@@ -40,7 +40,7 @@ public class cube {
                 for (int k = 0; k < dim; k++) {
                     colorCounter[theCube.cubeRep[i].facet[j][k]]++;
                     if (k == 1 && j == 1){
-                        centerColorsCounter[theCube.cubeRep[i].facet[j][k]] = i;
+                        centerColorsCounter[i] = theCube.cubeRep[i].facet[j][k];
                     }
                 }
             }
@@ -49,11 +49,74 @@ public class cube {
             if (colorCounter[i] != dim*dim){ return false; } // each color appears 9 times
             if (centerColorsCounter[i] < 0){ return false; } // each center has different color
         }
+        /**
+         * //Checking that the centers are organized correctly
+         * case 0 means it's red, thus it needs to be in front of orange
+         * case 1 means it's blue, this it needs to be in front of green
+         * etc
+         */
+        for(int i=0;i<2;i++) {
+            switch (centerColorsCounter[i]) {
+                case 0:
+                    if (centerColorsCounter[i+2] != 2)
+                        return false;
+                    break;
+                case 1:
+                    if (centerColorsCounter[i+2] != 3)
+                        return false;
+                    break;
+                case 2:
+                    if (centerColorsCounter[i+2] != 0)
+                        return false;
+                    break;
+                case 3:
+                    if (centerColorsCounter[i+2] != 1)
+                        return false;
+                    break;
+                case 4:
+                    if (centerColorsCounter[i+2] != 5)
+                        return false;
+                    break;
+                case 5:
+                    if (centerColorsCounter[i+2] != 4)
+                        return false;
+                    break;
+                default:
+                    return false;
+            }
+        }
+        switch (centerColorsCounter[4]) {
+            case 0:
+                if (centerColorsCounter[5] != 2)
+                    return false;
+                break;
+            case 1:
+                if (centerColorsCounter[5] != 3)
+                    return false;
+                break;
+            case 2:
+                if (centerColorsCounter[5] != 0)
+                    return false;
+                break;
+            case 3:
+                if (centerColorsCounter[5] != 1)
+                    return false;
+                break;
+            case 4:
+                if (centerColorsCounter[5] != 5)
+                    return false;
+                break;
+            case 5:
+                if (centerColorsCounter[5] != 4)
+                    return false;
+                break;
+            default:
+                return false;
 
-
-
+        }
         return true;
     }
+
 }
 
 
