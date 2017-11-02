@@ -1,6 +1,3 @@
-/**
- * Created by mac_ori on 01/11/2017.
- */
 
 public class side{
     public enum Direction{
