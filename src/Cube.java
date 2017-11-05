@@ -1,7 +1,8 @@
-/** Represents the cube's state
- *
- *  front - the cube's front face, looking from the arm's point of reference
- *  all other faces are according to the above point of reference
+/**
+ * Represents the cube's state
+ * <p>
+ * front - the cube's front face, looking from the arm's point of reference
+ * all other faces are according to the above point of reference
  */
 
 public class Cube {
@@ -17,8 +18,9 @@ public class Cube {
     private int algorithmStage;
 
 
-    /** Creates the initial state of the cube
-     *
+    /**
+     * Creates the initial state of the cube
+     * <p>
      * cube[0] = up
      * cube[1] = back
      * cube[2] = down
@@ -96,66 +98,166 @@ public class Cube {
     }
 
 
-    /** Rotates the cube to the right- front face turns to be right face, etc. */
+    /**
+     * Rotates the cube to the right- front face turns to be right face, etc.
+     */
     public void rightRotate() {
         Face tmp = front;
         front = left;
         left = back;
         back = right;
         right = tmp;
+
         up.counterClockwiseFixInnerValues();
         down.clockwiseFixInnerValues();
     }
 
-    /** Rotates the cube to the left- front face turns to be left face, etc. */
+    /**
+     * Rotates the cube to the left- front face turns to be left face, etc.
+     */
     public void leftRotate() {
         Face tmp = front;
         front = right;
         right = back;
         back = left;
         left = tmp;
+
         up.clockwiseFixInnerValues();
         down.counterClockwiseFixInnerValues();
     }
 
-    /** Flip the cube on its front- front face turns to be bottom face, etc. */
+    /**
+     * Flip the cube on its front- front face turns to be bottom face, etc.
+     */
     public void flip() {
         Face tmp = front;
         front = up;
         up = back;
         back = down;
         down = tmp;
+
         left.clockwiseFixInnerValues();
         right.counterClockwiseFixInnerValues();
+
         back.upsideDownFixInnerValues();
-        down.upsideDownFixInnerValues();
+        up.upsideDownFixInnerValues();
     }
 
-    /** Twists bottom face to the right- front face bottom row turns to be right face bottom row, etc. */
+    /**
+     * Twists bottom face to the right- front face bottom row turns to be right face bottom row, etc.
+     */
     public void rightTwistBottomFace() {
-        Color[] tmp = front.grid[dim -1];
-        front.grid[dim -1] = left.grid[dim -1];
-        left.grid[dim -1] = back.grid[dim -1];
-        back.grid[dim -1] = right.grid[dim -1];
-        right.grid[dim -1] = tmp;
+        Color[] tmp = front.grid[dim - 1];
+        front.grid[dim - 1] = left.grid[dim - 1];
+        left.grid[dim - 1] = back.grid[dim - 1];
+        back.grid[dim - 1] = right.grid[dim - 1];
+        right.grid[dim - 1] = tmp;
+
         down.clockwiseFixInnerValues();
     }
 
-    /** Twists bottom face to the left- front face bottom row turns to be left face bottom row, etc. */
+    /**
+     * Twists bottom face to the left- front face bottom row turns to be left face bottom row, etc.
+     */
     public void leftTwistBottomFace() {
-        Color[] tmp = front.grid[dim -1];
-        front.grid[dim -1] = right.grid[dim -1];
-        right.grid[dim -1] = back.grid[dim -1];
-        back.grid[dim -1] = left.grid[dim -1];
-        left.grid[dim -1] = tmp;
+        Color[] tmp = front.grid[dim - 1];
+        front.grid[dim - 1] = right.grid[dim - 1];
+        right.grid[dim - 1] = back.grid[dim - 1];
+        back.grid[dim - 1] = left.grid[dim - 1];
+        left.grid[dim - 1] = tmp;
+
         down.counterClockwiseFixInnerValues();
     }
 
 
     // TODO isValidCube !!!!
-    public boolean isValidCube(){
+    public boolean isValidCube() {
         return true;
-    }
+//        int[] colorCounter = new int[numOfFacets];
+//        int[] centerColorsCounter = {-1,-1,-1,-1,-1,-1};
+//        for (int i = 0; i < cubeRep.length; i++) {
+//            for (int j = 0; j < dim; j++) {
+//                for (int k = 0; k < dim; k++) {
+//                    colorCounter[theCube.cubeRep[i].facet[j][k]]++;
+//                    if (k == 1 && j == 1){
+//                        centerColorsCounter[i] = theCube.cubeRep[i].facet[j][k];
+//                    }
+//                }
+//            }
+//        }
+//        for (int i = 0; i < colorCounter.length; i++){
+//            if (colorCounter[i] != dim*dim){ return false; } // each color appears 9 times
+//            if (centerColorsCounter[i] < 0){ return false; } // each center has different color
+    /**
+     * //Checking that the centers are organized correctly
+     * case 0 means it's red, thus it needs to be in front of orange
+     * case 1 means it's blue, this it needs to be in front of green
+     * etc
+     */
+//        for(int i = 0;i<2;i++){
+//        switch (centerColorsCounter[i]) {
+//            case 0:
+//                if (centerColorsCounter[i + 2] != 2)
+//                    return false;
+//                break;
+//            case 1:
+//                if (centerColorsCounter[i + 2] != 3)
+//                    return false;
+//                break;
+//            case 2:
+//                if (centerColorsCounter[i + 2] != 0)
+//                    return false;
+//                break;
+//            case 3:
+//                if (centerColorsCounter[i + 2] != 1)
+//                    return false;
+//                break;
+//            case 4:
+//                if (centerColorsCounter[i + 2] != 5)
+//                    return false;
+//                break;
+//            case 5:
+//                if (centerColorsCounter[i + 2] != 4)
+//                    return false;
+//                break;
+//            default:
+//                return false;
+//        }
+//    }
+//        switch(centerColorsCounter[4])
+//
+//    {
+//        case 0:
+//            if (centerColorsCounter[5] != 2)
+//                return false;
+//            break;
+//        case 1:
+//            if (centerColorsCounter[5] != 3)
+//                return false;
+//            break;
+//        case 2:
+//            if (centerColorsCounter[5] != 0)
+//                return false;
+//            break;
+//        case 3:
+//            if (centerColorsCounter[5] != 1)
+//                return false;
+//            break;
+//        case 4:
+//            if (centerColorsCounter[5] != 5)
+//                return false;
+//            break;
+//        case 5:
+//            if (centerColorsCounter[5] != 4)
+//                return false;
+//            break;
+//        default:
+//            return false;
+//
+//        return true;
+//    }
+}
+
 
 
 
@@ -270,23 +372,8 @@ public class Cube {
         /** Turns the face's whole grid upside-down */
         public void upsideDownFixInnerValues() {
 
-            // first line
-            Color[] tempRow = grid[0];
-            grid[0][0] = grid[2][2];
-            grid[0][1] = grid[2][1];
-            grid[0][2] = grid[2][0];
-
-
-            // second update
-            Color temp = grid[1][0];
-            grid[1][0] = grid[1][2];
-            grid[1][2] = temp;
-
-            // third line
-            grid[2][0] = tempRow[2];
-            grid[2][1] = tempRow[1];
-            grid[2][2] = tempRow[0];
-
+            this.clockwiseFixInnerValues();
+            this.clockwiseFixInnerValues();
         }
     }
 }

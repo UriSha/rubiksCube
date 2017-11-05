@@ -30,7 +30,8 @@ public class CubeUtils {
 //    }
 
     /** Twists the left face according to the value of frontUpward
-     *  frontUpward == true -> twists from the front face to the upper face(before flipping)
+     *
+     *  @param frontUpward == true -> twists from the front face to the upper face(before flipping)
      */
     public static void twistRightFace(Cube cube, boolean frontUpward){
         cube.leftRotate();
@@ -44,7 +45,8 @@ public class CubeUtils {
     }
 
     /** Twists the left face according to the value of frontUpward
-     *  frontUpward == true -> twists from the front face to the upper face(before flipping)
+     *
+     *  @param frontUpward == true -> twists from the front face to the upper face(before flipping)
      */
     public static void twistLeftFace(Cube cube, boolean frontUpward){
         cube.rightRotate();
@@ -57,7 +59,10 @@ public class CubeUtils {
 
     }
 
-    /** Twists the front face according to the value of clockwise */
+    /** Twists the front face according to the value of clockwise
+     *
+     * @param clockwise == true -> twists the front face clockwise. Otherwise twists it counter-clockwise
+     */
     public static void twistFrontFace(Cube cube, boolean clockwise){
         cube.flip();
 
@@ -68,7 +73,10 @@ public class CubeUtils {
 
     }
 
-    /** Twists the back face according to the value of clockwise(before flipping) */
+    /** Twists the back face according to the value of clockwise(before flipping)
+     *
+     * @param clockwise == true -> twists the back face clockwise(before flipping). Otherwise twists it counter-clockwise
+     */
     public static void twistBackFace(Cube cube, boolean clockwise){
         cube.flip();
         cube.flip();
@@ -82,7 +90,8 @@ public class CubeUtils {
     }
 
     /** Twists the bottom face according to the value of right
-     *  right == true -> twists from the front face to the right face
+     *
+     *  @param right == true -> twists from the front face to the right face
      */
     public static void twistBottomFace(Cube cube, boolean right){
 
@@ -94,7 +103,8 @@ public class CubeUtils {
     }
 
     /** Twists the upper face according to the value of right
-     *  right == true -> twists from the front face to the right face(before flipping)
+     * 
+     *  @param right == true -> twists from the front face to the right face(before flipping)
      */
     public static void twistUpperFace(Cube cube, boolean right){
         cube.flip();
