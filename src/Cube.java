@@ -127,8 +127,8 @@ public class Cube {
         down = tmp;
         left.clockwiseFixInnerValues();
         right.counterClockwiseFixInnerValues();
-        // TODO upside-down back face
-        // TODO upside-down upper face
+        back.upsideDownFixInnerValues();
+        down.upsideDownFixInnerValues();
     }
 
     /** Twists bottom face to the right- front face bottom row turns to be right face bottom row, etc. */
@@ -272,9 +272,9 @@ public class Cube {
 
             // first line
             Color[] tempRow = grid[0];
-            grid[0][0] = grid[2][0];
+            grid[0][0] = grid[2][2];
             grid[0][1] = grid[2][1];
-            grid[0][2] = grid[2][2];
+            grid[0][2] = grid[2][0];
 
 
             // second update
@@ -283,9 +283,9 @@ public class Cube {
             grid[1][2] = temp;
 
             // third line
-            grid[2][0] = tempRow[0];
-            grid[2][0] = tempRow[1];
             grid[2][0] = tempRow[2];
+            grid[2][1] = tempRow[1];
+            grid[2][2] = tempRow[0];
 
         }
     }
