@@ -17,17 +17,9 @@ public class CubeUtils {
         LEFT_TWIST,
         RIGHT_TWIST,
         FRONT_TWIST,
-        BACK_TWIST}
+        BACK_TWIST
+    }
 
-//    public class newAction{
-//        Job move;
-//        int times;
-//
-//        public newAction(Job move , int times){
-//            this.move = move;
-//            this.times = times;
-//        }
-//    }
 
     /** Twists the left face according to the value of frontUpward
      *
@@ -103,7 +95,7 @@ public class CubeUtils {
     }
 
     /** Twists the upper face according to the value of right
-     * 
+     *
      *  @param right == true -> twists from the front face to the right face(before flipping)
      */
     public static void twistUpperFace(Cube cube, boolean right){
