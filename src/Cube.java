@@ -4,7 +4,7 @@
  *  all other faces are according to the above point of reference
  */
 
-public class cube {
+public class Cube {
     private final int dim = 3;
 
     // Directions point of reference: Robot's arm is front
@@ -28,7 +28,7 @@ public class cube {
      *
      * @param theCube - the 3D representation of the cube
      */
-    public cube(Color[][][] theCube) {
+    public Cube(Color[][][] theCube) {
         this.up = new Face(theCube[0]);
         this.back = new Face(theCube[1]);
         this.down = new Face(theCube[2]);
