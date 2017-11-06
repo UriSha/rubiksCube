@@ -6,7 +6,7 @@
  */
 
 public class Cube {
-    private final int dim = 3;
+    private final static int dim = 3;
 
     // Directions point of reference: Robot's arm is front
     private Face front;
@@ -266,7 +266,7 @@ public class Cube {
      *  grid - a matrix represents the face state.
      *  color - the color of the central tile of the face
      */
-    public class Face {
+    public static class Face {
 
         private Color[][] grid = new Color[dim][dim];
         private Color color;
