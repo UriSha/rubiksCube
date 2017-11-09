@@ -6,7 +6,7 @@ import java.util.List;
 
 public class Logic {
 
-    enum facet{
+    public enum facet{
         UP,
         DOWN,
         LEFT,
@@ -18,7 +18,6 @@ public class Logic {
     public List<cmd> mainAlgorithm(Cube cube) {
         List<cmd> result = new ArrayList<>();
         int algoStage = 0;
-        initialize(cube, result);
         stageOne(cube, result);
 
         return result;
@@ -37,26 +36,26 @@ public class Logic {
                 if (redYellow.x == 0 && redYellow.y == 1){
                     cube.twistUpperFace(true);
                     cube.twistUpperFace(true);
-                    actions.add(cmd.UP_TWIST_RIGHT);
-                    actions.add(cmd.UP_TWIST_RIGHT);
+                    actions.add(cmd.CMD_UP_TWIST_RIGHT);
+                    actions.add(cmd.CMD_UP_TWIST_RIGHT);
                 } else if (redYellow.x == 1 && redYellow.y == 0){
                     cube.twistUpperFace(true);
-                    actions.add(cmd.UP_TWIST_RIGHT);
+                    actions.add(cmd.CMD_UP_TWIST_RIGHT);
                 } else if (redYellow.x == 1 && redYellow.y == 2){
                     cube.twistUpperFace(false);
-                    actions.add(cmd.UP_TWIST_LEFT);
+                    actions.add(cmd.CMD_UP_TWIST_LEFT);
                 }
                 break;
             case FRONT:
                 if (redYellow.x == 0 && redYellow.y == 1){
-                    actions.add(cmd.RIGHT_TWIST_FRONTUPWARD);
-                    actions.add(cmd.LEFT_TWIST_FRONTUPWARD);
-                    actions.add(cmd.DOWN_TWIST_RIGHT);
-                    actions.add(cmd.RIGHT_TWIST_BACKUPWARD);
-                    actions.add(cmd.LEFT_TWIST_BACKUPWARD);
-                    actions.add(cmd.DOWN_TWIST_LEFT);
-                    actions.add(cmd.FRONT_TWIST_CLOCKWISE);
-                    actions.add(cmd.FRONT_TWIST_CLOCKWISE);
+                    actions.add(cmd.CMD_RIGHT_TWIST_FRONTUPWARD);
+                    actions.add(cmd.CMD_LEFT_TWIST_FRONTUPWARD);
+                    actions.add(cmd.CMD_DOWN_TWIST_RIGHT);
+                    actions.add(cmd.CMD_RIGHT_TWIST_BACKUPWARD);
+                    actions.add(cmd.CMD_LEFT_TWIST_BACKUPWARD);
+                    actions.add(cmd.CMD_DOWN_TWIST_LEFT);
+                    actions.add(cmd.CMD_FRONT_TWIST_CLOCKWISE);
+                    actions.add(cmd.CMD_FRONT_TWIST_CLOCKWISE);
                     cube.twistRightFace(true);
                     cube.twistLeftFace(true);
                     cube.twistBottomFace(true);
@@ -75,7 +74,57 @@ public class Logic {
 
     }
 
-    public
+    public static void executeCMD(cmd command, ArrayList<cmd> actions, Cube cube){
+        actions.add(command);
+        switch (command){
+            case CMD_LEFT_ROTATE:
+                cube.rotate(false);
+                break;
+            case CMD_RIGHT_ROTATE:
+                cube.rotate(true);
+                break;
+            case CMD_FLIP:
+                cube.flip();
+                break;
+            case CMD_UP_TWIST_LEFT:
+                cube.twistUpperFace(false);
+                break;
+            case CMD_UP_TWIST_RIGHT:
+                cube.twistUpperFace(true);
+                break;
+            case CMD_DOWN_TWIST_LEFT:
+                cube.twistBottomFace(false);
+                break;
+            case CMD_DOWN_TWIST_RIGHT:
+                cube.twistBottomFace(true);
+                break;
+            case CMD_LEFT_TWIST_FRONTUPWARD:
+                cube.twistLeftFace(true);
+                break;
+            case CMD_LEFT_TWIST_BACKUPWARD:
+                cube.twistLeftFace(false);
+                break;
+            case CMD_RIGHT_TWIST_BACKUPWARD:
+                cube.twistRightFace(false);
+                break;
+            case CMD_RIGHT_TWIST_FRONTUPWARD:
+                cube.twistLeftFace(true);
+                break;
+            case CMD_FRONT_TWIST_CLOCKWISE:
+                cube.twistFrontFace(true);
+                break;
+            case CMD_FRONT_TWIST_C_CLOCKWISE:
+                cube.twistFrontFace(false);
+                break;
+            case CMD_BACK_TWIST_CLOCKWISE:
+                cube.twistFrontFace(true);
+                break;
+            case CMD_BACK_TWIST_C_CLOCKWISE:
+                cube.twistFrontFace(false);
+                break;
+
+        }
+    }
 
 
 
@@ -116,56 +165,59 @@ public class Logic {
     }
 
 
-    private static void initialize(Cube cube, List<cmd> actions) {
+    private static List<cmd> initialize(Cube cube) {
+        List<cmd> actions = new ArrayList<>();
 
-        if (cube == null || actions == null) {
+        if (cube == null) {
             System.out.println("Error: 'initialize' arguments are null");
-            return;
+            return null;
         }
 
         if (cube.getUp().getColor() != Cube.Color.RED) { // getting the red facet to the top
             if (cube.getBack().getColor() == Cube.Color.RED) {
-                actions.add(cmd.FLIP);
+                actions.add(cmd.CMD_FLIP);
                 cube.flip();
-                actions.add(cmd.FLIP);
+                actions.add(cmd.CMD_FLIP);
                 cube.flip();
-                actions.add(cmd.FLIP);
+                actions.add(cmd.CMD_FLIP);
                 cube.flip();
             } else if (cube.getDown().getColor() == Cube.Color.RED) {
-                actions.add(cmd.FLIP);
+                actions.add(cmd.CMD_FLIP);
                 cube.flip();
-                actions.add(cmd.FLIP);
+                actions.add(cmd.CMD_FLIP);
                 cube.flip();
             } else if (cube.getFront().getColor() == Cube.Color.RED) {
-                actions.add(cmd.FLIP);
+                actions.add(cmd.CMD_FLIP);
                 cube.flip();
             } else if (cube.getRight().getColor() == Cube.Color.RED) {
                 cube.rotate(false);
-                actions.add(cmd.LEFT_ROTATE);
+                actions.add(cmd.CMD_LEFT_ROTATE);
                 cube.flip();
-                actions.add(cmd.FLIP);
+                actions.add(cmd.CMD_FLIP);
             } else if (cube.getLeft().getColor() == Cube.Color.RED) {
                 cube.rotate(true);
-                actions.add(cmd.RIGHT_ROTATE);
+                actions.add(cmd.CMD_RIGHT_ROTATE);
                 cube.flip();
-                actions.add(cmd.FLIP);
+                actions.add(cmd.CMD_FLIP);
             }
         }
 
         if (cube.getFront().getColor() != Cube.Color.YELLOW) {
             if (cube.getLeft().getColor() == Cube.Color.YELLOW) {
-                actions.add(cmd.RIGHT_ROTATE);
+                actions.add(cmd.CMD_RIGHT_ROTATE);
                 cube.rotate(true);
             } else if (cube.getRight().getColor() == Cube.Color.YELLOW) {
-                actions.add(cmd.LEFT_ROTATE);
+                actions.add(cmd.CMD_LEFT_ROTATE);
                 cube.rotate(false);
             } else if (cube.getBack().getColor() == Cube.Color.YELLOW) {
-                actions.add(cmd.LEFT_ROTATE);
+                actions.add(cmd.CMD_LEFT_ROTATE);
                 cube.rotate(false);
-                actions.add(cmd.LEFT_ROTATE);
+                actions.add(cmd.CMD_LEFT_ROTATE);
                 cube.rotate(false);
             }
         }
+
+        return actions;
     }
 
     private static class location {
