@@ -22,13 +22,13 @@ public class RobotUtils {
 
         for (cmd command : initialCommands){
             switch (command){
-                case FLIP:
+                case CMD_FLIP:
                     result.add(RobotSolvingAction.ROBOT_FLIP);
                     break;
-                case RIGHT_ROTATE:
+                case CMD_RIGHT_ROTATE:
                     result.add(RobotSolvingAction.ROBOT_RIGHT_R);
                     break;
-                case LEFT_ROTATE:
+                case CMD_LEFT_ROTATE:
                     result.add(RobotSolvingAction.ROBOT_LEFT_R);
                     break;
                 default:
