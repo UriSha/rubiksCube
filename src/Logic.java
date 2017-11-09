@@ -23,14 +23,35 @@ public class Logic {
         return result;
     }
 
+    private static void frontRedYellow(List<cmd> actions,Cube cube){
+        executeCMD(cmd.CMD_RIGHT_TWIST_FRONTUPWARD,actions,cube);
+        executeCMD(cmd.CMD_LEFT_TWIST_FRONTUPWARD,actions,cube);
+        executeCMD(cmd.CMD_DOWN_TWIST_RIGHT,actions,cube);
+        executeCMD(cmd.CMD_RIGHT_TWIST_BACKUPWARD,actions,cube);
+        executeCMD(cmd.CMD_LEFT_TWIST_BACKUPWARD,actions,cube);
+        executeCMD(cmd.CMD_DOWN_TWIST_LEFT,actions,cube);
+        executeCMD(cmd.CMD_FRONT_TWIST_CLOCKWISE,actions,cube);
+        executeCMD(cmd.CMD_FRONT_TWIST_CLOCKWISE,actions,cube);
+
+    }
+    private static void downRedYellow(List<cmd> actions,Cube cube){
+        executeCMD(cmd.CMD_FRONT_TWIST_CLOCKWISE,actions,cube);
+        executeCMD(cmd.CMD_FRONT_TWIST_CLOCKWISE,actions,cube);
+    }
+
     private static void stageOne(Cube cube, List<cmd> actions) {
 
         if (cube == null || actions == null) {
-            System.out.println("Error: 'stageZero' arguments are null");
+            System.out.println("Error: 'stageOne' arguments are null");
             return;
         }
 
         location redYellow = getLocationOfEdge(cube, Cube.Color.RED, Cube.Color.YELLOW);
+        if(redYellow.name==null)
+        {
+            System.out.println("Error: 'stageOne' has failed");
+            return ;
+        }
         switch(redYellow.name){
             case UP:
                 if (redYellow.x == 0 && redYellow.y == 1){
@@ -48,24 +69,34 @@ public class Logic {
                 break;
             case FRONT:
                 if (redYellow.x == 0 && redYellow.y == 1){
-                    actions.add(cmd.CMD_RIGHT_TWIST_FRONTUPWARD);
-                    actions.add(cmd.CMD_LEFT_TWIST_FRONTUPWARD);
-                    actions.add(cmd.CMD_DOWN_TWIST_RIGHT);
-                    actions.add(cmd.CMD_RIGHT_TWIST_BACKUPWARD);
-                    actions.add(cmd.CMD_LEFT_TWIST_BACKUPWARD);
-                    actions.add(cmd.CMD_DOWN_TWIST_LEFT);
-                    actions.add(cmd.CMD_FRONT_TWIST_CLOCKWISE);
-                    actions.add(cmd.CMD_FRONT_TWIST_CLOCKWISE);
-                    cube.twistRightFace(true);
-                    cube.twistLeftFace(true);
-                    cube.twistBottomFace(true);
+                    frontRedYellow(actions,cube);
+
+                }
+                else if(redYellow.x==1 && redYellow.y==0){
+                    executeCMD(cmd.CMD_FRONT_TWIST_CLOCKWISE,actions,cube);
+                    frontRedYellow(actions,cube);
+                }
+                else if(redYellow.x==1 && redYellow.y==2){
+                    executeCMD(cmd.CMD_FRONT_TWIST_C_CLOCKWISE,actions,cube);
+                    frontRedYellow(actions,cube);
+                }
+                else if(redYellow.x==2 && redYellow.y==1){
+                    executeCMD(cmd.CMD_FRONT_TWIST_CLOCKWISE,actions,cube);
+                    executeCMD(cmd.CMD_FRONT_TWIST_CLOCKWISE,actions,cube);
+                    frontRedYellow(actions,cube);
+                }
+            case DOWN:
+                if(redYellow.x==0 && redYellow.y==1){
+                    downRedYellow(actions,cube);
+                }
+                else if(redYellow.x==1 && redYellow.y==0){
+                    executeCMD(cmd.CMD_DOWN_TWIST_RIGHT,actions,cube);
+                    downRedYellow(actions,cube);
+                }else if(redYellow.x==1 && redYellow.y==2){
+                    executeCMD(cmd.CMD_DOWN_TWIST_LEFT,actions,cube);
+                    downRedYellow(actions,cube);
                 }
         }
-
-
-
-
-
         location redWhite = getLocationOfEdge(cube, Cube.Color.RED, Cube.Color.WHITE);
         location redBlue = getLocationOfEdge(cube, Cube.Color.RED, Cube.Color.BLUE);
         location redGreen = getLocationOfEdge(cube, Cube.Color.RED, Cube.Color.GREEN);
@@ -74,7 +105,7 @@ public class Logic {
 
     }
 
-    public static void executeCMD(cmd command, ArrayList<cmd> actions, Cube cube){
+    public static void executeCMD(cmd command,List<cmd> actions, Cube cube){
         actions.add(command);
         switch (command){
             case CMD_LEFT_ROTATE:
