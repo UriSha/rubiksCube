@@ -6,6 +6,7 @@
  */
 
 public class Cube {
+
     private final static int dim = 3;
 
     // Directions point of reference: Robot's arm is front
