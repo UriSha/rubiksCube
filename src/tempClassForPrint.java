@@ -41,7 +41,15 @@ public class tempClassForPrint {
         }
         Cube cube = new Cube(cubeValues);
         System.out.println(toStringCube(cube));
+        cube.twistUpperFace(true);
+        System.out.println(toStringCube(cube));
+        cube.twistBottomFace(false);
+        System.out.println(toStringCube(cube));
+        cube.twistFrontFace(true);
+        System.out.println(toStringCube(cube));
+
     }
+
 
 
     public static String toStringCube(Cube cube) {
