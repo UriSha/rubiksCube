@@ -72,6 +72,7 @@ public class Logic {
         location redGreen = getLocationOfEdge(cube, Cube.Color.RED, Cube.Color.GREEN);
 
 
+
     }
 
 
