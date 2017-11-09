@@ -62,6 +62,8 @@ public class Logic {
         if (cube.getRight().getGridEntry(1,0) == prime && cube.getFront().getGridEntry(1,2) == second){ return new location(facet.RIGHT, 1, 0); }
         if (cube.getRight().getGridEntry(1,2) == prime && cube.getBack().getGridEntry(1,0) == second){ return new location(facet.RIGHT, 1, 2); }
         if (cube.getRight().getGridEntry(2,1) == prime && cube.getDown().getGridEntry(1,2) == second){ return new location(facet.RIGHT, 2, 1); }
+
+        return null;
     }
 
 
