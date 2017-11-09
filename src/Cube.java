@@ -95,13 +95,31 @@ public class Cube {
         this.left = left;
     }
 
-
+    /**
+     *  0 - up
+     *  1 - front
+     *  2 - down
+     *  3 - back
+     *  4 - left
+     *  5 - right
+     * @return array of faces
+     */
+    public Face[] getFaces(){
+        Face[] faces = new Face[6];
+        faces[0] = up;
+        faces[1] = front;
+        faces[2] = down;
+        faces[3] = back;
+        faces[4] = left;
+        faces[5] = right;
+        return faces;
+    }
     /**
      * Rotates the cube 90 degrees
      *
      * @param right - indicates whether the rotation is to the right or to the left
      */
-    public void rotate(boolean right){
+    public void rotate(boolean right) {
         if (right)
             rightRotate();
         else
@@ -183,11 +201,12 @@ public class Cube {
     }
 
 
-    /** Twists the left face according to the value of frontUpward
+    /**
+     * Twists the left face according to the value of frontUpward
      *
-     *  @param frontUpward == true -> twists from the front face to the upper face(before flipping)
+     * @param frontUpward == true -> twists from the front face to the upper face(before flipping)
      */
-    public void twistRightFace(boolean frontUpward){
+    public void twistRightFace(boolean frontUpward) {
         leftRotate();
         flip();
 
@@ -198,11 +217,12 @@ public class Cube {
 
     }
 
-    /** Twists the left face according to the value of frontUpward
+    /**
+     * Twists the left face according to the value of frontUpward
      *
-     *  @param frontUpward == true -> twists from the front face to the upper face(before flipping)
+     * @param frontUpward == true -> twists from the front face to the upper face(before flipping)
      */
-    public void twistLeftFace(boolean frontUpward){
+    public void twistLeftFace(boolean frontUpward) {
         rightRotate();
         flip();
 
@@ -213,11 +233,41 @@ public class Cube {
 
     }
 
-    /** Twists the front face according to the value of clockwise
+    private void twistSideFace(boolean right, boolean upwards) {
+        int frontSideCol = right ? 2 : 0;
+        int backSideCol = right ? 0 : 2;
+
+        Color[] tmp = front.getGridColumn(frontSideCol);
+        Color[] reversedTmp;
+
+        if (upwards) {
+            front.setGridColumn(down.getGridColumn(frontSideCol), frontSideCol);
+
+            reversedTmp = back.getGridColumn(backSideCol);
+            reverseThreeElementsArray(reversedTmp);
+            down.setGridColumn(reversedTmp, frontSideCol);
+
+            reversedTmp = up.getGridColumn(frontSideCol);
+            reverseThreeElementsArray(reversedTmp);
+            back.setGridColumn(reversedTmp,backSideCol);
+
+            up.setGridColumn(tmp, frontSideCol);
+
+        }
+    }
+
+    private static void reverseThreeElementsArray(Color[] array){
+        Color tmp = array[0];
+        array[0] = array[2];
+        array[2] = tmp;
+    }
+
+    /**
+     * Twists the front face according to the value of clockwise
      *
      * @param clockwise == true -> twists the front face clockwise. Otherwise twists it counter-clockwise
      */
-    public void twistFrontFace( boolean clockwise){
+    public void twistFrontFace(boolean clockwise) {
         flip();
 
         if (clockwise)
@@ -227,27 +277,29 @@ public class Cube {
 
     }
 
-    /** Twists the back face according to the value of clockwise(before flipping)
+    /**
+     * Twists the back face according to the value of clockwise(before flipping)
      *
      * @param clockwise == true -> twists the back face clockwise(before flipping). Otherwise twists it counter-clockwise
      */
-    public void twistBackFace(boolean clockwise){
+    public void twistBackFace(boolean clockwise) {
         flip();
         flip();
         flip();
 
         if (!clockwise)
-           rightTwistBottomFace();
+            rightTwistBottomFace();
         else
             leftTwistBottomFace();
 
     }
 
-    /** Twists the bottom face according to the value of right
+    /**
+     * Twists the bottom face according to the value of right
      *
-     *  @param right == true -> twists from the front face to the right face
+     * @param right == true -> twists from the front face to the right face
      */
-    public void twistBottomFace(boolean right){
+    public void twistBottomFace(boolean right) {
 
         if (right)
             rightTwistBottomFace();
@@ -256,21 +308,21 @@ public class Cube {
 
     }
 
-    /** Twists the upper face according to the value of right
+    /**
+     * Twists the upper face according to the value of right
      *
-     *  @param right == true -> twists from the front face to the right face(before flipping)
+     * @param right == true -> twists from the front face to the right face(before flipping)
      */
-    public void twistUpperFace(boolean right){
+    public void twistUpperFace(boolean right) {
         flip();
         flip();
 
         if (!right)
-           rightTwistBottomFace();
+            rightTwistBottomFace();
         else
-           leftTwistBottomFace();
+            leftTwistBottomFace();
 
     }
-
 
 
     // TODO isValidCube !!!!
@@ -291,12 +343,12 @@ public class Cube {
 //        for (int i = 0; i < colorCounter.length; i++){
 //            if (colorCounter[i] != dim*dim){ return false; } // each color appears 9 times
 //            if (centerColorsCounter[i] < 0){ return false; } // each center has different color
-    /**
-     * //Checking that the centers are organized correctly
-     * case 0 means it's red, thus it needs to be in front of orange
-     * case 1 means it's blue, this it needs to be in front of green
-     * etc
-     */
+        /**
+         * //Checking that the centers are organized correctly
+         * case 0 means it's red, thus it needs to be in front of orange
+         * case 1 means it's blue, this it needs to be in front of green
+         * etc
+         */
 //        for(int i = 0;i<2;i++){
 //        switch (centerColorsCounter[i]) {
 //            case 0:
@@ -359,15 +411,14 @@ public class Cube {
 //
 //        return true;
 //    }
-}
+    }
 
 
-
-
-    /** Represents a cube's face
+    /**
+     * Represents a cube's face
      *
-     *  grid - a matrix represents the face state.
-     *  color - the color of the central tile of the face
+     * grid - a matrix represents the face state.
+     * color - the color of the central tile of the face
      */
     public static class Face {
 
@@ -382,13 +433,33 @@ public class Cube {
             return grid;
         }
 
-        /** Sets an entire row of the grid */
-        public void setGridRow(Color[] row, int rowIndex){
-            if (rowIndex < 0 || rowIndex >= dim){
+
+        /**
+         * Returns the specified row of the grid
+         *
+         * @param rowIndex - the index of the wanted row
+         */
+        public Color[] getGridRow(int rowIndex) {
+            if (rowIndex < 0 || rowIndex >= dim) {
+                System.out.println("Invalid row!");
+                return null;
+            }
+            return grid[rowIndex].clone();
+        }
+
+
+        /**
+         * Sets an entire row of the grid
+         *
+         * @param row - an array containing the wanted values for the row
+         * @param rowIndex - the index of the row we want to change
+         */
+        public void setGridRow(Color[] row, int rowIndex) {
+            if (rowIndex < 0 || rowIndex >= dim) {
                 System.out.println("Invalid row!");
                 return;
             }
-            if (row.length != dim){
+            if (row.length != dim) {
                 System.out.println("Invalid row array!");
                 return;
             }
@@ -398,13 +469,36 @@ public class Cube {
         }
 
 
-        /** Sets an entire column of the grid */
-        public void setGridColumn(Color[] col, int colIndex){
-            if (colIndex < 0 || colIndex >= dim){
+        /**
+         * Returns the specified column of the grid
+         *
+         * @param colIndex - the index of the wanted column
+         */
+        public Color[] getGridColumn(int colIndex) {
+            if (colIndex < 0 || colIndex >= dim) {
+                System.out.println("Invalid column!");
+                return null;
+            }
+            Color[] res = new Color[dim];
+            res[0] = grid[0][colIndex];
+            res[1] = grid[1][colIndex];
+            res[2] = grid[2][colIndex];
+            return res;
+        }
+
+
+        /**
+         * Sets an entire column of the grid
+         *
+         * @param col - an array containing the wanted values for the column
+         * @param colIndex - the index of the column we want to change
+         */
+        public void setGridColumn(Color[] col, int colIndex) {
+            if (colIndex < 0 || colIndex >= dim) {
                 System.out.println("Invalid column!");
                 return;
             }
-            if (col.length != dim){
+            if (col.length != dim) {
                 System.out.println("Invalid column array!");
                 return;
             }
@@ -414,13 +508,30 @@ public class Cube {
         }
 
 
-        /** Sets a specific entry of the grid */
-        public void setGridEntry(Color color, int row, int column){
-            if (row < 0 || row >= dim){
+        /**
+         * Returns a specific entry of the grid
+         */
+        public Color getGridEntry(int row, int column) {
+            if (row < 0 || row >= dim) {
+                System.out.println("Invalid row!");
+                return null;
+            }
+            if (column < 0 || column >= dim) {
+                System.out.println("Invalid column!");
+                return null;
+            }
+            return grid[row][column];
+        }
+
+        /**
+         * Sets a specific entry of the grid
+         */
+        public void setGridEntry(Color color, int row, int column) {
+            if (row < 0 || row >= dim) {
                 System.out.println("Invalid row!");
                 return;
             }
-            if (column < 0 || column >= dim){
+            if (column < 0 || column >= dim) {
                 System.out.println("Invalid column!");
                 return;
             }
@@ -435,7 +546,9 @@ public class Cube {
             this.color = color;
         }
 
-        /** Turns the face's whole grid clockwise */
+        /**
+         * Turns the face's whole grid clockwise
+         */
         public void clockwiseFixInnerValues() {
 
             // corners update
@@ -453,7 +566,9 @@ public class Cube {
             grid[1][2] = temp;
         }
 
-        /** Turns the face's whole grid counter clockwise */
+        /**
+         * Turns the face's whole grid counter clockwise
+         */
         public void counterClockwiseFixInnerValues() {
 
             // corners update
@@ -472,7 +587,9 @@ public class Cube {
 
         }
 
-        /** Turns the face's whole grid upside-down */
+        /**
+         * Turns the face's whole grid upside-down
+         */
         public void upsideDownFixInnerValues() {
 
             this.clockwiseFixInnerValues();
