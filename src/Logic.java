@@ -1,35 +1,36 @@
 import java.util.ArrayList;
 import java.util.List;
+import Cube.*;
 
-//public class logicMain {
-//
-//    public enum Job {LEFT_ROTATE, RIGHT_ROTATE, FLIP, UP_TWIST, DOWN_TWIST, LEFT_TWIST, RIGHT_TWIST, FRONT_TWIST, BACK_TWIST}
-//
-//    public static List<action> actionsList= new ArrayList<action>();
-//    public static cube theCube;
-//
-//
-//
-//    public class action{
-//        Job move;
-//        int times;
-//
-//        public action(Job move , int times){
-//            this.move = move;
-//            this.times = times;
-//        }
-//    }
-//
-//    public static ArrayList<action> getActionsList(){
-//        return (ArrayList<action>) actionsList;
-//    }
-//
-//
-//    /**
-//     * Initializing the cube so the red is up and the blue is in the front
-//     */
-//    public void initializeCube() {
-//        for (int i = 0; i < theCube.cubeRep.length; i++) {// finding the red facet
+
+
+
+/**
+ * Created by mac_ori on 09/11/2017.
+ */
+public class Logic{
+
+    public List<Action> mainAlgorithm(Cube cube){
+        List<Action> result = new ArrayList<>();
+        initialize(cube, result);
+
+
+
+        return result;
+    }
+
+    public static void initialize(Cube cube, List<Action> actions){
+
+        if (cube.getUp().getColor() != Cube.Color.RED){
+            if (cube.getBack().getColor() != Cube.Color.RED){
+                actions.add(Action.FLIP);
+                cube.flip()
+            }
+        }
+
+
+
+        //        for (int i = 0; i < theCube.cubeRep.length; i++) {// finding the red facet
 //            if (theCube.cubeRep[i].centerColor == 0){
 //                switch (theCube.cubeRep[i].dir){ // getting the red facet to the top
 //                    case UP:
@@ -64,22 +65,5 @@ import java.util.List;
 //        }
 //
 //    }
-//
-//    public void flipCube(){
-//        side tmpFacet;
-//        int tmp;
-//        // changing places of the facets
-//        tmpFacet = theCube.cubeRep[0];
-//        theCube.cubeRep[0] = theCube.cubeRep[3];
-//        theCube.cubeRep[0].dir = side.Direction.UP;
-//        theCube.cubeRep[3] = theCube.cubeRep[2];
-//        theCube.cubeRep[3].dir = side.Direction.BACK;
-//        theCube.cubeRep[2] = theCube.cubeRep[1];
-//        theCube.cubeRep[2].dir = side.Direction.DOWN;
-//        theCube.cubeRep[1] = tmpFacet;
-//        theCube.cubeRep[1].dir = side.Direction.FRONT;
-//        //changing places of the small facelets
-//
-//
-//    }
-//}
+    }
+}
