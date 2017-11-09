@@ -75,6 +75,8 @@ public class Logic {
 
     }
 
+    public
+
 
 
 
@@ -175,7 +177,6 @@ public class Logic {
             this.y = y;
         }
     }
-
 }
 
 
