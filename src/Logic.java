@@ -1,69 +1,80 @@
 import java.util.ArrayList;
 import java.util.List;
-import Cube.*;
 
 
 
-
-/**
- * Created by mac_ori on 09/11/2017.
- */
 public class Logic{
 
     public List<Action> mainAlgorithm(Cube cube){
         List<Action> result = new ArrayList<>();
+        int algoStage = 0;
         initialize(cube, result);
+        stageZero(cube, result);
 
 
 
         return result;
     }
 
+    private static void stageZero(Cube cube, List<Action> actions) {
+        if (cube == null || actions == null){
+            System.out.println("Error: 'stageZero' arguments are null");
+            return;
+        }
+        if (cube.getFront().getGrid()[1][0] == Cube.Color.RED){
+            actions.add(Action.LEFT_TWIST_FRONTUPWARD);
+            cube.twistLeftface
+        }
+    }
+
     public static void initialize(Cube cube, List<Action> actions){
 
-        if (cube.getUp().getColor() != Cube.Color.RED){
-            if (cube.getBack().getColor() != Cube.Color.RED){
+        if (cube == null || actions == null){
+            System.out.println("Error: 'initialize' arguments are null");
+            return;
+        }
+
+        if (cube.getUp().getColor() != Cube.Color.RED){ // getting the red facet to the top
+            if (cube.getBack().getColor() == Cube.Color.RED){
                 actions.add(Action.FLIP);
-                cube.flip()
+                cube.flip();
+                actions.add(Action.FLIP);
+                cube.flip();
+                actions.add(Action.FLIP);
+                cube.flip();
+            } else if (cube.getDown().getColor() == Cube.Color.RED){
+                actions.add(Action.FLIP);
+                cube.flip();
+                actions.add(Action.FLIP);
+                cube.flip();
+            } else if (cube.getFront().getColor() == Cube.Color.RED){
+                actions.add(Action.FLIP);
+                cube.flip();
+            } else if (cube.getRight().getColor() == Cube.Color.RED) {
+                cube.rotate(false);
+                actions.add(Action.LEFT_ROTATE);
+                cube.flip();
+                actions.add(Action.FLIP);
+            } else if (cube.getLeft().getColor() == Cube.Color.RED) {
+                cube.rotate(true);
+                actions.add(Action.RIGHT_ROTATE);
+                cube.flip();
+                actions.add(Action.FLIP);
             }
         }
 
-
-
-        //        for (int i = 0; i < theCube.cubeRep.length; i++) {// finding the red facet
-//            if (theCube.cubeRep[i].centerColor == 0){
-//                switch (theCube.cubeRep[i].dir){ // getting the red facet to the top
-//                    case UP:
-//                        break;
-//                    case BACK:
-//                        actionsList.add(new action(Job.FLIP, 1));
-//                        break;
-//                    case DOWN:
-//                        actionsList.add(new action(Job.FLIP, 2));
-//                        break;
-//                    case FRONT:
-//                        actionsList.add(new action(Job.FLIP, 3));
-//                        break;
-//                    case LEFT:
-//                        actionsList.add(new action(Job.RIGHT_ROTATE, 1));
-//                        actionsList.add(new action(Job.FLIP, 1));
-//                        side tmp = theCube.cubeRep[0];
-//                        theCube.cubeRep[0] = theCube.cubeRep[5];
-//                        theCube.cubeRep[5] = theCube.cubeRep[1];
-//                        theCube.cubeRep[1] = tmp;
-//
-//                        theCube.cubeRep[1] = tmp;
-//                        break;
-////                    break;
-//                    case RIGHT:
-//                        actionsList.add(new action(Job.LEFT_ROTATE, 1));
-//                        actionsList.add(new action(Job.FLIP, 1));
-//                        break;
-//                }
-//                break;
-//            }
-//        }
-//
-//    }
+        if (cube.getFront().getColor() != Cube.Color.YELLOW){
+            if (cube.getLeft().getColor() == Cube.Color.YELLOW){
+                actions.add(Action.RIGHT_ROTATE);
+                cube.rotate(true);
+            } else if (cube.getRight().getColor() == Cube.Color.YELLOW){
+                actions.add(Action.LEFT_ROTATE);
+                cube.rotate(false);
+            } else if (cube.getBack().getColor() == Cube.Color.YELLOW){
+                actions.add(Action.LEFT_ROTATE);
+                cube.rotate(false);
+                actions.add(Action.LEFT_ROTATE);
+                cube.rotate(false);
+            }
     }
 }
