@@ -15,7 +15,6 @@ public class Cube {
     private Face down;
     private Face right;
     private Face left;
-    private int algorithmStage;
 
 
     /**
@@ -37,7 +36,6 @@ public class Cube {
         this.front = new Face(theCube[3]);
         this.right = new Face(theCube[4]);
         this.left = new Face(theCube[5]);
-        algorithmStage = 0;
     }
 
     public enum Color {
@@ -98,6 +96,9 @@ public class Cube {
     }
 
 
+    public void rotate(boolean right){
+
+    }
     /**
      * Rotates the cube to the right- front face turns to be right face, etc.
      */
@@ -110,6 +111,8 @@ public class Cube {
 
         up.counterClockwiseFixInnerValues();
         down.clockwiseFixInnerValues();
+
+
     }
 
     /**
@@ -168,6 +171,96 @@ public class Cube {
 
         down.counterClockwiseFixInnerValues();
     }
+
+
+    /** Twists the left face according to the value of frontUpward
+     *
+     *  @param frontUpward == true -> twists from the front face to the upper face(before flipping)
+     */
+    public void twistRightFace(boolean frontUpward){
+        leftRotate();
+        flip();
+
+        if (frontUpward)
+            rightTwistBottomFace();
+        else
+            leftTwistBottomFace();
+
+    }
+
+    /** Twists the left face according to the value of frontUpward
+     *
+     *  @param frontUpward == true -> twists from the front face to the upper face(before flipping)
+     */
+    public void twistLeftFace(boolean frontUpward){
+       rightRotate();
+        flip();
+
+        if (!frontUpward)
+            rightTwistBottomFace();
+        else
+            leftTwistBottomFace();
+
+    }
+
+    /** Twists the front face according to the value of clockwise
+     *
+     * @param clockwise == true -> twists the front face clockwise. Otherwise twists it counter-clockwise
+     */
+    public void twistFrontFace( boolean clockwise){
+        flip();
+
+        if (clockwise)
+            rightTwistBottomFace();
+        else
+            leftTwistBottomFace();
+
+    }
+
+    /** Twists the back face according to the value of clockwise(before flipping)
+     *
+     * @param clockwise == true -> twists the back face clockwise(before flipping). Otherwise twists it counter-clockwise
+     */
+    public void twistBackFace( boolean clockwise){
+        flip();
+        flip();
+        flip();
+
+        if (!clockwise)
+           rightTwistBottomFace();
+        else
+            leftTwistBottomFace();
+
+    }
+
+    /** Twists the bottom face according to the value of right
+     *
+     *  @param right == true -> twists from the front face to the right face
+     */
+    public void twistBottomFace(boolean right){
+
+        if (right)
+            rightTwistBottomFace();
+        else
+            leftTwistBottomFace();
+
+    }
+
+    /** Twists the upper face according to the value of right
+     *
+     *  @param right == true -> twists from the front face to the right face(before flipping)
+     */
+    public void twistUpperFace(boolean right){
+        flip();
+        flip();
+
+        if (!right)
+           rightTwistBottomFace();
+        else
+           leftTwistBottomFace();
+
+    }
+
 
 
     // TODO isValidCube !!!!
