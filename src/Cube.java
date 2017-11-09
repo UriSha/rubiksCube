@@ -96,13 +96,23 @@ public class Cube {
     }
 
 
+    /**
+     * Rotates the cube 90 degrees
+     *
+     * @param right - indicates whether the rotation is to the right or to the left
+     */
     public void rotate(boolean right){
-
+        if (right)
+            rightRotate();
+        else
+            leftRotate();
     }
+
+
     /**
      * Rotates the cube to the right- front face turns to be right face, etc.
      */
-    public void rightRotate() {
+    private void rightRotate() {
         Face tmp = front;
         front = left;
         left = back;
@@ -118,7 +128,7 @@ public class Cube {
     /**
      * Rotates the cube to the left- front face turns to be left face, etc.
      */
-    public void leftRotate() {
+    private void leftRotate() {
         Face tmp = front;
         front = right;
         right = back;
@@ -149,7 +159,7 @@ public class Cube {
     /**
      * Twists bottom face to the right- front face bottom row turns to be right face bottom row, etc.
      */
-    public void rightTwistBottomFace() {
+    private void rightTwistBottomFace() {
         Color[] tmp = front.grid[dim - 1];
         front.grid[dim - 1] = left.grid[dim - 1];
         left.grid[dim - 1] = back.grid[dim - 1];
@@ -162,7 +172,7 @@ public class Cube {
     /**
      * Twists bottom face to the left- front face bottom row turns to be left face bottom row, etc.
      */
-    public void leftTwistBottomFace() {
+    private void leftTwistBottomFace() {
         Color[] tmp = front.grid[dim - 1];
         front.grid[dim - 1] = right.grid[dim - 1];
         right.grid[dim - 1] = back.grid[dim - 1];
@@ -193,7 +203,7 @@ public class Cube {
      *  @param frontUpward == true -> twists from the front face to the upper face(before flipping)
      */
     public void twistLeftFace(boolean frontUpward){
-       rightRotate();
+        rightRotate();
         flip();
 
         if (!frontUpward)
@@ -221,7 +231,7 @@ public class Cube {
      *
      * @param clockwise == true -> twists the back face clockwise(before flipping). Otherwise twists it counter-clockwise
      */
-    public void twistBackFace( boolean clockwise){
+    public void twistBackFace(boolean clockwise){
         flip();
         flip();
         flip();
