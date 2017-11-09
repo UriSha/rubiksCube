@@ -74,6 +74,7 @@ public class Logic {
 
     }
 
+
     public static void executeCMD(cmd command, ArrayList<cmd> actions, Cube cube){
         actions.add(command);
         switch (command){
