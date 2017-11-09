@@ -109,5 +109,11 @@ public class CubeUtils {
 
     }
 
+    public static void flip(Cube cube){
 
+    }
+
+    public static void rotate(Cube cube, boolean right){
+
+    }
 }
