@@ -25,13 +25,59 @@ public class Logic {
     }
 
     private static void stageOne(Cube cube, List<cmd> actions) {
+
         if (cube == null || actions == null) {
             System.out.println("Error: 'stageZero' arguments are null");
             return;
         }
+
+        location redYellow = getLocationOfEdge(cube, Cube.Color.RED, Cube.Color.YELLOW);
+        switch(redYellow.name){
+            case UP:
+                if (redYellow.x == 0 && redYellow.y == 1){
+                    cube.twistUpperFace(true);
+                    cube.twistUpperFace(true);
+                    actions.add(cmd.UP_TWIST_RIGHT);
+                    actions.add(cmd.UP_TWIST_RIGHT);
+                } else if (redYellow.x == 1 && redYellow.y == 0){
+                    cube.twistUpperFace(true);
+                    actions.add(cmd.UP_TWIST_RIGHT);
+                } else if (redYellow.x == 1 && redYellow.y == 2){
+                    cube.twistUpperFace(false);
+                    actions.add(cmd.UP_TWIST_LEFT);
+                }
+                break;
+            case FRONT:
+                if (redYellow.x == 0 && redYellow.y == 1){
+                    actions.add(cmd.RIGHT_TWIST_FRONTUPWARD);
+                    actions.add(cmd.LEFT_TWIST_FRONTUPWARD);
+                    actions.add(cmd.DOWN_TWIST_RIGHT);
+                    actions.add(cmd.RIGHT_TWIST_BACKUPWARD);
+                    actions.add(cmd.LEFT_TWIST_BACKUPWARD);
+                    actions.add(cmd.DOWN_TWIST_LEFT);
+                    actions.add(cmd.FRONT_TWIST_CLOCKWISE);
+                    actions.add(cmd.FRONT_TWIST_CLOCKWISE);
+                    cube.twistRightFace(true);
+                    cube.twistLeftFace(true);
+                    cube.twistBottomFace(true);
+                }
+        }
+
+
+
+
+
+        location redWhite = getLocationOfEdge(cube, Cube.Color.RED, Cube.Color.WHITE);
+        location redBlue = getLocationOfEdge(cube, Cube.Color.RED, Cube.Color.BLUE);
+        location redGreen = getLocationOfEdge(cube, Cube.Color.RED, Cube.Color.GREEN);
+
+
     }
 
-    private location getLocationOfEdge(Cube cube, Cube.Color prime, Cube.Color second){
+
+
+
+    private static location getLocationOfEdge(Cube cube, Cube.Color prime, Cube.Color second){
 
         if (cube.getUp().getGridEntry(0,1) == prime && cube.getBack().getGridEntry(0,1) == second){ return new location(facet.UP, 0, 1); }
         if (cube.getUp().getGridEntry(1,0) == prime && cube.getLeft().getGridEntry(0,1) == second){ return new location(facet.UP, 1, 0); }
@@ -119,7 +165,7 @@ public class Logic {
         }
     }
 
-    private class location {
+    private static class location {
         int x,y;
         facet name;
         public location(facet name, int x, int y){
