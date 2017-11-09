@@ -140,7 +140,6 @@ public class Cube {
         up.counterClockwiseFixInnerValues();
         down.clockwiseFixInnerValues();
 
-
     }
 
     /**
@@ -175,46 +174,12 @@ public class Cube {
     }
 
     /**
-     * Twists bottom face to the right- front face bottom row turns to be right face bottom row, etc.
-     */
-    private void rightTwistBottomFace() {
-        Color[] tmp = front.grid[dim - 1];
-        front.grid[dim - 1] = left.grid[dim - 1];
-        left.grid[dim - 1] = back.grid[dim - 1];
-        back.grid[dim - 1] = right.grid[dim - 1];
-        right.grid[dim - 1] = tmp;
-
-        down.clockwiseFixInnerValues();
-    }
-
-    /**
-     * Twists bottom face to the left- front face bottom row turns to be left face bottom row, etc.
-     */
-    private void leftTwistBottomFace() {
-        Color[] tmp = front.grid[dim - 1];
-        front.grid[dim - 1] = right.grid[dim - 1];
-        right.grid[dim - 1] = back.grid[dim - 1];
-        back.grid[dim - 1] = left.grid[dim - 1];
-        left.grid[dim - 1] = tmp;
-
-        down.counterClockwiseFixInnerValues();
-    }
-
-
-    /**
      * Twists the left face according to the value of frontUpward
      *
      * @param frontUpward == true -> twists from the front face to the upper face(before flipping)
      */
     public void twistRightFace(boolean frontUpward) {
-        leftRotate();
-        flip();
-
-        if (frontUpward)
-            rightTwistBottomFace();
-        else
-            leftTwistBottomFace();
-
+        twistSideFace(true, frontUpward);
     }
 
     /**
@@ -223,24 +188,68 @@ public class Cube {
      * @param frontUpward == true -> twists from the front face to the upper face(before flipping)
      */
     public void twistLeftFace(boolean frontUpward) {
-        rightRotate();
-        flip();
+        twistSideFace(false, frontUpward);
+    }
 
-        if (!frontUpward)
-            rightTwistBottomFace();
-        else
-            leftTwistBottomFace();
+
+    /**
+     * Twists the front face according to the value of clockwise
+     *
+     * @param clockwise == true -> twists the front face clockwise. Otherwise twists it counter-clockwise
+     */
+    public void twistFrontFace(boolean clockwise) {
+        rotate(true);
+        twistSideFace(true, clockwise);
+        rotate(false);
+    }
+
+    /**
+     * Twists the back face according to the value of clockwise(from the front point of view)
+     *
+     * @param clockwise == true -> twists the back face clockwise(from the front point of view). Otherwise twists it counter-clockwise
+     */
+    public void twistBackFace(boolean clockwise) {
+        rotate(false);
+        twistSideFace(true, !clockwise);
+        rotate(true);
+    }
+
+    /**
+     * Twists the bottom face according to the value of right
+     *
+     * @param isRightTwist == true -> twists from the front face to the right face
+     */
+    public void twistBottomFace(boolean isRightTwist) {
+        flip();
+        twistBackFace(!isRightTwist);
+        flip();
+        flip();
+        flip();
+    }
+
+    /**
+     * Twists the upper face according to the value of right
+     *
+     * @param isRightTwist == true -> twists from the front face to the right face(before flipping)
+     */
+    public void twistUpperFace(boolean isRightTwist) {
+       flip();
+       twistFrontFace(!isRightTwist);
+       flip();
+       flip();
+       flip();
 
     }
 
-    private void twistSideFace(boolean right, boolean upwards) {
-        int frontSideCol = right ? 2 : 0;
-        int backSideCol = right ? 0 : 2;
+
+    private void twistSideFace(boolean isRightFace, boolean isTwistUpwards) {
+        int frontSideCol = isRightFace ? 2 : 0;
+        int backSideCol = isRightFace ? 0 : 2;
 
         Color[] tmp = front.getGridColumn(frontSideCol);
         Color[] reversedTmp;
 
-        if (upwards) {
+        if (isTwistUpwards) {
             front.setGridColumn(down.getGridColumn(frontSideCol), frontSideCol);
 
             reversedTmp = back.getGridColumn(backSideCol);
@@ -253,6 +262,28 @@ public class Cube {
 
             up.setGridColumn(tmp, frontSideCol);
 
+            if (isRightFace)
+                right.clockwiseFixInnerValues();
+            else
+                left.counterClockwiseFixInnerValues();
+        }
+        else {
+            front.setGridColumn(up.getGridColumn(frontSideCol), frontSideCol);
+
+            reversedTmp = back.getGridColumn(backSideCol);
+            reverseThreeElementsArray(reversedTmp);
+            up.setGridColumn(reversedTmp, frontSideCol);
+
+            reversedTmp = down.getGridColumn(frontSideCol);
+            reverseThreeElementsArray(reversedTmp);
+            back.setGridColumn(reversedTmp,backSideCol);
+
+            down.setGridColumn(tmp, frontSideCol);
+
+            if (isRightFace)
+                right.counterClockwiseFixInnerValues();
+            else
+                left.clockwiseFixInnerValues();
         }
     }
 
@@ -260,68 +291,6 @@ public class Cube {
         Color tmp = array[0];
         array[0] = array[2];
         array[2] = tmp;
-    }
-
-    /**
-     * Twists the front face according to the value of clockwise
-     *
-     * @param clockwise == true -> twists the front face clockwise. Otherwise twists it counter-clockwise
-     */
-    public void twistFrontFace(boolean clockwise) {
-        flip();
-
-        if (clockwise)
-            rightTwistBottomFace();
-        else
-            leftTwistBottomFace();
-
-    }
-
-    /**
-     * Twists the back face according to the value of clockwise(before flipping)
-     *
-     * @param clockwise == true -> twists the back face clockwise(before flipping). Otherwise twists it counter-clockwise
-     */
-    public void twistBackFace(boolean clockwise) {
-        flip();
-        flip();
-        flip();
-
-        if (!clockwise)
-            rightTwistBottomFace();
-        else
-            leftTwistBottomFace();
-
-    }
-
-    /**
-     * Twists the bottom face according to the value of right
-     *
-     * @param right == true -> twists from the front face to the right face
-     */
-    public void twistBottomFace(boolean right) {
-
-        if (right)
-            rightTwistBottomFace();
-        else
-            leftTwistBottomFace();
-
-    }
-
-    /**
-     * Twists the upper face according to the value of right
-     *
-     * @param right == true -> twists from the front face to the right face(before flipping)
-     */
-    public void twistUpperFace(boolean right) {
-        flip();
-        flip();
-
-        if (!right)
-            rightTwistBottomFace();
-        else
-            leftTwistBottomFace();
-
     }
 
 
