@@ -40,13 +40,17 @@ public class tempClassForPrint {
             }
         }
         Cube cube = new Cube(cubeValues);
-        System.out.println(toStringCube(cube));
+//        System.out.println(toStringCube(cube));
+        System.out.println(cube.isValidCube());
         cube.twistUpperFace(true);
-        System.out.println(toStringCube(cube));
+//        System.out.println(toStringCube(cube));
+        System.out.println(cube.isValidCube());
         cube.twistBottomFace(false);
-        System.out.println(toStringCube(cube));
+//        System.out.println(toStringCube(cube));
+        System.out.println(cube.isValidCube());
         cube.twistFrontFace(true);
-        System.out.println(toStringCube(cube));
+//        System.out.println(toStringCube(cube));
+        System.out.println(cube.isValidCube());
 
     }
 
