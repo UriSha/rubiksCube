@@ -4,16 +4,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 
+
+
 public class Logic {
 
-    public enum facet{
-        UP,
-        DOWN,
-        LEFT,
-        RIGHT,
-        FRONT,
-        BACK
-    }
+//    public enum facet{
+//        UP,
+//        DOWN,
+//        LEFT,
+//        RIGHT,
+//        FRONT,
+//        BACK
+//    }
 
     public List<cmd> mainAlgorithm(Cube cube) {
         List<cmd> result = new ArrayList<>();
@@ -46,7 +48,7 @@ public class Logic {
             return;
         }
 
-        location redYellow = getLocationOfEdge(cube, Cube.Color.RED, Cube.Color.YELLOW);
+        Location redYellow = getLocationOfEdge(cube, Cube.Color.RED, Cube.Color.YELLOW);
         if(redYellow.name==null)
         {
             System.out.println("Error: 'stageOne' has failed");
@@ -97,9 +99,9 @@ public class Logic {
                     downRedYellow(actions,cube);
                 }
         }
-        location redWhite = getLocationOfEdge(cube, Cube.Color.RED, Cube.Color.WHITE);
-        location redBlue = getLocationOfEdge(cube, Cube.Color.RED, Cube.Color.BLUE);
-        location redGreen = getLocationOfEdge(cube, Cube.Color.RED, Cube.Color.GREEN);
+        Location redWhite = getLocationOfEdge(cube, Cube.Color.RED, Cube.Color.WHITE);
+        Location redBlue = getLocationOfEdge(cube, Cube.Color.RED, Cube.Color.BLUE);
+        Location redGreen = getLocationOfEdge(cube, Cube.Color.RED, Cube.Color.GREEN);
 
 
 
@@ -160,37 +162,37 @@ public class Logic {
 
 
 
-    private static location getLocationOfEdge(Cube cube, Cube.Color prime, Cube.Color second){
+    private static Location getLocationOfEdge(Cube cube, Cube.Color prime, Cube.Color second){
 
-        if (cube.getUp().getGridEntry(0,1) == prime && cube.getBack().getGridEntry(0,1) == second){ return new location(facet.UP, 0, 1); }
-        if (cube.getUp().getGridEntry(1,0) == prime && cube.getLeft().getGridEntry(0,1) == second){ return new location(facet.UP, 1, 0); }
-        if (cube.getUp().getGridEntry(1,2) == prime && cube.getRight().getGridEntry(0,1) == second){ return new location(facet.UP, 1, 2); }
-        if (cube.getUp().getGridEntry(2,1) == prime && cube.getFront().getGridEntry(0,1) == second){ return new location(facet.UP, 2, 1); }
+        if (cube.getUp().getGridEntry(0,1) == prime && cube.getBack().getGridEntry(0,1) == second){ return new Location(Face_Enum.UP, 0, 1); }
+        if (cube.getUp().getGridEntry(1,0) == prime && cube.getLeft().getGridEntry(0,1) == second){ return new Location(Face_Enum.UP, 1, 0); }
+        if (cube.getUp().getGridEntry(1,2) == prime && cube.getRight().getGridEntry(0,1) == second){ return new Location(Face_Enum.UP, 1, 2); }
+        if (cube.getUp().getGridEntry(2,1) == prime && cube.getFront().getGridEntry(0,1) == second){ return new Location(Face_Enum.UP, 2, 1); }
 
-        if (cube.getFront().getGridEntry(0,1) == prime && cube.getUp().getGridEntry(2,1) == second){ return new location(facet.FRONT, 0, 1); }
-        if (cube.getFront().getGridEntry(1,0) == prime && cube.getLeft().getGridEntry(1,2) == second){ return new location(facet.FRONT, 1, 0); }
-        if (cube.getFront().getGridEntry(1,2) == prime && cube.getRight().getGridEntry(1,0) == second){ return new location(facet.FRONT, 1, 2); }
-        if (cube.getFront().getGridEntry(2,1) == prime && cube.getDown().getGridEntry(0,1) == second){ return new location(facet.FRONT, 2, 1); }
+        if (cube.getFront().getGridEntry(0,1) == prime && cube.getUp().getGridEntry(2,1) == second){ return new Location(Face_Enum.FRONT, 0, 1); }
+        if (cube.getFront().getGridEntry(1,0) == prime && cube.getLeft().getGridEntry(1,2) == second){ return new Location(Face_Enum.FRONT, 1, 0); }
+        if (cube.getFront().getGridEntry(1,2) == prime && cube.getRight().getGridEntry(1,0) == second){ return new Location(Face_Enum.FRONT, 1, 2); }
+        if (cube.getFront().getGridEntry(2,1) == prime && cube.getDown().getGridEntry(0,1) == second){ return new Location(Face_Enum.FRONT, 2, 1); }
 
-        if (cube.getDown().getGridEntry(0,1) == prime && cube.getFront().getGridEntry(2,1) == second){ return new location(facet.DOWN, 0, 1); }
-        if (cube.getDown().getGridEntry(1,0) == prime && cube.getLeft().getGridEntry(2,1) == second){ return new location(facet.DOWN, 1, 0); }
-        if (cube.getDown().getGridEntry(1,2) == prime && cube.getRight().getGridEntry(2,1) == second){ return new location(facet.DOWN, 1, 2); }
-        if (cube.getDown().getGridEntry(2,1) == prime && cube.getBack().getGridEntry(2,1) == second){ return new location(facet.DOWN, 2, 1); }
+        if (cube.getDown().getGridEntry(0,1) == prime && cube.getFront().getGridEntry(2,1) == second){ return new Location(Face_Enum.DOWN, 0, 1); }
+        if (cube.getDown().getGridEntry(1,0) == prime && cube.getLeft().getGridEntry(2,1) == second){ return new Location(Face_Enum.DOWN, 1, 0); }
+        if (cube.getDown().getGridEntry(1,2) == prime && cube.getRight().getGridEntry(2,1) == second){ return new Location(Face_Enum.DOWN, 1, 2); }
+        if (cube.getDown().getGridEntry(2,1) == prime && cube.getBack().getGridEntry(2,1) == second){ return new Location(Face_Enum.DOWN, 2, 1); }
 
-        if (cube.getBack().getGridEntry(0,1) == prime && cube.getUp().getGridEntry(0,1) == second){ return new location(facet.BACK, 0, 1); }
-        if (cube.getBack().getGridEntry(1,0) == prime && cube.getRight().getGridEntry(1,2) == second){ return new location(facet.BACK, 1, 0); }
-        if (cube.getBack().getGridEntry(1,2) == prime && cube.getLeft().getGridEntry(1,0) == second){ return new location(facet.BACK, 1, 2); }
-        if (cube.getBack().getGridEntry(2,1) == prime && cube.getDown().getGridEntry(2,1) == second){ return new location(facet.BACK, 2, 1); }
+        if (cube.getBack().getGridEntry(0,1) == prime && cube.getUp().getGridEntry(0,1) == second){ return new Location(Face_Enum.BACK, 0, 1); }
+        if (cube.getBack().getGridEntry(1,0) == prime && cube.getRight().getGridEntry(1,2) == second){ return new Location(Face_Enum.BACK, 1, 0); }
+        if (cube.getBack().getGridEntry(1,2) == prime && cube.getLeft().getGridEntry(1,0) == second){ return new Location(Face_Enum.BACK, 1, 2); }
+        if (cube.getBack().getGridEntry(2,1) == prime && cube.getDown().getGridEntry(2,1) == second){ return new Location(Face_Enum.BACK, 2, 1); }
 
-        if (cube.getLeft().getGridEntry(0,1) == prime && cube.getUp().getGridEntry(1,0) == second){ return new location(facet.LEFT, 0, 1); }
-        if (cube.getLeft().getGridEntry(1,0) == prime && cube.getBack().getGridEntry(1,2) == second){ return new location(facet.LEFT, 1, 0); }
-        if (cube.getLeft().getGridEntry(1,2) == prime && cube.getFront().getGridEntry(1,0) == second){ return new location(facet.LEFT, 1, 2); }
-        if (cube.getLeft().getGridEntry(2,1) == prime && cube.getDown().getGridEntry(1,0) == second){ return new location(facet.LEFT, 2, 1); }
+        if (cube.getLeft().getGridEntry(0,1) == prime && cube.getUp().getGridEntry(1,0) == second){ return new Location(Face_Enum.LEFT, 0, 1); }
+        if (cube.getLeft().getGridEntry(1,0) == prime && cube.getBack().getGridEntry(1,2) == second){ return new Location(Face_Enum.LEFT, 1, 0); }
+        if (cube.getLeft().getGridEntry(1,2) == prime && cube.getFront().getGridEntry(1,0) == second){ return new Location(Face_Enum.LEFT, 1, 2); }
+        if (cube.getLeft().getGridEntry(2,1) == prime && cube.getDown().getGridEntry(1,0) == second){ return new Location(Face_Enum.LEFT, 2, 1); }
 
-        if (cube.getRight().getGridEntry(0,1) == prime && cube.getUp().getGridEntry(1,2) == second){ return new location(facet.RIGHT, 0, 1); }
-        if (cube.getRight().getGridEntry(1,0) == prime && cube.getFront().getGridEntry(1,2) == second){ return new location(facet.RIGHT, 1, 0); }
-        if (cube.getRight().getGridEntry(1,2) == prime && cube.getBack().getGridEntry(1,0) == second){ return new location(facet.RIGHT, 1, 2); }
-        if (cube.getRight().getGridEntry(2,1) == prime && cube.getDown().getGridEntry(1,2) == second){ return new location(facet.RIGHT, 2, 1); }
+        if (cube.getRight().getGridEntry(0,1) == prime && cube.getUp().getGridEntry(1,2) == second){ return new Location(Face_Enum.RIGHT, 0, 1); }
+        if (cube.getRight().getGridEntry(1,0) == prime && cube.getFront().getGridEntry(1,2) == second){ return new Location(Face_Enum.RIGHT, 1, 0); }
+        if (cube.getRight().getGridEntry(1,2) == prime && cube.getBack().getGridEntry(1,0) == second){ return new Location(Face_Enum.RIGHT, 1, 2); }
+        if (cube.getRight().getGridEntry(2,1) == prime && cube.getDown().getGridEntry(1,2) == second){ return new Location(Face_Enum.RIGHT, 2, 1); }
 
         return null;
     }
@@ -251,10 +253,10 @@ public class Logic {
         return actions;
     }
 
-    private static class location {
+    private static class Location {
         int x,y;
-        facet name;
-        public location(facet name, int x, int y){
+        Face_Enum name;
+        public Location(Face_Enum name, int x, int y){
             this.name = name;
             this.x = x;
             this.y = y;

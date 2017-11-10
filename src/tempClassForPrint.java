@@ -52,6 +52,8 @@ public class tempClassForPrint {
 //        System.out.println(toStringCube(cube));
         System.out.println(cube.isValidCube());
 
+//        System.out.println(Cube.Color.ORANGE - Cube.Color.BLUE);
+
     }
 
 
