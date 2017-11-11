@@ -45,12 +45,21 @@ public class Cube {
     }
 
     public enum Color {
-        RED,
-        GREEN,
-        WHITE,
-        YELLOW,
-        BLUE,
-        ORANGE
+        RED(1),
+        GREEN(2),
+        WHITE(3),
+        YELLOW(4),
+        BLUE(5),
+        ORANGE(6);
+
+        private final int value;
+        Color(int val){
+            this.value = val;
+        }
+
+        public int getValue(){
+            return value;
+        }
     }
 
     public Face getFront() {
@@ -316,6 +325,7 @@ public class Cube {
 
         public Face(Color[][] grid) {
             this.grid = grid;
+            this.color = grid[1][1];
         }
 
         public Color[][] getGrid() {

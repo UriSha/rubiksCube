@@ -1,3 +1,5 @@
+import java.util.HashMap;
+import java.util.Map;
 
 public class tempClassForPrint {
     public static void main(String[] args) {
@@ -11,26 +13,26 @@ public class tempClassForPrint {
 
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 3; j++) {
-                cubeValues[1][i][j] = Cube.Color.ORANGE;
+                cubeValues[1][i][j] = Cube.Color.BLUE;
             }
         }
 
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 3; j++) {
-                cubeValues[2][i][j] = Cube.Color.YELLOW;
+                cubeValues[2][i][j] = Cube.Color.ORANGE;
 
             }
         }
 
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 3; j++) {
-                cubeValues[3][i][j] = Cube.Color.BLUE;
+                cubeValues[3][i][j] = Cube.Color.GREEN;
             }
         }
 
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 3; j++) {
-                cubeValues[4][i][j] = Cube.Color.GREEN;
+                cubeValues[4][i][j] = Cube.Color.YELLOW;
             }
         }
 
@@ -40,7 +42,7 @@ public class tempClassForPrint {
             }
         }
         Cube cube = new Cube(cubeValues);
-//        System.out.println(toStringCube(cube));
+        System.out.println(toStringCube(cube));
         System.out.println(cube.isValidCube());
         cube.twistUpperFace(true);
 //        System.out.println(toStringCube(cube));
@@ -51,8 +53,36 @@ public class tempClassForPrint {
         cube.twistFrontFace(true);
 //        System.out.println(toStringCube(cube));
         System.out.println(cube.isValidCube());
+        cube.flip();
+        System.out.println(toStringCube(cube));
+        System.out.println(cube.isValidCube());
+        cube.twistFrontFace(false);
+        System.out.println(cube.isValidCube());
+        cube.twistFrontFace(false);
+        System.out.println(cube.isValidCube());
+        cube.twistLeftFace(false);
+        System.out.println(cube.isValidCube());
+        cube.twistBottomFace(false);
+        System.out.println(cube.isValidCube());
+        cube.twistBottomFace(false);
+        System.out.println(cube.isValidCube());
+        System.out.println(toStringCube(cube));
+        cube.flip();
+        System.out.println(toStringCube(cube));
+        System.out.println(cube.isValidCube());
+        cube.twistRightFace(true);
+        System.out.println(cube.isValidCube());
+        cube.rotate(true);
+        System.out.println(cube.isValidCube());
+
 
 //        System.out.println(Cube.Color.ORANGE - Cube.Color.BLUE);
+
+
+        Map<Cube.Color[], Integer> subCubes = new HashMap<>();
+        subCubes.put(new Cube.Color[]{Cube.Color.BLUE},1);
+        subCubes.put(new Cube.Color[]{Cube.Color.BLUE},2);
+        int x = 0;
 
     }
 
