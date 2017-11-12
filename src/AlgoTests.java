@@ -72,6 +72,13 @@ public class AlgoTests {
         cube.flip();
         cube.twistUpperFace(false);
         cube.twistRightFace(true);
+        cube.flip();
+        cube.twistBackFace(true);
+        cube.twistBackFace(true);
+        cube.twistFrontFace(false);
+        cube.twistFrontFace(false);
+        cube.twistRightFace(true);
+        cube.twistLeftFace(true);
 
         System.out.println(tempClassForPrint.toStringCube(cube));
 
