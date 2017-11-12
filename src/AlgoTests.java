@@ -52,6 +52,7 @@ public class AlgoTests {
         System.out.println(tempClassForPrint.toStringCube(cube));
 
         cube.twistBottomFace(false);
+        cube.flip();
         cube.twistBackFace(true);
         cube.twistFrontFace(false);
         cube.twistFrontFace(false);
@@ -68,6 +69,7 @@ public class AlgoTests {
         cube.twistRightFace(true);
         cube.twistLeftFace(true);
         cube.twistLeftFace(true);
+        cube.flip();
         cube.twistUpperFace(false);
         cube.twistRightFace(true);
 
@@ -76,6 +78,8 @@ public class AlgoTests {
         List<cmd> result = new ArrayList<>();
         int algoStage = 0;
         Logic.initialize(cube, result);
+        System.out.println(tempClassForPrint.toStringCube(cube));
+
         Logic.stageOne(cube, result);
 
         System.out.println(tempClassForPrint.toStringCube(cube));
