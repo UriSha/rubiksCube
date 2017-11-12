@@ -19,7 +19,7 @@ public class RobotUtils {
     /**
      *
      */
-    public List<RobotSolvingAction> translateCommandList(List<cmd> algorithmCommands){
+    public static List<RobotSolvingAction> translateCommandList(List<cmd> algorithmCommands){
         List<RobotSolvingAction> result = new ArrayList<>();
 
         // currentPositionMap - key : face to twist (from algorithm), value : its current position
@@ -40,7 +40,7 @@ public class RobotUtils {
 
     }
 
-    private void fromAlgoCommandToRobotAction(cmd command, List<RobotSolvingAction> result, Map<Face_Enum,Face_Enum> currentPositionMap ){
+    private static void fromAlgoCommandToRobotAction(cmd command, List<RobotSolvingAction> result, Map<Face_Enum,Face_Enum> currentPositionMap ){
         Face_Enum upLocation;
         Face_Enum leftLocation;
         Face_Enum frontLocation;
@@ -140,7 +140,7 @@ public class RobotUtils {
      * @param currentPositionMap
      * @return
      */
-    private List<RobotSolvingAction> getRobotActionTwist(Face_Enum face, boolean direction,Map<Face_Enum,Face_Enum> currentPositionMap){
+    private static List<RobotSolvingAction> getRobotActionTwist(Face_Enum face, boolean direction,Map<Face_Enum,Face_Enum> currentPositionMap){
         List<RobotSolvingAction> result = new ArrayList<>();
         switch (face){
             case UP:
@@ -185,31 +185,69 @@ public class RobotUtils {
         return result;
     }
 
-    private void updateMapDueToFlip(Map<Face_Enum,Face_Enum> currentPositionMap){
-        Face_Enum temp = currentPositionMap.get(Face_Enum.FRONT);
-        currentPositionMap.put(Face_Enum.FRONT, currentPositionMap.get(Face_Enum.UP));
-        currentPositionMap.put(Face_Enum.UP, currentPositionMap.get(Face_Enum.BACK));
-        currentPositionMap.put(Face_Enum.BACK, currentPositionMap.get(Face_Enum.DOWN));
-        currentPositionMap.put(Face_Enum.DOWN, temp);
+    private static void updateMapDueToFlip(Map<Face_Enum,Face_Enum> currentPositionMap){
+
+        Face_Enum faceCurrentlyInFront = getfaceInPosition(currentPositionMap,Face_Enum.FRONT);
+        Face_Enum faceCurrentlyInUp = getfaceInPosition(currentPositionMap,Face_Enum.UP);
+        Face_Enum faceCurrentlyInBack = getfaceInPosition(currentPositionMap,Face_Enum.BACK);
+        Face_Enum faceCurrentlyInDown = getfaceInPosition(currentPositionMap,Face_Enum.DOWN);
+
+
+        currentPositionMap.put(faceCurrentlyInFront, Face_Enum.DOWN);
+        currentPositionMap.put(faceCurrentlyInUp, Face_Enum.FRONT);
+        currentPositionMap.put(faceCurrentlyInBack, Face_Enum.UP);
+        currentPositionMap.put(faceCurrentlyInDown, Face_Enum.BACK);
     }
 
-    private void updateMapDueToRightRotate(Map<Face_Enum,Face_Enum> currentPositionMap){
-        Face_Enum temp = currentPositionMap.get(Face_Enum.FRONT);
-        currentPositionMap.put(Face_Enum.FRONT, currentPositionMap.get(Face_Enum.LEFT));
-        currentPositionMap.put(Face_Enum.LEFT, currentPositionMap.get(Face_Enum.BACK));
-        currentPositionMap.put(Face_Enum.BACK, currentPositionMap.get(Face_Enum.RIGHT));
-        currentPositionMap.put(Face_Enum.RIGHT, temp);
+
+
+    private static void updateMapDueToRightRotate(Map<Face_Enum,Face_Enum> currentPositionMap){
+
+        Face_Enum faceCurrentlyInFront = getfaceInPosition(currentPositionMap,Face_Enum.FRONT);
+        Face_Enum faceCurrentlyInLeft = getfaceInPosition(currentPositionMap,Face_Enum.LEFT);
+        Face_Enum faceCurrentlyInBack = getfaceInPosition(currentPositionMap,Face_Enum.BACK);
+        Face_Enum faceCurrentlyInRight = getfaceInPosition(currentPositionMap,Face_Enum.RIGHT);
+
+        currentPositionMap.put(faceCurrentlyInFront, Face_Enum.RIGHT);
+        currentPositionMap.put(faceCurrentlyInLeft, Face_Enum.FRONT);
+        currentPositionMap.put(faceCurrentlyInBack, Face_Enum.LEFT);
+        currentPositionMap.put(faceCurrentlyInRight, Face_Enum.BACK);
     }
 
-    private void updateMapDueToLeftRotate(Map<Face_Enum,Face_Enum> currentPositionMap){
-        Face_Enum temp = currentPositionMap.get(Face_Enum.FRONT);
-        currentPositionMap.put(Face_Enum.FRONT, currentPositionMap.get(Face_Enum.RIGHT));
-        currentPositionMap.put(Face_Enum.RIGHT, currentPositionMap.get(Face_Enum.BACK));
-        currentPositionMap.put(Face_Enum.BACK, currentPositionMap.get(Face_Enum.LEFT));
-        currentPositionMap.put(Face_Enum.LEFT, temp);
+    private static void updateMapDueToLeftRotate(Map<Face_Enum,Face_Enum> currentPositionMap){
+
+        Face_Enum faceCurrentlyInFront = getfaceInPosition(currentPositionMap,Face_Enum.FRONT);
+        Face_Enum faceCurrentlyInRight = getfaceInPosition(currentPositionMap,Face_Enum.RIGHT);
+        Face_Enum faceCurrentlyInBack = getfaceInPosition(currentPositionMap,Face_Enum.BACK);
+        Face_Enum faceCurrentlyInLeft = getfaceInPosition(currentPositionMap,Face_Enum.LEFT);
+
+
+        currentPositionMap.put(faceCurrentlyInFront, Face_Enum.LEFT);
+        currentPositionMap.put(faceCurrentlyInLeft, Face_Enum.BACK);
+        currentPositionMap.put(faceCurrentlyInBack, Face_Enum.RIGHT);
+        currentPositionMap.put(faceCurrentlyInRight, Face_Enum.FRONT);
+
     }
 
-    private boolean getBoolForDirection(Face_Enum initial, Face_Enum current, boolean algorithmBool){
+    private static Face_Enum getfaceInPosition(Map<Face_Enum,Face_Enum> currentPositionMap, Face_Enum face){
+        if (currentPositionMap.get(Face_Enum.FRONT) == face)
+            return Face_Enum.FRONT;
+        if (currentPositionMap.get(Face_Enum.UP) == face)
+            return Face_Enum.UP;
+        if (currentPositionMap.get(Face_Enum.LEFT) == face)
+            return Face_Enum.LEFT;
+        if (currentPositionMap.get(Face_Enum.RIGHT) == face)
+            return Face_Enum.RIGHT;
+        if (currentPositionMap.get(Face_Enum.DOWN) == face)
+            return Face_Enum.DOWN;
+        if (currentPositionMap.get(Face_Enum.BACK) == face)
+            return Face_Enum.BACK;
+
+        return null;
+
+    }
+
+    private static boolean getBoolForDirection(Face_Enum initial, Face_Enum current, boolean algorithmBool){
 
         // the original Face (i.e was right and right now is up)
 //        if (initial.getValue() == current.getValue())
@@ -226,7 +264,7 @@ public class RobotUtils {
 
     }
 
-    private boolean getBoolOtherFaceIsDown(Face_Enum initial, boolean algorithmBool){
+    private static boolean getBoolOtherFaceIsDown(Face_Enum initial, boolean algorithmBool){
         if (initial == Face_Enum.BACK || initial == Face_Enum.LEFT)
             return !algorithmBool;
         if (initial == Face_Enum.FRONT || initial == Face_Enum.RIGHT)
