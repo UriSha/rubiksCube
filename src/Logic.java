@@ -57,16 +57,12 @@ public class Logic {
         switch(redYellow.name){
             case UP:
                 if (redYellow.x == 0 && redYellow.y == 1){
-                    cube.twistUpperFace(true);
-                    cube.twistUpperFace(true);
-                    actions.add(cmd.CMD_UP_TWIST_RIGHT);
-                    actions.add(cmd.CMD_UP_TWIST_RIGHT);
+                    executeCMD(cmd.CMD_UP_TWIST_RIGHT, actions, cube);
+                    executeCMD(cmd.CMD_UP_TWIST_RIGHT, actions, cube);
                 } else if (redYellow.x == 1 && redYellow.y == 0){
-                    cube.twistUpperFace(true);
-                    actions.add(cmd.CMD_UP_TWIST_RIGHT);
+                    executeCMD(cmd.CMD_UP_TWIST_RIGHT, actions, cube);
                 } else if (redYellow.x == 1 && redYellow.y == 2){
-                    cube.twistUpperFace(false);
-                    actions.add(cmd.CMD_UP_TWIST_LEFT);
+                    executeCMD(cmd.CMD_UP_TWIST_LEFT, actions, cube);
                 }
                 break;
             case FRONT:
@@ -137,11 +133,11 @@ public class Logic {
             case CMD_LEFT_TWIST_BACKUPWARD:
                 cube.twistLeftFace(false);
                 break;
-            case CMD_RIGHT_TWIST_BACKUPWARD:
-                cube.twistRightFace(false);
-                break;
             case CMD_RIGHT_TWIST_FRONTUPWARD:
                 cube.twistLeftFace(true);
+                break;
+            case CMD_RIGHT_TWIST_BACKUPWARD:
+                cube.twistRightFace(false);
                 break;
             case CMD_FRONT_TWIST_CLOCKWISE:
                 cube.twistFrontFace(true);
@@ -150,10 +146,10 @@ public class Logic {
                 cube.twistFrontFace(false);
                 break;
             case CMD_BACK_TWIST_CLOCKWISE:
-                cube.twistFrontFace(true);
+                cube.twistBackFace(true);
                 break;
             case CMD_BACK_TWIST_C_CLOCKWISE:
-                cube.twistFrontFace(false);
+                cube.twistBackFace(false);
                 break;
 
         }
