@@ -20,6 +20,7 @@ public class Logic {
     public List<cmd> mainAlgorithm(Cube cube) {
         List<cmd> result = new ArrayList<>();
         int algoStage = 0;
+        initialize(cube, result);
         stageOne(cube, result);
 
         return result;
@@ -34,7 +35,12 @@ public class Logic {
         executeCMD(cmd.CMD_DOWN_TWIST_LEFT,actions,cube);
         executeCMD(cmd.CMD_FRONT_TWIST_CLOCKWISE,actions,cube);
         executeCMD(cmd.CMD_FRONT_TWIST_CLOCKWISE,actions,cube);
+    }
 
+    private static void backRedYellow(List<cmd> actions,Cube cube){
+        executeCMD(cmd.CMD_UP_TWIST_RIGHT, actions, cube);
+        executeCMD(cmd.CMD_UP_TWIST_RIGHT, actions, cube);
+        frontRedYellow(actions, cube);
     }
     private static void downRedYellow(List<cmd> actions,Cube cube){
         executeCMD(cmd.CMD_FRONT_TWIST_CLOCKWISE,actions,cube);
@@ -63,8 +69,7 @@ public class Logic {
                     executeCMD(cmd.CMD_UP_TWIST_RIGHT, actions, cube);
                 } else if (redYellow.x == 1 && redYellow.y == 2){
                     executeCMD(cmd.CMD_UP_TWIST_LEFT, actions, cube);
-                }
-                break;
+                } break;
             case FRONT:
                 if (redYellow.x == 0 && redYellow.y == 1){
                     frontRedYellow(actions,cube);
@@ -82,7 +87,7 @@ public class Logic {
                     executeCMD(cmd.CMD_FRONT_TWIST_CLOCKWISE,actions,cube);
                     executeCMD(cmd.CMD_FRONT_TWIST_CLOCKWISE,actions,cube);
                     frontRedYellow(actions,cube);
-                }
+                } break;
             case DOWN:
                 if(redYellow.x==0 && redYellow.y==1){
                     downRedYellow(actions,cube);
@@ -93,7 +98,25 @@ public class Logic {
                 }else if(redYellow.x==1 && redYellow.y==2){
                     executeCMD(cmd.CMD_DOWN_TWIST_LEFT,actions,cube);
                     downRedYellow(actions,cube);
-                }
+                } else if (redYellow.x==2 && redYellow.y==1){
+                    executeCMD(cmd.CMD_DOWN_TWIST_LEFT,actions,cube);
+                    executeCMD(cmd.CMD_DOWN_TWIST_LEFT,actions,cube);
+                    downRedYellow(actions,cube);
+                } break;
+            case BACK:
+                if(redYellow.x==0 && redYellow.y==1){
+                    backRedYellow(actions, cube);
+                } else if (redYellow.x==1 && redYellow.y==0){
+                    executeCMD(cmd.CMD_BACK_TWIST_CLOCKWISE, actions, cube);
+                    backRedYellow(actions, cube);
+                } else if (redYellow.x==2 && redYellow.y==1){
+                    executeCMD(cmd.CMD_BACK_TWIST_CLOCKWISE, actions, cube);
+                    executeCMD(cmd.CMD_BACK_TWIST_CLOCKWISE, actions, cube);
+                    backRedYellow(actions, cube);
+                } else if (redYellow.x==1 && redYellow.y==2){
+                    executeCMD(cmd.CMD_BACK_TWIST_C_CLOCKWISE, actions, cube);
+                    backRedYellow(actions, cube);
+                } break;
         }
         Location redWhite = getLocationOfEdge(cube, Cube.Color.RED, Cube.Color.WHITE);
         Location redBlue = getLocationOfEdge(cube, Cube.Color.RED, Cube.Color.BLUE);
@@ -194,12 +217,11 @@ public class Logic {
     }
 
 
-    private static List<cmd> initialize(Cube cube) {
-        List<cmd> actions = new ArrayList<>();
+    private static void initialize(Cube cube, List<cmd> actions) {
 
         if (cube == null) {
             System.out.println("Error: 'initialize' arguments are null");
-            return null;
+            return;
         }
 
         if (cube.getUp().getColor() != Cube.Color.RED) { // getting the red facet to the top
@@ -231,7 +253,7 @@ public class Logic {
             }
         }
 
-        if (cube.getFront().getColor() != Cube.Color.YELLOW) {
+        if (cube.getFront().getColor() != Cube.Color.YELLOW) { // getting the yellow facet to the front
             if (cube.getLeft().getColor() == Cube.Color.YELLOW) {
                 actions.add(cmd.CMD_RIGHT_ROTATE);
                 cube.rotate(true);
@@ -245,8 +267,6 @@ public class Logic {
                 cube.rotate(false);
             }
         }
-
-        return actions;
     }
 
     private static class Location {
