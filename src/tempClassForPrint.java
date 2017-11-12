@@ -54,7 +54,7 @@ public class tempClassForPrint {
 //        System.out.println(toStringCube(cube));
         System.out.println(cube.isValidCube());
         cube.flip();
-        System.out.println(toStringCube(cube));
+//        System.out.println(toStringCube(cube));
         System.out.println(cube.isValidCube());
         cube.twistFrontFace(false);
         System.out.println(cube.isValidCube());
@@ -66,13 +66,27 @@ public class tempClassForPrint {
         System.out.println(cube.isValidCube());
         cube.twistBottomFace(false);
         System.out.println(cube.isValidCube());
-        System.out.println(toStringCube(cube));
+//        System.out.println(toStringCube(cube));
         cube.flip();
-        System.out.println(toStringCube(cube));
+//        System.out.println(toStringCube(cube));
         System.out.println(cube.isValidCube());
         cube.twistRightFace(true);
         System.out.println(cube.isValidCube());
         cube.rotate(true);
+        cube.rotate(true);
+        cube.rotate(false);
+        System.out.println(cube.isValidCube());
+        cube.twistRightFace(true);
+        System.out.println(cube.isValidCube());
+        cube.twistRightFace(false);
+        System.out.println(cube.isValidCube());
+        cube.twistUpperFace(false);
+        System.out.println(cube.isValidCube());
+        cube.twistUpperFace(true);
+        System.out.println(cube.isValidCube());
+        cube.twistUpperFace(true);
+        System.out.println(cube.isValidCube());
+        cube.twistUpperFace(true);
         System.out.println(cube.isValidCube());
 
 
