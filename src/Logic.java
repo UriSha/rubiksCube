@@ -41,6 +41,7 @@ public class Logic {
         executeCMD(cmd.CMD_UP_TWIST_RIGHT, actions, cube);
         executeCMD(cmd.CMD_UP_TWIST_RIGHT, actions, cube);
         frontRedYellow(actions, cube);
+
     }
     private static void downRedYellow(List<cmd> actions,Cube cube){
         executeCMD(cmd.CMD_FRONT_TWIST_CLOCKWISE,actions,cube);
