@@ -131,7 +131,7 @@ public class Logic {
     private static void frontRedEdge(List<cmd> actions, Cube cube){
         executeCMD(cmd.CMD_RIGHT_TWIST_FRONTUPWARD,actions,cube);
         executeCMD(cmd.CMD_LEFT_TWIST_FRONTUPWARD,actions,cube);
-        executeCMD(cmd.CMD_DOWN_TWIST_RIGHT,actions,cube);
+        executeCMD(cmd.CMD_FRONT_TWIST_CLOCKWISE,actions,cube);
         executeCMD(cmd.CMD_RIGHT_TWIST_BACKUPWARD,actions,cube);
         executeCMD(cmd.CMD_LEFT_TWIST_BACKUPWARD,actions,cube);
         executeCMD(cmd.CMD_DOWN_TWIST_LEFT,actions,cube);
