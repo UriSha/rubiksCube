@@ -32,7 +32,7 @@ public class Logic {
                 if (redCorner.secondDircetion == Face_Enum.FRONT) {
                     if (redCorner.thirdDirection == Face_Enum.DOWN) {rightLowerRedCorner(actions, cube);}
                     else if(redCorner.thirdDirection == Face_Enum.UP){
-
+                        System.out.println("Not a logic location for this corner");
                     }
                 }
 
