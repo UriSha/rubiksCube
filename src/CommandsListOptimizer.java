@@ -32,9 +32,7 @@ public class CommandsListOptimizer {
                     actions.remove(i+1);
                     actions.remove(i);
                 }
-            } catch (ArrayIndexOutOfBoundsException e){
-                break;
-            }
+            } catch (ArrayIndexOutOfBoundsException e){}
         }
     }
 }
