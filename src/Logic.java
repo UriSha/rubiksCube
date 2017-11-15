@@ -303,6 +303,123 @@ public class Logic {
     }
 
 
+
+    public static Location getLocationOfCorner(Cube cube, Cube.Color prime, Cube.Color second, Cube.Color third){
+
+        if (cube.getUp().getGridEntry(0,0) == prime && cube.getBack().getGridEntry(0,2) == second && cube.getLeft().getGridEntry(0,0) == third) {
+            return new Location(Face_Enum.UP, 0, 0, Face_Enum.BACK); }
+        if (cube.getUp().getGridEntry(0,0) == prime && cube.getBack().getGridEntry(0,2) == third && cube.getLeft().getGridEntry(0,0) == second) {
+            return new Location(Face_Enum.UP, 0, 0, Face_Enum.LEFT); }
+        if (cube.getUp().getGridEntry(0,2) == prime && cube.getBack().getGridEntry(0,0) == second && cube.getRight().getGridEntry(0,2) == third) {
+            return new Location(Face_Enum.UP, 0, 2, Face_Enum.BACK); }
+        if (cube.getUp().getGridEntry(0,2) == prime && cube.getBack().getGridEntry(0,0) == third && cube.getRight().getGridEntry(0,2) == second) {
+            return new Location(Face_Enum.UP, 0, 2, Face_Enum.RIGHT); }
+        if (cube.getUp().getGridEntry(2,0) == prime && cube.getFront().getGridEntry(0,0) == second && cube.getLeft().getGridEntry(0,2) == third) {
+            return new Location(Face_Enum.UP, 2, 0, Face_Enum.FRONT); }
+        if (cube.getUp().getGridEntry(2,0) == prime && cube.getFront().getGridEntry(0,0) == third && cube.getLeft().getGridEntry(0,2) == second) {
+            return new Location(Face_Enum.UP, 2, 0, Face_Enum.LEFT); }
+        if (cube.getUp().getGridEntry(2,2) == prime && cube.getFront().getGridEntry(0,2) == second && cube.getRight().getGridEntry(0,0) == third) {
+            return new Location(Face_Enum.UP, 2, 2, Face_Enum.FRONT); }
+        if (cube.getUp().getGridEntry(2,2) == prime && cube.getFront().getGridEntry(0,2) == third && cube.getRight().getGridEntry(0,0) == second) {
+            return new Location(Face_Enum.UP, 2, 2, Face_Enum.RIGHT); }
+
+        if (cube.getFront().getGridEntry(0,0) == prime && cube.getUp().getGridEntry(2,0) == second && cube.getLeft().getGridEntry(0,2) == third) {
+            return new Location(Face_Enum.FRONT, 0, 0, Face_Enum.UP); }
+        if (cube.getFront().getGridEntry(0,0) == prime && cube.getUp().getGridEntry(2,0) == third && cube.getLeft().getGridEntry(0,2) == second) {
+            return new Location(Face_Enum.FRONT, 0, 0, Face_Enum.LEFT); }
+        if (cube.getFront().getGridEntry(0,2) == prime && cube.getUp().getGridEntry(2,2) == second && cube.getRight().getGridEntry(0,0) == third) {
+            return new Location(Face_Enum.FRONT, 0, 2, Face_Enum.UP); }
+        if (cube.getFront().getGridEntry(0,2) == prime && cube.getUp().getGridEntry(2,2) == third && cube.getRight().getGridEntry(0,0) == second) {
+            return new Location(Face_Enum.FRONT, 0, 2, Face_Enum.RIGHT); }
+        if (cube.getFront().getGridEntry(2,0) == prime && cube.getLeft().getGridEntry(2,2) == second && cube.getDown().getGridEntry(0,0) == third) {
+            return new Location(Face_Enum.FRONT, 2, 0, Face_Enum.LEFT); }
+        if (cube.getFront().getGridEntry(2,0) == prime && cube.getLeft().getGridEntry(2,2) == third && cube.getDown().getGridEntry(0,0) == second) {
+            return new Location(Face_Enum.FRONT, 2, 0, Face_Enum.DOWN); }
+        if (cube.getFront().getGridEntry(2,2) == prime && cube.getRight().getGridEntry(2,0) == second && cube.getDown().getGridEntry(0,2) == third) {
+            return new Location(Face_Enum.FRONT, 2, 2, Face_Enum.RIGHT); }
+        if (cube.getFront().getGridEntry(2,2) == prime && cube.getRight().getGridEntry(2,0) == third && cube.getDown().getGridEntry(0,2) == second) {
+            return new Location(Face_Enum.FRONT, 2, 2, Face_Enum.DOWN); }
+
+
+        if (cube.getBack().getGridEntry(0,0) == prime && cube.getUp().getGridEntry(0,2) == second && cube.getRight().getGridEntry(0,2) == third) {
+            return new Location(Face_Enum.BACK, 0, 0, Face_Enum.UP); }
+        if (cube.getBack().getGridEntry(0,0) == prime && cube.getUp().getGridEntry(0,2) == third && cube.getRight().getGridEntry(0,2) == second) {
+            return new Location(Face_Enum.BACK, 0, 0, Face_Enum.RIGHT); }
+        if (cube.getBack().getGridEntry(0,2) == prime && cube.getUp().getGridEntry(0,0) == second && cube.getLeft().getGridEntry(0,0) == third) {
+            return new Location(Face_Enum.BACK, 0, 2, Face_Enum.UP); }
+        if (cube.getBack().getGridEntry(0,2) == prime && cube.getUp().getGridEntry(0,0) == third && cube.getLeft().getGridEntry(0,0) == second) {
+            return new Location(Face_Enum.BACK, 0, 2, Face_Enum.LEFT); }
+        if (cube.getBack().getGridEntry(2,0) == prime && cube.getDown().getGridEntry(2,2) == second && cube.getRight().getGridEntry(2,2) == third) {
+            return new Location(Face_Enum.BACK, 2, 0, Face_Enum.DOWN); }
+        if (cube.getBack().getGridEntry(2,0) == prime && cube.getDown().getGridEntry(2,2) == third && cube.getRight().getGridEntry(2,2) == second) {
+            return new Location(Face_Enum.BACK, 2, 0, Face_Enum.RIGHT); }
+        if (cube.getBack().getGridEntry(2,2) == prime && cube.getDown().getGridEntry(2,0) == second && cube.getLeft().getGridEntry(2,0) == third) {
+            return new Location(Face_Enum.BACK, 2, 2, Face_Enum.DOWN); }
+        if (cube.getBack().getGridEntry(2,2) == prime && cube.getDown().getGridEntry(2,0) == third && cube.getLeft().getGridEntry(2,0) == second) {
+            return new Location(Face_Enum.BACK, 2, 2, Face_Enum.LEFT); }
+
+
+        if (cube.getDown().getGridEntry(0,0) == prime && cube.getFront().getGridEntry(2,0) == second && cube.getLeft().getGridEntry(2,2) == third) {
+            return new Location(Face_Enum.DOWN, 0, 0, Face_Enum.FRONT); }
+        if (cube.getDown().getGridEntry(0,0) == prime && cube.getFront().getGridEntry(2,0) == third && cube.getLeft().getGridEntry(2,2) == second) {
+            return new Location(Face_Enum.DOWN, 0, 0, Face_Enum.LEFT); }
+        if (cube.getDown().getGridEntry(0,2) == prime && cube.getFront().getGridEntry(2,2) == second && cube.getRight().getGridEntry(2,0) == third) {
+            return new Location(Face_Enum.DOWN, 0, 2, Face_Enum.FRONT); }
+        if (cube.getDown().getGridEntry(0,2) == prime && cube.getFront().getGridEntry(2,2) == third && cube.getRight().getGridEntry(2,0) == second) {
+            return new Location(Face_Enum.DOWN, 0, 2, Face_Enum.RIGHT); }
+        if (cube.getDown().getGridEntry(2,0) == prime && cube.getBack().getGridEntry(2,2) == second && cube.getLeft().getGridEntry(2,0) == third) {
+            return new Location(Face_Enum.DOWN, 2, 0, Face_Enum.BACK); }
+        if (cube.getDown().getGridEntry(2,0) == prime && cube.getBack().getGridEntry(2,2) == third && cube.getLeft().getGridEntry(2,0) == second) {
+            return new Location(Face_Enum.DOWN, 2, 0, Face_Enum.LEFT); }
+        if (cube.getDown().getGridEntry(2,2) == prime && cube.getBack().getGridEntry(2,0) == second && cube.getRight().getGridEntry(2,2) == third) {
+            return new Location(Face_Enum.DOWN, 2, 2, Face_Enum.BACK); }
+        if (cube.getDown().getGridEntry(2,2) == prime && cube.getBack().getGridEntry(2,0) == third && cube.getRight().getGridEntry(2,2) == second) {
+            return new Location(Face_Enum.DOWN, 2, 2, Face_Enum.RIGHT); }
+
+        if (cube.getRight().getGridEntry(0,0) == prime && cube.getUp().getGridEntry(2,2) == second && cube.getFront().getGridEntry(0,2) == third) {
+            return new Location(Face_Enum.RIGHT, 0, 0, Face_Enum.UP); }
+        if (cube.getRight().getGridEntry(0,0) == prime && cube.getUp().getGridEntry(2,2) == third && cube.getFront().getGridEntry(0,2) == second) {
+            return new Location(Face_Enum.RIGHT, 0, 0, Face_Enum.FRONT); }
+        if (cube.getRight().getGridEntry(0,2) == prime && cube.getUp().getGridEntry(0,2) == second && cube.getBack().getGridEntry(0,0) == third) {
+            return new Location(Face_Enum.RIGHT, 0, 2, Face_Enum.UP); }
+        if (cube.getRight().getGridEntry(0,2) == prime && cube.getUp().getGridEntry(0,2) == third && cube.getBack().getGridEntry(0,0) == second) {
+            return new Location(Face_Enum.RIGHT, 0, 2, Face_Enum.BACK); }
+        if (cube.getRight().getGridEntry(2,0) == prime && cube.getFront().getGridEntry(2,2) == second && cube.getDown().getGridEntry(0,2) == third) {
+            return new Location(Face_Enum.RIGHT, 2, 0, Face_Enum.FRONT); }
+        if (cube.getRight().getGridEntry(2,0) == prime && cube.getFront().getGridEntry(2,2) == third && cube.getDown().getGridEntry(0,2) == second) {
+            return new Location(Face_Enum.RIGHT, 2, 0, Face_Enum.DOWN); }
+        if (cube.getRight().getGridEntry(2,2) == prime && cube.getBack().getGridEntry(2,0) == second && cube.getDown().getGridEntry(2,2) == third) {
+            return new Location(Face_Enum.RIGHT, 2, 2, Face_Enum.BACK); }
+        if (cube.getRight().getGridEntry(2,2) == prime && cube.getBack().getGridEntry(2,0) == third && cube.getDown().getGridEntry(2,2) == second) {
+            return new Location(Face_Enum.RIGHT, 2, 2, Face_Enum.DOWN); }
+
+
+        if (cube.getLeft().getGridEntry(0,0) == prime && cube.getUp().getGridEntry(0,0) == second && cube.getBack().getGridEntry(0,2) == third) {
+            return new Location(Face_Enum.LEFT, 0, 0, Face_Enum.UP); }
+        if (cube.getLeft().getGridEntry(0,0) == prime && cube.getUp().getGridEntry(0,0) == third && cube.getBack().getGridEntry(0,2) == second) {
+            return new Location(Face_Enum.LEFT, 0, 0, Face_Enum.BACK); }
+        if (cube.getLeft().getGridEntry(0,2) == prime && cube.getUp().getGridEntry(2,0) == second && cube.getFront().getGridEntry(0,0) == third) {
+            return new Location(Face_Enum.LEFT, 0, 2, Face_Enum.UP); }
+        if (cube.getLeft().getGridEntry(0,2) == prime && cube.getUp().getGridEntry(2,0) == third && cube.getFront().getGridEntry(0,0) == second) {
+            return new Location(Face_Enum.LEFT, 0, 2, Face_Enum.FRONT); }
+        if (cube.getLeft().getGridEntry(2,0) == prime && cube.getBack().getGridEntry(2,2) == second && cube.getDown().getGridEntry(2,0) == third) {
+            return new Location(Face_Enum.LEFT, 2, 0, Face_Enum.BACK); }
+        if (cube.getLeft().getGridEntry(2,0) == prime && cube.getBack().getGridEntry(2,2) == third && cube.getDown().getGridEntry(2,0) == second) {
+            return new Location(Face_Enum.LEFT, 2, 0, Face_Enum.DOWN); }
+        if (cube.getLeft().getGridEntry(2,2) == prime && cube.getFront().getGridEntry(2,0) == second && cube.getDown().getGridEntry(0,0) == third) {
+            return new Location(Face_Enum.LEFT, 2, 2, Face_Enum.FRONT); }
+        if (cube.getLeft().getGridEntry(2,2) == prime && cube.getFront().getGridEntry(2,0) == third && cube.getDown().getGridEntry(0,0) == second) {
+            return new Location(Face_Enum.LEFT, 2, 2, Face_Enum.DOWN); }
+
+
+        return null;
+    }
+
+
+
+
+
+
     protected static void initialize(Cube cube, List<cmd> actions) {
 
         if (cube == null) {
@@ -312,30 +429,20 @@ public class Logic {
 
         if (cube.getUp().getColor() != Cube.Color.RED) { // getting the red facet to the top
             if (cube.getBack().getColor() == Cube.Color.RED) {
-                actions.add(cmd.CMD_FLIP);
-                cube.flip();
+                executeCMD(cmd.CMD_FLIP, actions, cube);
             } else if (cube.getDown().getColor() == Cube.Color.RED) {
-                actions.add(cmd.CMD_FLIP);
-                cube.flip();
-                actions.add(cmd.CMD_FLIP);
-                cube.flip();
+                executeCMD(cmd.CMD_FLIP, actions, cube);
+                executeCMD(cmd.CMD_FLIP, actions, cube);
             } else if (cube.getFront().getColor() == Cube.Color.RED) {
-                actions.add(cmd.CMD_FLIP);
-                cube.flip();
-                actions.add(cmd.CMD_FLIP);
-                cube.flip();
-                actions.add(cmd.CMD_FLIP);
-                cube.flip();
+                executeCMD(cmd.CMD_FLIP, actions, cube);
+                executeCMD(cmd.CMD_FLIP, actions, cube);
+                executeCMD(cmd.CMD_FLIP, actions, cube);
             } else if (cube.getRight().getColor() == Cube.Color.RED) {
-                cube.rotate(false);
-                actions.add(cmd.CMD_LEFT_ROTATE);
-                cube.flip();
-                actions.add(cmd.CMD_FLIP);
+                executeCMD(cmd.CMD_LEFT_ROTATE, actions, cube);
+                executeCMD(cmd.CMD_FLIP, actions, cube);
             } else if (cube.getLeft().getColor() == Cube.Color.RED) {
-                cube.rotate(true);
-                actions.add(cmd.CMD_RIGHT_ROTATE);
-                cube.flip();
-                actions.add(cmd.CMD_FLIP);
+                executeCMD(cmd.CMD_RIGHT_ROTATE, actions, cube);
+                executeCMD(cmd.CMD_FLIP, actions, cube);
             }
         }
 
@@ -358,10 +465,27 @@ public class Logic {
     private static class Location {
         int x,y;
         Face_Enum name;
+        Face_Enum directionOfSecond;
         Location(Face_Enum name, int x, int y){
             this.name = name;
             this.x = x;
             this.y = y;
+            directionOfSecond = null;
+        }
+        Location(Face_Enum name, int x, int y, Face_Enum directionOfSecond){
+            this.name = name;
+            this.x = x;
+            this.y = y;
+            this.directionOfSecond = directionOfSecond;
+        }
+
+        public String toString(){
+            if(directionOfSecond != null) {
+                return ("Location: prime = " + name + ", x:" + x + ", y=" + y + ", secondery in: " + directionOfSecond);
+            }
+            else{
+                return ("Location: prime = " + name + ", x:" + x + ", y=" + y);
+            }
         }
     }
 }
