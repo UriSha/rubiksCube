@@ -17,6 +17,46 @@ public class Logic {
         return result;
     }
 
+    protected static void stageTwo(Cube cube, List<cmd> actions) {
+        if (cube == null || actions == null) {
+            System.out.println("Error: 'stageTwo' arguments are null");
+            return;
+        }
+        Location redYellowBlue = getLocationOfCorner(cube, Cube.Color.RED, Cube.Color.YELLOW, Cube.Color.BLUE);
+        getRedCorner(cube, actions, redYellowBlue);
+
+        System.out.println(tempClassForPrint.toStringCube(cube));
+
+        cube.rotate(true);
+
+        Location redGreenYellow = getLocationOfCorner(cube, Cube.Color.RED, Cube.Color.GREEN, Cube.Color.YELLOW);
+        getRedCorner(cube, actions, redGreenYellow);
+
+        System.out.println(tempClassForPrint.toStringCube(cube));
+
+
+        cube.rotate(true);
+
+        Location redWhiteGreen = getLocationOfCorner(cube, Cube.Color.RED, Cube.Color.WHITE, Cube.Color.GREEN);
+        getRedCorner(cube, actions, redWhiteGreen);
+
+        System.out.println(tempClassForPrint.toStringCube(cube));
+
+
+        cube.rotate(true);
+
+        Location redBlueWhite = getLocationOfCorner(cube, Cube.Color.RED, Cube.Color.BLUE, Cube.Color.WHITE);
+        getRedCorner(cube, actions, redBlueWhite);
+
+        System.out.println(tempClassForPrint.toStringCube(cube));
+
+
+        cube.rotate(true);
+    }
+
+
+
+
 
     private static void getRedCorner(Cube cube, List<cmd> actions, Location redCorner) {
         if (redCorner.name == null) {
@@ -434,43 +474,26 @@ public class Logic {
         executeCMD(cmd.CMD_FRONT_TWIST_CLOCKWISE, actions, cube);
     }
 
-    private static void stageOne(Cube cube, List<cmd> actions) {
-
+    protected static void stageOne(Cube cube, List<cmd> actions) {
         if (cube == null || actions == null) {
             System.out.println("Error: 'stageOne' arguments are null");
             return;
         }
         Location redYellow = getLocationOfEdge(cube, Cube.Color.RED, Cube.Color.YELLOW);
-
-
         getRedCross(cube, actions, redYellow);
-        System.out.println("RedYellow in place");//Debugging
-        System.out.println(tempClassForPrint.toStringCube(cube));
-
         cube.rotate(true);
+
         Location redGreen = getLocationOfEdge(cube, Cube.Color.RED, Cube.Color.GREEN);
-
         getRedCross(cube, actions, redGreen);
-        System.out.println("RedGreen in place");//Debugging
-        System.out.println(tempClassForPrint.toStringCube(cube));
-
         cube.rotate(true);
 
         Location redWhite = getLocationOfEdge(cube, Cube.Color.RED, Cube.Color.WHITE);
         getRedCross(cube, actions, redWhite);
-        System.out.println("RedWhite in place");//Debugging
-        System.out.println(tempClassForPrint.toStringCube(cube));
-
         cube.rotate(true);
 
         Location redBlue = getLocationOfEdge(cube, Cube.Color.RED, Cube.Color.BLUE);
         getRedCross(cube, actions, redBlue);
-        System.out.println("RedBlue in place");//Debugging
-        System.out.println(tempClassForPrint.toStringCube(cube));
-
         cube.rotate(true);
-
-
     }
 
     private static void executeCMD(cmd command, List<cmd> actions, Cube cube) {
@@ -610,7 +633,7 @@ public class Logic {
     }
 
 
-    public static Location getLocationOfCorner(Cube cube, Cube.Color prime, Cube.Color second, Cube.Color third) {
+    private static Location getLocationOfCorner(Cube cube, Cube.Color prime, Cube.Color second, Cube.Color third) {
 
         if (cube.getUp().getGridEntry(0, 0) == prime && cube.getBack().getGridEntry(0, 2) == second && cube.getLeft().getGridEntry(0, 0) == third) {
             return new Location(Face_Enum.UP, Face_Enum.BACK, Face_Enum.LEFT);
