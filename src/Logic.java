@@ -84,6 +84,7 @@ public class Logic {
         executeCMD(cmd.CMD_DOWN_TWIST_RIGHT, actions, cube);
         executeCMD(cmd.CMD_RIGHT_TWIST_FRONTUPWARD, actions, cube);
     }
+    private
 
 
 
