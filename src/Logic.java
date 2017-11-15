@@ -18,6 +18,101 @@ public class Logic {
         return result;
     }
 
+
+
+
+    private static void getRedCorner(Cube cube, List<cmd> actions, Location redCorner){
+        if(redCorner.name==null)
+        {
+            System.out.println("Error: 'stageOne' has failed");
+            return ;
+        }
+        switch (redCorner.name){
+            case RIGHT:
+                if (redCorner.secondDircetion == Face_Enum.FRONT) {
+                    if (redCorner.thirdDirection == Face_Enum.DOWN) {rightLowerRedCorner(actions, cube);}
+                    else if(redCorner.thirdDirection == Face_Enum.UP){
+
+                    }
+                }
+
+        }
+    }
+
+    private static void rightLowerRedCorner(List<cmd> actions, Cube cube){
+        executeCMD(cmd.CMD_DOWN_TWIST_RIGHT, actions, cube);
+        executeCMD(cmd.CMD_FRONT_TWIST_CLOCKWISE, actions, cube);
+        executeCMD(cmd.CMD_DOWN_TWIST_LEFT, actions, cube);
+        executeCMD(cmd.CMD_FRONT_TWIST_C_CLOCKWISE, actions, cube);
+    }
+
+    private static void frontLowerRedCorner(List<cmd> actions, Cube cube){
+        executeCMD(cmd.CMD_DOWN_TWIST_LEFT, actions, cube);
+        executeCMD(cmd.CMD_RIGHT_TWIST_BACKUPWARD, actions, cube);
+        executeCMD(cmd.CMD_DOWN_TWIST_RIGHT, actions, cube);
+        executeCMD(cmd.CMD_RIGHT_TWIST_FRONTUPWARD, actions, cube);
+    }
+
+    private static void downRedCorner(List<cmd> actions, Cube cube){
+        executeCMD(cmd.CMD_RIGHT_TWIST_BACKUPWARD, actions, cube);
+        executeCMD(cmd.CMD_DOWN_TWIST_RIGHT, actions, cube);
+        executeCMD(cmd.CMD_RIGHT_TWIST_FRONTUPWARD, actions, cube);
+        executeCMD(cmd.CMD_FRONT_TWIST_CLOCKWISE, actions, cube);
+        executeCMD(cmd.CMD_DOWN_TWIST_RIGHT, actions, cube);
+        executeCMD(cmd.CMD_DOWN_TWIST_RIGHT, actions, cube);
+        executeCMD(cmd.CMD_FRONT_TWIST_C_CLOCKWISE, actions, cube);
+    }
+
+    private static void rightUpperRedCorner(List<cmd> actions, Cube cube){
+        executeCMD(cmd.CMD_RIGHT_TWIST_BACKUPWARD, actions, cube);
+        executeCMD(cmd.CMD_DOWN_TWIST_LEFT, actions, cube);
+        executeCMD(cmd.CMD_DOWN_TWIST_LEFT, actions, cube);
+        executeCMD(cmd.CMD_RIGHT_TWIST_FRONTUPWARD, actions, cube);
+        executeCMD(cmd.CMD_FRONT_TWIST_CLOCKWISE, actions, cube);
+        executeCMD(cmd.CMD_DOWN_TWIST_LEFT, actions, cube);
+        executeCMD(cmd.CMD_DOWN_TWIST_LEFT, actions, cube);
+        executeCMD(cmd.CMD_FRONT_TWIST_C_CLOCKWISE, actions, cube);
+    }
+
+    private static void frontUpperRedCorner(List<cmd> actions, Cube cube){
+        executeCMD(cmd.CMD_FRONT_TWIST_CLOCKWISE, actions, cube);
+        executeCMD(cmd.CMD_DOWN_TWIST_RIGHT, actions, cube);
+        executeCMD(cmd.CMD_DOWN_TWIST_RIGHT, actions, cube);
+        executeCMD(cmd.CMD_FRONT_TWIST_C_CLOCKWISE, actions, cube);
+        executeCMD(cmd.CMD_RIGHT_TWIST_BACKUPWARD, actions, cube);
+        executeCMD(cmd.CMD_DOWN_TWIST_RIGHT, actions, cube);
+        executeCMD(cmd.CMD_DOWN_TWIST_RIGHT, actions, cube);
+        executeCMD(cmd.CMD_RIGHT_TWIST_FRONTUPWARD, actions, cube);
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     private static void getRedCross(Cube cube, List<cmd> actions, Location redEdge){
 
 
@@ -172,7 +267,7 @@ public class Logic {
         executeCMD(cmd.CMD_FRONT_TWIST_CLOCKWISE,actions,cube);
     }
 
-    protected static void stageOne(Cube cube, List<cmd> actions) {
+    private static void stageOne(Cube cube, List<cmd> actions) {
 
         if (cube == null || actions == null) {
             System.out.println("Error: 'stageOne' arguments are null");
@@ -307,111 +402,111 @@ public class Logic {
     public static Location getLocationOfCorner(Cube cube, Cube.Color prime, Cube.Color second, Cube.Color third){
 
         if (cube.getUp().getGridEntry(0,0) == prime && cube.getBack().getGridEntry(0,2) == second && cube.getLeft().getGridEntry(0,0) == third) {
-            return new Location(Face_Enum.UP, 0, 0, Face_Enum.BACK); }
+            return new Location(Face_Enum.UP, Face_Enum.BACK, Face_Enum.LEFT); }
         if (cube.getUp().getGridEntry(0,0) == prime && cube.getBack().getGridEntry(0,2) == third && cube.getLeft().getGridEntry(0,0) == second) {
-            return new Location(Face_Enum.UP, 0, 0, Face_Enum.LEFT); }
+            return new Location(Face_Enum.UP, Face_Enum.LEFT, Face_Enum.BACK); }
         if (cube.getUp().getGridEntry(0,2) == prime && cube.getBack().getGridEntry(0,0) == second && cube.getRight().getGridEntry(0,2) == third) {
-            return new Location(Face_Enum.UP, 0, 2, Face_Enum.BACK); }
+            return new Location(Face_Enum.UP, Face_Enum.BACK, Face_Enum.RIGHT); }
         if (cube.getUp().getGridEntry(0,2) == prime && cube.getBack().getGridEntry(0,0) == third && cube.getRight().getGridEntry(0,2) == second) {
-            return new Location(Face_Enum.UP, 0, 2, Face_Enum.RIGHT); }
+            return new Location(Face_Enum.UP, Face_Enum.RIGHT, Face_Enum.BACK); }
         if (cube.getUp().getGridEntry(2,0) == prime && cube.getFront().getGridEntry(0,0) == second && cube.getLeft().getGridEntry(0,2) == third) {
-            return new Location(Face_Enum.UP, 2, 0, Face_Enum.FRONT); }
+            return new Location(Face_Enum.UP, Face_Enum.FRONT, Face_Enum.LEFT); }
         if (cube.getUp().getGridEntry(2,0) == prime && cube.getFront().getGridEntry(0,0) == third && cube.getLeft().getGridEntry(0,2) == second) {
-            return new Location(Face_Enum.UP, 2, 0, Face_Enum.LEFT); }
+            return new Location(Face_Enum.UP, Face_Enum.LEFT, Face_Enum.FRONT); }
         if (cube.getUp().getGridEntry(2,2) == prime && cube.getFront().getGridEntry(0,2) == second && cube.getRight().getGridEntry(0,0) == third) {
-            return new Location(Face_Enum.UP, 2, 2, Face_Enum.FRONT); }
+            return new Location(Face_Enum.UP, Face_Enum.FRONT, Face_Enum.RIGHT); }
         if (cube.getUp().getGridEntry(2,2) == prime && cube.getFront().getGridEntry(0,2) == third && cube.getRight().getGridEntry(0,0) == second) {
-            return new Location(Face_Enum.UP, 2, 2, Face_Enum.RIGHT); }
+            return new Location(Face_Enum.UP, Face_Enum.RIGHT, Face_Enum.FRONT); }
 
         if (cube.getFront().getGridEntry(0,0) == prime && cube.getUp().getGridEntry(2,0) == second && cube.getLeft().getGridEntry(0,2) == third) {
-            return new Location(Face_Enum.FRONT, 0, 0, Face_Enum.UP); }
+            return new Location(Face_Enum.FRONT, Face_Enum.UP, Face_Enum.LEFT); }
         if (cube.getFront().getGridEntry(0,0) == prime && cube.getUp().getGridEntry(2,0) == third && cube.getLeft().getGridEntry(0,2) == second) {
-            return new Location(Face_Enum.FRONT, 0, 0, Face_Enum.LEFT); }
+            return new Location(Face_Enum.FRONT, Face_Enum.LEFT, Face_Enum.UP); }
         if (cube.getFront().getGridEntry(0,2) == prime && cube.getUp().getGridEntry(2,2) == second && cube.getRight().getGridEntry(0,0) == third) {
-            return new Location(Face_Enum.FRONT, 0, 2, Face_Enum.UP); }
+            return new Location(Face_Enum.FRONT, Face_Enum.UP, Face_Enum.RIGHT); }
         if (cube.getFront().getGridEntry(0,2) == prime && cube.getUp().getGridEntry(2,2) == third && cube.getRight().getGridEntry(0,0) == second) {
-            return new Location(Face_Enum.FRONT, 0, 2, Face_Enum.RIGHT); }
+            return new Location(Face_Enum.FRONT, Face_Enum.RIGHT, Face_Enum.UP); }
         if (cube.getFront().getGridEntry(2,0) == prime && cube.getLeft().getGridEntry(2,2) == second && cube.getDown().getGridEntry(0,0) == third) {
-            return new Location(Face_Enum.FRONT, 2, 0, Face_Enum.LEFT); }
+            return new Location(Face_Enum.FRONT, Face_Enum.LEFT, Face_Enum.DOWN); }
         if (cube.getFront().getGridEntry(2,0) == prime && cube.getLeft().getGridEntry(2,2) == third && cube.getDown().getGridEntry(0,0) == second) {
-            return new Location(Face_Enum.FRONT, 2, 0, Face_Enum.DOWN); }
+            return new Location(Face_Enum.FRONT, Face_Enum.DOWN, Face_Enum.LEFT); }
         if (cube.getFront().getGridEntry(2,2) == prime && cube.getRight().getGridEntry(2,0) == second && cube.getDown().getGridEntry(0,2) == third) {
-            return new Location(Face_Enum.FRONT, 2, 2, Face_Enum.RIGHT); }
+            return new Location(Face_Enum.FRONT, Face_Enum.RIGHT, Face_Enum.DOWN); }
         if (cube.getFront().getGridEntry(2,2) == prime && cube.getRight().getGridEntry(2,0) == third && cube.getDown().getGridEntry(0,2) == second) {
-            return new Location(Face_Enum.FRONT, 2, 2, Face_Enum.DOWN); }
+            return new Location(Face_Enum.FRONT, Face_Enum.DOWN, Face_Enum.RIGHT); }
 
 
         if (cube.getBack().getGridEntry(0,0) == prime && cube.getUp().getGridEntry(0,2) == second && cube.getRight().getGridEntry(0,2) == third) {
-            return new Location(Face_Enum.BACK, 0, 0, Face_Enum.UP); }
+            return new Location(Face_Enum.BACK, Face_Enum.UP, Face_Enum.RIGHT); }
         if (cube.getBack().getGridEntry(0,0) == prime && cube.getUp().getGridEntry(0,2) == third && cube.getRight().getGridEntry(0,2) == second) {
-            return new Location(Face_Enum.BACK, 0, 0, Face_Enum.RIGHT); }
+            return new Location(Face_Enum.BACK, Face_Enum.RIGHT, Face_Enum.UP); }
         if (cube.getBack().getGridEntry(0,2) == prime && cube.getUp().getGridEntry(0,0) == second && cube.getLeft().getGridEntry(0,0) == third) {
-            return new Location(Face_Enum.BACK, 0, 2, Face_Enum.UP); }
+            return new Location(Face_Enum.BACK, Face_Enum.UP, Face_Enum.LEFT); }
         if (cube.getBack().getGridEntry(0,2) == prime && cube.getUp().getGridEntry(0,0) == third && cube.getLeft().getGridEntry(0,0) == second) {
-            return new Location(Face_Enum.BACK, 0, 2, Face_Enum.LEFT); }
+            return new Location(Face_Enum.BACK, Face_Enum.LEFT, Face_Enum.UP); }
         if (cube.getBack().getGridEntry(2,0) == prime && cube.getDown().getGridEntry(2,2) == second && cube.getRight().getGridEntry(2,2) == third) {
-            return new Location(Face_Enum.BACK, 2, 0, Face_Enum.DOWN); }
+            return new Location(Face_Enum.BACK, Face_Enum.DOWN, Face_Enum.RIGHT); }
         if (cube.getBack().getGridEntry(2,0) == prime && cube.getDown().getGridEntry(2,2) == third && cube.getRight().getGridEntry(2,2) == second) {
-            return new Location(Face_Enum.BACK, 2, 0, Face_Enum.RIGHT); }
+            return new Location(Face_Enum.BACK, Face_Enum.RIGHT, Face_Enum.DOWN); }
         if (cube.getBack().getGridEntry(2,2) == prime && cube.getDown().getGridEntry(2,0) == second && cube.getLeft().getGridEntry(2,0) == third) {
-            return new Location(Face_Enum.BACK, 2, 2, Face_Enum.DOWN); }
+            return new Location(Face_Enum.BACK, Face_Enum.DOWN, Face_Enum.LEFT); }
         if (cube.getBack().getGridEntry(2,2) == prime && cube.getDown().getGridEntry(2,0) == third && cube.getLeft().getGridEntry(2,0) == second) {
-            return new Location(Face_Enum.BACK, 2, 2, Face_Enum.LEFT); }
+            return new Location(Face_Enum.BACK, Face_Enum.LEFT, Face_Enum.DOWN); }
 
 
         if (cube.getDown().getGridEntry(0,0) == prime && cube.getFront().getGridEntry(2,0) == second && cube.getLeft().getGridEntry(2,2) == third) {
-            return new Location(Face_Enum.DOWN, 0, 0, Face_Enum.FRONT); }
+            return new Location(Face_Enum.DOWN, Face_Enum.FRONT, Face_Enum.LEFT); }
         if (cube.getDown().getGridEntry(0,0) == prime && cube.getFront().getGridEntry(2,0) == third && cube.getLeft().getGridEntry(2,2) == second) {
-            return new Location(Face_Enum.DOWN, 0, 0, Face_Enum.LEFT); }
+            return new Location(Face_Enum.DOWN, Face_Enum.LEFT, Face_Enum.FRONT); }
         if (cube.getDown().getGridEntry(0,2) == prime && cube.getFront().getGridEntry(2,2) == second && cube.getRight().getGridEntry(2,0) == third) {
-            return new Location(Face_Enum.DOWN, 0, 2, Face_Enum.FRONT); }
+            return new Location(Face_Enum.DOWN, Face_Enum.FRONT, Face_Enum.RIGHT); }
         if (cube.getDown().getGridEntry(0,2) == prime && cube.getFront().getGridEntry(2,2) == third && cube.getRight().getGridEntry(2,0) == second) {
-            return new Location(Face_Enum.DOWN, 0, 2, Face_Enum.RIGHT); }
+            return new Location(Face_Enum.DOWN, Face_Enum.RIGHT, Face_Enum.FRONT); }
         if (cube.getDown().getGridEntry(2,0) == prime && cube.getBack().getGridEntry(2,2) == second && cube.getLeft().getGridEntry(2,0) == third) {
-            return new Location(Face_Enum.DOWN, 2, 0, Face_Enum.BACK); }
+            return new Location(Face_Enum.DOWN, Face_Enum.BACK, Face_Enum.LEFT); }
         if (cube.getDown().getGridEntry(2,0) == prime && cube.getBack().getGridEntry(2,2) == third && cube.getLeft().getGridEntry(2,0) == second) {
-            return new Location(Face_Enum.DOWN, 2, 0, Face_Enum.LEFT); }
+            return new Location(Face_Enum.DOWN, Face_Enum.LEFT, Face_Enum.BACK); }
         if (cube.getDown().getGridEntry(2,2) == prime && cube.getBack().getGridEntry(2,0) == second && cube.getRight().getGridEntry(2,2) == third) {
-            return new Location(Face_Enum.DOWN, 2, 2, Face_Enum.BACK); }
+            return new Location(Face_Enum.DOWN, Face_Enum.BACK, Face_Enum.RIGHT); }
         if (cube.getDown().getGridEntry(2,2) == prime && cube.getBack().getGridEntry(2,0) == third && cube.getRight().getGridEntry(2,2) == second) {
-            return new Location(Face_Enum.DOWN, 2, 2, Face_Enum.RIGHT); }
+            return new Location(Face_Enum.DOWN, Face_Enum.RIGHT, Face_Enum.BACK); }
 
         if (cube.getRight().getGridEntry(0,0) == prime && cube.getUp().getGridEntry(2,2) == second && cube.getFront().getGridEntry(0,2) == third) {
-            return new Location(Face_Enum.RIGHT, 0, 0, Face_Enum.UP); }
+            return new Location(Face_Enum.RIGHT, Face_Enum.UP, Face_Enum.FRONT); }
         if (cube.getRight().getGridEntry(0,0) == prime && cube.getUp().getGridEntry(2,2) == third && cube.getFront().getGridEntry(0,2) == second) {
-            return new Location(Face_Enum.RIGHT, 0, 0, Face_Enum.FRONT); }
+            return new Location(Face_Enum.RIGHT, Face_Enum.FRONT, Face_Enum.UP); }
         if (cube.getRight().getGridEntry(0,2) == prime && cube.getUp().getGridEntry(0,2) == second && cube.getBack().getGridEntry(0,0) == third) {
-            return new Location(Face_Enum.RIGHT, 0, 2, Face_Enum.UP); }
+            return new Location(Face_Enum.RIGHT, Face_Enum.UP, Face_Enum.BACK); }
         if (cube.getRight().getGridEntry(0,2) == prime && cube.getUp().getGridEntry(0,2) == third && cube.getBack().getGridEntry(0,0) == second) {
-            return new Location(Face_Enum.RIGHT, 0, 2, Face_Enum.BACK); }
+            return new Location(Face_Enum.RIGHT, Face_Enum.BACK, Face_Enum.UP); }
         if (cube.getRight().getGridEntry(2,0) == prime && cube.getFront().getGridEntry(2,2) == second && cube.getDown().getGridEntry(0,2) == third) {
-            return new Location(Face_Enum.RIGHT, 2, 0, Face_Enum.FRONT); }
+            return new Location(Face_Enum.RIGHT, Face_Enum.FRONT, Face_Enum.DOWN); }
         if (cube.getRight().getGridEntry(2,0) == prime && cube.getFront().getGridEntry(2,2) == third && cube.getDown().getGridEntry(0,2) == second) {
-            return new Location(Face_Enum.RIGHT, 2, 0, Face_Enum.DOWN); }
+            return new Location(Face_Enum.RIGHT, Face_Enum.DOWN, Face_Enum.FRONT); }
         if (cube.getRight().getGridEntry(2,2) == prime && cube.getBack().getGridEntry(2,0) == second && cube.getDown().getGridEntry(2,2) == third) {
-            return new Location(Face_Enum.RIGHT, 2, 2, Face_Enum.BACK); }
+            return new Location(Face_Enum.RIGHT, Face_Enum.BACK, Face_Enum.DOWN); }
         if (cube.getRight().getGridEntry(2,2) == prime && cube.getBack().getGridEntry(2,0) == third && cube.getDown().getGridEntry(2,2) == second) {
-            return new Location(Face_Enum.RIGHT, 2, 2, Face_Enum.DOWN); }
+            return new Location(Face_Enum.RIGHT, Face_Enum.DOWN, Face_Enum.BACK); }
 
 
         if (cube.getLeft().getGridEntry(0,0) == prime && cube.getUp().getGridEntry(0,0) == second && cube.getBack().getGridEntry(0,2) == third) {
-            return new Location(Face_Enum.LEFT, 0, 0, Face_Enum.UP); }
+            return new Location(Face_Enum.LEFT, Face_Enum.UP, Face_Enum.BACK); }
         if (cube.getLeft().getGridEntry(0,0) == prime && cube.getUp().getGridEntry(0,0) == third && cube.getBack().getGridEntry(0,2) == second) {
-            return new Location(Face_Enum.LEFT, 0, 0, Face_Enum.BACK); }
+            return new Location(Face_Enum.LEFT, Face_Enum.BACK, Face_Enum.UP); }
         if (cube.getLeft().getGridEntry(0,2) == prime && cube.getUp().getGridEntry(2,0) == second && cube.getFront().getGridEntry(0,0) == third) {
-            return new Location(Face_Enum.LEFT, 0, 2, Face_Enum.UP); }
+            return new Location(Face_Enum.LEFT, Face_Enum.UP, Face_Enum.FRONT); }
         if (cube.getLeft().getGridEntry(0,2) == prime && cube.getUp().getGridEntry(2,0) == third && cube.getFront().getGridEntry(0,0) == second) {
-            return new Location(Face_Enum.LEFT, 0, 2, Face_Enum.FRONT); }
+            return new Location(Face_Enum.LEFT, Face_Enum.FRONT, Face_Enum.UP); }
         if (cube.getLeft().getGridEntry(2,0) == prime && cube.getBack().getGridEntry(2,2) == second && cube.getDown().getGridEntry(2,0) == third) {
-            return new Location(Face_Enum.LEFT, 2, 0, Face_Enum.BACK); }
+            return new Location(Face_Enum.LEFT, Face_Enum.BACK, Face_Enum.DOWN); }
         if (cube.getLeft().getGridEntry(2,0) == prime && cube.getBack().getGridEntry(2,2) == third && cube.getDown().getGridEntry(2,0) == second) {
-            return new Location(Face_Enum.LEFT, 2, 0, Face_Enum.DOWN); }
+            return new Location(Face_Enum.LEFT, Face_Enum.DOWN, Face_Enum.BACK); }
         if (cube.getLeft().getGridEntry(2,2) == prime && cube.getFront().getGridEntry(2,0) == second && cube.getDown().getGridEntry(0,0) == third) {
-            return new Location(Face_Enum.LEFT, 2, 2, Face_Enum.FRONT); }
+            return new Location(Face_Enum.LEFT, Face_Enum.FRONT, Face_Enum.DOWN); }
         if (cube.getLeft().getGridEntry(2,2) == prime && cube.getFront().getGridEntry(2,0) == third && cube.getDown().getGridEntry(0,0) == second) {
-            return new Location(Face_Enum.LEFT, 2, 2, Face_Enum.DOWN); }
+            return new Location(Face_Enum.LEFT, Face_Enum.DOWN, Face_Enum.FRONT); }
 
-
+        System.out.println("Not such corner exists");
         return null;
     }
 
@@ -465,23 +560,25 @@ public class Logic {
     private static class Location {
         int x,y;
         Face_Enum name;
-        Face_Enum directionOfSecond;
+        Face_Enum secondDircetion;
+        Face_Enum thirdDirection;
         Location(Face_Enum name, int x, int y){
             this.name = name;
             this.x = x;
             this.y = y;
-            directionOfSecond = null;
+            secondDircetion = null;
         }
-        Location(Face_Enum name, int x, int y, Face_Enum directionOfSecond){
+        Location(Face_Enum name, Face_Enum directionOfSecond, Face_Enum directionOfThird){
             this.name = name;
-            this.x = x;
-            this.y = y;
-            this.directionOfSecond = directionOfSecond;
+            this.x = 10;
+            this.y = 10;
+            this.secondDircetion = directionOfSecond;
+            this.thirdDirection = directionOfThird;
         }
 
         public String toString(){
-            if(directionOfSecond != null) {
-                return ("Location: prime = " + name + ", x:" + x + ", y=" + y + ", secondery in: " + directionOfSecond);
+            if(secondDircetion != null) {
+                return ("Location: prime = " + name + ", secondary in: " + secondDircetion + ", third in: " + thirdDirection);
             }
             else{
                 return ("Location: prime = " + name + ", x:" + x + ", y=" + y);
