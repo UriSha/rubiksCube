@@ -12,7 +12,8 @@ public class RobotUtilsTests {
         algorithmCommands.add(cmd.CMD_DOWN_TWIST_RIGHT);
 
         robotCommands = RobotUtils.translateCommandList(algorithmCommands);
-        int x = 9;
+        System.out.println(robotCommands);
+//        int x = 9;
 
     }
 }
