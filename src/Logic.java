@@ -12,9 +12,52 @@ public class Logic {
         int algoStage = 0;
         initialize(cube, result);
         stageOne(cube, result);
+        stageTwo(cube, result);
+        flipForStageThree(cube, result);
+        stageThree(cube, result);
 
 
         return result;
+    }
+
+    protected static void flipForStageThree(Cube cube, List<cmd> actions) {
+        executeCMD(cmd.CMD_FLIP, actions, cube);
+        executeCMD(cmd.CMD_FLIP, actions, cube);
+    }
+
+    protected static void stageThree(Cube cube, List<cmd> actions) {
+        if (cube == null || actions == null) {
+            System.out.println("Error: 'stageThree' arguments are null");
+            return;
+        }
+        Location whiteBlue=getLocationOfEdge(cube,Cube.Color.WHITE,Cube.Color.BLUE);
+        getFrontRightEdge(cube,actions,whiteBlue);
+
+        System.out.println(tempClassForPrint.toStringCube(cube));
+
+        cube.rotate(true);
+
+        Location greenWhite=getLocationOfEdge(cube,Cube.Color.GREEN,Cube.Color.WHITE);
+        getFrontRightEdge(cube,actions,greenWhite);
+
+        System.out.println(tempClassForPrint.toStringCube(cube));
+
+        cube.rotate(true);
+
+        Location yellowGreen=getLocationOfEdge(cube,Cube.Color.YELLOW,Cube.Color.GREEN);
+        getFrontRightEdge(cube,actions,yellowGreen);
+
+        System.out.println(tempClassForPrint.toStringCube(cube));
+
+        cube.rotate(true);
+
+        Location blueYellow=getLocationOfEdge(cube,Cube.Color.BLUE,Cube.Color.YELLOW);
+        getFrontRightEdge(cube,actions,blueYellow);
+
+        System.out.println(tempClassForPrint.toStringCube(cube));
+
+        cube.rotate(true);
+
     }
 
     protected static void stageTwo(Cube cube, List<cmd> actions) {
@@ -24,38 +67,110 @@ public class Logic {
         }
         Location redYellowBlue = getLocationOfCorner(cube, Cube.Color.RED, Cube.Color.YELLOW, Cube.Color.BLUE);
         getRedCorner(cube, actions, redYellowBlue);
-
-        System.out.println(tempClassForPrint.toStringCube(cube));
-
         cube.rotate(true);
-
         Location redGreenYellow = getLocationOfCorner(cube, Cube.Color.RED, Cube.Color.GREEN, Cube.Color.YELLOW);
         getRedCorner(cube, actions, redGreenYellow);
-
-        System.out.println(tempClassForPrint.toStringCube(cube));
-
-
         cube.rotate(true);
-
         Location redWhiteGreen = getLocationOfCorner(cube, Cube.Color.RED, Cube.Color.WHITE, Cube.Color.GREEN);
         getRedCorner(cube, actions, redWhiteGreen);
-
-        System.out.println(tempClassForPrint.toStringCube(cube));
-
-
         cube.rotate(true);
-
         Location redBlueWhite = getLocationOfCorner(cube, Cube.Color.RED, Cube.Color.BLUE, Cube.Color.WHITE);
         getRedCorner(cube, actions, redBlueWhite);
-
-        System.out.println(tempClassForPrint.toStringCube(cube));
-
-
         cube.rotate(true);
     }
 
 
-
+    private static void getFrontRightEdge(Cube cube, List<cmd> actions, Location edge) {
+        if (edge.name == null) {
+            System.out.println("Error: 'stageThree' has failed");
+            return;
+        }
+        switch (edge.name) {
+            case UP:
+                if (edge.x == 1 && edge.y == 2) {
+                    edgeFromTheRight(actions, cube);
+                } else if (edge.x == 0 && edge.y == 1) {
+                    executeCMD(cmd.CMD_UP_TWIST_RIGHT, actions, cube);
+                    edgeFromTheRight(actions, cube);
+                } else if (edge.x == 2 && edge.y == 1) {
+                    executeCMD(cmd.CMD_UP_TWIST_LEFT, actions, cube);
+                    edgeFromTheRight(actions, cube);
+                } else if (edge.x == 1 && edge.y == 0) {
+                    executeCMD(cmd.CMD_UP_TWIST_LEFT, actions, cube);
+                    executeCMD(cmd.CMD_UP_TWIST_LEFT, actions, cube);
+                    edgeFromTheRight(actions, cube);
+                }
+                break;
+            case FRONT:
+                if (edge.x == 0 && edge.y == 1) {
+                    edgeOnTop(actions, cube);
+                } else if (edge.x == 1 && edge.y == 0) {
+                    executeCMD(cmd.CMD_RIGHT_ROTATE, actions, cube);
+                    edgeFromTheRight(actions, cube);
+                    executeCMD(cmd.CMD_LEFT_ROTATE, actions, cube);
+                    executeCMD(cmd.CMD_UP_TWIST_LEFT, actions, cube);
+                    edgeFromTheRight(actions, cube);
+                }
+                break;
+            case LEFT:
+                if (edge.x == 0 && edge.y == 1) {
+                    executeCMD(cmd.CMD_UP_TWIST_RIGHT, actions, cube);
+                    edgeOnTop(actions, cube);
+                } else if (edge.x == 1 && edge.y == 0) {
+                    executeCMD(cmd.CMD_LEFT_ROTATE, actions, cube);
+                    executeCMD(cmd.CMD_LEFT_ROTATE, actions, cube);
+                    edgeOnTop(actions, cube);
+                    executeCMD(cmd.CMD_RIGHT_ROTATE, actions, cube);
+                    executeCMD(cmd.CMD_RIGHT_ROTATE, actions, cube);
+                    edgeOnTop(actions, cube);
+                } else if (edge.x == 1 && edge.y == 2) {
+                    executeCMD(cmd.CMD_LEFT_ROTATE, actions, cube);
+                    edgeFromTheRight(actions, cube);
+                    executeCMD(cmd.CMD_RIGHT_ROTATE, actions, cube);
+                    executeCMD(cmd.CMD_UP_TWIST_LEFT, actions, cube);
+                    executeCMD(cmd.CMD_UP_TWIST_LEFT, actions, cube);
+                    edgeOnTop(actions, cube);
+                }
+                break;
+            case RIGHT:
+                if (edge.x == 0 && edge.y == 1) {
+                    executeCMD(cmd.CMD_UP_TWIST_LEFT, actions, cube);
+                    edgeOnTop(actions, cube);
+                } else if (edge.x == 1 && edge.y == 0) {
+                    switchEdgeColors(actions,cube);
+                } else if (edge.x == 1 && edge.y == 2) {
+                    executeCMD(cmd.CMD_LEFT_ROTATE,actions,cube);
+                    edgeOnTop(actions,cube);
+                    executeCMD(cmd.CMD_RIGHT_ROTATE,actions,cube);
+                    executeCMD(cmd.CMD_UP_TWIST_RIGHT,actions,cube);
+                    executeCMD(cmd.CMD_UP_TWIST_RIGHT,actions,cube);
+                    edgeFromTheRight(actions,cube);
+                }
+                break;
+            case BACK:
+                if(edge.x==0&&edge.y==1){
+                    executeCMD(cmd.CMD_UP_TWIST_RIGHT,actions,cube);
+                    executeCMD(cmd.CMD_UP_TWIST_RIGHT,actions,cube);
+                    edgeOnTop(actions,cube);
+                }
+                else if(edge.x==1&&edge.y==0){
+                    executeCMD(cmd.CMD_LEFT_ROTATE,actions,cube);
+                    edgeOnTop(actions,cube);
+                    executeCMD(cmd.CMD_RIGHT_ROTATE,actions,cube);
+                    executeCMD(cmd.CMD_UP_TWIST_RIGHT,actions,cube);
+                    edgeOnTop(actions,cube);
+                }
+                else if(edge.x==1&&edge.y==2){
+                    executeCMD(cmd.CMD_RIGHT_ROTATE,actions,cube);
+                    executeCMD(cmd.CMD_RIGHT_ROTATE,actions,cube);
+                    edgeOnTop(actions,cube);
+                    executeCMD(cmd.CMD_LEFT_ROTATE,actions,cube);
+                    executeCMD(cmd.CMD_LEFT_ROTATE,actions,cube);
+                    executeCMD(cmd.CMD_UP_TWIST_RIGHT,actions,cube);
+                    edgeFromTheRight(actions,cube);
+                }
+        }
+    }
 
 
     private static void getRedCorner(Cube cube, List<cmd> actions, Location redCorner) {
@@ -264,12 +379,54 @@ public class Logic {
                     } else if (redCorner.thirdDirection == Face_Enum.BACK) {
                         System.out.println("Not a logic location for this corner - ULB");
                     }
-                } else if(redCorner.secondDircetion==Face_Enum.FRONT){
-                    if(redCorner.thirdDirection== Face_Enum.LEFT){
+                } else if (redCorner.secondDircetion == Face_Enum.FRONT) {
+                    if (redCorner.thirdDirection == Face_Enum.LEFT) {
                         System.out.println("Not a logic location for this corner - UFL");
                     }
                 }
         }
+    }
+
+    private static void edgeFromTheRight(List<cmd> actions, Cube cube) {
+        executeCMD(cmd.CMD_UP_TWIST_RIGHT, actions, cube);
+        executeCMD(cmd.CMD_FRONT_TWIST_C_CLOCKWISE, actions, cube);
+        executeCMD(cmd.CMD_UP_TWIST_LEFT, actions, cube);
+        executeCMD(cmd.CMD_FRONT_TWIST_CLOCKWISE, actions, cube);
+        executeCMD(cmd.CMD_UP_TWIST_LEFT, actions, cube);
+        executeCMD(cmd.CMD_RIGHT_TWIST_FRONTUPWARD, actions, cube);
+        executeCMD(cmd.CMD_UP_TWIST_RIGHT, actions, cube);
+        executeCMD(cmd.CMD_RIGHT_TWIST_BACKUPWARD, actions, cube);
+    }
+
+    private static void edgeOnTop(List<cmd> actions, Cube cube) {
+        executeCMD(cmd.CMD_UP_TWIST_LEFT, actions, cube);
+        executeCMD(cmd.CMD_RIGHT_TWIST_FRONTUPWARD, actions, cube);
+        executeCMD(cmd.CMD_UP_TWIST_RIGHT, actions, cube);
+        executeCMD(cmd.CMD_RIGHT_TWIST_BACKUPWARD, actions, cube);
+        executeCMD(cmd.CMD_UP_TWIST_RIGHT, actions, cube);
+        executeCMD(cmd.CMD_FRONT_TWIST_C_CLOCKWISE, actions, cube);
+        executeCMD(cmd.CMD_UP_TWIST_LEFT, actions, cube);
+        executeCMD(cmd.CMD_FRONT_TWIST_CLOCKWISE, actions, cube);
+    }
+
+    private static void switchEdgeColors(List<cmd> actions, Cube cube) {
+        executeCMD(cmd.CMD_UP_TWIST_LEFT, actions, cube);
+        executeCMD(cmd.CMD_RIGHT_TWIST_FRONTUPWARD, actions, cube);
+        executeCMD(cmd.CMD_UP_TWIST_RIGHT, actions, cube);
+        executeCMD(cmd.CMD_RIGHT_TWIST_BACKUPWARD, actions, cube);
+        executeCMD(cmd.CMD_UP_TWIST_RIGHT, actions, cube);
+        executeCMD(cmd.CMD_FRONT_TWIST_C_CLOCKWISE, actions, cube);
+        executeCMD(cmd.CMD_UP_TWIST_LEFT, actions, cube);
+        executeCMD(cmd.CMD_FRONT_TWIST_CLOCKWISE, actions, cube);
+        executeCMD(cmd.CMD_UP_TWIST_RIGHT, actions, cube);
+        executeCMD(cmd.CMD_RIGHT_TWIST_FRONTUPWARD, actions, cube);
+        executeCMD(cmd.CMD_UP_TWIST_RIGHT, actions, cube);
+        executeCMD(cmd.CMD_RIGHT_TWIST_BACKUPWARD, actions, cube);
+        executeCMD(cmd.CMD_UP_TWIST_RIGHT, actions, cube);
+        executeCMD(cmd.CMD_FRONT_TWIST_C_CLOCKWISE, actions, cube);
+        executeCMD(cmd.CMD_UP_TWIST_LEFT, actions, cube);
+        executeCMD(cmd.CMD_FRONT_TWIST_CLOCKWISE, actions, cube);
+
     }
 
     private static void rightLowerRedCorner(List<cmd> actions, Cube cube) {
@@ -317,7 +474,6 @@ public class Logic {
         executeCMD(cmd.CMD_DOWN_TWIST_RIGHT, actions, cube);
         executeCMD(cmd.CMD_RIGHT_TWIST_FRONTUPWARD, actions, cube);
     }
-
 
 
     private static void getRedCross(Cube cube, List<cmd> actions, Location redEdge) {
