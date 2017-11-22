@@ -64,11 +64,41 @@ public class AlgoTests {
         cube.twistFrontFace(false);
         cube.twistFrontFace(false);
         cube.twistBackFace(true);
+        cube.twistFrontFace(false);
+        cube.flip();
+        cube.twistFrontFace(false);
+        cube.twistBackFace(true);
         cube.twistRightFace(true);
         cube.flip();
         cube.twistFrontFace(false);
         cube.flip();
         cube.twistFrontFace(false);
+        cube.twistBackFace(true);
+        cube.twistRightFace(true);
+        cube.flip();
+        cube.twistRightFace(true);
+        cube.flip();
+        cube.twistFrontFace(false);
+        cube.flip();
+        cube.twistFrontFace(false);
+        cube.twistRightFace(true);
+        cube.flip();
+        cube.twistRightFace(true);
+        cube.flip();
+        cube.twistFrontFace(false);
+        cube.flip();
+        cube.twistRightFace(true);
+        cube.flip();
+        cube.twistFrontFace(false);
+        cube.flip();
+        cube.twistFrontFace(false);
+        cube.twistBackFace(true);
+        cube.twistRightFace(true);
+        cube.flip();
+        cube.twistRightFace(true);
+        cube.flip();
+        cube.twistFrontFace(false);
+        cube.twistBackFace(true);
         cube.twistRightFace(true);
         cube.flip();
         cube.twistRightFace(true);
@@ -86,8 +116,6 @@ public class AlgoTests {
         cube.twistRightFace(true);
         cube.flip();
         cube.twistFrontFace(false);
-
-
 
         System.out.println(tempClassForPrint.toStringCube(cube));
 
@@ -110,6 +138,10 @@ public class AlgoTests {
         System.out.println(tempClassForPrint.toStringCube(cube));
 
         Logic.stageThree(cube, result);
+
+        System.out.println(tempClassForPrint.toStringCube(cube));
+
+        Logic.stageFour(cube,result);
 
         System.out.println(tempClassForPrint.toStringCube(cube));
 
