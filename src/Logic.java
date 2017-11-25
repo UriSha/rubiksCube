@@ -45,9 +45,14 @@ public class Logic {
             twoNearInPlace(actions,cube);
             executeCMD(cmd.CMD_RIGHT_ROTATE,actions,cube);
             executeCMD(cmd.CMD_RIGHT_ROTATE,actions,cube);
+        }else if(cube.getUp().getGrid()[1][0] == Cube.Color.ORANGE && cube.getUp().getGrid()[2][1]== Cube.Color.ORANGE){
+            executeCMD(cmd.CMD_LEFT_ROTATE,actions,cube);
+            twoNearInPlace(actions,cube);
+            executeCMD(cmd.CMD_RIGHT_ROTATE,actions,cube);
         }
         else{
             noneInPlace(actions,cube);
+
         }
     }
 
@@ -117,10 +122,10 @@ public class Logic {
                 if (edge.x == 1 && edge.y == 2) {
                     edgeFromTheRight(actions, cube);
                 } else if (edge.x == 0 && edge.y == 1) {
-                    executeCMD(cmd.CMD_UP_TWIST_RIGHT, actions, cube);
+                    executeCMD(cmd.CMD_UP_TWIST_LEFT, actions, cube);
                     edgeFromTheRight(actions, cube);
                 } else if (edge.x == 2 && edge.y == 1) {
-                    executeCMD(cmd.CMD_UP_TWIST_LEFT, actions, cube);
+                    executeCMD(cmd.CMD_UP_TWIST_RIGHT, actions, cube);
                     edgeFromTheRight(actions, cube);
                 } else if (edge.x == 1 && edge.y == 0) {
                     executeCMD(cmd.CMD_UP_TWIST_LEFT, actions, cube);
