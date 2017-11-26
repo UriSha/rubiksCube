@@ -1,11 +1,12 @@
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 
 public class CommandsListOptimizer {
 
-    protected void optimizeList(ArrayList<cmd> actions){
+    protected void optimizeList(List<cmd> actions){
         Map<cmd, cmd> contrastCMDs = new HashMap<>();
         contrastCMDs.put(cmd.CMD_LEFT_ROTATE, cmd.CMD_RIGHT_ROTATE);
         contrastCMDs.put(cmd.CMD_RIGHT_ROTATE, cmd.CMD_LEFT_ROTATE);

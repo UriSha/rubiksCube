@@ -67,28 +67,28 @@ public class Logic {
         Location whiteBlue=getLocationOfEdge(cube,Cube.Color.WHITE,Cube.Color.BLUE);
         getFrontRightEdge(cube,actions,whiteBlue);
 
-        System.out.println(tempClassForPrint.toStringCube(cube));
+
 
         cube.rotate(true);
 
         Location greenWhite=getLocationOfEdge(cube,Cube.Color.GREEN,Cube.Color.WHITE);
         getFrontRightEdge(cube,actions,greenWhite);
 
-        System.out.println(tempClassForPrint.toStringCube(cube));
+
 
         cube.rotate(true);
 
         Location yellowGreen=getLocationOfEdge(cube,Cube.Color.YELLOW,Cube.Color.GREEN);
         getFrontRightEdge(cube,actions,yellowGreen);
 
-        System.out.println(tempClassForPrint.toStringCube(cube));
+
 
         cube.rotate(true);
 
         Location blueYellow=getLocationOfEdge(cube,Cube.Color.BLUE,Cube.Color.YELLOW);
         getFrontRightEdge(cube,actions,blueYellow);
 
-        System.out.println(tempClassForPrint.toStringCube(cube));
+
 
         cube.rotate(true);
 
