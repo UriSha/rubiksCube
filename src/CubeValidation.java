@@ -98,8 +98,9 @@ public class CubeValidation {
         Arrays.sort(threeColors);
         subCube = new SubCube(threeColors);
         Integer val = subCubes.get(subCube);
-        if (val == null || val == 1)
+        if (val == null || val > 0)
             return false;
+        subCubes.put(subCube, val + 1);
 
         // 0,2
         threeColors[0] = cube.getUp().getGridEntry(0,2);
@@ -108,8 +109,9 @@ public class CubeValidation {
         Arrays.sort(threeColors);
         subCube = new SubCube(threeColors);
         val = subCubes.get(subCube);
-        if (val == null || val == 1)
+        if (val == null || val > 0)
             return false;
+        subCubes.put(subCube, val + 1);
 
         // 2,0
         threeColors[0] = cube.getUp().getGridEntry(2,0);
@@ -118,8 +120,9 @@ public class CubeValidation {
         Arrays.sort(threeColors);
         subCube = new SubCube(threeColors);
         val = subCubes.get(subCube);
-        if (val == null || val == 1)
+        if (val == null || val > 0)
             return false;
+        subCubes.put(subCube, val + 1);
 
         // 2,2
         threeColors[0] = cube.getUp().getGridEntry(2,2);
@@ -128,8 +131,9 @@ public class CubeValidation {
         Arrays.sort(threeColors);
         subCube = new SubCube(threeColors);
         val = subCubes.get(subCube);
-        if (val == null || val == 1)
+        if (val == null || val > 0)
             return false;
+        subCubes.put(subCube, val + 1);
 
         return true;
     }
@@ -144,8 +148,9 @@ public class CubeValidation {
         Arrays.sort(twoColors);
         subCube = new SubCube(twoColors);
         Integer val = subCubes.get(subCube);
-        if (val == null || val == 1)
+        if (val == null || val > 0)
             return false;
+        subCubes.put(subCube, val + 1);
 
         // 1,0
         twoColors[0] = cube.getUp().getGridEntry(1,0);
@@ -153,8 +158,9 @@ public class CubeValidation {
         Arrays.sort(twoColors);
         subCube = new SubCube(twoColors);
         val = subCubes.get(subCube);
-        if (val == null || val == 1)
+        if (val == null || val > 0)
             return false;
+        subCubes.put(subCube, val + 1);
 
         // 1,2
         twoColors[0] = cube.getUp().getGridEntry(1,2);
@@ -162,8 +168,9 @@ public class CubeValidation {
         Arrays.sort(twoColors);
         subCube = new SubCube(twoColors);
         val = subCubes.get(subCube);
-        if (val == null || val == 1)
+        if (val == null || val > 0)
             return false;
+        subCubes.put(subCube, val + 1);
 
         // 2,1
         twoColors[0] = cube.getUp().getGridEntry(2,1);
@@ -171,8 +178,9 @@ public class CubeValidation {
         Arrays.sort(twoColors);
         subCube = new SubCube(twoColors);
         val = subCubes.get(subCube);
-        if (val == null || val == 1)
+        if (val == null || val > 0)
             return false;
+        subCubes.put(subCube, val + 1);
 
         return true;
     }
@@ -187,8 +195,9 @@ public class CubeValidation {
         Arrays.sort(twoColors);
         subCube = new SubCube(twoColors);
         Integer val = subCubes.get(subCube);
-        if (val == null || val == 1)
+        if (val == null || val > 0)
             return false;
+        subCubes.put(subCube, val + 1);
 
         // front-right
         twoColors[0] = cube.getFront().getGridEntry(1,2);
@@ -196,8 +205,9 @@ public class CubeValidation {
         Arrays.sort(twoColors);
         subCube = new SubCube(twoColors);
         val = subCubes.get(subCube);
-        if (val == null || val == 1)
+        if (val == null || val > 0)
             return false;
+        subCubes.put(subCube, val + 1);
 
         // back-left
         twoColors[0] = cube.getBack().getGridEntry(1,0);
@@ -205,8 +215,9 @@ public class CubeValidation {
         Arrays.sort(twoColors);
         subCube = new SubCube(twoColors);
         val = subCubes.get(subCube);
-        if (val == null || val == 1)
+        if (val == null || val > 0)
             return false;
+        subCubes.put(subCube, val + 1);
 
         // back-right
         twoColors[0] = cube.getBack().getGridEntry(1,2);
@@ -214,8 +225,9 @@ public class CubeValidation {
         Arrays.sort(twoColors);
         subCube = new SubCube(twoColors);
         val = subCubes.get(subCube);
-        if (val == null || val == 1)
+        if (val == null || val > 0)
             return false;
+        subCubes.put(subCube, val + 1);
 
         return true;
     }
@@ -243,8 +255,9 @@ public class CubeValidation {
         Arrays.sort(threeColors);
         subCube = new SubCube(threeColors);
         Integer val = subCubes.get(subCube);
-        if (val == null || val == 1)
+        if (val == null || val > 0)
             return false;
+        subCubes.put(subCube, val + 1);
 
         // 0,2
         threeColors[0] = cube.getDown().getGridEntry(0,2);
@@ -253,8 +266,9 @@ public class CubeValidation {
         Arrays.sort(threeColors);
         subCube = new SubCube(threeColors);
         val = subCubes.get(subCube);
-        if (val == null || val == 1)
+        if (val == null || val > 0)
             return false;
+        subCubes.put(subCube, val + 1);
 
         // 2,0
         threeColors[0] = cube.getDown().getGridEntry(2,0);
@@ -263,8 +277,9 @@ public class CubeValidation {
         Arrays.sort(threeColors);
         subCube = new SubCube(threeColors);
         val = subCubes.get(subCube);
-        if (val == null || val == 1)
+        if (val == null || val > 0)
             return false;
+        subCubes.put(subCube, val + 1);
 
         // 2,2
         threeColors[0] = cube.getDown().getGridEntry(2,2);
@@ -273,8 +288,9 @@ public class CubeValidation {
         Arrays.sort(threeColors);
         subCube = new SubCube(threeColors);
         val = subCubes.get(subCube);
-        if (val == null || val == 1)
+        if (val == null || val > 0)
             return false;
+        subCubes.put(subCube, val + 1);
 
         return true;
     }
@@ -289,8 +305,9 @@ public class CubeValidation {
         Arrays.sort(twoColors);
         subCube = new SubCube(twoColors);
         Integer val = subCubes.get(subCube);
-        if (val == null || val == 1)
+        if (val == null || val > 0)
             return false;
+        subCubes.put(subCube, val + 1);
 
         // 1,0
         twoColors[0] = cube.getDown().getGridEntry(1,0);
@@ -298,8 +315,9 @@ public class CubeValidation {
         Arrays.sort(twoColors);
         subCube = new SubCube(twoColors);
         val = subCubes.get(subCube);
-        if (val == null || val == 1)
+        if (val == null || val > 0)
             return false;
+        subCubes.put(subCube, val + 1);
 
         // 1,2
         twoColors[0] = cube.getDown().getGridEntry(1,2);
@@ -307,8 +325,9 @@ public class CubeValidation {
         Arrays.sort(twoColors);
         subCube = new SubCube(twoColors);
         val = subCubes.get(subCube);
-        if (val == null || val == 1)
+        if (val == null || val > 0)
             return false;
+        subCubes.put(subCube, val + 1);
 
         // 2,1
         twoColors[0] = cube.getDown().getGridEntry(2,1);
@@ -316,8 +335,9 @@ public class CubeValidation {
         Arrays.sort(twoColors);
         subCube = new SubCube(twoColors);
         val = subCubes.get(subCube);
-        if (val == null || val == 1)
+        if (val == null || val > 0)
             return false;
+        subCubes.put(subCube, val + 1);
 
         return true;
     }
