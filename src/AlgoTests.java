@@ -215,8 +215,6 @@ public class AlgoTests {
         cube.twistUpperFace(false);
 
 
-
-
         System.out.println(tempClassForPrint.toStringCube(cube));
 
         List<cmd> result = new ArrayList<>();
