@@ -22,7 +22,7 @@ public class Logic {
     static void initialize(Cube cube, List<cmd> actions) {
 
         if (cube == null) {
-            System.out.println("Error: 'initialize' arguments are null");
+            System.out.println("Error: 'initialize' arguments arre null");
             return;
         }
 
@@ -47,16 +47,12 @@ public class Logic {
 
         if (cube.getFront().getColor() != Cube.Color.YELLOW) { // getting the yellow facet to the front
             if (cube.getLeft().getColor() == Cube.Color.YELLOW) {
-                actions.add(cmd.CMD_RIGHT_ROTATE);
-                LogicUtils.executeCMD(cmd.CMD_RIGHT_ROTATE,actions,cube);
+                LogicUtils.executeCMD(cmd.CMD_RIGHT_ROTATE, actions, cube);
             } else if (cube.getRight().getColor() == Cube.Color.YELLOW) {
-                actions.add(cmd.CMD_LEFT_ROTATE);
-                LogicUtils.executeCMD(cmd.CMD_RIGHT_ROTATE,actions,cube);
+                LogicUtils.executeCMD(cmd.CMD_LEFT_ROTATE, actions, cube);
             } else if (cube.getBack().getColor() == Cube.Color.YELLOW) {
-                actions.add(cmd.CMD_LEFT_ROTATE);
-                LogicUtils.executeCMD(cmd.CMD_RIGHT_ROTATE,actions,cube);
-                actions.add(cmd.CMD_LEFT_ROTATE);
-                LogicUtils.executeCMD(cmd.CMD_RIGHT_ROTATE,actions,cube);
+                LogicUtils.executeCMD(cmd.CMD_LEFT_ROTATE, actions, cube);
+                LogicUtils.executeCMD(cmd.CMD_LEFT_ROTATE, actions, cube);
             }
         }
     }
@@ -67,19 +63,19 @@ public class Logic {
         }
         Location redYellow = LogicUtils.getLocationOfEdge(cube, Cube.Color.RED, Cube.Color.YELLOW);
         LogicUtils.getRedCross(cube, actions, redYellow);
-        LogicUtils.executeCMD(cmd.CMD_RIGHT_ROTATE,actions,cube);
+        LogicUtils.executeCMD(cmd.CMD_RIGHT_ROTATE, actions, cube);
 
         Location redGreen = LogicUtils.getLocationOfEdge(cube, Cube.Color.RED, Cube.Color.GREEN);
         LogicUtils.getRedCross(cube, actions, redGreen);
-        LogicUtils.executeCMD(cmd.CMD_RIGHT_ROTATE,actions,cube);
+        LogicUtils.executeCMD(cmd.CMD_RIGHT_ROTATE, actions, cube);
 
         Location redWhite = LogicUtils.getLocationOfEdge(cube, Cube.Color.RED, Cube.Color.WHITE);
         LogicUtils.getRedCross(cube, actions, redWhite);
-        LogicUtils.executeCMD(cmd.CMD_RIGHT_ROTATE,actions,cube);
+        LogicUtils.executeCMD(cmd.CMD_RIGHT_ROTATE, actions, cube);
 
         Location redBlue = LogicUtils.getLocationOfEdge(cube, Cube.Color.RED, Cube.Color.BLUE);
         LogicUtils.getRedCross(cube, actions, redBlue);
-        LogicUtils.executeCMD(cmd.CMD_RIGHT_ROTATE,actions,cube);
+        LogicUtils.executeCMD(cmd.CMD_RIGHT_ROTATE, actions, cube);
     }
     static void stageTwo(Cube cube, List<cmd> actions) {
         if (cube == null || actions == null) {
@@ -88,16 +84,16 @@ public class Logic {
         }
         Location redYellowBlue = LogicUtils.getLocationOfCorner(cube, Cube.Color.RED, Cube.Color.YELLOW, Cube.Color.BLUE);
         LogicUtils.getRedCorner(cube, actions, redYellowBlue);
-        LogicUtils.executeCMD(cmd.CMD_RIGHT_ROTATE,actions,cube);
+        LogicUtils.executeCMD(cmd.CMD_RIGHT_ROTATE, actions, cube);
         Location redGreenYellow = LogicUtils.getLocationOfCorner(cube, Cube.Color.RED, Cube.Color.GREEN, Cube.Color.YELLOW);
         LogicUtils.getRedCorner(cube, actions, redGreenYellow);
-        LogicUtils.executeCMD(cmd.CMD_RIGHT_ROTATE,actions,cube);
+        LogicUtils.executeCMD(cmd.CMD_RIGHT_ROTATE, actions, cube);
         Location redWhiteGreen = LogicUtils.getLocationOfCorner(cube, Cube.Color.RED, Cube.Color.WHITE, Cube.Color.GREEN);
         LogicUtils.getRedCorner(cube, actions, redWhiteGreen);
-        LogicUtils.executeCMD(cmd.CMD_RIGHT_ROTATE,actions,cube);
+        LogicUtils.executeCMD(cmd.CMD_RIGHT_ROTATE, actions, cube);
         Location redBlueWhite = LogicUtils.getLocationOfCorner(cube, Cube.Color.RED, Cube.Color.BLUE, Cube.Color.WHITE);
         LogicUtils.getRedCorner(cube, actions, redBlueWhite);
-        LogicUtils.executeCMD(cmd.CMD_RIGHT_ROTATE,actions,cube);
+        LogicUtils.executeCMD(cmd.CMD_RIGHT_ROTATE, actions, cube);
     }
 
     static void flipForStageThree(Cube cube, List<cmd> actions) {
@@ -113,22 +109,22 @@ public class Logic {
         Location whiteBlue = LogicUtils.getLocationOfEdge(cube, Cube.Color.WHITE, Cube.Color.BLUE);
         LogicUtils.getFrontRightEdge(cube, actions, whiteBlue);
 
-        LogicUtils.executeCMD(cmd.CMD_RIGHT_ROTATE,actions,cube);
+        LogicUtils.executeCMD(cmd.CMD_RIGHT_ROTATE, actions, cube);
 
         Location greenWhite = LogicUtils.getLocationOfEdge(cube, Cube.Color.GREEN, Cube.Color.WHITE);
         LogicUtils.getFrontRightEdge(cube, actions, greenWhite);
 
-        LogicUtils.executeCMD(cmd.CMD_RIGHT_ROTATE,actions,cube);
+        LogicUtils.executeCMD(cmd.CMD_RIGHT_ROTATE, actions, cube);
 
         Location yellowGreen = LogicUtils.getLocationOfEdge(cube, Cube.Color.YELLOW, Cube.Color.GREEN);
         LogicUtils.getFrontRightEdge(cube, actions, yellowGreen);
 
-        LogicUtils.executeCMD(cmd.CMD_RIGHT_ROTATE,actions,cube);
+        LogicUtils.executeCMD(cmd.CMD_RIGHT_ROTATE, actions, cube);
 
         Location blueYellow = LogicUtils.getLocationOfEdge(cube, Cube.Color.BLUE, Cube.Color.YELLOW);
         LogicUtils.getFrontRightEdge(cube, actions, blueYellow);
 
-        LogicUtils.executeCMD(cmd.CMD_RIGHT_ROTATE,actions,cube);
+        LogicUtils.executeCMD(cmd.CMD_RIGHT_ROTATE, actions, cube);
 
     }
 
@@ -162,7 +158,7 @@ public class Logic {
         }
     }
 
-     static class Location {
+    static class Location {
         int x, y;
         Face_Enum name;
         Face_Enum secondDircetion;
