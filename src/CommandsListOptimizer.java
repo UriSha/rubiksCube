@@ -1,11 +1,12 @@
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 
-public class CommandsListOptimizer {
+ class CommandsListOptimizer {
 
-    protected void optimizeList(ArrayList<cmd> actions){
+     static void optimizeList(List<cmd> actions){
         Map<cmd, cmd> contrastCMDs = new HashMap<>();
         contrastCMDs.put(cmd.CMD_LEFT_ROTATE, cmd.CMD_RIGHT_ROTATE);
         contrastCMDs.put(cmd.CMD_RIGHT_ROTATE, cmd.CMD_LEFT_ROTATE);
@@ -24,6 +25,7 @@ public class CommandsListOptimizer {
 
         for (int i = actions.size() - 2; i >= 0; i--){
             try{
+                if(actions.get(i)==cmd.CMD_FLIP){continue;}
                 if (actions.get(i) == actions.get(i+1) && actions.get(i) == actions.get(i+2)){
                     actions.set(i, contrastCMDs.get(actions.get(i)));
                     actions.remove(i+2);
@@ -32,7 +34,7 @@ public class CommandsListOptimizer {
                     actions.remove(i+1);
                     actions.remove(i);
                 }
-            } catch (ArrayIndexOutOfBoundsException e){}
+            } catch (IndexOutOfBoundsException e){}
         }
     }
 }

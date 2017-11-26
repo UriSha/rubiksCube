@@ -7,95 +7,81 @@ import java.util.List;
 public class Logic {
 
 
-    public List<cmd> mainAlgorithm(Cube cube) {
+    public static List<cmd> mainAlgorithm(Cube cube) {
         List<cmd> result = new ArrayList<>();
         initialize(cube, result);
         stageOne(cube, result);
         stageTwo(cube, result);
         flipForStageThree(cube, result);
         stageThree(cube, result);
-        stageFour(cube,result);
-
-
+        stageFour(cube, result);
+        CommandsListOptimizer.optimizeList(result);
         return result;
     }
 
-    protected static void flipForStageThree(Cube cube, List<cmd> actions) {
+    static void flipForStageThree(Cube cube, List<cmd> actions) {
         executeCMD(cmd.CMD_FLIP, actions, cube);
         executeCMD(cmd.CMD_FLIP, actions, cube);
     }
 
-    protected static void stageFour(Cube cube, List<cmd> actions) {
-        if(cube.getUp().getGrid()[0][1] == Cube.Color.ORANGE && cube.getUp().getGrid()[2][1]== Cube.Color.ORANGE){
-            if(cube.getUp().getGrid()[1][2] != Cube.Color.ORANGE){
-                executeCMD(cmd.CMD_RIGHT_ROTATE,actions,cube);
-                twoCounterInPlace(actions,cube);
-                executeCMD(cmd.CMD_LEFT_ROTATE,actions,cube);
+    static void stageFour(Cube cube, List<cmd> actions) {
+        if (cube.getUp().getGrid()[0][1] == Cube.Color.ORANGE && cube.getUp().getGrid()[2][1] == Cube.Color.ORANGE) {
+            if (cube.getUp().getGrid()[1][2] != Cube.Color.ORANGE) {
+                executeCMD(cmd.CMD_RIGHT_ROTATE, actions, cube);
+                twoCounterInPlace(actions, cube);
+                executeCMD(cmd.CMD_LEFT_ROTATE, actions, cube);
             }
-        }
-        else if(cube.getUp().getGrid()[1][0] == Cube.Color.ORANGE && cube.getUp().getGrid()[1][2]== Cube.Color.ORANGE){
-            twoCounterInPlace(actions,cube);
-        }
-        else if(cube.getUp().getGrid()[0][1] == Cube.Color.ORANGE && cube.getUp().getGrid()[1][0]== Cube.Color.ORANGE){
-            twoNearInPlace(actions,cube);
-        }
-        else if(cube.getUp().getGrid()[1][2] == Cube.Color.ORANGE && cube.getUp().getGrid()[2][1]== Cube.Color.ORANGE){
-            executeCMD(cmd.CMD_RIGHT_ROTATE,actions,cube);
-            executeCMD(cmd.CMD_RIGHT_ROTATE,actions,cube);
-            twoNearInPlace(actions,cube);
-            executeCMD(cmd.CMD_RIGHT_ROTATE,actions,cube);
-            executeCMD(cmd.CMD_RIGHT_ROTATE,actions,cube);
-        }else if(cube.getUp().getGrid()[1][0] == Cube.Color.ORANGE && cube.getUp().getGrid()[2][1]== Cube.Color.ORANGE){
-            executeCMD(cmd.CMD_LEFT_ROTATE,actions,cube);
-            twoNearInPlace(actions,cube);
-            executeCMD(cmd.CMD_RIGHT_ROTATE,actions,cube);
-        }else if(cube.getUp().getGrid()[0][1] == Cube.Color.ORANGE && cube.getUp().getGrid()[1][2]== Cube.Color.ORANGE){
-            executeCMD(cmd.CMD_UP_TWIST_RIGHT,actions,cube);
-            twoNearInPlace(actions,cube);
-        }
-        else{
-            noneInPlace(actions,cube);
+        } else if (cube.getUp().getGrid()[1][0] == Cube.Color.ORANGE && cube.getUp().getGrid()[1][2] == Cube.Color.ORANGE) {
+            twoCounterInPlace(actions, cube);
+        } else if (cube.getUp().getGrid()[0][1] == Cube.Color.ORANGE && cube.getUp().getGrid()[1][0] == Cube.Color.ORANGE) {
+            twoNearInPlace(actions, cube);
+        } else if (cube.getUp().getGrid()[1][2] == Cube.Color.ORANGE && cube.getUp().getGrid()[2][1] == Cube.Color.ORANGE) {
+            executeCMD(cmd.CMD_RIGHT_ROTATE, actions, cube);
+            executeCMD(cmd.CMD_RIGHT_ROTATE, actions, cube);
+            twoNearInPlace(actions, cube);
+            executeCMD(cmd.CMD_RIGHT_ROTATE, actions, cube);
+            executeCMD(cmd.CMD_RIGHT_ROTATE, actions, cube);
+        } else if (cube.getUp().getGrid()[1][0] == Cube.Color.ORANGE && cube.getUp().getGrid()[2][1] == Cube.Color.ORANGE) {
+            executeCMD(cmd.CMD_LEFT_ROTATE, actions, cube);
+            twoNearInPlace(actions, cube);
+            executeCMD(cmd.CMD_RIGHT_ROTATE, actions, cube);
+        } else if (cube.getUp().getGrid()[0][1] == Cube.Color.ORANGE && cube.getUp().getGrid()[1][2] == Cube.Color.ORANGE) {
+            executeCMD(cmd.CMD_UP_TWIST_RIGHT, actions, cube);
+            twoNearInPlace(actions, cube);
+        } else {
+            noneInPlace(actions, cube);
 
         }
     }
 
-    protected static void stageThree(Cube cube, List<cmd> actions) {
+    static void stageThree(Cube cube, List<cmd> actions) {
         if (cube == null || actions == null) {
             System.out.println("Error: 'stageThree' arguments are null");
             return;
         }
-        Location whiteBlue=getLocationOfEdge(cube,Cube.Color.WHITE,Cube.Color.BLUE);
-        getFrontRightEdge(cube,actions,whiteBlue);
-
-        System.out.println(tempClassForPrint.toStringCube(cube));
+        Location whiteBlue = getLocationOfEdge(cube, Cube.Color.WHITE, Cube.Color.BLUE);
+        getFrontRightEdge(cube, actions, whiteBlue);
 
         cube.rotate(true);
 
-        Location greenWhite=getLocationOfEdge(cube,Cube.Color.GREEN,Cube.Color.WHITE);
-        getFrontRightEdge(cube,actions,greenWhite);
-
-        System.out.println(tempClassForPrint.toStringCube(cube));
+        Location greenWhite = getLocationOfEdge(cube, Cube.Color.GREEN, Cube.Color.WHITE);
+        getFrontRightEdge(cube, actions, greenWhite);
 
         cube.rotate(true);
 
-        Location yellowGreen=getLocationOfEdge(cube,Cube.Color.YELLOW,Cube.Color.GREEN);
-        getFrontRightEdge(cube,actions,yellowGreen);
-
-        System.out.println(tempClassForPrint.toStringCube(cube));
+        Location yellowGreen = getLocationOfEdge(cube, Cube.Color.YELLOW, Cube.Color.GREEN);
+        getFrontRightEdge(cube, actions, yellowGreen);
 
         cube.rotate(true);
 
-        Location blueYellow=getLocationOfEdge(cube,Cube.Color.BLUE,Cube.Color.YELLOW);
-        getFrontRightEdge(cube,actions,blueYellow);
-
-        System.out.println(tempClassForPrint.toStringCube(cube));
+        Location blueYellow = getLocationOfEdge(cube, Cube.Color.BLUE, Cube.Color.YELLOW);
+        getFrontRightEdge(cube, actions, blueYellow);
 
         cube.rotate(true);
 
     }
 
-
-    protected static void stageTwo(Cube cube, List<cmd> actions) {
+    static void stageTwo(Cube cube, List<cmd> actions) {
         if (cube == null || actions == null) {
             System.out.println("Error: 'stageTwo' arguments are null");
             return;
@@ -172,37 +158,35 @@ public class Logic {
                     executeCMD(cmd.CMD_UP_TWIST_LEFT, actions, cube);
                     edgeOnTop(actions, cube);
                 } else if (edge.x == 1 && edge.y == 0) {
-                    switchEdgeColors(actions,cube);
+                    switchEdgeColors(actions, cube);
                 } else if (edge.x == 1 && edge.y == 2) {
-                    executeCMD(cmd.CMD_LEFT_ROTATE,actions,cube);
-                    edgeOnTop(actions,cube);
-                    executeCMD(cmd.CMD_RIGHT_ROTATE,actions,cube);
-                    executeCMD(cmd.CMD_UP_TWIST_RIGHT,actions,cube);
-                    executeCMD(cmd.CMD_UP_TWIST_RIGHT,actions,cube);
-                    edgeFromTheRight(actions,cube);
+                    executeCMD(cmd.CMD_LEFT_ROTATE, actions, cube);
+                    edgeOnTop(actions, cube);
+                    executeCMD(cmd.CMD_RIGHT_ROTATE, actions, cube);
+                    executeCMD(cmd.CMD_UP_TWIST_RIGHT, actions, cube);
+                    executeCMD(cmd.CMD_UP_TWIST_RIGHT, actions, cube);
+                    edgeFromTheRight(actions, cube);
                 }
                 break;
             case BACK:
-                if(edge.x==0&&edge.y==1){
-                    executeCMD(cmd.CMD_UP_TWIST_RIGHT,actions,cube);
-                    executeCMD(cmd.CMD_UP_TWIST_RIGHT,actions,cube);
-                    edgeOnTop(actions,cube);
-                }
-                else if(edge.x==1&&edge.y==0){
-                    executeCMD(cmd.CMD_LEFT_ROTATE,actions,cube);
-                    edgeOnTop(actions,cube);
-                    executeCMD(cmd.CMD_RIGHT_ROTATE,actions,cube);
-                    executeCMD(cmd.CMD_UP_TWIST_RIGHT,actions,cube);
-                    edgeOnTop(actions,cube);
-                }
-                else if(edge.x==1&&edge.y==2){
-                    executeCMD(cmd.CMD_RIGHT_ROTATE,actions,cube);
-                    executeCMD(cmd.CMD_RIGHT_ROTATE,actions,cube);
-                    edgeOnTop(actions,cube);
-                    executeCMD(cmd.CMD_LEFT_ROTATE,actions,cube);
-                    executeCMD(cmd.CMD_LEFT_ROTATE,actions,cube);
-                    executeCMD(cmd.CMD_UP_TWIST_RIGHT,actions,cube);
-                    edgeFromTheRight(actions,cube);
+                if (edge.x == 0 && edge.y == 1) {
+                    executeCMD(cmd.CMD_UP_TWIST_RIGHT, actions, cube);
+                    executeCMD(cmd.CMD_UP_TWIST_RIGHT, actions, cube);
+                    edgeOnTop(actions, cube);
+                } else if (edge.x == 1 && edge.y == 0) {
+                    executeCMD(cmd.CMD_LEFT_ROTATE, actions, cube);
+                    edgeOnTop(actions, cube);
+                    executeCMD(cmd.CMD_RIGHT_ROTATE, actions, cube);
+                    executeCMD(cmd.CMD_UP_TWIST_RIGHT, actions, cube);
+                    edgeOnTop(actions, cube);
+                } else if (edge.x == 1 && edge.y == 2) {
+                    executeCMD(cmd.CMD_RIGHT_ROTATE, actions, cube);
+                    executeCMD(cmd.CMD_RIGHT_ROTATE, actions, cube);
+                    edgeOnTop(actions, cube);
+                    executeCMD(cmd.CMD_LEFT_ROTATE, actions, cube);
+                    executeCMD(cmd.CMD_LEFT_ROTATE, actions, cube);
+                    executeCMD(cmd.CMD_UP_TWIST_RIGHT, actions, cube);
+                    edgeFromTheRight(actions, cube);
                 }
         }
     }
@@ -422,35 +406,37 @@ public class Logic {
     }
 
     private static void noneInPlace(List<cmd> actions, Cube cube) {
-        executeCMD(cmd.CMD_BACK_TWIST_C_CLOCKWISE,actions,cube);
-        executeCMD(cmd.CMD_LEFT_TWIST_BACKUPWARD,actions,cube);
-        executeCMD(cmd.CMD_UP_TWIST_LEFT,actions,cube);
-        executeCMD(cmd.CMD_LEFT_TWIST_FRONTUPWARD,actions,cube);
-        executeCMD(cmd.CMD_UP_TWIST_RIGHT,actions,cube);
-        executeCMD(cmd.CMD_BACK_TWIST_CLOCKWISE,actions,cube);
-        executeCMD(cmd.CMD_FRONT_TWIST_CLOCKWISE,actions,cube);
-        executeCMD(cmd.CMD_UP_TWIST_LEFT,actions,cube);
-        executeCMD(cmd.CMD_RIGHT_TWIST_FRONTUPWARD,actions,cube);
-        executeCMD(cmd.CMD_UP_TWIST_RIGHT,actions,cube);
-        executeCMD(cmd.CMD_RIGHT_TWIST_BACKUPWARD,actions,cube);
-        executeCMD(cmd.CMD_FRONT_TWIST_C_CLOCKWISE,actions,cube);
+        executeCMD(cmd.CMD_BACK_TWIST_C_CLOCKWISE, actions, cube);
+        executeCMD(cmd.CMD_LEFT_TWIST_BACKUPWARD, actions, cube);
+        executeCMD(cmd.CMD_UP_TWIST_LEFT, actions, cube);
+        executeCMD(cmd.CMD_LEFT_TWIST_FRONTUPWARD, actions, cube);
+        executeCMD(cmd.CMD_UP_TWIST_RIGHT, actions, cube);
+        executeCMD(cmd.CMD_BACK_TWIST_CLOCKWISE, actions, cube);
+        executeCMD(cmd.CMD_FRONT_TWIST_CLOCKWISE, actions, cube);
+        executeCMD(cmd.CMD_UP_TWIST_LEFT, actions, cube);
+        executeCMD(cmd.CMD_RIGHT_TWIST_FRONTUPWARD, actions, cube);
+        executeCMD(cmd.CMD_UP_TWIST_RIGHT, actions, cube);
+        executeCMD(cmd.CMD_RIGHT_TWIST_BACKUPWARD, actions, cube);
+        executeCMD(cmd.CMD_FRONT_TWIST_C_CLOCKWISE, actions, cube);
     }
+
     private static void twoNearInPlace(List<cmd> actions, Cube cube) {
-        executeCMD(cmd.CMD_FRONT_TWIST_CLOCKWISE,actions,cube);
-        executeCMD(cmd.CMD_UP_TWIST_LEFT,actions,cube);
-        executeCMD(cmd.CMD_RIGHT_TWIST_FRONTUPWARD,actions,cube);
-        executeCMD(cmd.CMD_UP_TWIST_RIGHT,actions,cube);
-        executeCMD(cmd.CMD_RIGHT_TWIST_BACKUPWARD,actions,cube);
-        executeCMD(cmd.CMD_FRONT_TWIST_C_CLOCKWISE,actions,cube);
+        executeCMD(cmd.CMD_FRONT_TWIST_CLOCKWISE, actions, cube);
+        executeCMD(cmd.CMD_UP_TWIST_LEFT, actions, cube);
+        executeCMD(cmd.CMD_RIGHT_TWIST_FRONTUPWARD, actions, cube);
+        executeCMD(cmd.CMD_UP_TWIST_RIGHT, actions, cube);
+        executeCMD(cmd.CMD_RIGHT_TWIST_BACKUPWARD, actions, cube);
+        executeCMD(cmd.CMD_FRONT_TWIST_C_CLOCKWISE, actions, cube);
 
     }
+
     private static void twoCounterInPlace(List<cmd> actions, Cube cube) {
-        executeCMD(cmd.CMD_BACK_TWIST_C_CLOCKWISE,actions,cube);
-        executeCMD(cmd.CMD_LEFT_TWIST_BACKUPWARD,actions,cube);
-        executeCMD(cmd.CMD_UP_TWIST_LEFT,actions,cube);
-        executeCMD(cmd.CMD_LEFT_TWIST_FRONTUPWARD,actions,cube);
-        executeCMD(cmd.CMD_UP_TWIST_RIGHT,actions,cube);
-        executeCMD(cmd.CMD_BACK_TWIST_CLOCKWISE,actions,cube);
+        executeCMD(cmd.CMD_BACK_TWIST_C_CLOCKWISE, actions, cube);
+        executeCMD(cmd.CMD_LEFT_TWIST_BACKUPWARD, actions, cube);
+        executeCMD(cmd.CMD_UP_TWIST_LEFT, actions, cube);
+        executeCMD(cmd.CMD_LEFT_TWIST_FRONTUPWARD, actions, cube);
+        executeCMD(cmd.CMD_UP_TWIST_RIGHT, actions, cube);
+        executeCMD(cmd.CMD_BACK_TWIST_CLOCKWISE, actions, cube);
     }
 
     private static void edgeFromTheRight(List<cmd> actions, Cube cube) {
@@ -543,7 +529,6 @@ public class Logic {
 
 
     private static void getRedCross(Cube cube, List<cmd> actions, Location redEdge) {
-
 
         if (redEdge.name == null) {
             System.out.println("Error: 'stageOne' has failed");
@@ -696,7 +681,7 @@ public class Logic {
         executeCMD(cmd.CMD_FRONT_TWIST_CLOCKWISE, actions, cube);
     }
 
-    protected static void stageOne(Cube cube, List<cmd> actions) {
+    static void stageOne(Cube cube, List<cmd> actions) {
         if (cube == null || actions == null) {
             System.out.println("Error: 'stageOne' arguments are null");
             return;
@@ -1015,7 +1000,7 @@ public class Logic {
     }
 
 
-    protected static void initialize(Cube cube, List<cmd> actions) {
+    static void initialize(Cube cube, List<cmd> actions) {
 
         if (cube == null) {
             System.out.println("Error: 'initialize' arguments are null");
