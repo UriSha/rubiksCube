@@ -807,8 +807,7 @@ class LogicUtils {
             case LEFT:
                 if (redEdge.x == 0 && redEdge.y == 1) {
                     executeCMD(cmd.CMD_LEFT_TWIST_BACKUPWARD, actions, cube);
-                    executeCMD(cmd.CMD_LEFT_TWIST_BACKUPWARD, actions, cube);
-                    leftRedEdge(actions, cube);
+                    executeCMD(cmd.CMD_FRONT_TWIST_CLOCKWISE, actions, cube);
                 } else if (redEdge.x == 1 && redEdge.y == 0) {
                     executeCMD(cmd.CMD_LEFT_TWIST_FRONTUPWARD, actions, cube);
                     leftRedEdge(actions, cube);
@@ -816,20 +815,15 @@ class LogicUtils {
                 } else if (redEdge.x == 2 && redEdge.y == 1) {
                     leftRedEdge(actions, cube);
                 } else if (redEdge.x == 1 && redEdge.y == 2) {
-                    executeCMD(cmd.CMD_LEFT_TWIST_BACKUPWARD, actions, cube);
-                    leftRedEdge(actions, cube);
-                    executeCMD(cmd.CMD_LEFT_TWIST_FRONTUPWARD, actions, cube);
+                    executeCMD(cmd.CMD_FRONT_TWIST_CLOCKWISE, actions, cube);
                 }
                 break;
             case RIGHT:
                 if (redEdge.x == 0 && redEdge.y == 1) {
-                    executeCMD(cmd.CMD_RIGHT_TWIST_FRONTUPWARD, actions, cube);
-                    executeCMD(cmd.CMD_RIGHT_TWIST_FRONTUPWARD, actions, cube);
-                    rightRedEdge(actions, cube);
-                } else if (redEdge.x == 1 && redEdge.y == 0) {
                     executeCMD(cmd.CMD_RIGHT_TWIST_BACKUPWARD, actions, cube);
-                    rightRedEdge(actions, cube);
-                    executeCMD(cmd.CMD_RIGHT_TWIST_FRONTUPWARD, actions, cube);
+                    executeCMD(cmd.CMD_FRONT_TWIST_CLOCKWISE, actions, cube);
+                } else if (redEdge.x == 1 && redEdge.y == 0) {
+                    executeCMD(cmd.CMD_FRONT_TWIST_C_CLOCKWISE, actions, cube);
                 } else if (redEdge.x == 2 && redEdge.y == 1) {
                     rightRedEdge(actions, cube);
                 } else if (redEdge.x == 1 && redEdge.y == 2) {
@@ -861,17 +855,15 @@ class LogicUtils {
     }
 
     private static void leftRedEdge(List<cmd> actions, Cube cube) {
-        executeCMD(cmd.CMD_DOWN_TWIST_RIGHT, actions, cube);
+        executeCMD(cmd.CMD_LEFT_TWIST_FRONTUPWARD, actions, cube);
         executeCMD(cmd.CMD_FRONT_TWIST_CLOCKWISE, actions, cube);
-        executeCMD(cmd.CMD_FRONT_TWIST_CLOCKWISE, actions, cube);
-        frontRedEdge(actions, cube);
+        executeCMD(cmd.CMD_LEFT_TWIST_BACKUPWARD, actions, cube);
     }
 
     private static void rightRedEdge(List<cmd> actions, Cube cube) {
-        executeCMD(cmd.CMD_DOWN_TWIST_LEFT, actions, cube);
-        executeCMD(cmd.CMD_FRONT_TWIST_CLOCKWISE, actions, cube);
-        executeCMD(cmd.CMD_FRONT_TWIST_CLOCKWISE, actions, cube);
-        frontRedEdge(actions, cube);
+        executeCMD(cmd.CMD_RIGHT_TWIST_FRONTUPWARD, actions, cube);
+        executeCMD(cmd.CMD_FRONT_TWIST_C_CLOCKWISE, actions, cube);
+        executeCMD(cmd.CMD_RIGHT_TWIST_BACKUPWARD, actions, cube);
     }
 
     private static void downRedEdge(List<cmd> actions, Cube cube) {
