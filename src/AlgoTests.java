@@ -60,13 +60,15 @@ public class AlgoTests {
         cube.twistFrontFace(false);
         cube.twistBackFace(true);
         cube.twistRightFace(true);
-        cube.flip();cube.twistUpperFace(false);
+        cube.flip();
+        cube.twistUpperFace(false);
         cube.twistFrontFace(false);
         cube.flip();
         cube.twistFrontFace(false);
         cube.twistBackFace(true);
         cube.twistRightFace(true);
-        cube.flip();cube.twistUpperFace(false);
+        cube.flip();
+        cube.twistUpperFace(false);
         cube.twistFrontFace(false);
         cube.flip();
         cube.twistFrontFace(false);
