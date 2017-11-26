@@ -49,6 +49,9 @@ public class Logic {
             executeCMD(cmd.CMD_LEFT_ROTATE,actions,cube);
             twoNearInPlace(actions,cube);
             executeCMD(cmd.CMD_RIGHT_ROTATE,actions,cube);
+        }else if(cube.getUp().getGrid()[0][1] == Cube.Color.ORANGE && cube.getUp().getGrid()[1][2]== Cube.Color.ORANGE){
+            executeCMD(cmd.CMD_UP_TWIST_RIGHT,actions,cube);
+            twoNearInPlace(actions,cube);
         }
         else{
             noneInPlace(actions,cube);
