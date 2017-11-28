@@ -243,6 +243,10 @@ public class AlgoTests {
 
         System.out.println(tempClassForPrint.toStringCube(cube));
 
+//        Logic.stageFive(cube,result);
+//
+//        System.out.println(tempClassForPrint.toStringCube(cube));
+
         System.out.println(result.toString());
 
 

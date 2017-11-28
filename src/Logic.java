@@ -129,6 +129,10 @@ public class Logic {
     }
 
     static void stageFour(Cube cube, List<cmd> actions) {
+        if (cube == null || actions == null) {
+            System.out.println("Error: 'stageFour' arguments are null");
+            return;
+        }
         if (cube.getUp().getGrid()[0][1] == Cube.Color.ORANGE && cube.getUp().getGrid()[2][1] == Cube.Color.ORANGE) {
             if (cube.getUp().getGrid()[1][2] != Cube.Color.ORANGE) {
                 LogicUtils.executeCMD(cmd.CMD_RIGHT_ROTATE, actions, cube);
@@ -157,6 +161,48 @@ public class Logic {
 
         }
     }
+    //    static void stageFive(Cube cube, List<cmd> actions) {
+//        if (cube == null || actions == null) {
+//            System.out.println("Error: 'stageFive' arguments are null");
+//            return;
+//        }
+//        Location whiteOrange=LogicUtils.getLocationOfEdge(cube, Cube.Color.WHITE, Cube.Color.ORANGE);
+//        switch (whiteOrange.name){
+//            case RIGHT:
+//                LogicUtils.executeCMD(cmd.CMD_UP_TWIST_LEFT,actions,cube);
+//                break;
+//            case LEFT:
+//                LogicUtils.executeCMD(cmd.CMD_UP_TWIST_LEFT,actions,cube);
+//                break;
+//            case BACK:
+//                LogicUtils.executeCMD(cmd.CMD_UP_TWIST_LEFT,actions,cube);
+//                LogicUtils.executeCMD(cmd.CMD_UP_TWIST_LEFT,actions,cube);
+//                break;
+//            default:
+//                break;
+//        }
+//        Location greenOrange=LogicUtils.getLocationOfEdge(cube, Cube.Color.GREEN, Cube.Color.ORANGE);
+//        if (greenOrange==null)
+//            return;
+//        Location yellowOrange=LogicUtils.getLocationOfEdge(cube, Cube.Color.YELLOW, Cube.Color.ORANGE);
+//        if (yellowOrange==null)
+//            return;
+//        Location blueOrange=LogicUtils.getLocationOfEdge(cube, Cube.Color.BLUE, Cube.Color.ORANGE);
+//        if (blueOrange==null)
+//            return;
+//        while(!(greenOrange.name==Face_Enum.LEFT && yellowOrange.name==Face_Enum.BACK && blueOrange.name==Face_Enum.RIGHT)){
+//            LogicUtils.executeCMD(cmd.CMD_RIGHT_TWIST_FRONTUPWARD,actions,cube);
+//            LogicUtils.executeCMD(cmd.CMD_UP_TWIST_LEFT,actions,cube);
+//            LogicUtils.executeCMD(cmd.CMD_RIGHT_TWIST_BACKUPWARD,actions,cube);
+//            LogicUtils.executeCMD(cmd.CMD_UP_TWIST_LEFT,actions,cube);
+//            LogicUtils.executeCMD(cmd.CMD_RIGHT_TWIST_FRONTUPWARD,actions,cube);
+//            LogicUtils.executeCMD(cmd.CMD_UP_TWIST_LEFT,actions,cube);
+//            LogicUtils.executeCMD(cmd.CMD_UP_TWIST_LEFT,actions,cube);
+//            LogicUtils.executeCMD(cmd.CMD_RIGHT_TWIST_BACKUPWARD,actions,cube);
+//        }
+//
+//
+//    }
 
     static class Location {
         int x, y;
