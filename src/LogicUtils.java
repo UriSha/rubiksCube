@@ -297,6 +297,26 @@ class LogicUtils {
         System.out.println("Not such corner exists");
         return null;
     }
+    static void coreSixLeftToRight(Cube cube, List<cmd> actions){
+        executeCMD(cmd.CMD_UP_TWIST_LEFT,actions,cube);
+        executeCMD(cmd.CMD_RIGHT_TWIST_FRONTUPWARD,actions,cube);
+        executeCMD(cmd.CMD_UP_TWIST_RIGHT,actions,cube);
+        executeCMD(cmd.CMD_LEFT_TWIST_FRONTUPWARD,actions,cube);
+        executeCMD(cmd.CMD_UP_TWIST_LEFT,actions,cube);
+        executeCMD(cmd.CMD_RIGHT_TWIST_BACKUPWARD,actions,cube);
+        executeCMD(cmd.CMD_UP_TWIST_RIGHT,actions,cube);
+        executeCMD(cmd.CMD_LEFT_TWIST_BACKUPWARD,actions,cube);
+    }
+    static void coreSixRightToLeft(Cube cube, List<cmd> actions){
+        executeCMD(cmd.CMD_UP_TWIST_RIGHT,actions,cube);
+        executeCMD(cmd.CMD_LEFT_TWIST_FRONTUPWARD,actions,cube);
+        executeCMD(cmd.CMD_UP_TWIST_LEFT,actions,cube);
+        executeCMD(cmd.CMD_RIGHT_TWIST_FRONTUPWARD,actions,cube);
+        executeCMD(cmd.CMD_UP_TWIST_RIGHT,actions,cube);
+        executeCMD(cmd.CMD_LEFT_TWIST_BACKUPWARD,actions,cube);
+        executeCMD(cmd.CMD_UP_TWIST_LEFT,actions,cube);
+        executeCMD(cmd.CMD_RIGHT_TWIST_BACKUPWARD,actions,cube);
+    }
 
     static void coreFiveLeftToRight(Cube cube, List<cmd> actions){
         LogicUtils.executeCMD(cmd.CMD_RIGHT_TWIST_FRONTUPWARD,actions,cube);
