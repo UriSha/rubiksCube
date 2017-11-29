@@ -48,7 +48,7 @@ public class AlgoTests {
 
         Cube cube = new Cube(cubeValues);
 
-        System.out.println(tempClassForPrint.toStringCube(cube));
+        System.out.println(cube);
 
         cube.twistBottomFace(false);
         cube.flip();
@@ -215,37 +215,37 @@ public class AlgoTests {
         cube.twistUpperFace(false);
 
 
-        System.out.println(tempClassForPrint.toStringCube(cube));
+        System.out.println(cube);
 
         List<cmd> result = new ArrayList<>();
 
         Logic.initialize(cube, result);
 
-        System.out.println(tempClassForPrint.toStringCube(cube));
+        System.out.println(cube);
 
         Logic.stageOne(cube, result);
 
-        System.out.println(tempClassForPrint.toStringCube(cube));
+        System.out.println(cube);
 
         Logic.stageTwo(cube, result);
 
-        System.out.println(tempClassForPrint.toStringCube(cube));
+        System.out.println(cube);
 
         Logic.flipForStageThree(cube,result);
 
-        System.out.println(tempClassForPrint.toStringCube(cube));
+        System.out.println(cube);
 
         Logic.stageThree(cube, result);
 
-        System.out.println(tempClassForPrint.toStringCube(cube));
+        System.out.println(cube);
 
         Logic.stageFour(cube,result);
 
-        System.out.println(tempClassForPrint.toStringCube(cube));
+        System.out.println(cube);
 
 //        Logic.stageFive(cube,result);
 //
-//        System.out.println(tempClassForPrint.toStringCube(cube));
+//        System.out.println(cube);
 
         System.out.println(result.toString());
 

@@ -1,7 +1,3 @@
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
-
 
 /**
  * Represents the cube's state
@@ -25,7 +21,7 @@ public class Cube {
 
     /**
      * Creates the initial state of the cube
-     * <p>
+     *
      * cube[0] = up
      * cube[1] = back
      * cube[2] = down
@@ -50,7 +46,8 @@ public class Cube {
         WHITE(3),
         YELLOW(4),
         BLUE(5),
-        ORANGE(6);
+        ORANGE(6),
+        NO_COLOR(7);    							// TODO push carefully
 
         private final int value;
         Color(int val){
@@ -60,6 +57,10 @@ public class Cube {
         public int getValue(){
             return value;
         }
+    }
+
+    public static int getDim() {					// TODO push carefully
+        return dim;
     }
 
     public Face getFront() {
@@ -248,11 +249,11 @@ public class Cube {
      * @param isRightTwist == true -> twists from the front face to the right face(before flipping)
      */
     public void twistUpperFace(boolean isRightTwist) {
-       flip();
-       twistFrontFace(!isRightTwist);
-       flip();
-       flip();
-       flip();
+        flip();
+        twistFrontFace(!isRightTwist);
+        flip();
+        flip();
+        flip();
 
     }
 
@@ -310,6 +311,27 @@ public class Cube {
 
     public boolean isValidCube() {
         return CubeValidation.isValidCube(this);
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder result = new StringBuilder();
+
+        CubePrintUtils.topAndButtomBorders(result);
+
+        CubePrintUtils.upAndDownFaces(result, this.getUp().getGrid());
+
+        CubePrintUtils.middleBorders(result);
+
+        CubePrintUtils.fourMiddleFaces(result, this.getLeft().getGrid(), this.getFront().getGrid(), this.getRight().getGrid(), this.getBack().getGrid());
+
+        CubePrintUtils.middleBorders(result);
+
+        CubePrintUtils.upAndDownFaces(result, this.getDown().getGrid());
+
+        CubePrintUtils.topAndButtomBorders(result);
+
+        return result.toString();
     }
 
     /**
