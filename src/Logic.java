@@ -214,10 +214,11 @@ public class Logic {
     }
 
     static void stageSix(Cube cube, List<cmd> actions) {
-        Location whiteBlue = LogicUtils.getLocationOfCorner(cube, Cube.Color.WHITE, Cube.Color.BLUE, Cube.Color.ORANGE);
-        Location greenWhite = LogicUtils.getLocationOfCorner(cube, Cube.Color.GREEN, Cube.Color.WHITE, Cube.Color.ORANGE);
-        Location yellowGreen = LogicUtils.getLocationOfCorner(cube, Cube.Color.YELLOW, Cube.Color.GREEN, Cube.Color.ORANGE);
-        Location blueYellow = LogicUtils.getLocationOfCorner(cube, Cube.Color.BLUE, Cube.Color.YELLOW, Cube.Color.ORANGE);
+        int whiteBlue = LogicUtils.getUpperCornerNum(LogicUtils.getLocationOfCorner(cube, Cube.Color.WHITE, Cube.Color.BLUE, Cube.Color.ORANGE));
+        int greenWhite = LogicUtils.getUpperCornerNum(LogicUtils.getLocationOfCorner(cube, Cube.Color.GREEN, Cube.Color.WHITE, Cube.Color.ORANGE));
+        int yellowGreen = LogicUtils.getUpperCornerNum(LogicUtils.getLocationOfCorner(cube, Cube.Color.YELLOW, Cube.Color.GREEN, Cube.Color.ORANGE));
+        int blueYellow = LogicUtils.getUpperCornerNum(LogicUtils.getLocationOfCorner(cube, Cube.Color.BLUE, Cube.Color.YELLOW, Cube.Color.ORANGE));
+
 
     }
 
