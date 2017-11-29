@@ -318,6 +318,40 @@ class LogicUtils {
         executeCMD(cmd.CMD_RIGHT_TWIST_BACKUPWARD,actions,cube);
     }
 
+    static int getUpperCornerNum(Logic.Location location) {
+        Face_Enum prime = location.name;
+        Face_Enum sec = location.secondDircetion;
+        Face_Enum third = location.thirdDirection;
+        if (prime == Face_Enum.FRONT) {
+            if ((sec == Face_Enum.UP && third == Face_Enum.RIGHT) || (sec == Face_Enum.RIGHT && third == Face_Enum.UP)) {
+                return 0;
+            }
+            if ((sec == Face_Enum.UP && third == Face_Enum.LEFT) || (sec == Face_Enum.LEFT && third == Face_Enum.UP)) {
+                return 3;
+            }
+        } if (prime == Face_Enum.RIGHT){
+            if ((sec == Face_Enum.FRONT && third == Face_Enum.UP) || (sec == Face_Enum.UP && third == Face_Enum.FRONT)){
+                return 0;
+            } if ((sec == Face_Enum.BACK && third == Face_Enum.UP) || (sec == Face_Enum.UP && third == Face_Enum.BACK)){
+                return 1;
+            }
+        } if (prime == Face_Enum.BACK){
+            if ((sec == Face_Enum.RIGHT && third == Face_Enum.UP) || (sec == Face_Enum.UP && third == Face_Enum.RIGHT)){
+                return 1;
+            } if ((sec == Face_Enum.LEFT && third == Face_Enum.UP) || (sec == Face_Enum.UP && third == Face_Enum.LEFT)){
+                return 2;
+            }
+        } if (prime == Face_Enum.LEFT){
+            if ((sec == Face_Enum.BACK && third == Face_Enum.UP) || (sec == Face_Enum.UP && third == Face_Enum.BACK)){
+                return 2;
+            } if ((sec == Face_Enum.FRONT && third == Face_Enum.UP) || (sec == Face_Enum.UP && third == Face_Enum.FRONT)){
+                return 3;
+            }
+        }
+        return 4;
+    }
+
+
     static void coreFiveLeftToRight(Cube cube, List<cmd> actions){
         LogicUtils.executeCMD(cmd.CMD_RIGHT_TWIST_FRONTUPWARD,actions,cube);
         LogicUtils.executeCMD(cmd.CMD_UP_TWIST_LEFT,actions,cube);
