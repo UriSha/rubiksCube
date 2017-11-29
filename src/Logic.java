@@ -64,15 +64,12 @@ public class Logic {
         Location redYellow = LogicUtils.getLocationOfEdge(cube, Cube.Color.RED, Cube.Color.YELLOW);
         LogicUtils.getRedCross(cube, actions, redYellow);
         LogicUtils.executeCMD(cmd.CMD_RIGHT_ROTATE, actions, cube);
-
         Location redGreen = LogicUtils.getLocationOfEdge(cube, Cube.Color.RED, Cube.Color.GREEN);
         LogicUtils.getRedCross(cube, actions, redGreen);
         LogicUtils.executeCMD(cmd.CMD_RIGHT_ROTATE, actions, cube);
-
         Location redWhite = LogicUtils.getLocationOfEdge(cube, Cube.Color.RED, Cube.Color.WHITE);
         LogicUtils.getRedCross(cube, actions, redWhite);
         LogicUtils.executeCMD(cmd.CMD_RIGHT_ROTATE, actions, cube);
-
         Location redBlue = LogicUtils.getLocationOfEdge(cube, Cube.Color.RED, Cube.Color.BLUE);
         LogicUtils.getRedCross(cube, actions, redBlue);
         LogicUtils.executeCMD(cmd.CMD_RIGHT_ROTATE, actions, cube);
@@ -161,48 +158,63 @@ public class Logic {
 
         }
     }
-    //    static void stageFive(Cube cube, List<cmd> actions) {
-//        if (cube == null || actions == null) {
-//            System.out.println("Error: 'stageFive' arguments are null");
-//            return;
-//        }
-//        Location whiteOrange=LogicUtils.getLocationOfEdge(cube, Cube.Color.WHITE, Cube.Color.ORANGE);
-//        switch (whiteOrange.name){
-//            case RIGHT:
-//                LogicUtils.executeCMD(cmd.CMD_UP_TWIST_LEFT,actions,cube);
-//                break;
-//            case LEFT:
-//                LogicUtils.executeCMD(cmd.CMD_UP_TWIST_LEFT,actions,cube);
-//                break;
-//            case BACK:
-//                LogicUtils.executeCMD(cmd.CMD_UP_TWIST_LEFT,actions,cube);
-//                LogicUtils.executeCMD(cmd.CMD_UP_TWIST_LEFT,actions,cube);
-//                break;
-//            default:
-//                break;
-//        }
-//        Location greenOrange=LogicUtils.getLocationOfEdge(cube, Cube.Color.GREEN, Cube.Color.ORANGE);
-//        if (greenOrange==null)
-//            return;
-//        Location yellowOrange=LogicUtils.getLocationOfEdge(cube, Cube.Color.YELLOW, Cube.Color.ORANGE);
-//        if (yellowOrange==null)
-//            return;
-//        Location blueOrange=LogicUtils.getLocationOfEdge(cube, Cube.Color.BLUE, Cube.Color.ORANGE);
-//        if (blueOrange==null)
-//            return;
-//        while(!(greenOrange.name==Face_Enum.LEFT && yellowOrange.name==Face_Enum.BACK && blueOrange.name==Face_Enum.RIGHT)){
-//            LogicUtils.executeCMD(cmd.CMD_RIGHT_TWIST_FRONTUPWARD,actions,cube);
-//            LogicUtils.executeCMD(cmd.CMD_UP_TWIST_LEFT,actions,cube);
-//            LogicUtils.executeCMD(cmd.CMD_RIGHT_TWIST_BACKUPWARD,actions,cube);
-//            LogicUtils.executeCMD(cmd.CMD_UP_TWIST_LEFT,actions,cube);
-//            LogicUtils.executeCMD(cmd.CMD_RIGHT_TWIST_FRONTUPWARD,actions,cube);
-//            LogicUtils.executeCMD(cmd.CMD_UP_TWIST_LEFT,actions,cube);
-//            LogicUtils.executeCMD(cmd.CMD_UP_TWIST_LEFT,actions,cube);
-//            LogicUtils.executeCMD(cmd.CMD_RIGHT_TWIST_BACKUPWARD,actions,cube);
-//        }
-//
-//
-//    }
+        static void stageFive(Cube cube, List<cmd> actions) {
+        if (cube == null || actions == null) {
+            System.out.println("Error: 'stageFive' arguments are null");
+            return;
+        }
+        Location whiteOrange=LogicUtils.getLocationOfEdge(cube, Cube.Color.WHITE, Cube.Color.ORANGE);
+        switch (whiteOrange.name){
+            case RIGHT:
+                LogicUtils.executeCMD(cmd.CMD_UP_TWIST_LEFT,actions,cube);
+                break;
+            case LEFT:
+                LogicUtils.executeCMD(cmd.CMD_UP_TWIST_RIGHT,actions,cube);
+                break;
+            case BACK:
+                LogicUtils.executeCMD(cmd.CMD_UP_TWIST_LEFT,actions,cube);
+                LogicUtils.executeCMD(cmd.CMD_UP_TWIST_LEFT,actions,cube);
+                break;
+            default:
+                break;
+        }
+        Location greenOrange=LogicUtils.getLocationOfEdge(cube, Cube.Color.GREEN, Cube.Color.ORANGE);
+        if (greenOrange==null)
+            return;
+        Location yellowOrange=LogicUtils.getLocationOfEdge(cube, Cube.Color.YELLOW, Cube.Color.ORANGE);
+        if (yellowOrange==null)
+            return;
+        Location blueOrange=LogicUtils.getLocationOfEdge(cube, Cube.Color.BLUE, Cube.Color.ORANGE);
+        if (blueOrange==null)
+            return;
+        if (greenOrange.name == Face_Enum.BACK && yellowOrange.name == Face_Enum.RIGHT){
+            LogicUtils.coreFiveLeftToRight(cube, actions);
+        } else if (greenOrange.name == Face_Enum.RIGHT && blueOrange.name == Face_Enum.BACK){
+            LogicUtils.coreFiveRightToLeft(cube, actions);
+        } else if (greenOrange.name == Face_Enum.BACK && yellowOrange.name == Face_Enum.LEFT){
+            LogicUtils.executeCMD(cmd.CMD_UP_TWIST_RIGHT, actions, cube);
+            LogicUtils.executeCMD(cmd.CMD_RIGHT_ROTATE, actions, cube);
+            LogicUtils.coreFiveRightToLeft(cube, actions);
+            LogicUtils.executeCMD(cmd.CMD_LEFT_ROTATE, actions, cube);
+        } else if (yellowOrange.name == Face_Enum.RIGHT && blueOrange.name == Face_Enum.BACK){
+            LogicUtils.executeCMD(cmd.CMD_UP_TWIST_LEFT, actions, cube);
+            LogicUtils.executeCMD(cmd.CMD_LEFT_ROTATE, actions, cube);
+            LogicUtils.coreFiveLeftToRight(cube, actions);
+            LogicUtils.executeCMD(cmd.CMD_RIGHT_ROTATE, actions, cube);
+        } else if (greenOrange.name == Face_Enum.RIGHT && blueOrange.name == Face_Enum.LEFT){
+            LogicUtils.coreFiveLeftToRight(cube, actions);
+            LogicUtils.executeCMD(cmd.CMD_UP_TWIST_RIGHT, actions, cube);
+            LogicUtils.executeCMD(cmd.CMD_RIGHT_ROTATE, actions, cube);
+            LogicUtils.coreFiveRightToLeft(cube, actions);
+            LogicUtils.executeCMD(cmd.CMD_LEFT_ROTATE, actions, cube);
+        }
+    }
+
+    static void stageSix(Cube cube, List<cmd> actions){
+        Location white
+    }
+
+
 
     static class Location {
         int x, y;

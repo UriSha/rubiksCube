@@ -298,6 +298,28 @@ class LogicUtils {
         return null;
     }
 
+    static void coreFiveLeftToRight(Cube cube, List<cmd> actions){
+        LogicUtils.executeCMD(cmd.CMD_RIGHT_TWIST_FRONTUPWARD,actions,cube);
+        LogicUtils.executeCMD(cmd.CMD_UP_TWIST_LEFT,actions,cube);
+        LogicUtils.executeCMD(cmd.CMD_RIGHT_TWIST_BACKUPWARD,actions,cube);
+        LogicUtils.executeCMD(cmd.CMD_UP_TWIST_LEFT,actions,cube);
+        LogicUtils.executeCMD(cmd.CMD_RIGHT_TWIST_FRONTUPWARD,actions,cube);
+        LogicUtils.executeCMD(cmd.CMD_UP_TWIST_LEFT,actions,cube);
+        LogicUtils.executeCMD(cmd.CMD_UP_TWIST_LEFT,actions,cube);
+        LogicUtils.executeCMD(cmd.CMD_RIGHT_TWIST_BACKUPWARD,actions,cube);
+    }
+
+    static void coreFiveRightToLeft(Cube cube, List<cmd> actions){
+        LogicUtils.executeCMD(cmd.CMD_LEFT_TWIST_FRONTUPWARD,actions,cube);
+        LogicUtils.executeCMD(cmd.CMD_UP_TWIST_RIGHT,actions,cube);
+        LogicUtils.executeCMD(cmd.CMD_LEFT_TWIST_BACKUPWARD,actions,cube);
+        LogicUtils.executeCMD(cmd.CMD_UP_TWIST_RIGHT,actions,cube);
+        LogicUtils.executeCMD(cmd.CMD_LEFT_TWIST_FRONTUPWARD,actions,cube);
+        LogicUtils.executeCMD(cmd.CMD_UP_TWIST_RIGHT,actions,cube);
+        LogicUtils.executeCMD(cmd.CMD_UP_TWIST_RIGHT,actions,cube);
+        LogicUtils.executeCMD(cmd.CMD_LEFT_TWIST_BACKUPWARD,actions,cube);
+    }
+
 
     static void getFrontRightEdge(Cube cube, List<cmd> actions, Logic.Location edge) {
         if (edge.name == null) {
@@ -821,7 +843,7 @@ class LogicUtils {
             case RIGHT:
                 if (redEdge.x == 0 && redEdge.y == 1) {
                     executeCMD(cmd.CMD_RIGHT_TWIST_BACKUPWARD, actions, cube);
-                    executeCMD(cmd.CMD_FRONT_TWIST_CLOCKWISE, actions, cube);
+                    executeCMD(cmd.CMD_FRONT_TWIST_C_CLOCKWISE, actions, cube);
                 } else if (redEdge.x == 1 && redEdge.y == 0) {
                     executeCMD(cmd.CMD_FRONT_TWIST_C_CLOCKWISE, actions, cube);
                 } else if (redEdge.x == 2 && redEdge.y == 1) {
