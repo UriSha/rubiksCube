@@ -347,6 +347,16 @@ class LogicUtils {
             } if ((sec == Face_Enum.FRONT && third == Face_Enum.UP) || (sec == Face_Enum.UP && third == Face_Enum.FRONT)){
                 return 3;
             }
+        } if (prime == Face_Enum.UP){
+            if ((sec == Face_Enum.FRONT && third == Face_Enum.RIGHT) || (sec == Face_Enum.FRONT && third == Face_Enum.RIGHT)){
+                return 0;
+            } if ((sec == Face_Enum.BACK && third == Face_Enum.RIGHT) || (sec == Face_Enum.RIGHT && third == Face_Enum.BACK)){
+                return 1;
+            } if ((sec == Face_Enum.FRONT && third == Face_Enum.LEFT) || (sec == Face_Enum.LEFT && third == Face_Enum.FRONT)){
+                return 3;
+            } if ((sec == Face_Enum.BACK && third == Face_Enum.LEFT) || (sec == Face_Enum.LEFT && third == Face_Enum.BACK)){
+                return 2;
+            }
         }
         return 4;
     }

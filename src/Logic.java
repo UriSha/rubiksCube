@@ -214,12 +214,59 @@ public class Logic {
     }
 
     static void stageSix(Cube cube, List<cmd> actions) {
-        int whiteBlue = LogicUtils.getUpperCornerNum(LogicUtils.getLocationOfCorner(cube, Cube.Color.WHITE, Cube.Color.BLUE, Cube.Color.ORANGE));
-        int greenWhite = LogicUtils.getUpperCornerNum(LogicUtils.getLocationOfCorner(cube, Cube.Color.GREEN, Cube.Color.WHITE, Cube.Color.ORANGE));
-        int yellowGreen = LogicUtils.getUpperCornerNum(LogicUtils.getLocationOfCorner(cube, Cube.Color.YELLOW, Cube.Color.GREEN, Cube.Color.ORANGE));
-        int blueYellow = LogicUtils.getUpperCornerNum(LogicUtils.getLocationOfCorner(cube, Cube.Color.BLUE, Cube.Color.YELLOW, Cube.Color.ORANGE));
-
-
+        do {
+            int whiteBlue = LogicUtils.getUpperCornerNum(LogicUtils.getLocationOfCorner(cube, Cube.Color.WHITE, Cube.Color.BLUE, Cube.Color.ORANGE));
+            int greenWhite = LogicUtils.getUpperCornerNum(LogicUtils.getLocationOfCorner(cube, Cube.Color.GREEN, Cube.Color.WHITE, Cube.Color.ORANGE));
+            int yellowGreen = LogicUtils.getUpperCornerNum(LogicUtils.getLocationOfCorner(cube, Cube.Color.YELLOW, Cube.Color.GREEN, Cube.Color.ORANGE));
+            int blueYellow = LogicUtils.getUpperCornerNum(LogicUtils.getLocationOfCorner(cube, Cube.Color.BLUE, Cube.Color.YELLOW, Cube.Color.ORANGE));
+            if (whiteBlue == 0) {
+                if (greenWhite == 2) {
+                    LogicUtils.coreSixLeftToRight(cube, actions);
+                } else if (greenWhite == 1) {
+                    LogicUtils.executeCMD(cmd.CMD_LEFT_ROTATE, actions, cube);
+                    LogicUtils.coreSixRightToLeft(cube, actions);
+                    LogicUtils.executeCMD(cmd.CMD_RIGHT_ROTATE, actions, cube);
+                }
+                break;
+            } else if (greenWhite == 3) {
+                if (whiteBlue == 1) {
+                    LogicUtils.coreSixRightToLeft(cube, actions);
+                } else if (whiteBlue == 2) {
+                    LogicUtils.executeCMD(cmd.CMD_RIGHT_ROTATE, actions, cube);
+                    LogicUtils.coreSixLeftToRight(cube, actions);
+                    LogicUtils.executeCMD(cmd.CMD_LEFT_ROTATE, actions, cube);
+                }
+                break;
+            } else if (yellowGreen == 2) {
+                if (whiteBlue == 1) {
+                    LogicUtils.executeCMD(cmd.CMD_RIGHT_ROTATE, actions, cube);
+                    LogicUtils.coreSixRightToLeft(cube, actions);
+                    LogicUtils.executeCMD(cmd.CMD_LEFT_ROTATE, actions, cube);
+                } else if (whiteBlue == 3) {
+                    LogicUtils.executeCMD(cmd.CMD_RIGHT_ROTATE, actions, cube);
+                    LogicUtils.executeCMD(cmd.CMD_RIGHT_ROTATE, actions, cube);
+                    LogicUtils.coreSixLeftToRight(cube, actions);
+                    LogicUtils.executeCMD(cmd.CMD_LEFT_ROTATE, actions, cube);
+                    LogicUtils.executeCMD(cmd.CMD_LEFT_ROTATE, actions, cube);
+                }
+                break;
+            } else if (blueYellow == 1) {
+                if (whiteBlue == 2) {
+                    LogicUtils.executeCMD(cmd.CMD_RIGHT_ROTATE, actions, cube);
+                    LogicUtils.executeCMD(cmd.CMD_RIGHT_ROTATE, actions, cube);
+                    LogicUtils.coreSixRightToLeft(cube, actions);
+                    LogicUtils.executeCMD(cmd.CMD_LEFT_ROTATE, actions, cube);
+                    LogicUtils.executeCMD(cmd.CMD_LEFT_ROTATE, actions, cube);
+                } else if (whiteBlue == 3) {
+                    LogicUtils.executeCMD(cmd.CMD_LEFT_ROTATE, actions, cube);
+                    LogicUtils.coreSixLeftToRight(cube, actions);
+                    LogicUtils.executeCMD(cmd.CMD_RIGHT_ROTATE, actions, cube);
+                }
+                break;
+            } else {
+                LogicUtils.coreSixLeftToRight(cube, actions);
+            }
+        } while(true);
     }
 
 
