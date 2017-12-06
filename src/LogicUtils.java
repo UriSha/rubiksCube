@@ -297,6 +297,65 @@ class LogicUtils {
         System.out.println("Not such corner exists");
         return null;
     }
+
+    static void coreSevenInside(Cube cube, List<cmd> actions){
+        executeCMD(cmd.CMD_LEFT_TWIST_BACKUPWARD,actions,cube);
+        executeCMD(cmd.CMD_DOWN_TWIST_LEFT,actions,cube);
+        executeCMD(cmd.CMD_LEFT_TWIST_FRONTUPWARD,actions,cube);
+        executeCMD(cmd.CMD_FRONT_TWIST_C_CLOCKWISE,actions,cube);
+        executeCMD(cmd.CMD_DOWN_TWIST_LEFT,actions,cube);
+        executeCMD(cmd.CMD_FRONT_TWIST_CLOCKWISE,actions,cube);
+        executeCMD(cmd.CMD_UP_TWIST_LEFT,actions,cube);
+        executeCMD(cmd.CMD_FRONT_TWIST_C_CLOCKWISE,actions,cube);
+        executeCMD(cmd.CMD_DOWN_TWIST_RIGHT,actions,cube);
+        executeCMD(cmd.CMD_FRONT_TWIST_CLOCKWISE,actions,cube);
+        executeCMD(cmd.CMD_LEFT_TWIST_BACKUPWARD,actions,cube);
+        executeCMD(cmd.CMD_DOWN_TWIST_RIGHT,actions,cube);
+        executeCMD(cmd.CMD_LEFT_TWIST_FRONTUPWARD,actions,cube);
+        executeCMD(cmd.CMD_UP_TWIST_RIGHT,actions,cube);
+    }
+
+
+    static void coreSevenOutside(Cube cube, List<cmd> actions){
+        executeCMD(cmd.CMD_RIGHT_TWIST_FRONTUPWARD,actions,cube);
+        executeCMD(cmd.CMD_BACK_TWIST_CLOCKWISE,actions,cube);
+        executeCMD(cmd.CMD_RIGHT_TWIST_BACKUPWARD,actions,cube);
+        executeCMD(cmd.CMD_UP_TWIST_RIGHT,actions,cube);
+        executeCMD(cmd.CMD_BACK_TWIST_CLOCKWISE,actions,cube);
+        executeCMD(cmd.CMD_UP_TWIST_LEFT,actions,cube);
+        executeCMD(cmd.CMD_FRONT_TWIST_CLOCKWISE,actions,cube);
+        executeCMD(cmd.CMD_UP_TWIST_RIGHT,actions,cube);
+        executeCMD(cmd.CMD_BACK_TWIST_C_CLOCKWISE,actions,cube);
+        executeCMD(cmd.CMD_UP_TWIST_LEFT,actions,cube);
+        executeCMD(cmd.CMD_RIGHT_TWIST_FRONTUPWARD,actions,cube);
+        executeCMD(cmd.CMD_BACK_TWIST_C_CLOCKWISE,actions,cube);
+        executeCMD(cmd.CMD_RIGHT_TWIST_BACKUPWARD,actions,cube);
+        executeCMD(cmd.CMD_FRONT_TWIST_C_CLOCKWISE,actions,cube);
+    }
+
+    static Face_Enum getOrangeFace(Cube cube, int corner){
+        switch (corner){
+            case 0:
+                if (cube.getRight().getGrid()[0][0] == Cube.Color.ORANGE) return Face_Enum.RIGHT;
+                if (cube.getUp().getGrid()[2][2] == Cube.Color.ORANGE) return Face_Enum.UP;
+                if (cube.getFront().getGrid()[0][2] == Cube.Color.ORANGE) return Face_Enum.FRONT;
+            case 1:
+                if (cube.getRight().getGrid()[0][2] == Cube.Color.ORANGE) return Face_Enum.RIGHT;
+                if (cube.getUp().getGrid()[0][2] == Cube.Color.ORANGE) return Face_Enum.UP;
+                if (cube.getBack().getGrid()[0][0] == Cube.Color.ORANGE) return Face_Enum.BACK;
+            case 2:
+                if (cube.getLeft().getGrid()[0][0] == Cube.Color.ORANGE) return Face_Enum.LEFT;
+                if (cube.getUp().getGrid()[0][0] == Cube.Color.ORANGE) return Face_Enum.UP;
+                if (cube.getBack().getGrid()[0][2] == Cube.Color.ORANGE) return Face_Enum.BACK;
+            case 3:
+                if (cube.getLeft().getGrid()[0][2] == Cube.Color.ORANGE) return Face_Enum.LEFT;
+                if (cube.getUp().getGrid()[2][0] == Cube.Color.ORANGE) return Face_Enum.UP;
+                if (cube.getFront().getGrid()[0][0] == Cube.Color.ORANGE) return Face_Enum.FRONT;
+        }
+        return null;
+    }
+
+
     static void coreSixLeftToRight(Cube cube, List<cmd> actions){
         executeCMD(cmd.CMD_UP_TWIST_LEFT,actions,cube);
         executeCMD(cmd.CMD_RIGHT_TWIST_FRONTUPWARD,actions,cube);
@@ -307,6 +366,7 @@ class LogicUtils {
         executeCMD(cmd.CMD_UP_TWIST_RIGHT,actions,cube);
         executeCMD(cmd.CMD_LEFT_TWIST_BACKUPWARD,actions,cube);
     }
+
     static void coreSixRightToLeft(Cube cube, List<cmd> actions){
         executeCMD(cmd.CMD_UP_TWIST_RIGHT,actions,cube);
         executeCMD(cmd.CMD_LEFT_TWIST_FRONTUPWARD,actions,cube);

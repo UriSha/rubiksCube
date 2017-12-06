@@ -270,6 +270,64 @@ public class Logic {
     }
 
 
+    static void stageSeven(Cube cube, List<cmd> actions) {
+        boolean arnonIsReady = false;
+        while (!arnonIsReady) {
+            Face_Enum first = LogicUtils.getOrangeFace(cube, 0);
+            Face_Enum sec = LogicUtils.getOrangeFace(cube, 1);
+            Face_Enum third = LogicUtils.getOrangeFace(cube, 2);
+            Face_Enum forth = LogicUtils.getOrangeFace(cube, 3);
+            if (first == Face_Enum.UP && forth == Face_Enum.UP) {
+                if (third == Face_Enum.UP && sec == Face_Enum.UP) {
+                    arnonIsReady = true;
+                } else {
+                    LogicUtils.executeCMD(cmd.CMD_RIGHT_ROTATE, actions, cube);
+                    LogicUtils.executeCMD(cmd.CMD_RIGHT_ROTATE, actions, cube);
+                }
+            } else if (first == Face_Enum.UP) {
+                if (third != Face_Enum.UP) {
+                    LogicUtils.executeCMD(cmd.CMD_RIGHT_ROTATE, actions, cube);
+                } else {
+                    if (forth == Face_Enum.LEFT) {
+                        LogicUtils.coreSevenOutside(cube, actions);
+                        LogicUtils.executeCMD(cmd.CMD_LEFT_ROTATE, actions, cube);
+                    } else {
+                        LogicUtils.coreSevenInside(cube, actions);
+                        LogicUtils.executeCMD(cmd.CMD_LEFT_ROTATE, actions, cube);
+                    }
+                }
+            } else if (forth == Face_Enum.UP) {
+                if (sec != Face_Enum.UP) {
+                    LogicUtils.executeCMD(cmd.CMD_LEFT_ROTATE, actions, cube);
+                } else {
+                    if (first == Face_Enum.RIGHT) {
+                        LogicUtils.coreSevenOutside(cube, actions);
+                        LogicUtils.executeCMD(cmd.CMD_RIGHT_ROTATE, actions, cube);
+                    } else {
+                        LogicUtils.coreSevenInside(cube, actions);
+                        LogicUtils.executeCMD(cmd.CMD_RIGHT_ROTATE, actions, cube);
+                    }
+                }
+            } else if (first == Face_Enum.FRONT && forth == Face_Enum.FRONT) {
+                LogicUtils.coreSevenInside(cube, actions);
+                LogicUtils.executeCMD(cmd.CMD_RIGHT_ROTATE, actions, cube);
+                LogicUtils.executeCMD(cmd.CMD_RIGHT_ROTATE, actions, cube);
+            } else if (first == Face_Enum.RIGHT && forth == Face_Enum.LEFT) {
+                LogicUtils.coreSevenOutside(cube, actions);
+                LogicUtils.executeCMD(cmd.CMD_RIGHT_ROTATE, actions, cube);
+                LogicUtils.executeCMD(cmd.CMD_RIGHT_ROTATE, actions, cube);
+            } else if (first == Face_Enum.RIGHT) {
+                LogicUtils.coreSevenOutside(cube, actions);
+                LogicUtils.executeCMD(cmd.CMD_RIGHT_ROTATE, actions, cube);
+            } else if (first == Face_Enum.FRONT){
+                LogicUtils.coreSevenInside(cube, actions);
+                LogicUtils.executeCMD(cmd.CMD_RIGHT_ROTATE, actions, cube);
+            }
+        }
+        System.out.println("Arnon is ready:"+ arnonIsReady);
+    }
+
+
     static class Location {
         int x, y;
         Face_Enum name;
