@@ -1,4 +1,3 @@
-import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -40,7 +39,7 @@ public class AlgoTests {
 
             if(!Logic.isArnonReady(cube))
                 return false;
-            commands[i]=result.size();
+            commands[i]=CommandsListOptimizer.getNumOfAtomic(result);
         }
         return true;
     }
