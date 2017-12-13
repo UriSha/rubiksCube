@@ -36,4 +36,17 @@ import java.util.Map;
             } catch (IndexOutOfBoundsException e){}
         }
     }
+
+    static int getNumOfAtomic(List<cmd> actions){
+        int num = 0;
+        for (cmd action : actions){
+            if (action != cmd.CMD_RIGHT_ROTATE && action != cmd.CMD_LEFT_ROTATE && action != cmd.CMD_FLIP){
+                num++;
+            }
+        }
+        return num;
+    }
+
+
+
 }
