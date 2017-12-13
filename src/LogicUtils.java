@@ -556,10 +556,9 @@ class LogicUtils {
                     }
                 } else if (redCorner.secondDircetion == Face_Enum.BACK) {
                     if (redCorner.thirdDirection == Face_Enum.UP) {
-                        executeCMD(cmd.CMD_RIGHT_TWIST_FRONTUPWARD, actions, cube);
+                        executeCMD(cmd.CMD_BACK_TWIST_CLOCKWISE, actions, cube);
                         executeCMD(cmd.CMD_DOWN_TWIST_LEFT, actions, cube);
-                        executeCMD(cmd.CMD_RIGHT_TWIST_BACKUPWARD, actions, cube);
-                        executeCMD(cmd.CMD_DOWN_TWIST_LEFT, actions, cube);
+                        executeCMD(cmd.CMD_BACK_TWIST_C_CLOCKWISE, actions, cube);
                         downRedCorner(actions, cube);
                     } else if (redCorner.thirdDirection == Face_Enum.DOWN) {
                         System.out.println("Not a logic location for this corner - RBD");
