@@ -3,9 +3,9 @@ import java.util.List;
 import java.util.Map;
 
 
- class CommandsListOptimizer {
+class CommandsListOptimizer {
 
-     static void optimizeList(List<cmd> actions){
+    static void optimizeList(List<cmd> actions){
         Map<cmd, cmd> contrastCMDs = new HashMap<>();
         contrastCMDs.put(cmd.CMD_LEFT_ROTATE, cmd.CMD_RIGHT_ROTATE);
         contrastCMDs.put(cmd.CMD_RIGHT_ROTATE, cmd.CMD_LEFT_ROTATE);
@@ -36,4 +36,17 @@ import java.util.Map;
             } catch (IndexOutOfBoundsException e){}
         }
     }
+
+    static int getNumOfAtomic(List<cmd> actions){
+        int num = 0;
+        for (cmd action : actions){
+            if (action != cmd.CMD_RIGHT_ROTATE && action != cmd.CMD_LEFT_ROTATE && action != cmd.CMD_FLIP){
+                num++;
+            }
+        }
+        return num;
+    }
+
+
+
 }
