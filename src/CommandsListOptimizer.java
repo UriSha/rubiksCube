@@ -46,7 +46,4 @@ class CommandsListOptimizer {
         }
         return num;
     }
-
-
-
 }

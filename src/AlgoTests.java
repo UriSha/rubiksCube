@@ -1,16 +1,14 @@
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
-
 public class AlgoTests {
-    static boolean testAlgorithm(Cube cube,int numOfTests,int numOfCommands, Integer[] commands){
+    private static boolean testAlgorithm(Cube cube, int numOfTests, int numOfCommands, Integer[] commands) {
 
-        for(int i=0;i<numOfTests;i++)
-        {
-            for(int j=0;j<numOfCommands;j++){
+        for (int i = 0; i < numOfTests; i++) {
+            for (int j = 0; j < numOfCommands; j++) {
                 int x = ThreadLocalRandom.current().nextInt(0, 7);
                 boolean y = ThreadLocalRandom.current().nextBoolean();
-                switch(x){
+                switch (x) {
                     case 0:
                         cube.twistUpperFace(y);
                         break;
@@ -32,19 +30,18 @@ public class AlgoTests {
                         cube.flip();
                         break;
                 }
-
             }
 
-            List<cmd> result=Logic.mainAlgorithm(cube);
+            List<cmd> result = Logic.mainAlgorithm(cube);
 
-            if(!Logic.isArnonReady(cube))
+            if (!Logic.isArnonReady(cube))
                 return false;
-            commands[i]=CommandsListOptimizer.getNumOfAtomic(result);
+            commands[i] = CommandsListOptimizer.getNumOfAtomic(result);
         }
         return true;
     }
 
-    public static void main(String[] args){
+    public static void main(String[] args) {
         Cube.Color[][][] cubeValues = new Cube.Color[6][3][3];
 
         for (int i = 0; i < 3; i++) {
@@ -88,10 +85,10 @@ public class AlgoTests {
         Cube cube = new Cube(cubeValues);
 
         System.out.println(cube);
-        Integer[] commands=new Integer[1000];
-        System.out.println(testAlgorithm(cube,1000,500,commands));
+        Integer[] commands = new Integer[1000];
+        System.out.println(testAlgorithm(cube, 1000, 500, commands));
         int sum = 0;
         for (int d : commands) sum += d;
-        System.out.println(sum/(double)commands.length);
+        System.out.println(sum / (double) commands.length);
     }
 }
