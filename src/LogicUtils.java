@@ -408,7 +408,7 @@ class LogicUtils {
                 return 3;
             }
         } if (prime == Face_Enum.UP){
-            if ((sec == Face_Enum.FRONT && third == Face_Enum.RIGHT) || (sec == Face_Enum.FRONT && third == Face_Enum.RIGHT)){
+            if ((sec == Face_Enum.FRONT && third == Face_Enum.RIGHT) || (sec == Face_Enum.RIGHT && third == Face_Enum.FRONT)){
                 return 0;
             } if ((sec == Face_Enum.BACK && third == Face_Enum.RIGHT) || (sec == Face_Enum.RIGHT && third == Face_Enum.BACK)){
                 return 1;
@@ -1029,6 +1029,8 @@ class LogicUtils {
         executeCMD(cmd.CMD_FRONT_TWIST_CLOCKWISE, actions, cube);
         executeCMD(cmd.CMD_FRONT_TWIST_CLOCKWISE, actions, cube);
     }
+
+
 
 
 }

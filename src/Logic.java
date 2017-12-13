@@ -1,13 +1,10 @@
-
-
 import java.util.ArrayList;
 import java.util.List;
-
 
 public class Logic {
 
 
-    public static List<cmd> mainAlgorithm(Cube cube) {
+     static List<cmd> mainAlgorithm(Cube cube) {
         List<cmd> result = new ArrayList<>();
         initialize(cube, result);
         stageOne(cube, result);
@@ -15,6 +12,9 @@ public class Logic {
         flipForStageThree(cube, result);
         stageThree(cube, result);
         stageFour(cube, result);
+        stageFive(cube,result);
+        stageSix(cube,result);
+        stageSeven(cube,result);
         CommandsListOptimizer.optimizeList(result);
         return result;
     }
@@ -167,6 +167,8 @@ public class Logic {
             return;
         }
         Location whiteOrange = LogicUtils.getLocationOfEdge(cube, Cube.Color.WHITE, Cube.Color.ORANGE);
+        if (whiteOrange == null)
+            return;
         switch (whiteOrange.name) {
             case RIGHT:
                 LogicUtils.executeCMD(cmd.CMD_UP_TWIST_LEFT, actions, cube);
@@ -319,12 +321,58 @@ public class Logic {
             } else if (first == Face_Enum.RIGHT) {
                 LogicUtils.coreSevenOutside(cube, actions);
                 LogicUtils.executeCMD(cmd.CMD_RIGHT_ROTATE, actions, cube);
-            } else if (first == Face_Enum.FRONT){
+            } else if (first == Face_Enum.FRONT) {
                 LogicUtils.coreSevenInside(cube, actions);
                 LogicUtils.executeCMD(cmd.CMD_RIGHT_ROTATE, actions, cube);
             }
         }
-        System.out.println("Arnon is ready:"+ arnonIsReady);
+    }
+    static boolean isArnonReady(Cube cube){
+        if (cube==null)
+            return false;
+        Cube.Color colorCheck=cube.getUp().getGrid()[0][0];
+        for(int i=0;i<3;i++){
+            for(int j=0;j<3;j++){
+                if(cube.getUp().getGrid()[i][j]!=colorCheck)
+                    return false;
+            }
+        }
+        colorCheck=cube.getDown().getGrid()[0][0];
+        for(int i=0;i<3;i++){
+            for(int j=0;j<3;j++){
+                if(cube.getDown().getGrid()[i][j]!=colorCheck)
+                    return false;
+            }
+        }
+        colorCheck=cube.getRight().getGrid()[0][0];
+        for(int i=0;i<3;i++){
+            for(int j=0;j<3;j++){
+                if(cube.getRight().getGrid()[i][j]!=colorCheck)
+                    return false;
+            }
+        }
+        colorCheck=cube.getLeft().getGrid()[0][0];
+        for(int i=0;i<3;i++){
+            for(int j=0;j<3;j++){
+                if(cube.getLeft().getGrid()[i][j]!=colorCheck)
+                    return false;
+            }
+        }
+        colorCheck=cube.getFront().getGrid()[0][0];
+        for(int i=0;i<3;i++){
+            for(int j=0;j<3;j++){
+                if(cube.getFront().getGrid()[i][j]!=colorCheck)
+                    return false;
+            }
+        }
+        colorCheck=cube.getBack().getGrid()[0][0];
+        for(int i=0;i<3;i++){
+            for(int j=0;j<3;j++){
+                if(cube.getBack().getGrid()[i][j]!=colorCheck)
+                    return false;
+            }
+        }
+        return true;
     }
 
 

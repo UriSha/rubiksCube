@@ -1,9 +1,45 @@
-import java.util.ArrayList;
-import java.util.List;
-/**
- * Created by mac_ori on 12/11/2017.
- */
+import java.util.concurrent.ThreadLocalRandom;
+
+
 public class AlgoTests {
+     static boolean testAlgorithm(Cube cube,int numOfTests,int numOfCommands){
+
+        for(int i=0;i<numOfTests;i++)
+        {
+            for(int j=0;j<numOfCommands;j++){
+                int x = ThreadLocalRandom.current().nextInt(0, 7);
+                boolean y = ThreadLocalRandom.current().nextBoolean();
+                switch(x){
+                    case 0:
+                        cube.twistUpperFace(y);
+                        break;
+                    case 1:
+                        cube.twistFrontFace(y);
+                        break;
+                    case 2:
+                        cube.twistBottomFace(y);
+                        break;
+                    case 3:
+                        cube.twistRightFace(y);
+                        break;
+                    case 4:
+                        cube.twistLeftFace(y);
+                        break;
+                    case 5:
+                        cube.twistBackFace(y);
+                    case 6:
+                        cube.flip();
+                        break;
+                }
+
+            }
+
+            Logic.mainAlgorithm(cube);
+            if(!Logic.isArnonReady(cube))
+                return false;
+        }
+        return true;
+    }
 
     public static void main(String[] args){
         Cube.Color[][][] cubeValues = new Cube.Color[6][3][3];
@@ -49,122 +85,6 @@ public class AlgoTests {
         Cube cube = new Cube(cubeValues);
 
         System.out.println(cube);
-
-        cube.twistBottomFace(false);
-
-        cube.twistFrontFace(false);
-        cube.flip();
-        cube.flip();          cube.twistFrontFace(false);
-        cube.twistBackFace(true);
-        cube.twistRightFace(true);
-        cube.flip();
-
-        cube.flip();          cube.twistFrontFace(false);
-        cube.twistBackFace(true);
-        cube.flip();
-        cube.twistBackFace(true);
-        cube.twistBackFace(true);
-        cube.twistUpperFace(false);
-        cube.twistFrontFace(false);
-        cube.flip();
-        cube.flip();
-        cube.twistFrontFace(false);
-        cube.twistBackFace(true);
-        cube.twistFrontFace(false);
-        cube.twistBackFace(true);
-        cube.twistRightFace(true);
-        cube.twistRightFace(true);
-        cube.twistFrontFace(false);
-        cube.twistBackFace(true);
-        cube.twistRightFace(true);
-        cube.twistRightFace(true);
-        cube.twistFrontFace(false);        cube.flip();
-        cube.flip();          cube.twistFrontFace(false);
-        cube.twistBackFace(true);
-        cube.twistRightFace(true);
-        cube.twistRightFace(true);
-        cube.twistFrontFace(false);        cube.twistBackFace(true);
-        cube.twistRightFace(true);
-        cube.twistRightFace(true);
-        cube.twistFrontFace(false);        cube.twistBackFace(true);
-        cube.twistRightFace(true);
-        cube.twistRightFace(true);
-        cube.twistFrontFace(false);
-        cube.flip();
-        cube.flip();          cube.twistFrontFace(false);
-        cube.twistBackFace(true);
-        cube.twistRightFace(true);
-        cube.twistRightFace(true);
-        cube.twistRightFace(true);
-        cube.twistRightFace(true);
-        cube.twistFrontFace(false);
-        cube.flip();
-        cube.flip();          cube.twistFrontFace(false);
-        cube.flip();          cube.twistFrontFace(false);
-        cube.twistBackFace(true);
-
-        cube.flip();
-        cube.flip();          cube.twistFrontFace(false);
-        cube.twistBackFace(true);
-        cube.twistRightFace(true);
-        cube.twistRightFace(true);
-        cube.twistFrontFace(false);
-
-        cube.twistRightFace(true);
-        cube.twistFrontFace(false);
-        cube.twistFrontFace(false);
-        cube.flip();
-        cube.flip();          cube.twistFrontFace(false);
-
-
-
-        System.out.println(cube);
-
-        List<cmd> result = new ArrayList<>();
-
-        Logic.initialize(cube, result);
-
-        System.out.println(cube);
-
-        Logic.stageOne(cube, result);
-
-        System.out.println(cube);
-
-        Logic.stageTwo(cube, result);
-
-        System.out.println(cube);
-
-        Logic.flipForStageThree(cube,result);
-
-        System.out.println(cube);
-
-        Logic.stageThree(cube, result);
-
-        System.out.println(cube);
-
-        Logic.stageFour(cube,result);
-
-        System.out.println(cube);
-
-        Logic.stageFive(cube,result);
-
-        System.out.println(cube);
-
-        Logic.stageSix(cube, result);
-
-        System.out.println(cube);
-
-        Logic.stageSeven(cube,result);
-
-        System.out.println(cube);
-
-        System.out.println(result.toString());
-
-
-        System.out.println(result.size());
-        CommandsListOptimizer.optimizeList(result);
-        System.out.println(result.size());
-
-    }
-
+        System.out.println(testAlgorithm(cube,100,1000));
+        }
 }
