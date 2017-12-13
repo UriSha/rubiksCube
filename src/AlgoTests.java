@@ -1,8 +1,10 @@
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
 
 public class AlgoTests {
-     static boolean testAlgorithm(Cube cube,int numOfTests,int numOfCommands){
+     static boolean testAlgorithm(Cube cube,int numOfTests,int numOfCommands, Integer[] commands){
 
         for(int i=0;i<numOfTests;i++)
         {
@@ -34,9 +36,11 @@ public class AlgoTests {
 
             }
 
-            Logic.mainAlgorithm(cube);
+            List<cmd> result=Logic.mainAlgorithm(cube);
+
             if(!Logic.isArnonReady(cube))
                 return false;
+            commands[i]=result.size();
         }
         return true;
     }
@@ -85,6 +89,10 @@ public class AlgoTests {
         Cube cube = new Cube(cubeValues);
 
         System.out.println(cube);
-        System.out.println(testAlgorithm(cube,100,1000));
+        Integer[] commands=new Integer[300];
+        System.out.println(testAlgorithm(cube,300,60,commands));
+        int sum = 0;
+        for (int d : commands) sum += d;
+        System.out.println(sum/(double)commands.length);
         }
 }
