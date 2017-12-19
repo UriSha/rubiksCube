@@ -81,9 +81,6 @@ public class CubeValidation {
             return false;
         if(!topTwoColorCheck(cube, subCubes))
             return false;
-
-
-
         return true;
     }
 
@@ -344,28 +341,29 @@ public class CubeValidation {
 
     private static boolean checkCentersColorValidity(Cube cube){
         switch(cube.getFront().getColor()){
+            Cube.Color backColor = cube.getBack().getColor();
             case RED:
-                if (cube.getBack().getColor() != Cube.Color.ORANGE)
+                if (backColor != Cube.Color.ORANGE)
                     return false;
                 break;
             case ORANGE:
-                if (cube.getBack().getColor() != Cube.Color.RED)
+                if (backColor != Cube.Color.RED)
                     return false;
                 break;
             case GREEN:
-                if (cube.getBack().getColor() != Cube.Color.BLUE)
+                if (backColor != Cube.Color.BLUE)
                     return false;
                 break;
             case BLUE:
-                if (cube.getBack().getColor() != Cube.Color.GREEN)
+                if (backColor != Cube.Color.GREEN)
                     return false;
                 break;
             case WHITE:
-                if (cube.getBack().getColor() != Cube.Color.YELLOW)
+                if (backColor != Cube.Color.YELLOW)
                     return false;
                 break;
             case YELLOW:
-                if (cube.getBack().getColor() != Cube.Color.WHITE)
+                if (backColor != Cube.Color.WHITE)
                     return false;
                 break;
             default:
@@ -373,28 +371,29 @@ public class CubeValidation {
         }
 
         switch(cube.getUp().getColor()){
+            Cube.Color downColor = cube.getDown().getColor();
             case RED:
-                if (cube.getDown().getColor() != Cube.Color.ORANGE)
+                if (downColor != Cube.Color.ORANGE)
                     return false;
                 break;
             case ORANGE:
-                if (cube.getDown().getColor() != Cube.Color.RED)
+                if (downColor != Cube.Color.RED)
                     return false;
                 break;
             case GREEN:
-                if (cube.getDown().getColor() != Cube.Color.BLUE)
+                if (downColor != Cube.Color.BLUE)
                     return false;
                 break;
             case BLUE:
-                if (cube.getDown().getColor() != Cube.Color.GREEN)
+                if (downColor != Cube.Color.GREEN)
                     return false;
                 break;
             case WHITE:
-                if (cube.getDown().getColor() != Cube.Color.YELLOW)
+                if (downColor != Cube.Color.YELLOW)
                     return false;
                 break;
             case YELLOW:
-                if (cube.getDown().getColor() != Cube.Color.WHITE)
+                if (downColor != Cube.Color.WHITE)
                     return false;
                 break;
             default:
@@ -402,28 +401,29 @@ public class CubeValidation {
         }
 
         switch(cube.getRight().getColor()){
+            Cube.Color leftColor = cube.getLeft().getColor();
             case RED:
-                if (cube.getLeft().getColor() != Cube.Color.ORANGE)
+                if (leftColor != Cube.Color.ORANGE)
                     return false;
                 break;
             case ORANGE:
-                if (cube.getLeft().getColor() != Cube.Color.RED)
+                if (leftColor != Cube.Color.RED)
                     return false;
                 break;
             case GREEN:
-                if (cube.getLeft().getColor() != Cube.Color.BLUE)
+                if (leftColor != Cube.Color.BLUE)
                     return false;
                 break;
             case BLUE:
-                if (cube.getLeft().getColor() != Cube.Color.GREEN)
+                if (leftColor != Cube.Color.GREEN)
                     return false;
                 break;
             case WHITE:
-                if (cube.getLeft().getColor() != Cube.Color.YELLOW)
+                if (leftColor != Cube.Color.YELLOW)
                     return false;
                 break;
             case YELLOW:
-                if (cube.getLeft().getColor() != Cube.Color.WHITE)
+                if (leftColor != Cube.Color.WHITE)
                     return false;
                 break;
             default:
