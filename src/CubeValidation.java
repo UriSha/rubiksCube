@@ -340,90 +340,41 @@ public class CubeValidation {
     }
 
     private static boolean checkCentersColorValidity(Cube cube){
-        switch(cube.getFront().getColor()){
-            Cube.Color backColor = cube.getBack().getColor();
-            case RED:
-                if (backColor != Cube.Color.ORANGE)
-                    return false;
-                break;
-            case ORANGE:
-                if (backColor != Cube.Color.RED)
-                    return false;
-                break;
-            case GREEN:
-                if (backColor != Cube.Color.BLUE)
-                    return false;
-                break;
-            case BLUE:
-                if (backColor != Cube.Color.GREEN)
-                    return false;
-                break;
-            case WHITE:
-                if (backColor != Cube.Color.YELLOW)
-                    return false;
-                break;
-            case YELLOW:
-                if (backColor != Cube.Color.WHITE)
-                    return false;
-                break;
-            default:
-                break;
-        }
 
-        switch(cube.getUp().getColor()){
-            Cube.Color downColor = cube.getDown().getColor();
-            case RED:
-                if (downColor != Cube.Color.ORANGE)
-                    return false;
-                break;
-            case ORANGE:
-                if (downColor != Cube.Color.RED)
-                    return false;
-                break;
-            case GREEN:
-                if (downColor != Cube.Color.BLUE)
-                    return false;
-                break;
-            case BLUE:
-                if (downColor != Cube.Color.GREEN)
-                    return false;
-                break;
-            case WHITE:
-                if (downColor != Cube.Color.YELLOW)
-                    return false;
-                break;
-            case YELLOW:
-                if (downColor != Cube.Color.WHITE)
-                    return false;
-                break;
-            default:
-                break;
-        }
+        if (!checkSpecificCenterColorValidity(cube.getFront().getColor(), cube.getBack().getColor()))
+            return false;
+        if (!checkSpecificCenterColorValidity(cube.getUp().getColor(), cube.getDown().getColor()))
+            return false;
+        if (!checkSpecificCenterColorValidity(cube.getRight().getColor(), cube.getLeft().getColor()))
+            return false;
 
-        switch(cube.getRight().getColor()){
-            Cube.Color leftColor = cube.getLeft().getColor();
+        return true;
+    }
+
+    private static boolean checkSpecificCenterColorValidity(Cube.Color color1, Cube.Color color2){
+        switch(color1){
             case RED:
-                if (leftColor != Cube.Color.ORANGE)
+                if (color2 != Cube.Color.ORANGE)
                     return false;
                 break;
             case ORANGE:
-                if (leftColor != Cube.Color.RED)
+                if (color2 != Cube.Color.RED)
                     return false;
                 break;
             case GREEN:
-                if (leftColor != Cube.Color.BLUE)
+                if (color2 != Cube.Color.BLUE)
                     return false;
                 break;
             case BLUE:
-                if (leftColor != Cube.Color.GREEN)
+                if (color2 != Cube.Color.GREEN)
                     return false;
                 break;
             case WHITE:
-                if (leftColor != Cube.Color.YELLOW)
+                if (color2 != Cube.Color.YELLOW)
                     return false;
                 break;
             case YELLOW:
-                if (leftColor != Cube.Color.WHITE)
+                if (color2 != Cube.Color.WHITE)
                     return false;
                 break;
             default:
