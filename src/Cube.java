@@ -1,9 +1,4 @@
 
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
-
-
 /**
  * Represents the cube's state
  * <p>
@@ -11,7 +6,7 @@ import java.util.Map;
  * all other faces are according to the above point of reference
  */
 
-public class Cube {
+class Cube {
 
     private final static int dim = 3;
 
@@ -36,7 +31,7 @@ public class Cube {
      *
      * @param theCube - the 3D representation of the cube
      */
-    public Cube(Color[][][] theCube) {
+    Cube(Color[][][] theCube) {
         this.up = new Face(theCube[0]);
         this.back = new Face(theCube[1]);
         this.down = new Face(theCube[2]);
@@ -45,14 +40,34 @@ public class Cube {
         this.left = new Face(theCube[5]);
     }
 
-    public enum Color {
+    /**
+     * Creates a clone of a cube
+     *
+     * @param: cube - the 3D representation of the cube
+     *
+     * @return: a clone of the cube
+     */
+    static Cube cloneCube(Cube cube){
+        Cube.Color[][][] cloneGrids = new Cube.Color[cube.getFaces().length][getDim()][getDim()];
+        Face[] faces = cube.getFaces();
+        for (int k = 0; k < faces.length; k++) {
+            for (int i = 0; i < getDim(); i++) {
+                for (int j = 0; j < getDim(); j++) {
+                    cloneGrids[k][i][j] = faces[k].getGrid()[i][j];
+                }
+            }
+        }
+        return new Cube(cloneGrids);
+    }
+
+    enum Color {
         RED(1),
         GREEN(2),
         WHITE(3),
         YELLOW(4),
         BLUE(5),
         ORANGE(6),
-        NO_COLOR(7);    							// TODO push carefully
+        NO_COLOR(7);
 
         private final int value;
         Color(int val){
@@ -64,11 +79,11 @@ public class Cube {
         }
     }
 
-    public static int getDim() {					// TODO push carefully
+    static int getDim() {
         return dim;
     }
 
-    public Face getFront() {
+    Face getFront() {
         return front;
     }
 
@@ -76,23 +91,23 @@ public class Cube {
         this.front = front;
     }
 
-    public Face getBack() {
+    Face getBack() {
         return back;
     }
 
-    public void setBack(Face back) {
+    void setBack(Face back) {
         this.back = back;
     }
 
-    public Face getUp() {
+    Face getUp() {
         return up;
     }
 
-    public void setUp(Face up) {
+    void setUp(Face up) {
         this.up = up;
     }
 
-    public Face getDown() {
+    Face getDown() {
         return down;
     }
 
@@ -100,7 +115,7 @@ public class Cube {
         this.down = down;
     }
 
-    public Face getRight() {
+    Face getRight() {
         return right;
     }
 
@@ -108,7 +123,7 @@ public class Cube {
         this.right = right;
     }
 
-    public Face getLeft() {
+    Face getLeft() {
         return left;
     }
 
@@ -117,22 +132,22 @@ public class Cube {
     }
 
     /**
-     *  0 - up
-     *  1 - front
-     *  2 - down
-     *  3 - back
-     *  4 - left
-     *  5 - right
+     * 0 = up
+     * 1 = back
+     * 2 = down
+     * 3 = front
+     * 4 = right
+     * 5 = left
      * @return array of faces
      */
-    public Face[] getFaces(){
+    Face[] getFaces(){
         Face[] faces = new Face[6];
         faces[0] = up;
-        faces[1] = front;
+        faces[1] = back;
         faces[2] = down;
-        faces[3] = back;
-        faces[4] = left;
-        faces[5] = right;
+        faces[3] = front;
+        faces[4] = right;
+        faces[5] = left;
         return faces;
     }
     /**
@@ -140,7 +155,7 @@ public class Cube {
      *
      * @param right - indicates whether the rotation is to the right or to the left
      */
-    public void rotate(boolean right) {
+    void rotate(boolean right) {
         if (right)
             rightRotate();
         else
@@ -180,7 +195,7 @@ public class Cube {
     /**
      * Flip the cube on its front- front face turns to be bottom face, etc.
      */
-    public void flip() {
+    void flip() {
         Face tmp = front;
         front = up;
         up = back;
@@ -199,7 +214,7 @@ public class Cube {
      *
      * @param frontUpward == true -> twists from the front face to the upper face(before flipping)
      */
-    public void twistRightFace(boolean frontUpward) {
+    void twistRightFace(boolean frontUpward) {
         twistSideFace(true, frontUpward);
     }
 
@@ -208,7 +223,7 @@ public class Cube {
      *
      * @param frontUpward == true -> twists from the front face to the upper face(before flipping)
      */
-    public void twistLeftFace(boolean frontUpward) {
+    void twistLeftFace(boolean frontUpward) {
         twistSideFace(false, frontUpward);
     }
 
@@ -218,7 +233,7 @@ public class Cube {
      *
      * @param clockwise == true -> twists the front face clockwise. Otherwise twists it counter-clockwise
      */
-    public void twistFrontFace(boolean clockwise) {
+    void twistFrontFace(boolean clockwise) {
         rotate(true);
         twistSideFace(true, clockwise);
         rotate(false);
@@ -229,7 +244,7 @@ public class Cube {
      *
      * @param clockwise == true -> twists the back face clockwise(from the front point of view). Otherwise twists it counter-clockwise
      */
-    public void twistBackFace(boolean clockwise) {
+    void twistBackFace(boolean clockwise) {
         rotate(false);
         twistSideFace(true, !clockwise);
         rotate(true);
@@ -240,7 +255,7 @@ public class Cube {
      *
      * @param isRightTwist == true -> twists from the front face to the right face
      */
-    public void twistBottomFace(boolean isRightTwist) {
+    void twistBottomFace(boolean isRightTwist) {
         flip();
         twistBackFace(!isRightTwist);
         flip();
@@ -253,7 +268,7 @@ public class Cube {
      *
      * @param isRightTwist == true -> twists from the front face to the right face(before flipping)
      */
-    public void twistUpperFace(boolean isRightTwist) {
+    void twistUpperFace(boolean isRightTwist) {
         flip();
         twistFrontFace(!isRightTwist);
         flip();
@@ -314,7 +329,7 @@ public class Cube {
         array[2] = tmp;
     }
 
-    public boolean isValidCube() {
+    boolean isValidCube() {
         return CubeValidation.isValidCube(this);
     }
 
@@ -345,17 +360,17 @@ public class Cube {
      * grid - a matrix represents the face state.
      * color - the color of the central tile of the face
      */
-    public static class Face {
+    static class Face {
 
         private Color[][] grid = new Color[dim][dim];
         private Color color;
 
-        public Face(Color[][] grid) {
+        Face(Color[][] grid) {
             this.grid = grid;
             this.color = grid[1][1];
         }
 
-        public Color[][] getGrid() {
+        Color[][] getGrid() {
             return grid;
         }
 
@@ -400,7 +415,7 @@ public class Cube {
          *
          * @param colIndex - the index of the wanted column
          */
-        public Color[] getGridColumn(int colIndex) {
+        Color[] getGridColumn(int colIndex) {
             if (colIndex < 0 || colIndex >= dim) {
                 System.out.println("Invalid column!");
                 return null;
@@ -419,7 +434,7 @@ public class Cube {
          * @param col - an array containing the wanted values for the column
          * @param colIndex - the index of the column we want to change
          */
-        public void setGridColumn(Color[] col, int colIndex) {
+        void setGridColumn(Color[] col, int colIndex) {
             if (colIndex < 0 || colIndex >= dim) {
                 System.out.println("Invalid column!");
                 return;
@@ -437,7 +452,7 @@ public class Cube {
         /**
          * Returns a specific entry of the grid
          */
-        public Color getGridEntry(int row, int column) {
+        Color getGridEntry(int row, int column) {
             if (row < 0 || row >= dim) {
                 System.out.println("Invalid row!");
                 return null;
@@ -464,7 +479,7 @@ public class Cube {
             grid[row][column] = color;
         }
 
-        public Color getColor() {
+        Color getColor() {
             return color;
         }
 
@@ -475,7 +490,7 @@ public class Cube {
         /**
          * Turns the face's whole grid clockwise
          */
-        public void clockwiseFixInnerValues() {
+        void clockwiseFixInnerValues() {
 
             // corners update
             Color temp = grid[0][0];
@@ -495,7 +510,7 @@ public class Cube {
         /**
          * Turns the face's whole grid counter clockwise
          */
-        public void counterClockwiseFixInnerValues() {
+        void counterClockwiseFixInnerValues() {
 
             // corners update
             Color temp = grid[0][0];
@@ -516,7 +531,7 @@ public class Cube {
         /**
          * Turns the face's whole grid upside-down
          */
-        public void upsideDownFixInnerValues() {
+        void upsideDownFixInnerValues() {
 
             this.clockwiseFixInnerValues();
             this.clockwiseFixInnerValues();
