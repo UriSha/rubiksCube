@@ -8,7 +8,7 @@ public class AlgoTests {
         for(int i=0;i<numOfTests;i++)
         {
             for(int j=0;j<numOfCommands;j++){
-                int x = ThreadLocalRandom.current().nextInt(0, 7);
+                int x = ThreadLocalRandom.current().nextInt(0, 8);
                 boolean y = ThreadLocalRandom.current().nextBoolean();
                 switch(x){
                     case 0:
@@ -30,6 +30,8 @@ public class AlgoTests {
                         cube.twistBackFace(y);
                     case 6:
                         cube.flip();
+                    case 7:
+                        cube.rotate(y);
                         break;
                 }
 
