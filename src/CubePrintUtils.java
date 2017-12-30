@@ -1,7 +1,7 @@
 import java.util.HashMap;
 import java.util.Map;
 
-public class tempClassForPrint {
+public class CubePrintUtils {
     public static void main(String[] args) {
         Cube.Color[][][] cubeValues = new Cube.Color[6][3][3];
 
@@ -42,7 +42,7 @@ public class tempClassForPrint {
             }
         }
         Cube cube = new Cube(cubeValues);
-        System.out.println(toStringCube(cube));
+        System.out.println(cube.toString());
         System.out.println(cube.isValidCube());
         cube.twistUpperFace(true);
 //        System.out.println(toStringCube(cube));
@@ -98,28 +98,6 @@ public class tempClassForPrint {
         subCubes.put(new Cube.Color[]{Cube.Color.BLUE},2);
         int x = 0;
 
-    }
-
-
-
-    public static String toStringCube(Cube cube) {
-        StringBuilder result = new StringBuilder();
-
-        topAndButtomBorders(result);
-
-        upAndDownFaces(result, cube.getUp().getGrid());
-
-        middleBorders(result);
-
-        fourMiddleFaces(result, cube.getLeft().getGrid(), cube.getFront().getGrid(), cube.getRight().getGrid(), cube.getBack().getGrid());
-
-        middleBorders(result);
-
-        upAndDownFaces(result, cube.getDown().getGrid());
-
-        topAndButtomBorders(result);
-
-        return result.toString();
     }
 
 
