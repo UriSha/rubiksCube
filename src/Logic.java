@@ -1,28 +1,36 @@
 import java.util.ArrayList;
 import java.util.List;
 
-public class Logic {
+class Logic {
 
+    static List<cmd> mainAlgorithm(Cube cube){
+        cube = optimizerToRed.getCovertedOptimizedCube(cube);
+        List<cmd> res = algorithm(cube);
+        if(!Logic.isArnonReady(cube)){
+            System.out.println(cube);
+        }
+        return res;
+    }
 
-     static List<cmd> mainAlgorithm(Cube cube) {
+     static List<cmd> algorithm(Cube cube) {
         List<cmd> result = new ArrayList<>();
-        initialize(cube, result);
-        stageOne(cube, result);
-        stageTwo(cube, result);
-        flipForStageThree(cube, result);
-        stageThree(cube, result);
-        stageFour(cube, result);
-        stageFive(cube,result);
-        stageSix(cube,result);
-        stageSeven(cube,result);
-        CommandsListOptimizer.optimizeList(result);
+         initialize(cube, result);
+         stageOne(cube, result);
+         stageTwo(cube, result);
+         flipForStageThree(cube, result);
+         stageThree(cube, result);
+         stageFour(cube, result);
+         stageFive(cube,result);
+         stageSix(cube,result);
+         stageSeven(cube,result);
+         CommandsListOptimizer.optimizeList(result);
         return result;
     }
 
-    static void initialize(Cube cube, List<cmd> actions) {
+    private static void initialize(Cube cube, List<cmd> actions) {
 
         if (cube == null) {
-            System.out.println("Error: 'initialize' arguments arre null");
+            System.out.println("Error: 'initialize' arguments are null");
             return;
         }
 
@@ -37,10 +45,10 @@ public class Logic {
                 LogicUtils.executeCMD(cmd.CMD_FLIP, actions, cube);
                 LogicUtils.executeCMD(cmd.CMD_FLIP, actions, cube);
             } else if (cube.getRight().getColor() == Cube.Color.RED) {
-                LogicUtils.executeCMD(cmd.CMD_LEFT_ROTATE, actions, cube);
+                LogicUtils.executeCMD(cmd.CMD_RIGHT_ROTATE, actions, cube);
                 LogicUtils.executeCMD(cmd.CMD_FLIP, actions, cube);
             } else if (cube.getLeft().getColor() == Cube.Color.RED) {
-                LogicUtils.executeCMD(cmd.CMD_RIGHT_ROTATE, actions, cube);
+                LogicUtils.executeCMD(cmd.CMD_LEFT_ROTATE, actions, cube);
                 LogicUtils.executeCMD(cmd.CMD_FLIP, actions, cube);
             }
         }
@@ -57,7 +65,7 @@ public class Logic {
         }
     }
 
-    static void stageOne(Cube cube, List<cmd> actions) {
+    private static void stageOne(Cube cube, List<cmd> actions) {
         if (cube == null || actions == null) {
             System.out.println("Error: 'stageOne' arguments are null");
             return;
@@ -76,7 +84,7 @@ public class Logic {
         LogicUtils.executeCMD(cmd.CMD_RIGHT_ROTATE, actions, cube);
     }
 
-    static void stageTwo(Cube cube, List<cmd> actions) {
+    private static void stageTwo(Cube cube, List<cmd> actions) {
         if (cube == null || actions == null) {
             System.out.println("Error: 'stageTwo' arguments are null");
             return;
@@ -95,12 +103,12 @@ public class Logic {
         LogicUtils.executeCMD(cmd.CMD_RIGHT_ROTATE, actions, cube);
     }
 
-    static void flipForStageThree(Cube cube, List<cmd> actions) {
+    private static void flipForStageThree(Cube cube, List<cmd> actions) {
         LogicUtils.executeCMD(cmd.CMD_FLIP, actions, cube);
         LogicUtils.executeCMD(cmd.CMD_FLIP, actions, cube);
     }
 
-    static void stageThree(Cube cube, List<cmd> actions) {
+    private static void stageThree(Cube cube, List<cmd> actions) {
         if (cube == null || actions == null) {
             System.out.println("Error: 'stageThree' arguments are null");
             return;
@@ -127,7 +135,7 @@ public class Logic {
 
     }
 
-    static void stageFour(Cube cube, List<cmd> actions) {
+    private static void stageFour(Cube cube, List<cmd> actions) {
         if (cube == null || actions == null) {
             System.out.println("Error: 'stageFour' arguments are null");
             return;
@@ -161,7 +169,7 @@ public class Logic {
         }
     }
 
-    static void stageFive(Cube cube, List<cmd> actions) {
+    private static void stageFive(Cube cube, List<cmd> actions) {
         if (cube == null || actions == null) {
             System.out.println("Error: 'stageFive' arguments are null");
             return;
@@ -215,7 +223,7 @@ public class Logic {
         }
     }
 
-    static void stageSix(Cube cube, List<cmd> actions) {
+    private static void stageSix(Cube cube, List<cmd> actions) {
         do {
             int whiteBlue = LogicUtils.getUpperCornerNum(LogicUtils.getLocationOfCorner(cube, Cube.Color.WHITE, Cube.Color.BLUE, Cube.Color.ORANGE));
             int greenWhite = LogicUtils.getUpperCornerNum(LogicUtils.getLocationOfCorner(cube, Cube.Color.GREEN, Cube.Color.WHITE, Cube.Color.ORANGE));
@@ -272,7 +280,7 @@ public class Logic {
     }
 
 
-    static void stageSeven(Cube cube, List<cmd> actions) {
+    private static void stageSeven(Cube cube, List<cmd> actions) {
         boolean arnonIsReady = false;
         while (!arnonIsReady) {
             Face_Enum first = LogicUtils.getOrangeFace(cube, 0);
@@ -327,7 +335,7 @@ public class Logic {
             }
         }
     }
-    static boolean isArnonReady(Cube cube){
+    private static boolean isArnonReady(Cube cube){
         if (cube==null)
             return false;
         Cube.Color colorCheck=cube.getUp().getGrid()[0][0];

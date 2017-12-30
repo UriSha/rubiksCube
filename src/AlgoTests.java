@@ -3,7 +3,7 @@ import java.util.concurrent.ThreadLocalRandom;
 
 
 public class AlgoTests {
-     static boolean testAlgorithm(Cube cube,int numOfTests,int numOfCommands, Integer[] commands){
+     private static boolean testAlgorithm(Cube cube, int numOfTests, int numOfCommands, Integer[] commands){
 
         for(int i=0;i<numOfTests;i++)
         {
@@ -37,8 +37,7 @@ public class AlgoTests {
 
             List<cmd> result=Logic.mainAlgorithm(cube);
 
-            if(!Logic.isArnonReady(cube))
-                return false;
+
             commands[i]=CommandsListOptimizer.getNumOfAtomic(result);
         }
         return true;
@@ -93,5 +92,11 @@ public class AlgoTests {
         int sum = 0;
         for (int d : commands) sum += d;
         System.out.println(sum/(double)commands.length);
+
+//        covertor test
+//        Cube converted = optimizerToRed.convertCube(cube, Cube.Color.ORANGE, Cube.Color.WHITE, Cube.Color.GREEN,
+//                Cube.Color.BLUE, Cube.Color.YELLOW, Cube.Color.RED);
+//        System.out.println(converted);
+
         }
 }
