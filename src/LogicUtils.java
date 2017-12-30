@@ -138,7 +138,6 @@ class LogicUtils {
         return null;
     }
 
-
     static Logic.Location getLocationOfCorner(Cube cube, Cube.Color prime, Cube.Color second, Cube.Color third) {
 
         if (cube.getUp().getGridEntry(0, 0) == prime && cube.getBack().getGridEntry(0, 2) == second && cube.getLeft().getGridEntry(0, 0) == third) {
@@ -268,7 +267,6 @@ class LogicUtils {
             return new Logic.Location(Face_Enum.RIGHT, Face_Enum.DOWN, Face_Enum.BACK);
         }
 
-
         if (cube.getLeft().getGridEntry(0, 0) == prime && cube.getUp().getGridEntry(0, 0) == second && cube.getBack().getGridEntry(0, 2) == third) {
             return new Logic.Location(Face_Enum.LEFT, Face_Enum.UP, Face_Enum.BACK);
         }
@@ -298,43 +296,42 @@ class LogicUtils {
         return null;
     }
 
-    static void coreSevenInside(Cube cube, List<cmd> actions){
-        executeCMD(cmd.CMD_LEFT_TWIST_BACKUPWARD,actions,cube);
-        executeCMD(cmd.CMD_DOWN_TWIST_LEFT,actions,cube);
-        executeCMD(cmd.CMD_LEFT_TWIST_FRONTUPWARD,actions,cube);
-        executeCMD(cmd.CMD_FRONT_TWIST_C_CLOCKWISE,actions,cube);
-        executeCMD(cmd.CMD_DOWN_TWIST_LEFT,actions,cube);
-        executeCMD(cmd.CMD_FRONT_TWIST_CLOCKWISE,actions,cube);
-        executeCMD(cmd.CMD_UP_TWIST_LEFT,actions,cube);
-        executeCMD(cmd.CMD_FRONT_TWIST_C_CLOCKWISE,actions,cube);
-        executeCMD(cmd.CMD_DOWN_TWIST_RIGHT,actions,cube);
-        executeCMD(cmd.CMD_FRONT_TWIST_CLOCKWISE,actions,cube);
-        executeCMD(cmd.CMD_LEFT_TWIST_BACKUPWARD,actions,cube);
-        executeCMD(cmd.CMD_DOWN_TWIST_RIGHT,actions,cube);
-        executeCMD(cmd.CMD_LEFT_TWIST_FRONTUPWARD,actions,cube);
-        executeCMD(cmd.CMD_UP_TWIST_RIGHT,actions,cube);
+    static void coreSevenInside(Cube cube, List<cmd> actions) {
+        executeCMD(cmd.CMD_LEFT_TWIST_BACKUPWARD, actions, cube);
+        executeCMD(cmd.CMD_DOWN_TWIST_LEFT, actions, cube);
+        executeCMD(cmd.CMD_LEFT_TWIST_FRONTUPWARD, actions, cube);
+        executeCMD(cmd.CMD_FRONT_TWIST_C_CLOCKWISE, actions, cube);
+        executeCMD(cmd.CMD_DOWN_TWIST_LEFT, actions, cube);
+        executeCMD(cmd.CMD_FRONT_TWIST_CLOCKWISE, actions, cube);
+        executeCMD(cmd.CMD_UP_TWIST_LEFT, actions, cube);
+        executeCMD(cmd.CMD_FRONT_TWIST_C_CLOCKWISE, actions, cube);
+        executeCMD(cmd.CMD_DOWN_TWIST_RIGHT, actions, cube);
+        executeCMD(cmd.CMD_FRONT_TWIST_CLOCKWISE, actions, cube);
+        executeCMD(cmd.CMD_LEFT_TWIST_BACKUPWARD, actions, cube);
+        executeCMD(cmd.CMD_DOWN_TWIST_RIGHT, actions, cube);
+        executeCMD(cmd.CMD_LEFT_TWIST_FRONTUPWARD, actions, cube);
+        executeCMD(cmd.CMD_UP_TWIST_RIGHT, actions, cube);
     }
 
-
-    static void coreSevenOutside(Cube cube, List<cmd> actions){
-        executeCMD(cmd.CMD_RIGHT_TWIST_FRONTUPWARD,actions,cube);
-        executeCMD(cmd.CMD_BACK_TWIST_CLOCKWISE,actions,cube);
-        executeCMD(cmd.CMD_RIGHT_TWIST_BACKUPWARD,actions,cube);
-        executeCMD(cmd.CMD_UP_TWIST_RIGHT,actions,cube);
-        executeCMD(cmd.CMD_BACK_TWIST_CLOCKWISE,actions,cube);
-        executeCMD(cmd.CMD_UP_TWIST_LEFT,actions,cube);
-        executeCMD(cmd.CMD_FRONT_TWIST_CLOCKWISE,actions,cube);
-        executeCMD(cmd.CMD_UP_TWIST_RIGHT,actions,cube);
-        executeCMD(cmd.CMD_BACK_TWIST_C_CLOCKWISE,actions,cube);
-        executeCMD(cmd.CMD_UP_TWIST_LEFT,actions,cube);
-        executeCMD(cmd.CMD_RIGHT_TWIST_FRONTUPWARD,actions,cube);
-        executeCMD(cmd.CMD_BACK_TWIST_C_CLOCKWISE,actions,cube);
-        executeCMD(cmd.CMD_RIGHT_TWIST_BACKUPWARD,actions,cube);
-        executeCMD(cmd.CMD_FRONT_TWIST_C_CLOCKWISE,actions,cube);
+    static void coreSevenOutside(Cube cube, List<cmd> actions) {
+        executeCMD(cmd.CMD_RIGHT_TWIST_FRONTUPWARD, actions, cube);
+        executeCMD(cmd.CMD_BACK_TWIST_CLOCKWISE, actions, cube);
+        executeCMD(cmd.CMD_RIGHT_TWIST_BACKUPWARD, actions, cube);
+        executeCMD(cmd.CMD_UP_TWIST_RIGHT, actions, cube);
+        executeCMD(cmd.CMD_BACK_TWIST_CLOCKWISE, actions, cube);
+        executeCMD(cmd.CMD_UP_TWIST_LEFT, actions, cube);
+        executeCMD(cmd.CMD_FRONT_TWIST_CLOCKWISE, actions, cube);
+        executeCMD(cmd.CMD_UP_TWIST_RIGHT, actions, cube);
+        executeCMD(cmd.CMD_BACK_TWIST_C_CLOCKWISE, actions, cube);
+        executeCMD(cmd.CMD_UP_TWIST_LEFT, actions, cube);
+        executeCMD(cmd.CMD_RIGHT_TWIST_FRONTUPWARD, actions, cube);
+        executeCMD(cmd.CMD_BACK_TWIST_C_CLOCKWISE, actions, cube);
+        executeCMD(cmd.CMD_RIGHT_TWIST_BACKUPWARD, actions, cube);
+        executeCMD(cmd.CMD_FRONT_TWIST_C_CLOCKWISE, actions, cube);
     }
 
-    static Face_Enum getOrangeFace(Cube cube, int corner){
-        switch (corner){
+    static Face_Enum getOrangeFace(Cube cube, int corner) {
+        switch (corner) {
             case 0:
                 if (cube.getRight().getGrid()[0][0] == Cube.Color.ORANGE) return Face_Enum.RIGHT;
                 if (cube.getUp().getGrid()[2][2] == Cube.Color.ORANGE) return Face_Enum.UP;
@@ -355,27 +352,26 @@ class LogicUtils {
         return null;
     }
 
-
-    static void coreSixLeftToRight(Cube cube, List<cmd> actions){
-        executeCMD(cmd.CMD_UP_TWIST_LEFT,actions,cube);
-        executeCMD(cmd.CMD_RIGHT_TWIST_FRONTUPWARD,actions,cube);
-        executeCMD(cmd.CMD_UP_TWIST_RIGHT,actions,cube);
-        executeCMD(cmd.CMD_LEFT_TWIST_FRONTUPWARD,actions,cube);
-        executeCMD(cmd.CMD_UP_TWIST_LEFT,actions,cube);
-        executeCMD(cmd.CMD_RIGHT_TWIST_BACKUPWARD,actions,cube);
-        executeCMD(cmd.CMD_UP_TWIST_RIGHT,actions,cube);
-        executeCMD(cmd.CMD_LEFT_TWIST_BACKUPWARD,actions,cube);
+    static void coreSixLeftToRight(Cube cube, List<cmd> actions) {
+        executeCMD(cmd.CMD_UP_TWIST_LEFT, actions, cube);
+        executeCMD(cmd.CMD_RIGHT_TWIST_FRONTUPWARD, actions, cube);
+        executeCMD(cmd.CMD_UP_TWIST_RIGHT, actions, cube);
+        executeCMD(cmd.CMD_LEFT_TWIST_FRONTUPWARD, actions, cube);
+        executeCMD(cmd.CMD_UP_TWIST_LEFT, actions, cube);
+        executeCMD(cmd.CMD_RIGHT_TWIST_BACKUPWARD, actions, cube);
+        executeCMD(cmd.CMD_UP_TWIST_RIGHT, actions, cube);
+        executeCMD(cmd.CMD_LEFT_TWIST_BACKUPWARD, actions, cube);
     }
 
-    static void coreSixRightToLeft(Cube cube, List<cmd> actions){
-        executeCMD(cmd.CMD_UP_TWIST_RIGHT,actions,cube);
-        executeCMD(cmd.CMD_LEFT_TWIST_FRONTUPWARD,actions,cube);
-        executeCMD(cmd.CMD_UP_TWIST_LEFT,actions,cube);
-        executeCMD(cmd.CMD_RIGHT_TWIST_FRONTUPWARD,actions,cube);
-        executeCMD(cmd.CMD_UP_TWIST_RIGHT,actions,cube);
-        executeCMD(cmd.CMD_LEFT_TWIST_BACKUPWARD,actions,cube);
-        executeCMD(cmd.CMD_UP_TWIST_LEFT,actions,cube);
-        executeCMD(cmd.CMD_RIGHT_TWIST_BACKUPWARD,actions,cube);
+    static void coreSixRightToLeft(Cube cube, List<cmd> actions) {
+        executeCMD(cmd.CMD_UP_TWIST_RIGHT, actions, cube);
+        executeCMD(cmd.CMD_LEFT_TWIST_FRONTUPWARD, actions, cube);
+        executeCMD(cmd.CMD_UP_TWIST_LEFT, actions, cube);
+        executeCMD(cmd.CMD_RIGHT_TWIST_FRONTUPWARD, actions, cube);
+        executeCMD(cmd.CMD_UP_TWIST_RIGHT, actions, cube);
+        executeCMD(cmd.CMD_LEFT_TWIST_BACKUPWARD, actions, cube);
+        executeCMD(cmd.CMD_UP_TWIST_LEFT, actions, cube);
+        executeCMD(cmd.CMD_RIGHT_TWIST_BACKUPWARD, actions, cube);
     }
 
     static int getUpperCornerNum(Logic.Location location) {
@@ -389,61 +385,69 @@ class LogicUtils {
             if ((sec == Face_Enum.UP && third == Face_Enum.LEFT) || (sec == Face_Enum.LEFT && third == Face_Enum.UP)) {
                 return 3;
             }
-        } if (prime == Face_Enum.RIGHT){
-            if ((sec == Face_Enum.FRONT && third == Face_Enum.UP) || (sec == Face_Enum.UP && third == Face_Enum.FRONT)){
+        }
+        if (prime == Face_Enum.RIGHT) {
+            if ((sec == Face_Enum.FRONT && third == Face_Enum.UP) || (sec == Face_Enum.UP && third == Face_Enum.FRONT)) {
                 return 0;
-            } if ((sec == Face_Enum.BACK && third == Face_Enum.UP) || (sec == Face_Enum.UP && third == Face_Enum.BACK)){
+            }
+            if ((sec == Face_Enum.BACK && third == Face_Enum.UP) || (sec == Face_Enum.UP && third == Face_Enum.BACK)) {
                 return 1;
             }
-        } if (prime == Face_Enum.BACK){
-            if ((sec == Face_Enum.RIGHT && third == Face_Enum.UP) || (sec == Face_Enum.UP && third == Face_Enum.RIGHT)){
+        }
+        if (prime == Face_Enum.BACK) {
+            if ((sec == Face_Enum.RIGHT && third == Face_Enum.UP) || (sec == Face_Enum.UP && third == Face_Enum.RIGHT)) {
                 return 1;
-            } if ((sec == Face_Enum.LEFT && third == Face_Enum.UP) || (sec == Face_Enum.UP && third == Face_Enum.LEFT)){
+            }
+            if ((sec == Face_Enum.LEFT && third == Face_Enum.UP) || (sec == Face_Enum.UP && third == Face_Enum.LEFT)) {
                 return 2;
             }
-        } if (prime == Face_Enum.LEFT){
-            if ((sec == Face_Enum.BACK && third == Face_Enum.UP) || (sec == Face_Enum.UP && third == Face_Enum.BACK)){
+        }
+        if (prime == Face_Enum.LEFT) {
+            if ((sec == Face_Enum.BACK && third == Face_Enum.UP) || (sec == Face_Enum.UP && third == Face_Enum.BACK)) {
                 return 2;
-            } if ((sec == Face_Enum.FRONT && third == Face_Enum.UP) || (sec == Face_Enum.UP && third == Face_Enum.FRONT)){
+            }
+            if ((sec == Face_Enum.FRONT && third == Face_Enum.UP) || (sec == Face_Enum.UP && third == Face_Enum.FRONT)) {
                 return 3;
             }
-        } if (prime == Face_Enum.UP){
-            if ((sec == Face_Enum.FRONT && third == Face_Enum.RIGHT) || (sec == Face_Enum.RIGHT && third == Face_Enum.FRONT)){
+        }
+        if (prime == Face_Enum.UP) {
+            if ((sec == Face_Enum.FRONT && third == Face_Enum.RIGHT) || (sec == Face_Enum.RIGHT && third == Face_Enum.FRONT)) {
                 return 0;
-            } if ((sec == Face_Enum.BACK && third == Face_Enum.RIGHT) || (sec == Face_Enum.RIGHT && third == Face_Enum.BACK)){
+            }
+            if ((sec == Face_Enum.BACK && third == Face_Enum.RIGHT) || (sec == Face_Enum.RIGHT && third == Face_Enum.BACK)) {
                 return 1;
-            } if ((sec == Face_Enum.FRONT && third == Face_Enum.LEFT) || (sec == Face_Enum.LEFT && third == Face_Enum.FRONT)){
+            }
+            if ((sec == Face_Enum.FRONT && third == Face_Enum.LEFT) || (sec == Face_Enum.LEFT && third == Face_Enum.FRONT)) {
                 return 3;
-            } if ((sec == Face_Enum.BACK && third == Face_Enum.LEFT) || (sec == Face_Enum.LEFT && third == Face_Enum.BACK)){
+            }
+            if ((sec == Face_Enum.BACK && third == Face_Enum.LEFT) || (sec == Face_Enum.LEFT && third == Face_Enum.BACK)) {
                 return 2;
             }
         }
         return 4;
     }
 
-
-    static void coreFiveLeftToRight(Cube cube, List<cmd> actions){
-        LogicUtils.executeCMD(cmd.CMD_RIGHT_TWIST_FRONTUPWARD,actions,cube);
-        LogicUtils.executeCMD(cmd.CMD_UP_TWIST_LEFT,actions,cube);
-        LogicUtils.executeCMD(cmd.CMD_RIGHT_TWIST_BACKUPWARD,actions,cube);
-        LogicUtils.executeCMD(cmd.CMD_UP_TWIST_LEFT,actions,cube);
-        LogicUtils.executeCMD(cmd.CMD_RIGHT_TWIST_FRONTUPWARD,actions,cube);
-        LogicUtils.executeCMD(cmd.CMD_UP_TWIST_LEFT,actions,cube);
-        LogicUtils.executeCMD(cmd.CMD_UP_TWIST_LEFT,actions,cube);
-        LogicUtils.executeCMD(cmd.CMD_RIGHT_TWIST_BACKUPWARD,actions,cube);
+    static void coreFiveLeftToRight(Cube cube, List<cmd> actions) {
+        LogicUtils.executeCMD(cmd.CMD_RIGHT_TWIST_FRONTUPWARD, actions, cube);
+        LogicUtils.executeCMD(cmd.CMD_UP_TWIST_LEFT, actions, cube);
+        LogicUtils.executeCMD(cmd.CMD_RIGHT_TWIST_BACKUPWARD, actions, cube);
+        LogicUtils.executeCMD(cmd.CMD_UP_TWIST_LEFT, actions, cube);
+        LogicUtils.executeCMD(cmd.CMD_RIGHT_TWIST_FRONTUPWARD, actions, cube);
+        LogicUtils.executeCMD(cmd.CMD_UP_TWIST_LEFT, actions, cube);
+        LogicUtils.executeCMD(cmd.CMD_UP_TWIST_LEFT, actions, cube);
+        LogicUtils.executeCMD(cmd.CMD_RIGHT_TWIST_BACKUPWARD, actions, cube);
     }
 
-    static void coreFiveRightToLeft(Cube cube, List<cmd> actions){
-        LogicUtils.executeCMD(cmd.CMD_LEFT_TWIST_FRONTUPWARD,actions,cube);
-        LogicUtils.executeCMD(cmd.CMD_UP_TWIST_RIGHT,actions,cube);
-        LogicUtils.executeCMD(cmd.CMD_LEFT_TWIST_BACKUPWARD,actions,cube);
-        LogicUtils.executeCMD(cmd.CMD_UP_TWIST_RIGHT,actions,cube);
-        LogicUtils.executeCMD(cmd.CMD_LEFT_TWIST_FRONTUPWARD,actions,cube);
-        LogicUtils.executeCMD(cmd.CMD_UP_TWIST_RIGHT,actions,cube);
-        LogicUtils.executeCMD(cmd.CMD_UP_TWIST_RIGHT,actions,cube);
-        LogicUtils.executeCMD(cmd.CMD_LEFT_TWIST_BACKUPWARD,actions,cube);
+    static void coreFiveRightToLeft(Cube cube, List<cmd> actions) {
+        LogicUtils.executeCMD(cmd.CMD_LEFT_TWIST_FRONTUPWARD, actions, cube);
+        LogicUtils.executeCMD(cmd.CMD_UP_TWIST_RIGHT, actions, cube);
+        LogicUtils.executeCMD(cmd.CMD_LEFT_TWIST_BACKUPWARD, actions, cube);
+        LogicUtils.executeCMD(cmd.CMD_UP_TWIST_RIGHT, actions, cube);
+        LogicUtils.executeCMD(cmd.CMD_LEFT_TWIST_FRONTUPWARD, actions, cube);
+        LogicUtils.executeCMD(cmd.CMD_UP_TWIST_RIGHT, actions, cube);
+        LogicUtils.executeCMD(cmd.CMD_UP_TWIST_RIGHT, actions, cube);
+        LogicUtils.executeCMD(cmd.CMD_LEFT_TWIST_BACKUPWARD, actions, cube);
     }
-
 
     static void getFrontRightEdge(Cube cube, List<cmd> actions, Logic.Location edge) {
         if (edge.name == null) {
@@ -1011,8 +1015,6 @@ class LogicUtils {
         executeCMD(cmd.CMD_FRONT_TWIST_CLOCKWISE, actions, cube);
         executeCMD(cmd.CMD_FRONT_TWIST_CLOCKWISE, actions, cube);
     }
-
-
 
 
 }

@@ -3,9 +3,9 @@ import java.util.List;
 import java.util.Map;
 
 
- class CommandsListOptimizer {
+class CommandsListOptimizer {
 
-     static void optimizeList(List<cmd> actions){
+    static void optimizeList(List<cmd> actions){
         Map<cmd, cmd> contrastCMDs = new HashMap<>();
         contrastCMDs.put(cmd.CMD_LEFT_ROTATE, cmd.CMD_RIGHT_ROTATE);
         contrastCMDs.put(cmd.CMD_RIGHT_ROTATE, cmd.CMD_LEFT_ROTATE);
@@ -46,7 +46,4 @@ import java.util.Map;
         }
         return num;
     }
-
-
-
 }

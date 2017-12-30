@@ -81,9 +81,6 @@ public class CubeValidation {
             return false;
         if(!topTwoColorCheck(cube, subCubes))
             return false;
-
-
-
         return true;
     }
 
@@ -343,87 +340,41 @@ public class CubeValidation {
     }
 
     private static boolean checkCentersColorValidity(Cube cube){
-        switch(cube.getFront().getColor()){
-            case RED:
-                if (cube.getBack().getColor() != Cube.Color.ORANGE)
-                    return false;
-                break;
-            case ORANGE:
-                if (cube.getBack().getColor() != Cube.Color.RED)
-                    return false;
-                break;
-            case GREEN:
-                if (cube.getBack().getColor() != Cube.Color.BLUE)
-                    return false;
-                break;
-            case BLUE:
-                if (cube.getBack().getColor() != Cube.Color.GREEN)
-                    return false;
-                break;
-            case WHITE:
-                if (cube.getBack().getColor() != Cube.Color.YELLOW)
-                    return false;
-                break;
-            case YELLOW:
-                if (cube.getBack().getColor() != Cube.Color.WHITE)
-                    return false;
-                break;
-            default:
-                break;
-        }
 
-        switch(cube.getUp().getColor()){
-            case RED:
-                if (cube.getDown().getColor() != Cube.Color.ORANGE)
-                    return false;
-                break;
-            case ORANGE:
-                if (cube.getDown().getColor() != Cube.Color.RED)
-                    return false;
-                break;
-            case GREEN:
-                if (cube.getDown().getColor() != Cube.Color.BLUE)
-                    return false;
-                break;
-            case BLUE:
-                if (cube.getDown().getColor() != Cube.Color.GREEN)
-                    return false;
-                break;
-            case WHITE:
-                if (cube.getDown().getColor() != Cube.Color.YELLOW)
-                    return false;
-                break;
-            case YELLOW:
-                if (cube.getDown().getColor() != Cube.Color.WHITE)
-                    return false;
-                break;
-            default:
-                break;
-        }
+        if (!checkSpecificCenterColorValidity(cube.getFront().getColor(), cube.getBack().getColor()))
+            return false;
+        if (!checkSpecificCenterColorValidity(cube.getUp().getColor(), cube.getDown().getColor()))
+            return false;
+        if (!checkSpecificCenterColorValidity(cube.getRight().getColor(), cube.getLeft().getColor()))
+            return false;
 
-        switch(cube.getRight().getColor()){
+        return true;
+    }
+
+    private static boolean checkSpecificCenterColorValidity(Cube.Color color1, Cube.Color color2){
+        switch(color1){
             case RED:
-                if (cube.getLeft().getColor() != Cube.Color.ORANGE)
+                if (color2 != Cube.Color.ORANGE)
                     return false;
                 break;
             case ORANGE:
-                if (cube.getLeft().getColor() != Cube.Color.RED)
+                if (color2 != Cube.Color.RED)
                     return false;
                 break;
             case GREEN:
-                if (cube.getLeft().getColor() != Cube.Color.BLUE)
+                if (color2 != Cube.Color.BLUE)
                     return false;
                 break;
             case BLUE:
-                if (cube.getLeft().getColor() != Cube.Color.GREEN)
+                if (color2 != Cube.Color.GREEN)
                     return false;
                 break;
             case WHITE:
-                if (cube.getLeft().getColor() != Cube.Color.YELLOW)
+                if (color2 != Cube.Color.YELLOW)
                     return false;
                 break;
             case YELLOW:
-                if (cube.getLeft().getColor() != Cube.Color.WHITE)
+                if (color2 != Cube.Color.WHITE)
                     return false;
                 break;
             default:
