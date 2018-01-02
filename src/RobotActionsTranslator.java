@@ -263,7 +263,7 @@ public class RobotActionsTranslator {
         virtualInitialMap.put(Face_Enum.RIGHT, temp);
     }
 
-    private static void updateMapDueToFlip(Map<Face_Enum,Face_Enum> initialPhysicalMap){
+    static void updateMapDueToFlip(Map<Face_Enum,Face_Enum> initialPhysicalMap){
 
         Face_Enum faceCurrentlyInFront = getfaceInPosition(initialPhysicalMap,Face_Enum.FRONT);
         Face_Enum faceCurrentlyInUp = getfaceInPosition(initialPhysicalMap,Face_Enum.UP);

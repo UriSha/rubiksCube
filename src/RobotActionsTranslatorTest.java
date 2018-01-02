@@ -1,3 +1,5 @@
+import org.junit.jupiter.api.Test;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -133,6 +135,49 @@ class RobotActionsTranslatorTest {
         assertTrue(testMap.get(Face_Enum.LEFT) == expectedValForLeft, String.format(msg, Face_Enum.LEFT, prevLeft, testMap.get(Face_Enum.LEFT), expectedValForLeft));
         assertTrue(testMap.get(Face_Enum.RIGHT) == expectedValForRight, String.format(msg, Face_Enum.RIGHT, prevRight, testMap.get(Face_Enum.RIGHT), expectedValForRight));
         // second flip end
+
+    }
+    @org.junit.jupiter.api.Test
+    void updateMapDueToFlip(){
+        String msg = "updateMapDueToFlip() failed when before flip the key: %s has value: %s, and after" +
+                " the flip the value is: %s instead of %s";
+
+        // init first test map
+        Map<Face_Enum, Face_Enum> initialPhysicalMap = new HashMap<>();
+
+        initialPhysicalMap.put(Face_Enum.UP, Face_Enum.UP);
+        initialPhysicalMap.put(Face_Enum.BACK, Face_Enum.BACK);
+        initialPhysicalMap.put(Face_Enum.DOWN, Face_Enum.DOWN);
+        initialPhysicalMap.put(Face_Enum.RIGHT, Face_Enum.RIGHT);
+        initialPhysicalMap.put(Face_Enum.LEFT, Face_Enum.LEFT);
+        initialPhysicalMap.put(Face_Enum.FRONT, Face_Enum.FRONT);
+        // init test map end
+
+
+        // first flip
+        Face_Enum prevUP = Face_Enum.UP;
+        Face_Enum prevBack = Face_Enum.BACK;
+        Face_Enum prevDown = Face_Enum.DOWN;
+        Face_Enum prevFront = Face_Enum.FRONT;
+        Face_Enum prevLeft = Face_Enum.LEFT;
+        Face_Enum prevRight = Face_Enum.RIGHT;
+
+        RobotActionsTranslator.updateMapDueToFlip(initialPhysicalMap);
+
+        Face_Enum expectedValForUP = Face_Enum.FRONT;
+        Face_Enum expectedValForBack = Face_Enum.UP;
+        Face_Enum expectedValForDown = Face_Enum.BACK;
+        Face_Enum expectedValForFront = Face_Enum.DOWN;
+        Face_Enum expectedValForLeft = Face_Enum.LEFT;
+        Face_Enum expectedValForRight = Face_Enum.RIGHT;
+
+        assertTrue(initialPhysicalMap.get(Face_Enum.UP) == expectedValForUP, String.format(msg, Face_Enum.UP, prevUP, initialPhysicalMap.get(Face_Enum.UP), expectedValForUP));
+        assertTrue(initialPhysicalMap.get(Face_Enum.BACK) == expectedValForBack, String.format(msg, Face_Enum.BACK, prevBack, initialPhysicalMap.get(Face_Enum.BACK), expectedValForBack));
+        assertTrue(initialPhysicalMap.get(Face_Enum.DOWN) == expectedValForDown, String.format(msg, Face_Enum.DOWN, prevDown, initialPhysicalMap.get(Face_Enum.DOWN), expectedValForDown));
+        assertTrue(initialPhysicalMap.get(Face_Enum.FRONT) == expectedValForFront, String.format(msg, Face_Enum.FRONT, prevFront, initialPhysicalMap.get(Face_Enum.FRONT), expectedValForFront));
+        assertTrue(initialPhysicalMap.get(Face_Enum.LEFT) == expectedValForLeft, String.format(msg, Face_Enum.LEFT, prevLeft, initialPhysicalMap.get(Face_Enum.LEFT), expectedValForLeft));
+        assertTrue(initialPhysicalMap.get(Face_Enum.RIGHT) == expectedValForRight, String.format(msg, Face_Enum.RIGHT, prevRight, initialPhysicalMap.get(Face_Enum.RIGHT), expectedValForRight));
+        // first flip end
 
     }
 
