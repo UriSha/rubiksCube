@@ -136,9 +136,5 @@ class RobotActionsTranslatorTest {
 
     }
 
-    private void assertMapIsOK(){
-
-    }
-
 
 }
