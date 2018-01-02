@@ -326,7 +326,7 @@ public class RobotActionsTranslator {
 
     }
 
-    private static boolean getBoolForDirection(Face_Enum initial, Face_Enum current, boolean algorithmBool){
+    public static boolean getBoolForDirection(Face_Enum initial, Face_Enum current, boolean algorithmBool){
 
         // the original Face (i.e was right and right now is up)
 //        if (initial.getValue() == current.getValue())
