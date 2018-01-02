@@ -236,7 +236,7 @@ public class RobotActionsTranslator {
         return result;
     }
 
-    private static void virtualUpdateMapDueToFlip(Map<Face_Enum,Face_Enum> virtualInitialMap){
+    static void virtualUpdateMapDueToFlip(Map<Face_Enum,Face_Enum> virtualInitialMap){
         Face_Enum temp = virtualInitialMap.get(Face_Enum.UP);
 
         virtualInitialMap.put(Face_Enum.UP, virtualInitialMap.get(Face_Enum.BACK));
