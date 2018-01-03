@@ -34,7 +34,7 @@ class Logic {
     }
 // Initialize the cube s.t the two desired colors will be UP and FRONT
 // Adds the appropriate commands to the list
-    private static void initialize(Cube cube, List<cmd> actions) {
+     static void initialize(Cube cube, List<cmd> actions) {
 
         if (cube == null) {
             System.out.println("Error: 'initialize' arguments are null");
@@ -73,7 +73,7 @@ class Logic {
     }
 // At the end of this stage the UP color face will be cross shaped
 // Adds the appropriate commands to the list
-    private static void stageOne(Cube cube, List<cmd> actions) {
+     static void stageOne(Cube cube, List<cmd> actions) {
         if (cube == null || actions == null) {
             System.out.println("Error: 'stageOne' arguments are null");
             return;
@@ -93,7 +93,7 @@ class Logic {
     }
 // At the end of this stage the UP color face will be completed(only one color )
 // Adds the appropriate commands to the list
-    private static void stageTwo(Cube cube, List<cmd> actions) {
+     static void stageTwo(Cube cube, List<cmd> actions) {
         if (cube == null || actions == null) {
             System.out.println("Error: 'stageTwo' arguments are null");
             return;
@@ -118,7 +118,7 @@ class Logic {
     }
 // At the end of this stage two lines of each face(LEFT, RIGHT, FRONT, BACK) will be completed
 // Adds the appropriate commands to the list
-    private static void stageThree(Cube cube, List<cmd> actions) {
+     static void stageThree(Cube cube, List<cmd> actions) {
         if (cube == null || actions == null) {
             System.out.println("Error: 'stageThree' arguments are null");
             return;
@@ -146,7 +146,7 @@ class Logic {
     }
 // At the end of this stage the new UP face will be cross shaped
 // Adds the appropriate commands to the list
-    private static void stageFour(Cube cube, List<cmd> actions) {
+     static void stageFour(Cube cube, List<cmd> actions) {
         if (cube == null || actions == null) {
             System.out.println("Error: 'stageFour' arguments are null");
             return;
@@ -181,7 +181,7 @@ class Logic {
     }
 // At the end of this stage the upper edge part of each face (LEFT, RIGHT, FRONT, BACK) will match the center color
 // Adds the appropriate commands to the list
-    private static void stageFive(Cube cube, List<cmd> actions) {
+     static void stageFive(Cube cube, List<cmd> actions) {
         if (cube == null || actions == null) {
             System.out.println("Error: 'stageFive' arguments are null");
             return;
@@ -236,7 +236,7 @@ class Logic {
     }
 // At the end of this stage we will put the corner parts of all the faces to their place, still no color matching
 // Adds the appropriate commands to the list
-    private static void stageSix(Cube cube, List<cmd> actions) {
+     static void stageSix(Cube cube, List<cmd> actions) {
         do {
             int whiteBlue = LogicUtils.getUpperCornerNum(LogicUtils.getLocationOfCorner(cube, Cube.Color.WHITE, Cube.Color.BLUE, Cube.Color.ORANGE));
             int greenWhite = LogicUtils.getUpperCornerNum(LogicUtils.getLocationOfCorner(cube, Cube.Color.GREEN, Cube.Color.WHITE, Cube.Color.ORANGE));
@@ -293,7 +293,7 @@ class Logic {
     }
 // The final stage. match the corner parts to their colors and solve the cube
 // Adds the appropriate commands to the list
-    private static void stageSeven(Cube cube, List<cmd> actions) {
+     static void stageSeven(Cube cube, List<cmd> actions) {
         boolean arnonIsReady = false;
         while (!arnonIsReady) {
             Face_Enum first = LogicUtils.getOrangeFace(cube, 0);
@@ -407,11 +407,11 @@ class Logic {
         Face_Enum secondDircetion;
         Face_Enum thirdDirection;
 
-        Location(Face_Enum name, int x, int y) {
+        Location(Face_Enum name,Face_Enum directionOfSecond, int x, int y) {
             this.name = name;
             this.x = x;
             this.y = y;
-            secondDircetion = null;
+            this.secondDircetion = directionOfSecond;
         }
 
         Location(Face_Enum name, Face_Enum directionOfSecond, Face_Enum directionOfThird) {
