@@ -1,7 +1,16 @@
 import java.util.List;
 
+/**
+ * The class that contains all the help functions to the Logic class
+ * Was created in order to give the code more delicate and clean appearance
+ */
 class LogicUtils {
-
+    /**
+     *
+     * @param command
+     * @param actions
+     * @param cube
+     */
     static void executeCMD(cmd command, List<cmd> actions, Cube cube) {
         actions.add(command);
         switch (command) {

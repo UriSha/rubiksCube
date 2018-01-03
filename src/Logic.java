@@ -1,17 +1,23 @@
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * The class of the algorithm.  Here you can find all the main functions that the algorithm uses
+ * in order to solve a rubik's Cube
+ */
 class Logic {
-
+// The main function of the algorithm. gets unsolved cube and solve it, using the shortest option possible according to
+// our built algorithm
     static List<cmd> mainAlgorithm(Cube cube){
-        cube = optimizerToRed.getCovertedOptimizedCube(cube);
+        cube = OptimizeCube.getConvertedOptimizedCube(cube);
         List<cmd> res = algorithm(cube);
         if(!Logic.isArnonReady(cube)){
             System.out.println(cube);
         }
         return res;
     }
-
+// Runs all the seven stages of the algorithm and returns an array list that the robot can use in order to
+// physically solve the cube
      static List<cmd> algorithm(Cube cube) {
         List<cmd> result = new ArrayList<>();
          initialize(cube, result);
@@ -23,10 +29,11 @@ class Logic {
          stageFive(cube,result);
          stageSix(cube,result);
          stageSeven(cube,result);
-         CommandsListOptimizer.optimizeList(result);
+         OptimizeCube.optimizeList(result);
         return result;
     }
-
+// Initialize the cube s.t the two desired colors will be UP and FRONT
+// Adds the appropriate commands to the list
     private static void initialize(Cube cube, List<cmd> actions) {
 
         if (cube == null) {
@@ -64,7 +71,8 @@ class Logic {
             }
         }
     }
-
+// At the end of this stage the UP color face will be cross shaped
+// Adds the appropriate commands to the list
     private static void stageOne(Cube cube, List<cmd> actions) {
         if (cube == null || actions == null) {
             System.out.println("Error: 'stageOne' arguments are null");
@@ -83,7 +91,8 @@ class Logic {
         LogicUtils.getRedCross(cube, actions, redBlue);
         LogicUtils.executeCMD(cmd.CMD_RIGHT_ROTATE, actions, cube);
     }
-
+// At the end of this stage the UP color face will be completed(only one color )
+// Adds the appropriate commands to the list
     private static void stageTwo(Cube cube, List<cmd> actions) {
         if (cube == null || actions == null) {
             System.out.println("Error: 'stageTwo' arguments are null");
@@ -102,12 +111,13 @@ class Logic {
         LogicUtils.getRedCorner(cube, actions, redBlueWhite);
         LogicUtils.executeCMD(cmd.CMD_RIGHT_ROTATE, actions, cube);
     }
-
+//Technical step for the algorithm
     private static void flipForStageThree(Cube cube, List<cmd> actions) {
         LogicUtils.executeCMD(cmd.CMD_FLIP, actions, cube);
         LogicUtils.executeCMD(cmd.CMD_FLIP, actions, cube);
     }
-
+// At the end of this stage two lines of each face(LEFT, RIGHT, FRONT, BACK) will be completed
+// Adds the appropriate commands to the list
     private static void stageThree(Cube cube, List<cmd> actions) {
         if (cube == null || actions == null) {
             System.out.println("Error: 'stageThree' arguments are null");
@@ -134,7 +144,8 @@ class Logic {
         LogicUtils.executeCMD(cmd.CMD_RIGHT_ROTATE, actions, cube);
 
     }
-
+// At the end of this stage the new UP face will be cross shaped
+// Adds the appropriate commands to the list
     private static void stageFour(Cube cube, List<cmd> actions) {
         if (cube == null || actions == null) {
             System.out.println("Error: 'stageFour' arguments are null");
@@ -168,7 +179,8 @@ class Logic {
 
         }
     }
-
+// At the end of this stage the upper edge part of each face (LEFT, RIGHT, FRONT, BACK) will match the center color
+// Adds the appropriate commands to the list
     private static void stageFive(Cube cube, List<cmd> actions) {
         if (cube == null || actions == null) {
             System.out.println("Error: 'stageFive' arguments are null");
@@ -222,7 +234,8 @@ class Logic {
             LogicUtils.executeCMD(cmd.CMD_LEFT_ROTATE, actions, cube);
         }
     }
-
+// At the end of this stage we will put the corner parts of all the faces to their place, still no color matching
+// Adds the appropriate commands to the list
     private static void stageSix(Cube cube, List<cmd> actions) {
         do {
             int whiteBlue = LogicUtils.getUpperCornerNum(LogicUtils.getLocationOfCorner(cube, Cube.Color.WHITE, Cube.Color.BLUE, Cube.Color.ORANGE));
@@ -278,8 +291,8 @@ class Logic {
             }
         } while(true);
     }
-
-
+// The final stage. match the corner parts to their colors and solve the cube
+// Adds the appropriate commands to the list
     private static void stageSeven(Cube cube, List<cmd> actions) {
         boolean arnonIsReady = false;
         while (!arnonIsReady) {
@@ -335,6 +348,7 @@ class Logic {
             }
         }
     }
+    // A function that validates that the cube is solved
     private static boolean isArnonReady(Cube cube){
         if (cube==null)
             return false;
@@ -383,7 +397,10 @@ class Logic {
         return true;
     }
 
-
+    /**
+     * A help class that defines how does a location on the cube looks like
+     * there are corner parts and edge parts
+     */
     static class Location {
         int x, y;
         Face_Enum name;

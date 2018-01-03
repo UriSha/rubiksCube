@@ -1,5 +1,5 @@
 /**
- * Created by 0mer on 10/11/2017.
+ * ENUM that we use to determine the face of the cube
  */
 public enum Face_Enum {
     UP,

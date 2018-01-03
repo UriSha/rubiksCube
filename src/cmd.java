@@ -1,5 +1,5 @@
 /**
- * Created by mac_ori on 09/11/2017.
+ * ENUM that we use that describes all the possible commands of the cube
  */
 public enum cmd {
         CMD_LEFT_ROTATE,
