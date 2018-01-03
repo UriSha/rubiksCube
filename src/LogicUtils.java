@@ -6,10 +6,11 @@ import java.util.List;
  */
 class LogicUtils {
     /**
-     *
-     * @param command
-     * @param actions
-     * @param cube
+     * @param command - ENUM that represents the command type
+     * @param actions - List with all the commands
+     * @param cube    - Standard cube
+     *                This functions adds the desirable command to the commands list and also changes the cube object,
+     *                according to the command
      */
     static void executeCMD(cmd command, List<cmd> actions, Cube cube) {
         actions.add(command);
@@ -63,7 +64,8 @@ class LogicUtils {
         }
     }
 
-
+    // gets 2 colors of an edge part of the cube and returns  a Location object of the exact location on the cube
+    // by searching inside the object
     static Logic.Location getLocationOfEdge(Cube cube, Cube.Color prime, Cube.Color second) {
 
         if (cube.getUp().getGridEntry(0, 1) == prime && cube.getBack().getGridEntry(0, 1) == second) {
@@ -147,6 +149,8 @@ class LogicUtils {
         return null;
     }
 
+    // gets 3 colors of a corner part of the cube and returns  a Location object of the exact location on the cube
+    // by searching inside the object
     static Logic.Location getLocationOfCorner(Cube cube, Cube.Color prime, Cube.Color second, Cube.Color third) {
 
         if (cube.getUp().getGridEntry(0, 0) == prime && cube.getBack().getGridEntry(0, 2) == second && cube.getLeft().getGridEntry(0, 0) == third) {
@@ -305,6 +309,7 @@ class LogicUtils {
         return null;
     }
 
+// one of the core actions of stage seven in the algorithm. has fixed actions that is added to the list of commands
     static void coreSevenInside(Cube cube, List<cmd> actions) {
         executeCMD(cmd.CMD_LEFT_TWIST_BACKUPWARD, actions, cube);
         executeCMD(cmd.CMD_DOWN_TWIST_LEFT, actions, cube);
@@ -321,7 +326,7 @@ class LogicUtils {
         executeCMD(cmd.CMD_LEFT_TWIST_FRONTUPWARD, actions, cube);
         executeCMD(cmd.CMD_UP_TWIST_RIGHT, actions, cube);
     }
-
+// one of the core actions of stage seven in the algorithm. has fixed actions that is added to the list of commands
     static void coreSevenOutside(Cube cube, List<cmd> actions) {
         executeCMD(cmd.CMD_RIGHT_TWIST_FRONTUPWARD, actions, cube);
         executeCMD(cmd.CMD_BACK_TWIST_CLOCKWISE, actions, cube);
@@ -338,7 +343,7 @@ class LogicUtils {
         executeCMD(cmd.CMD_RIGHT_TWIST_BACKUPWARD, actions, cube);
         executeCMD(cmd.CMD_FRONT_TWIST_C_CLOCKWISE, actions, cube);
     }
-
+// help function for stage seven that returns the Face ENUM of one of the four corners, according to user input
     static Face_Enum getOrangeFace(Cube cube, int corner) {
         switch (corner) {
             case 0:
@@ -360,7 +365,7 @@ class LogicUtils {
         }
         return null;
     }
-
+// one of the core actions of stage six in the algorithm. has fixed actions that is added to the list of commands
     static void coreSixLeftToRight(Cube cube, List<cmd> actions) {
         executeCMD(cmd.CMD_UP_TWIST_LEFT, actions, cube);
         executeCMD(cmd.CMD_RIGHT_TWIST_FRONTUPWARD, actions, cube);
@@ -371,7 +376,7 @@ class LogicUtils {
         executeCMD(cmd.CMD_UP_TWIST_RIGHT, actions, cube);
         executeCMD(cmd.CMD_LEFT_TWIST_BACKUPWARD, actions, cube);
     }
-
+// one of the core actions of stage six in the algorithm. has fixed actions that is added to the list of commands
     static void coreSixRightToLeft(Cube cube, List<cmd> actions) {
         executeCMD(cmd.CMD_UP_TWIST_RIGHT, actions, cube);
         executeCMD(cmd.CMD_LEFT_TWIST_FRONTUPWARD, actions, cube);
@@ -382,7 +387,7 @@ class LogicUtils {
         executeCMD(cmd.CMD_UP_TWIST_LEFT, actions, cube);
         executeCMD(cmd.CMD_RIGHT_TWIST_BACKUPWARD, actions, cube);
     }
-
+// help function for stage seven that helps to locate , given a location object, the number of the corner
     static int getUpperCornerNum(Logic.Location location) {
         Face_Enum prime = location.name;
         Face_Enum sec = location.secondDircetion;
@@ -435,7 +440,7 @@ class LogicUtils {
         }
         return 4;
     }
-
+// one of the core actions of stage five in the algorithm. has fixed actions that is added to the list of commands
     static void coreFiveLeftToRight(Cube cube, List<cmd> actions) {
         LogicUtils.executeCMD(cmd.CMD_RIGHT_TWIST_FRONTUPWARD, actions, cube);
         LogicUtils.executeCMD(cmd.CMD_UP_TWIST_LEFT, actions, cube);
@@ -446,7 +451,7 @@ class LogicUtils {
         LogicUtils.executeCMD(cmd.CMD_UP_TWIST_LEFT, actions, cube);
         LogicUtils.executeCMD(cmd.CMD_RIGHT_TWIST_BACKUPWARD, actions, cube);
     }
-
+// one of the core actions of stage five in the algorithm. has fixed actions that is added to the list of commands
     static void coreFiveRightToLeft(Cube cube, List<cmd> actions) {
         LogicUtils.executeCMD(cmd.CMD_LEFT_TWIST_FRONTUPWARD, actions, cube);
         LogicUtils.executeCMD(cmd.CMD_UP_TWIST_RIGHT, actions, cube);
@@ -457,12 +462,9 @@ class LogicUtils {
         LogicUtils.executeCMD(cmd.CMD_UP_TWIST_RIGHT, actions, cube);
         LogicUtils.executeCMD(cmd.CMD_LEFT_TWIST_BACKUPWARD, actions, cube);
     }
-
+// Help function for stage three. searches for the location given and brings it to the desired position on the cube
+// Adds the appropriate commands to the list
     static void getFrontRightEdge(Cube cube, List<cmd> actions, Logic.Location edge) {
-        if (edge.name == null) {
-            System.out.println("Error: 'stageThree' has failed");
-            return;
-        }
         switch (edge.name) {
             case UP:
                 if (edge.x == 1 && edge.y == 2) {
@@ -547,7 +549,8 @@ class LogicUtils {
                 }
         }
     }
-
+// Help function for stage two. searches for the location given and brings it to the desired position on the cube
+// Adds the appropriate commands to the list
     static void getRedCorner(Cube cube, List<cmd> actions, Logic.Location redCorner) {
         if (redCorner.name == null) {
             System.out.println("Error: 'stageTwo' has failed");
@@ -760,7 +763,7 @@ class LogicUtils {
                 }
         }
     }
-
+// one of the core actions of stage four in the algorithm. has fixed actions that is added to the list of commands
     static void noneInPlace(List<cmd> actions, Cube cube) {
         executeCMD(cmd.CMD_BACK_TWIST_C_CLOCKWISE, actions, cube);
         executeCMD(cmd.CMD_LEFT_TWIST_BACKUPWARD, actions, cube);
@@ -775,7 +778,7 @@ class LogicUtils {
         executeCMD(cmd.CMD_RIGHT_TWIST_BACKUPWARD, actions, cube);
         executeCMD(cmd.CMD_FRONT_TWIST_C_CLOCKWISE, actions, cube);
     }
-
+// one of the core actions of stage four in the algorithm. has fixed actions that is added to the list of commands
     static void twoNearInPlace(List<cmd> actions, Cube cube) {
         executeCMD(cmd.CMD_FRONT_TWIST_CLOCKWISE, actions, cube);
         executeCMD(cmd.CMD_UP_TWIST_LEFT, actions, cube);
@@ -785,7 +788,8 @@ class LogicUtils {
         executeCMD(cmd.CMD_FRONT_TWIST_C_CLOCKWISE, actions, cube);
 
     }
-
+// one of the core actions of stage four in the algorithm. has fixed actions that is added to the list of commands
+// Adds the appropriate commands to the list
     static void twoCounterInPlace(List<cmd> actions, Cube cube) {
         executeCMD(cmd.CMD_BACK_TWIST_C_CLOCKWISE, actions, cube);
         executeCMD(cmd.CMD_LEFT_TWIST_BACKUPWARD, actions, cube);
@@ -794,7 +798,8 @@ class LogicUtils {
         executeCMD(cmd.CMD_UP_TWIST_RIGHT, actions, cube);
         executeCMD(cmd.CMD_BACK_TWIST_CLOCKWISE, actions, cube);
     }
-
+// one of the core actions of stage three in the algorithm. has fixed actions that is added to the list of commands
+// Adds the appropriate commands to the list
     private static void edgeFromTheRight(List<cmd> actions, Cube cube) {
         executeCMD(cmd.CMD_UP_TWIST_RIGHT, actions, cube);
         executeCMD(cmd.CMD_FRONT_TWIST_C_CLOCKWISE, actions, cube);
@@ -805,7 +810,8 @@ class LogicUtils {
         executeCMD(cmd.CMD_UP_TWIST_RIGHT, actions, cube);
         executeCMD(cmd.CMD_RIGHT_TWIST_BACKUPWARD, actions, cube);
     }
-
+// one of the core actions of stage three in the algorithm. has fixed actions that is added to the list of commands
+// Adds the appropriate commands to the list
     private static void edgeOnTop(List<cmd> actions, Cube cube) {
         executeCMD(cmd.CMD_UP_TWIST_LEFT, actions, cube);
         executeCMD(cmd.CMD_RIGHT_TWIST_FRONTUPWARD, actions, cube);
@@ -816,7 +822,8 @@ class LogicUtils {
         executeCMD(cmd.CMD_UP_TWIST_LEFT, actions, cube);
         executeCMD(cmd.CMD_FRONT_TWIST_CLOCKWISE, actions, cube);
     }
-
+// one of the core actions of stage three in the algorithm. has fixed actions that is added to the list of commands
+// Adds the appropriate commands to the list
     private static void switchEdgeColors(List<cmd> actions, Cube cube) {
         executeCMD(cmd.CMD_UP_TWIST_LEFT, actions, cube);
         executeCMD(cmd.CMD_RIGHT_TWIST_FRONTUPWARD, actions, cube);
@@ -836,21 +843,24 @@ class LogicUtils {
         executeCMD(cmd.CMD_FRONT_TWIST_CLOCKWISE, actions, cube);
 
     }
-
+// one of the core actions of stage two in the algorithm. has fixed actions that is added to the list of commands
+// Adds the appropriate commands to the list
     private static void rightLowerRedCorner(List<cmd> actions, Cube cube) {
         executeCMD(cmd.CMD_DOWN_TWIST_RIGHT, actions, cube);
         executeCMD(cmd.CMD_FRONT_TWIST_CLOCKWISE, actions, cube);
         executeCMD(cmd.CMD_DOWN_TWIST_LEFT, actions, cube);
         executeCMD(cmd.CMD_FRONT_TWIST_C_CLOCKWISE, actions, cube);
     }
-
+// one of the core actions of stage two in the algorithm. has fixed actions that is added to the list of commands
+// Adds the appropriate commands to the list
     private static void frontLowerRedCorner(List<cmd> actions, Cube cube) {
         executeCMD(cmd.CMD_DOWN_TWIST_LEFT, actions, cube);
         executeCMD(cmd.CMD_RIGHT_TWIST_BACKUPWARD, actions, cube);
         executeCMD(cmd.CMD_DOWN_TWIST_RIGHT, actions, cube);
         executeCMD(cmd.CMD_RIGHT_TWIST_FRONTUPWARD, actions, cube);
     }
-
+// one of the core actions of stage two in the algorithm. has fixed actions that is added to the list of commands
+// Adds the appropriate commands to the list
     private static void downRedCorner(List<cmd> actions, Cube cube) {
         executeCMD(cmd.CMD_RIGHT_TWIST_BACKUPWARD, actions, cube);
         executeCMD(cmd.CMD_DOWN_TWIST_RIGHT, actions, cube);
@@ -860,7 +870,8 @@ class LogicUtils {
         executeCMD(cmd.CMD_DOWN_TWIST_RIGHT, actions, cube);
         executeCMD(cmd.CMD_FRONT_TWIST_C_CLOCKWISE, actions, cube);
     }
-
+// one of the core actions of stage two in the algorithm. has fixed actions that is added to the list of commands
+// Adds the appropriate commands to the list
     private static void rightUpperRedCorner(List<cmd> actions, Cube cube) {
         executeCMD(cmd.CMD_RIGHT_TWIST_BACKUPWARD, actions, cube);
         executeCMD(cmd.CMD_DOWN_TWIST_LEFT, actions, cube);
@@ -871,7 +882,8 @@ class LogicUtils {
         executeCMD(cmd.CMD_DOWN_TWIST_LEFT, actions, cube);
         executeCMD(cmd.CMD_FRONT_TWIST_C_CLOCKWISE, actions, cube);
     }
-
+// one of the core actions of stage two in the algorithm. has fixed actions that is added to the list of commands
+// Adds the appropriate commands to the list
     private static void frontUpperRedCorner(List<cmd> actions, Cube cube) {
         executeCMD(cmd.CMD_FRONT_TWIST_CLOCKWISE, actions, cube);
         executeCMD(cmd.CMD_DOWN_TWIST_RIGHT, actions, cube);
@@ -883,7 +895,7 @@ class LogicUtils {
         executeCMD(cmd.CMD_RIGHT_TWIST_FRONTUPWARD, actions, cube);
     }
 
-
+// Help functions for stage one. Brings the cross to the UP face
     static void getRedCross(Cube cube, List<cmd> actions, Logic.Location redEdge) {
 
         if (redEdge.name == null) {
