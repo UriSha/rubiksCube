@@ -99,9 +99,11 @@
 //        Cube cube = new Cube(cubeValues);
 //        System.out.println(cube);
 //        Integer[] commands=new Integer[300];
-//        System.out.println(testAlgorithm(cube,Integer.parseInt(args[1]),Integer.parseInt(args[2]),commands));
+//        System.out.println(testAlgorithm(cube,Integer.parseInt(args[0]),Integer.parseInt(args[1]),commands));
 //        int sum = 0;
-//        for (int d : commands) sum += d;
-//        System.out.println(sum/(double)commands.length);
+////        for (int d : commands) sum += d;
+////        System.out.println(sum/(double)commands.length);
+//        Logic.Location redYellow=LogicUtils.getLocationOfEdge(cube,Cube.Color.RED, Cube.Color.YELLOW);
+//        System.out.println(redYellow.secondDircetion);
 //        }
 //}
