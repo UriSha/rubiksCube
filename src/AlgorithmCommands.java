@@ -1,7 +1,7 @@
 /**
  * ENUM that we use that describes all the possible commands of the cube
  */
-public enum cmd {
+public enum AlgorithmCommands {
         CMD_LEFT_ROTATE,
         CMD_RIGHT_ROTATE,
         CMD_FLIP,
