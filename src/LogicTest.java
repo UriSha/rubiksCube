@@ -2,7 +2,6 @@ import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.ThreadLocalRandom;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -17,7 +16,7 @@ class LogicTest {
     }
     @Test
     void initialize(){
-        Cube cube=getRandomCube();
+        Cube cube=CubeUtils.getRandomCube();
         List<cmd> actions=new ArrayList<>();
         Logic.initialize(cube,actions);
         String msgUP = "Initialize test has failed. The center of the UP face is: %s instead of: RED";
@@ -27,7 +26,7 @@ class LogicTest {
     }
     @Test
     void stageOne(){
-        Cube cube=getRandomCube();
+        Cube cube=CubeUtils.getRandomCube();
         List<cmd> actions=new ArrayList<>();
         Logic.initialize(cube,actions);
         Logic.stageOne(cube,actions);
@@ -54,7 +53,7 @@ class LogicTest {
     }
     @Test
     void stageTwo(){
-        Cube cube=getRandomCube();
+        Cube cube=CubeUtils.getRandomCube();
         List<cmd> actions=new ArrayList<>();
         Logic.initialize(cube,actions);
         Logic.stageOne(cube,actions);
@@ -82,11 +81,12 @@ class LogicTest {
     }
     @Test
     void stageThree(){
-        Cube cube=getRandomCube();
+        Cube cube=CubeUtils.getRandomCube();
         List<cmd> actions=new ArrayList<>();
         Logic.initialize(cube,actions);
         Logic.stageOne(cube,actions);
         Logic.stageTwo(cube,actions);
+        Logic.flipForStageThree(cube,actions);
         Logic.stageThree(cube,actions);
         String msgEdge1="Stage Three test has failed. WHITE-BLUE edge is located at : %s - %s  instead of : FRONT - RIGHT";
         String msgEdge2="Stage Three test has failed. GREEN-WHITE edge is located at : %s - %s  instead of : LEFT - FRONT";
@@ -109,76 +109,37 @@ class LogicTest {
         assertTrue(blueYellow.name==Face_Enum.RIGHT && blueYellow.secondDircetion==Face_Enum.BACK,
                 String.format(msgEdge4,blueYellow.name,blueYellow.secondDircetion));
     }
-    private Cube getRandomCube(){
-        Cube.Color[][][] cubeValues = new Cube.Color[6][3][3];
-
-        for (int i = 0; i < 3; i++) {
-            for (int j = 0; j < 3; j++) {
-                cubeValues[0][i][j] = Cube.Color.RED;
-            }
+    @Test
+    void stageFour(){
+        Cube cube=CubeUtils.getRandomCube();
+        List<cmd> actions=new ArrayList<>();
+        Logic.initialize(cube,actions);
+        Logic.stageOne(cube,actions);
+        Logic.stageTwo(cube,actions);
+        Logic.flipForStageThree(cube,actions);
+        Logic.stageThree(cube,actions);
+        Logic.stageFour(cube,actions);
+        Logic.Location orangeBlue = LogicUtils.getLocationOfEdge(cube, Cube.Color.ORANGE, Cube.Color.BLUE);
+        Logic.Location orangeWhite = LogicUtils.getLocationOfEdge(cube, Cube.Color.ORANGE, Cube.Color.WHITE);
+        Logic.Location orangeGreen = LogicUtils.getLocationOfEdge(cube, Cube.Color.ORANGE, Cube.Color.GREEN);
+        Logic.Location orangeYellow = LogicUtils.getLocationOfEdge(cube, Cube.Color.ORANGE, Cube.Color.YELLOW);
+        Logic.Location[] oranges={orangeBlue,orangeWhite,orangeGreen,orangeYellow};
+        String errMsg="Stage four test has failed. this orange face should be UP, but instead it's %s";
+        for(int i=0;i<4;i++){
+            assertNotNull(oranges[i]);
+            assertTrue(oranges[i].name==Face_Enum.UP,String.format(errMsg,oranges[i].name));
         }
+    }
+    void stageFive(){
+        Cube cube=CubeUtils.getRandomCube();
+        List<cmd> actions=new ArrayList<>();
+        Logic.initialize(cube,actions);
+        Logic.stageOne(cube,actions);
+        Logic.stageTwo(cube,actions);
+        Logic.flipForStageThree(cube,actions);
+        Logic.stageThree(cube,actions);
+        Logic.stageFour(cube,actions);
+        Logic.stageFive(cube,actions);
 
-        for (int i = 0; i < 3; i++) {
-            for (int j = 0; j < 3; j++) {
-                cubeValues[1][i][j] = Cube.Color.BLUE;
-
-            }
-        }
-
-        for (int i = 0; i < 3; i++) {
-            for (int j = 0; j < 3; j++) {
-                cubeValues[2][i][j] = Cube.Color.ORANGE;
-
-            }
-        }
-
-        for (int i = 0; i < 3; i++) {
-            for (int j = 0; j < 3; j++) {
-                cubeValues[3][i][j] = Cube.Color.GREEN;
-            }
-        }
-
-        for (int i = 0; i < 3; i++) {
-            for (int j = 0; j < 3; j++) {
-                cubeValues[4][i][j] = Cube.Color.YELLOW;
-            }
-        }
-
-        for (int i = 0; i < 3; i++) {
-            for (int j = 0; j < 3; j++) {
-                cubeValues[5][i][j] = Cube.Color.WHITE;
-            }
-        }
-        Cube cube = new Cube(cubeValues);
-        for (int j = 0; j < 100; j++) {
-                int x = ThreadLocalRandom.current().nextInt(0, 8);
-                boolean y = ThreadLocalRandom.current().nextBoolean();
-                switch (x) {
-                    case 0:
-                        cube.twistUpperFace(y);
-                        break;
-                    case 1:
-                        cube.twistFrontFace(y);
-                        break;
-                    case 2:
-                        cube.twistBottomFace(y);
-                        break;
-                    case 3:
-                        cube.twistRightFace(y);
-                        break;
-                    case 4:
-                        cube.twistLeftFace(y);
-                        break;
-                    case 5:
-                        cube.twistBackFace(y);
-                    case 6:
-                        cube.flip();
-                    case 7:
-                        cube.rotate(y);
-                        break;
-                }
-
-            }
-            return cube;
-        }
+    }
 }

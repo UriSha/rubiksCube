@@ -1,6 +1,8 @@
-public class CubeUtils {
+import java.util.concurrent.ThreadLocalRandom;
 
-	public static Cube initialDoneCube() {
+ class CubeUtils {
+
+	 static Cube initialDoneCube() {
         Cube.Color[][][] cubeValues = new Cube.Color[6][3][3];
 
         // up
@@ -51,4 +53,38 @@ public class CubeUtils {
         
         return cube;
 	}
+    static Cube getRandomCube() {
+        Cube cube=initialDoneCube();
+
+        for (int j = 0; j < 100; j++) {
+            int x = ThreadLocalRandom.current().nextInt(0, 8);
+            boolean y = ThreadLocalRandom.current().nextBoolean();
+            switch (x) {
+                case 0:
+                    cube.twistUpperFace(y);
+                    break;
+                case 1:
+                    cube.twistFrontFace(y);
+                    break;
+                case 2:
+                    cube.twistBottomFace(y);
+                    break;
+                case 3:
+                    cube.twistRightFace(y);
+                    break;
+                case 4:
+                    cube.twistLeftFace(y);
+                    break;
+                case 5:
+                    cube.twistBackFace(y);
+                case 6:
+                    cube.flip();
+                case 7:
+                    cube.rotate(y);
+                    break;
+            }
+
+        }
+        return cube;
+    }
 }

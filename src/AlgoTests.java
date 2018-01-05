@@ -1,9 +1,13 @@
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.ThreadLocalRandom;
+
 //import java.util.List;
 //import java.util.concurrent.ThreadLocalRandom;
 //
 //// This class checks the validity of the algorithm
-//public class AlgoTests {
-//    /**
+public class AlgoTests {
+    //    /**
 //     *
 //     * @param cube - A standard cube
 //     * @param numOfTests - number of tests we want to run
@@ -55,48 +59,21 @@
 //     }
 //// Main test -  initialize solved cube ,gets two integers that represents number of tests the user wants to run
 //// and number of commands the user wants to manipulate the cube
-//    public static void main(String[] args){
-//        Cube.Color[][][] cubeValues = new Cube.Color[6][3][3];
-//
-//        for (int i = 0; i < 3; i++) {
-//            for (int j = 0; j < 3; j++) {
-//                cubeValues[0][i][j] = Cube.Color.RED;
-//            }
-//        }
-//
-//        for (int i = 0; i < 3; i++) {
-//            for (int j = 0; j < 3; j++) {
-//                cubeValues[1][i][j] = Cube.Color.BLUE;
-//
-//            }
-//        }
-//
-//        for (int i = 0; i < 3; i++) {
-//            for (int j = 0; j < 3; j++) {
-//                cubeValues[2][i][j] = Cube.Color.ORANGE;
-//
-//            }
-//        }
-//
-//        for (int i = 0; i < 3; i++) {
-//            for (int j = 0; j < 3; j++) {
-//                cubeValues[3][i][j] = Cube.Color.GREEN;
-//            }
-//        }
-//
-//        for (int i = 0; i < 3; i++) {
-//            for (int j = 0; j < 3; j++) {
-//                cubeValues[4][i][j] = Cube.Color.YELLOW;
-//            }
-//        }
-//
-//        for (int i = 0; i < 3; i++) {
-//            for (int j = 0; j < 3; j++) {
-//                cubeValues[5][i][j] = Cube.Color.WHITE;
-//            }
-//        }
-//
-//        Cube cube = new Cube(cubeValues);
+
+    public static void main(String[] args) {
+        Cube cube=CubeUtils.getRandomCube();
+        List<cmd> actions = new ArrayList<>();
+        System.out.println(cube);
+        Logic.initialize(cube, actions);
+        System.out.println(cube);
+        Logic.stageOne(cube, actions);
+        System.out.println(cube);
+        Logic.stageTwo(cube, actions);
+        Logic.flipForStageThree(cube, actions);
+        Logic.stageThree(cube, actions);
+        System.out.println(cube);
+        Logic.stageFour(cube, actions);
+        System.out.println(cube);
 //        System.out.println(cube);
 //        Integer[] commands=new Integer[300];
 //        System.out.println(testAlgorithm(cube,Integer.parseInt(args[0]),Integer.parseInt(args[1]),commands));
@@ -105,5 +82,5 @@
 ////        System.out.println(sum/(double)commands.length);
 //        Logic.Location redYellow=LogicUtils.getLocationOfEdge(cube,Cube.Color.RED, Cube.Color.YELLOW);
 //        System.out.println(redYellow.secondDircetion);
-//        }
-//}
+    }
+}

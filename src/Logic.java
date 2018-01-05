@@ -112,7 +112,7 @@ class Logic {
         LogicUtils.executeCMD(cmd.CMD_RIGHT_ROTATE, actions, cube);
     }
 //Technical step for the algorithm
-    private static void flipForStageThree(Cube cube, List<cmd> actions) {
+     static void flipForStageThree(Cube cube, List<cmd> actions) {
         LogicUtils.executeCMD(cmd.CMD_FLIP, actions, cube);
         LogicUtils.executeCMD(cmd.CMD_FLIP, actions, cube);
     }
