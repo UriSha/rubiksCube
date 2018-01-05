@@ -8,7 +8,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class LogicTest {
 
     @Test
-    void mainAlgorithm() {
+    void algorithm() {
         for (int i = 0; i < 100; i++) {
             Cube cube = CubeUtils.getRandomCube();
             Logic.algorithm(cube);
