@@ -48,10 +48,8 @@ import java.util.concurrent.ThreadLocalRandom;
                 cubeValues[5][i][j] = Cube.Color.WHITE;
             }
         }
-
-        Cube cube = new Cube(cubeValues);
         
-        return cube;
+        return new Cube(cubeValues);
 	}
     static Cube getRandomCube() {
         Cube cube=initialDoneCube();
