@@ -3,7 +3,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class RobotActionsTranslator {
+ class RobotActionsTranslator {
 
     /**
      *
@@ -19,7 +19,7 @@ public class RobotActionsTranslator {
     /**
      *
      */
-    public static List<RobotSolvingAction> translateCommandList(List<cmd> algorithmCommands){
+     static List<RobotSolvingAction> translateCommandList(List<AlgorithmCommands> algorithmCommands){
         List<RobotSolvingAction> result = new ArrayList<>();
 
         // initialPhysicalMap - key : face to twist (from algorithm), value : its current position
@@ -46,14 +46,14 @@ public class RobotActionsTranslator {
         
         
         
-        for (cmd command : algorithmCommands)
+        for (AlgorithmCommands command : algorithmCommands)
             fromAlgoCommandToRobotAction(command, result, initialPhysicalMap, virtualInitialMap);
 
         return result;
 
     }
 
-    private static void fromAlgoCommandToRobotAction(cmd command, List<RobotSolvingAction> result, Map<Face_Enum,Face_Enum> initialPhysicalMap, Map<Face_Enum,Face_Enum> virtualInitialMap){
+    private static void fromAlgoCommandToRobotAction(AlgorithmCommands command, List<RobotSolvingAction> result, Map<Face_Enum,Face_Enum> initialPhysicalMap, Map<Face_Enum,Face_Enum> virtualInitialMap){
         Face_Enum upLocation;
         Face_Enum leftLocation;
         Face_Enum frontLocation;
@@ -326,7 +326,7 @@ public class RobotActionsTranslator {
 
     }
 
-    public static boolean getBoolForDirection(Face_Enum initial, Face_Enum current, boolean algorithmBool){
+     static boolean getBoolForDirection(Face_Enum initial, Face_Enum current, boolean algorithmBool){
 
         // the original Face (i.e was right and right now is up)
 //        if (initial.getValue() == current.getValue())
