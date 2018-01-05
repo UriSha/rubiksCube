@@ -10,11 +10,7 @@ class Logic {
 // our built algorithm
     static List<cmd> mainAlgorithm(Cube cube){
         cube = OptimizeCube.getConvertedOptimizedCube(cube);
-        List<cmd> res = algorithm(cube);
-        if(!Logic.isArnonReady(cube)){
-            System.out.println(cube);
-        }
-        return res;
+        return algorithm(cube);
     }
 // Runs all the seven stages of the algorithm and returns an array list that the robot can use in order to
 // physically solve the cube
@@ -349,7 +345,7 @@ class Logic {
         }
     }
     // A function that validates that the cube is solved
-    private static boolean isArnonReady(Cube cube){
+     static boolean isArnonReady(Cube cube){
         if (cube==null)
             return false;
         Cube.Color colorCheck=cube.getUp().getGrid()[0][0];
