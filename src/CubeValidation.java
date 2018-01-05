@@ -377,6 +377,8 @@ public class CubeValidation {
                 if (color2 != Cube.Color.WHITE)
                     return false;
                 break;
+            case NO_COLOR:
+                return false;
             default:
                 break;
         }

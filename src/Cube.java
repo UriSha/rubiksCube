@@ -363,11 +363,9 @@ class Cube {
     static class Face {
 
         private Color[][] grid = new Color[dim][dim];
-        private Color color;
 
         Face(Color[][] grid) {
             this.grid = grid;
-            this.color = grid[1][1];
         }
 
         Color[][] getGrid() {
@@ -480,11 +478,7 @@ class Cube {
         }
 
         Color getColor() {
-            return color;
-        }
-
-        public void setColor(Color color) {
-            this.color = color;
+            return grid[1][1];
         }
 
         /**
