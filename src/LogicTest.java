@@ -5,9 +5,15 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * Test class for the algorithm parts of the code. each test run 100 times and get a randomized cube each time
+ */
 class LogicTest {
 
     @Test
+    /**
+     * Test for the full algorithm, after getting a randomized cube
+     */
     void algorithm() {
         for (int i = 0; i < 100; i++) {
             Cube cube = CubeUtils.getRandomCube();
@@ -15,6 +21,10 @@ class LogicTest {
             assertTrue(Logic.isArnonReady(cube), "Error: The main algorithm is not working");
         }
     }
+
+    /**
+     * These tests are for each stage of the algorithm separately. Each test assumes that the previous one was successful
+     */
 
 
     @Test
