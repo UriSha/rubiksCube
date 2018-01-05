@@ -330,26 +330,26 @@ class Cube {
     }
 
     boolean isValidCube() {
-        return CubeValidation.isValidCube(this);
+        return CubeUtils.isValidCube(this);
     }
 
     @Override
     public String toString() {
         StringBuilder result = new StringBuilder();
 
-        CubePrintUtils.topAndButtomBorders(result);
+        CubeUtils.topAndBottomBorders(result);
 
-        CubePrintUtils.upAndDownFaces(result, this.getUp().getGrid());
+        CubeUtils.upAndDownFaces(result, this.getUp().getGrid());
 
-        CubePrintUtils.middleBorders(result);
+        CubeUtils.middleBorders(result);
 
-        CubePrintUtils.fourMiddleFaces(result, this.getLeft().getGrid(), this.getFront().getGrid(), this.getRight().getGrid(), this.getBack().getGrid());
+        CubeUtils.fourMiddleFaces(result, this.getLeft().getGrid(), this.getFront().getGrid(), this.getRight().getGrid(), this.getBack().getGrid());
 
-        CubePrintUtils.middleBorders(result);
+        CubeUtils.middleBorders(result);
 
-        CubePrintUtils.upAndDownFaces(result, this.getDown().getGrid());
+        CubeUtils.upAndDownFaces(result, this.getDown().getGrid());
 
-        CubePrintUtils.topAndButtomBorders(result);
+        CubeUtils.topAndBottomBorders(result);
 
         return result.toString();
     }

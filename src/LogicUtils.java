@@ -12,7 +12,7 @@ class LogicUtils {
      *                This functions adds the desirable command to the commands list and also changes the cube object,
      *                according to the command
      */
-    static void executeCMD(cmd command, List<cmd> actions, Cube cube) {
+    static void executeCMD(AlgorithmCommands command, List<AlgorithmCommands> actions, Cube cube) {
         actions.add(command);
         switch (command) {
             case CMD_LEFT_ROTATE:
@@ -315,41 +315,41 @@ class LogicUtils {
     // one of the core actions of stage seven in the algorithm,
     // rotate the right-up-front to be front-right-up and left-up-front to be front-left-up.
     // has fixed actions that is added to the list of commands
-    static void coreSevenInside(Cube cube, List<cmd> actions) {
-        executeCMD(cmd.CMD_LEFT_TWIST_BACKUPWARD, actions, cube);
-        executeCMD(cmd.CMD_DOWN_TWIST_LEFT, actions, cube);
-        executeCMD(cmd.CMD_LEFT_TWIST_FRONTUPWARD, actions, cube);
-        executeCMD(cmd.CMD_FRONT_TWIST_C_CLOCKWISE, actions, cube);
-        executeCMD(cmd.CMD_DOWN_TWIST_LEFT, actions, cube);
-        executeCMD(cmd.CMD_FRONT_TWIST_CLOCKWISE, actions, cube);
-        executeCMD(cmd.CMD_UP_TWIST_LEFT, actions, cube);
-        executeCMD(cmd.CMD_FRONT_TWIST_C_CLOCKWISE, actions, cube);
-        executeCMD(cmd.CMD_DOWN_TWIST_RIGHT, actions, cube);
-        executeCMD(cmd.CMD_FRONT_TWIST_CLOCKWISE, actions, cube);
-        executeCMD(cmd.CMD_LEFT_TWIST_BACKUPWARD, actions, cube);
-        executeCMD(cmd.CMD_DOWN_TWIST_RIGHT, actions, cube);
-        executeCMD(cmd.CMD_LEFT_TWIST_FRONTUPWARD, actions, cube);
-        executeCMD(cmd.CMD_UP_TWIST_RIGHT, actions, cube);
+    static void coreSevenInside(Cube cube, List<AlgorithmCommands> actions) {
+        executeCMD(AlgorithmCommands.CMD_LEFT_TWIST_BACKUPWARD, actions, cube);
+        executeCMD(AlgorithmCommands.CMD_DOWN_TWIST_LEFT, actions, cube);
+        executeCMD(AlgorithmCommands.CMD_LEFT_TWIST_FRONTUPWARD, actions, cube);
+        executeCMD(AlgorithmCommands.CMD_FRONT_TWIST_C_CLOCKWISE, actions, cube);
+        executeCMD(AlgorithmCommands.CMD_DOWN_TWIST_LEFT, actions, cube);
+        executeCMD(AlgorithmCommands.CMD_FRONT_TWIST_CLOCKWISE, actions, cube);
+        executeCMD(AlgorithmCommands.CMD_UP_TWIST_LEFT, actions, cube);
+        executeCMD(AlgorithmCommands.CMD_FRONT_TWIST_C_CLOCKWISE, actions, cube);
+        executeCMD(AlgorithmCommands.CMD_DOWN_TWIST_RIGHT, actions, cube);
+        executeCMD(AlgorithmCommands.CMD_FRONT_TWIST_CLOCKWISE, actions, cube);
+        executeCMD(AlgorithmCommands.CMD_LEFT_TWIST_BACKUPWARD, actions, cube);
+        executeCMD(AlgorithmCommands.CMD_DOWN_TWIST_RIGHT, actions, cube);
+        executeCMD(AlgorithmCommands.CMD_LEFT_TWIST_FRONTUPWARD, actions, cube);
+        executeCMD(AlgorithmCommands.CMD_UP_TWIST_RIGHT, actions, cube);
     }
 
     // one of the core actions of stage seven in the algorithm,
     // rotate the right-up-front to be up-front-right and left-up-front to be up-front-left.
     // has fixed actions that is added to the list of commands
-    static void coreSevenOutside(Cube cube, List<cmd> actions) {
-        executeCMD(cmd.CMD_RIGHT_TWIST_FRONTUPWARD, actions, cube);
-        executeCMD(cmd.CMD_BACK_TWIST_CLOCKWISE, actions, cube);
-        executeCMD(cmd.CMD_RIGHT_TWIST_BACKUPWARD, actions, cube);
-        executeCMD(cmd.CMD_UP_TWIST_RIGHT, actions, cube);
-        executeCMD(cmd.CMD_BACK_TWIST_CLOCKWISE, actions, cube);
-        executeCMD(cmd.CMD_UP_TWIST_LEFT, actions, cube);
-        executeCMD(cmd.CMD_FRONT_TWIST_CLOCKWISE, actions, cube);
-        executeCMD(cmd.CMD_UP_TWIST_RIGHT, actions, cube);
-        executeCMD(cmd.CMD_BACK_TWIST_C_CLOCKWISE, actions, cube);
-        executeCMD(cmd.CMD_UP_TWIST_LEFT, actions, cube);
-        executeCMD(cmd.CMD_RIGHT_TWIST_FRONTUPWARD, actions, cube);
-        executeCMD(cmd.CMD_BACK_TWIST_C_CLOCKWISE, actions, cube);
-        executeCMD(cmd.CMD_RIGHT_TWIST_BACKUPWARD, actions, cube);
-        executeCMD(cmd.CMD_FRONT_TWIST_C_CLOCKWISE, actions, cube);
+    static void coreSevenOutside(Cube cube, List<AlgorithmCommands> actions) {
+        executeCMD(AlgorithmCommands.CMD_RIGHT_TWIST_FRONTUPWARD, actions, cube);
+        executeCMD(AlgorithmCommands.CMD_BACK_TWIST_CLOCKWISE, actions, cube);
+        executeCMD(AlgorithmCommands.CMD_RIGHT_TWIST_BACKUPWARD, actions, cube);
+        executeCMD(AlgorithmCommands.CMD_UP_TWIST_RIGHT, actions, cube);
+        executeCMD(AlgorithmCommands.CMD_BACK_TWIST_CLOCKWISE, actions, cube);
+        executeCMD(AlgorithmCommands.CMD_UP_TWIST_LEFT, actions, cube);
+        executeCMD(AlgorithmCommands.CMD_FRONT_TWIST_CLOCKWISE, actions, cube);
+        executeCMD(AlgorithmCommands.CMD_UP_TWIST_RIGHT, actions, cube);
+        executeCMD(AlgorithmCommands.CMD_BACK_TWIST_C_CLOCKWISE, actions, cube);
+        executeCMD(AlgorithmCommands.CMD_UP_TWIST_LEFT, actions, cube);
+        executeCMD(AlgorithmCommands.CMD_RIGHT_TWIST_FRONTUPWARD, actions, cube);
+        executeCMD(AlgorithmCommands.CMD_BACK_TWIST_C_CLOCKWISE, actions, cube);
+        executeCMD(AlgorithmCommands.CMD_RIGHT_TWIST_BACKUPWARD, actions, cube);
+        executeCMD(AlgorithmCommands.CMD_FRONT_TWIST_C_CLOCKWISE, actions, cube);
     }
 
     // help function for stage seven that returns the Face ENUM of the orange side of the given one out of the
@@ -443,29 +443,29 @@ class LogicUtils {
     // one of the core actions of stage six in the algorithm.
     // rotate up-right-back, up-back-left, up-right-front corners counter-clockwise
     // has fixed actions that is added to the list of commands
-    static void coreSixLeftToRight(Cube cube, List<cmd> actions) {
-        executeCMD(cmd.CMD_UP_TWIST_LEFT, actions, cube);
-        executeCMD(cmd.CMD_RIGHT_TWIST_FRONTUPWARD, actions, cube);
-        executeCMD(cmd.CMD_UP_TWIST_RIGHT, actions, cube);
-        executeCMD(cmd.CMD_LEFT_TWIST_FRONTUPWARD, actions, cube);
-        executeCMD(cmd.CMD_UP_TWIST_LEFT, actions, cube);
-        executeCMD(cmd.CMD_RIGHT_TWIST_BACKUPWARD, actions, cube);
-        executeCMD(cmd.CMD_UP_TWIST_RIGHT, actions, cube);
-        executeCMD(cmd.CMD_LEFT_TWIST_BACKUPWARD, actions, cube);
+    static void coreSixLeftToRight(Cube cube, List<AlgorithmCommands> actions) {
+        executeCMD(AlgorithmCommands.CMD_UP_TWIST_LEFT, actions, cube);
+        executeCMD(AlgorithmCommands.CMD_RIGHT_TWIST_FRONTUPWARD, actions, cube);
+        executeCMD(AlgorithmCommands.CMD_UP_TWIST_RIGHT, actions, cube);
+        executeCMD(AlgorithmCommands.CMD_LEFT_TWIST_FRONTUPWARD, actions, cube);
+        executeCMD(AlgorithmCommands.CMD_UP_TWIST_LEFT, actions, cube);
+        executeCMD(AlgorithmCommands.CMD_RIGHT_TWIST_BACKUPWARD, actions, cube);
+        executeCMD(AlgorithmCommands.CMD_UP_TWIST_RIGHT, actions, cube);
+        executeCMD(AlgorithmCommands.CMD_LEFT_TWIST_BACKUPWARD, actions, cube);
     }
 
     // one of the core actions of stage six in the algorithm.
     // rotate up-right-back, up-back-left, up-right-front corners clockwise
     // has fixed actions that is added to the list of commands
-    static void coreSixRightToLeft(Cube cube, List<cmd> actions) {
-        executeCMD(cmd.CMD_UP_TWIST_RIGHT, actions, cube);
-        executeCMD(cmd.CMD_LEFT_TWIST_FRONTUPWARD, actions, cube);
-        executeCMD(cmd.CMD_UP_TWIST_LEFT, actions, cube);
-        executeCMD(cmd.CMD_RIGHT_TWIST_FRONTUPWARD, actions, cube);
-        executeCMD(cmd.CMD_UP_TWIST_RIGHT, actions, cube);
-        executeCMD(cmd.CMD_LEFT_TWIST_BACKUPWARD, actions, cube);
-        executeCMD(cmd.CMD_UP_TWIST_LEFT, actions, cube);
-        executeCMD(cmd.CMD_RIGHT_TWIST_BACKUPWARD, actions, cube);
+    static void coreSixRightToLeft(Cube cube, List<AlgorithmCommands> actions) {
+        executeCMD(AlgorithmCommands.CMD_UP_TWIST_RIGHT, actions, cube);
+        executeCMD(AlgorithmCommands.CMD_LEFT_TWIST_FRONTUPWARD, actions, cube);
+        executeCMD(AlgorithmCommands.CMD_UP_TWIST_LEFT, actions, cube);
+        executeCMD(AlgorithmCommands.CMD_RIGHT_TWIST_FRONTUPWARD, actions, cube);
+        executeCMD(AlgorithmCommands.CMD_UP_TWIST_RIGHT, actions, cube);
+        executeCMD(AlgorithmCommands.CMD_LEFT_TWIST_BACKUPWARD, actions, cube);
+        executeCMD(AlgorithmCommands.CMD_UP_TWIST_LEFT, actions, cube);
+        executeCMD(AlgorithmCommands.CMD_RIGHT_TWIST_BACKUPWARD, actions, cube);
     }
 
     //////////////////////////////// stage five ////////////////////////////////
@@ -474,29 +474,29 @@ class LogicUtils {
     // one of the core actions of stage five in the algorithm.
     // rotate up-right, up-back, up-left edges counter-clockwise
     // has fixed actions that is added to the list of commands
-    static void coreFiveLeftToRight(Cube cube, List<cmd> actions) {
-        LogicUtils.executeCMD(cmd.CMD_RIGHT_TWIST_FRONTUPWARD, actions, cube);
-        LogicUtils.executeCMD(cmd.CMD_UP_TWIST_LEFT, actions, cube);
-        LogicUtils.executeCMD(cmd.CMD_RIGHT_TWIST_BACKUPWARD, actions, cube);
-        LogicUtils.executeCMD(cmd.CMD_UP_TWIST_LEFT, actions, cube);
-        LogicUtils.executeCMD(cmd.CMD_RIGHT_TWIST_FRONTUPWARD, actions, cube);
-        LogicUtils.executeCMD(cmd.CMD_UP_TWIST_LEFT, actions, cube);
-        LogicUtils.executeCMD(cmd.CMD_UP_TWIST_LEFT, actions, cube);
-        LogicUtils.executeCMD(cmd.CMD_RIGHT_TWIST_BACKUPWARD, actions, cube);
+    static void coreFiveLeftToRight(Cube cube, List<AlgorithmCommands> actions) {
+        LogicUtils.executeCMD(AlgorithmCommands.CMD_RIGHT_TWIST_FRONTUPWARD, actions, cube);
+        LogicUtils.executeCMD(AlgorithmCommands.CMD_UP_TWIST_LEFT, actions, cube);
+        LogicUtils.executeCMD(AlgorithmCommands.CMD_RIGHT_TWIST_BACKUPWARD, actions, cube);
+        LogicUtils.executeCMD(AlgorithmCommands.CMD_UP_TWIST_LEFT, actions, cube);
+        LogicUtils.executeCMD(AlgorithmCommands.CMD_RIGHT_TWIST_FRONTUPWARD, actions, cube);
+        LogicUtils.executeCMD(AlgorithmCommands.CMD_UP_TWIST_LEFT, actions, cube);
+        LogicUtils.executeCMD(AlgorithmCommands.CMD_UP_TWIST_LEFT, actions, cube);
+        LogicUtils.executeCMD(AlgorithmCommands.CMD_RIGHT_TWIST_BACKUPWARD, actions, cube);
     }
 
     // one of the core actions of stage five in the algorithm.
     // rotate up-right, up-back, up-left edges clockwise
     // has fixed actions that is added to the list of commands
-    static void coreFiveRightToLeft(Cube cube, List<cmd> actions) {
-        LogicUtils.executeCMD(cmd.CMD_LEFT_TWIST_FRONTUPWARD, actions, cube);
-        LogicUtils.executeCMD(cmd.CMD_UP_TWIST_RIGHT, actions, cube);
-        LogicUtils.executeCMD(cmd.CMD_LEFT_TWIST_BACKUPWARD, actions, cube);
-        LogicUtils.executeCMD(cmd.CMD_UP_TWIST_RIGHT, actions, cube);
-        LogicUtils.executeCMD(cmd.CMD_LEFT_TWIST_FRONTUPWARD, actions, cube);
-        LogicUtils.executeCMD(cmd.CMD_UP_TWIST_RIGHT, actions, cube);
-        LogicUtils.executeCMD(cmd.CMD_UP_TWIST_RIGHT, actions, cube);
-        LogicUtils.executeCMD(cmd.CMD_LEFT_TWIST_BACKUPWARD, actions, cube);
+    static void coreFiveRightToLeft(Cube cube, List<AlgorithmCommands> actions) {
+        LogicUtils.executeCMD(AlgorithmCommands.CMD_LEFT_TWIST_FRONTUPWARD, actions, cube);
+        LogicUtils.executeCMD(AlgorithmCommands.CMD_UP_TWIST_RIGHT, actions, cube);
+        LogicUtils.executeCMD(AlgorithmCommands.CMD_LEFT_TWIST_BACKUPWARD, actions, cube);
+        LogicUtils.executeCMD(AlgorithmCommands.CMD_UP_TWIST_RIGHT, actions, cube);
+        LogicUtils.executeCMD(AlgorithmCommands.CMD_LEFT_TWIST_FRONTUPWARD, actions, cube);
+        LogicUtils.executeCMD(AlgorithmCommands.CMD_UP_TWIST_RIGHT, actions, cube);
+        LogicUtils.executeCMD(AlgorithmCommands.CMD_UP_TWIST_RIGHT, actions, cube);
+        LogicUtils.executeCMD(AlgorithmCommands.CMD_LEFT_TWIST_BACKUPWARD, actions, cube);
     }
 
     //////////////////////////////// stage four ////////////////////////////////
@@ -506,44 +506,44 @@ class LogicUtils {
     //to face up.
     // has fixed actions that is added to the list of commands
     // Adds the appropriate commands to the list
-    static void noneInPlace(List<cmd> actions, Cube cube) {
-        executeCMD(cmd.CMD_BACK_TWIST_C_CLOCKWISE, actions, cube);
-        executeCMD(cmd.CMD_LEFT_TWIST_BACKUPWARD, actions, cube);
-        executeCMD(cmd.CMD_UP_TWIST_LEFT, actions, cube);
-        executeCMD(cmd.CMD_LEFT_TWIST_FRONTUPWARD, actions, cube);
-        executeCMD(cmd.CMD_UP_TWIST_RIGHT, actions, cube);
-        executeCMD(cmd.CMD_BACK_TWIST_CLOCKWISE, actions, cube);
-        executeCMD(cmd.CMD_FRONT_TWIST_CLOCKWISE, actions, cube);
-        executeCMD(cmd.CMD_UP_TWIST_LEFT, actions, cube);
-        executeCMD(cmd.CMD_RIGHT_TWIST_FRONTUPWARD, actions, cube);
-        executeCMD(cmd.CMD_UP_TWIST_RIGHT, actions, cube);
-        executeCMD(cmd.CMD_RIGHT_TWIST_BACKUPWARD, actions, cube);
-        executeCMD(cmd.CMD_FRONT_TWIST_C_CLOCKWISE, actions, cube);
+    static void noneInPlace(List<AlgorithmCommands> actions, Cube cube) {
+        executeCMD(AlgorithmCommands.CMD_BACK_TWIST_C_CLOCKWISE, actions, cube);
+        executeCMD(AlgorithmCommands.CMD_LEFT_TWIST_BACKUPWARD, actions, cube);
+        executeCMD(AlgorithmCommands.CMD_UP_TWIST_LEFT, actions, cube);
+        executeCMD(AlgorithmCommands.CMD_LEFT_TWIST_FRONTUPWARD, actions, cube);
+        executeCMD(AlgorithmCommands.CMD_UP_TWIST_RIGHT, actions, cube);
+        executeCMD(AlgorithmCommands.CMD_BACK_TWIST_CLOCKWISE, actions, cube);
+        executeCMD(AlgorithmCommands.CMD_FRONT_TWIST_CLOCKWISE, actions, cube);
+        executeCMD(AlgorithmCommands.CMD_UP_TWIST_LEFT, actions, cube);
+        executeCMD(AlgorithmCommands.CMD_RIGHT_TWIST_FRONTUPWARD, actions, cube);
+        executeCMD(AlgorithmCommands.CMD_UP_TWIST_RIGHT, actions, cube);
+        executeCMD(AlgorithmCommands.CMD_RIGHT_TWIST_BACKUPWARD, actions, cube);
+        executeCMD(AlgorithmCommands.CMD_FRONT_TWIST_C_CLOCKWISE, actions, cube);
     }
 
     // one of the core actions of stage four in the algorithm, set orange edges from front-up, right-up to face up.
     // has fixed actions that is added to the list of commands
     // Adds the appropriate commands to the list
-    static void twoNearInPlace(List<cmd> actions, Cube cube) {
-        executeCMD(cmd.CMD_FRONT_TWIST_CLOCKWISE, actions, cube);
-        executeCMD(cmd.CMD_UP_TWIST_LEFT, actions, cube);
-        executeCMD(cmd.CMD_RIGHT_TWIST_FRONTUPWARD, actions, cube);
-        executeCMD(cmd.CMD_UP_TWIST_RIGHT, actions, cube);
-        executeCMD(cmd.CMD_RIGHT_TWIST_BACKUPWARD, actions, cube);
-        executeCMD(cmd.CMD_FRONT_TWIST_C_CLOCKWISE, actions, cube);
+    static void twoNearInPlace(List<AlgorithmCommands> actions, Cube cube) {
+        executeCMD(AlgorithmCommands.CMD_FRONT_TWIST_CLOCKWISE, actions, cube);
+        executeCMD(AlgorithmCommands.CMD_UP_TWIST_LEFT, actions, cube);
+        executeCMD(AlgorithmCommands.CMD_RIGHT_TWIST_FRONTUPWARD, actions, cube);
+        executeCMD(AlgorithmCommands.CMD_UP_TWIST_RIGHT, actions, cube);
+        executeCMD(AlgorithmCommands.CMD_RIGHT_TWIST_BACKUPWARD, actions, cube);
+        executeCMD(AlgorithmCommands.CMD_FRONT_TWIST_C_CLOCKWISE, actions, cube);
 
     }
 
     // one of the core actions of stage four in the algorithm, set orange edges from front-up, back-up to face up.
     // has fixed actions that is added to the list of commands
     // Adds the appropriate commands to the list
-    static void twoCounterInPlace(List<cmd> actions, Cube cube) {
-        executeCMD(cmd.CMD_BACK_TWIST_C_CLOCKWISE, actions, cube);
-        executeCMD(cmd.CMD_LEFT_TWIST_BACKUPWARD, actions, cube);
-        executeCMD(cmd.CMD_UP_TWIST_LEFT, actions, cube);
-        executeCMD(cmd.CMD_LEFT_TWIST_FRONTUPWARD, actions, cube);
-        executeCMD(cmd.CMD_UP_TWIST_RIGHT, actions, cube);
-        executeCMD(cmd.CMD_BACK_TWIST_CLOCKWISE, actions, cube);
+    static void twoCounterInPlace(List<AlgorithmCommands> actions, Cube cube) {
+        executeCMD(AlgorithmCommands.CMD_BACK_TWIST_C_CLOCKWISE, actions, cube);
+        executeCMD(AlgorithmCommands.CMD_LEFT_TWIST_BACKUPWARD, actions, cube);
+        executeCMD(AlgorithmCommands.CMD_UP_TWIST_LEFT, actions, cube);
+        executeCMD(AlgorithmCommands.CMD_LEFT_TWIST_FRONTUPWARD, actions, cube);
+        executeCMD(AlgorithmCommands.CMD_UP_TWIST_RIGHT, actions, cube);
+        executeCMD(AlgorithmCommands.CMD_BACK_TWIST_CLOCKWISE, actions, cube);
     }
 
 
@@ -552,20 +552,20 @@ class LogicUtils {
     // Help function for stage three. searches for the location given and brings it to the desired position on the cube
     // which is the front-right edge.
     // Adds the appropriate commands to the list
-    static void getFrontRightEdge(Cube cube, List<cmd> actions, Logic.Location edge) {
+    static void getFrontRightEdge(Cube cube, List<AlgorithmCommands> actions, Logic.Location edge) {
         switch (edge.name) {
             case UP:
                 if (edge.x == 1 && edge.y == 2) {
                     edgeFromTheRight(actions, cube);
                 } else if (edge.x == 0 && edge.y == 1) {
-                    executeCMD(cmd.CMD_UP_TWIST_LEFT, actions, cube);
+                    executeCMD(AlgorithmCommands.CMD_UP_TWIST_LEFT, actions, cube);
                     edgeFromTheRight(actions, cube);
                 } else if (edge.x == 2 && edge.y == 1) {
-                    executeCMD(cmd.CMD_UP_TWIST_RIGHT, actions, cube);
+                    executeCMD(AlgorithmCommands.CMD_UP_TWIST_RIGHT, actions, cube);
                     edgeFromTheRight(actions, cube);
                 } else if (edge.x == 1 && edge.y == 0) {
-                    executeCMD(cmd.CMD_UP_TWIST_LEFT, actions, cube);
-                    executeCMD(cmd.CMD_UP_TWIST_LEFT, actions, cube);
+                    executeCMD(AlgorithmCommands.CMD_UP_TWIST_LEFT, actions, cube);
+                    executeCMD(AlgorithmCommands.CMD_UP_TWIST_LEFT, actions, cube);
                     edgeFromTheRight(actions, cube);
                 }
                 break;
@@ -573,66 +573,66 @@ class LogicUtils {
                 if (edge.x == 0 && edge.y == 1) {
                     edgeOnTop(actions, cube);
                 } else if (edge.x == 1 && edge.y == 0) {
-                    executeCMD(cmd.CMD_RIGHT_ROTATE, actions, cube);
+                    executeCMD(AlgorithmCommands.CMD_RIGHT_ROTATE, actions, cube);
                     edgeFromTheRight(actions, cube);
-                    executeCMD(cmd.CMD_LEFT_ROTATE, actions, cube);
-                    executeCMD(cmd.CMD_UP_TWIST_LEFT, actions, cube);
+                    executeCMD(AlgorithmCommands.CMD_LEFT_ROTATE, actions, cube);
+                    executeCMD(AlgorithmCommands.CMD_UP_TWIST_LEFT, actions, cube);
                     edgeFromTheRight(actions, cube);
                 }
                 break;
             case LEFT:
                 if (edge.x == 0 && edge.y == 1) {
-                    executeCMD(cmd.CMD_UP_TWIST_RIGHT, actions, cube);
+                    executeCMD(AlgorithmCommands.CMD_UP_TWIST_RIGHT, actions, cube);
                     edgeOnTop(actions, cube);
                 } else if (edge.x == 1 && edge.y == 0) {
-                    executeCMD(cmd.CMD_LEFT_ROTATE, actions, cube);
-                    executeCMD(cmd.CMD_LEFT_ROTATE, actions, cube);
+                    executeCMD(AlgorithmCommands.CMD_LEFT_ROTATE, actions, cube);
+                    executeCMD(AlgorithmCommands.CMD_LEFT_ROTATE, actions, cube);
                     edgeOnTop(actions, cube);
-                    executeCMD(cmd.CMD_RIGHT_ROTATE, actions, cube);
-                    executeCMD(cmd.CMD_RIGHT_ROTATE, actions, cube);
+                    executeCMD(AlgorithmCommands.CMD_RIGHT_ROTATE, actions, cube);
+                    executeCMD(AlgorithmCommands.CMD_RIGHT_ROTATE, actions, cube);
                     edgeOnTop(actions, cube);
                 } else if (edge.x == 1 && edge.y == 2) {
-                    executeCMD(cmd.CMD_RIGHT_ROTATE, actions, cube);
+                    executeCMD(AlgorithmCommands.CMD_RIGHT_ROTATE, actions, cube);
                     edgeFromTheRight(actions, cube);
-                    executeCMD(cmd.CMD_LEFT_ROTATE, actions, cube);
-                    executeCMD(cmd.CMD_UP_TWIST_LEFT, actions, cube);
-                    executeCMD(cmd.CMD_UP_TWIST_LEFT, actions, cube);
+                    executeCMD(AlgorithmCommands.CMD_LEFT_ROTATE, actions, cube);
+                    executeCMD(AlgorithmCommands.CMD_UP_TWIST_LEFT, actions, cube);
+                    executeCMD(AlgorithmCommands.CMD_UP_TWIST_LEFT, actions, cube);
                     edgeOnTop(actions, cube);
                 }
                 break;
             case RIGHT:
                 if (edge.x == 0 && edge.y == 1) {
-                    executeCMD(cmd.CMD_UP_TWIST_LEFT, actions, cube);
+                    executeCMD(AlgorithmCommands.CMD_UP_TWIST_LEFT, actions, cube);
                     edgeOnTop(actions, cube);
                 } else if (edge.x == 1 && edge.y == 0) {
                     switchEdgeColors(actions, cube);
                 } else if (edge.x == 1 && edge.y == 2) {
-                    executeCMD(cmd.CMD_LEFT_ROTATE, actions, cube);
+                    executeCMD(AlgorithmCommands.CMD_LEFT_ROTATE, actions, cube);
                     edgeOnTop(actions, cube);
-                    executeCMD(cmd.CMD_RIGHT_ROTATE, actions, cube);
-                    executeCMD(cmd.CMD_UP_TWIST_RIGHT, actions, cube);
-                    executeCMD(cmd.CMD_UP_TWIST_RIGHT, actions, cube);
+                    executeCMD(AlgorithmCommands.CMD_RIGHT_ROTATE, actions, cube);
+                    executeCMD(AlgorithmCommands.CMD_UP_TWIST_RIGHT, actions, cube);
+                    executeCMD(AlgorithmCommands.CMD_UP_TWIST_RIGHT, actions, cube);
                     edgeFromTheRight(actions, cube);
                 }
                 break;
             case BACK:
                 if (edge.x == 0 && edge.y == 1) {
-                    executeCMD(cmd.CMD_UP_TWIST_RIGHT, actions, cube);
-                    executeCMD(cmd.CMD_UP_TWIST_RIGHT, actions, cube);
+                    executeCMD(AlgorithmCommands.CMD_UP_TWIST_RIGHT, actions, cube);
+                    executeCMD(AlgorithmCommands.CMD_UP_TWIST_RIGHT, actions, cube);
                     edgeOnTop(actions, cube);
                 } else if (edge.x == 1 && edge.y == 0) {
-                    executeCMD(cmd.CMD_LEFT_ROTATE, actions, cube);
+                    executeCMD(AlgorithmCommands.CMD_LEFT_ROTATE, actions, cube);
                     edgeOnTop(actions, cube);
-                    executeCMD(cmd.CMD_RIGHT_ROTATE, actions, cube);
-                    executeCMD(cmd.CMD_UP_TWIST_RIGHT, actions, cube);
+                    executeCMD(AlgorithmCommands.CMD_RIGHT_ROTATE, actions, cube);
+                    executeCMD(AlgorithmCommands.CMD_UP_TWIST_RIGHT, actions, cube);
                     edgeOnTop(actions, cube);
                 } else if (edge.x == 1 && edge.y == 2) {
-                    executeCMD(cmd.CMD_RIGHT_ROTATE, actions, cube);
-                    executeCMD(cmd.CMD_RIGHT_ROTATE, actions, cube);
+                    executeCMD(AlgorithmCommands.CMD_RIGHT_ROTATE, actions, cube);
+                    executeCMD(AlgorithmCommands.CMD_RIGHT_ROTATE, actions, cube);
                     edgeOnTop(actions, cube);
-                    executeCMD(cmd.CMD_LEFT_ROTATE, actions, cube);
-                    executeCMD(cmd.CMD_LEFT_ROTATE, actions, cube);
-                    executeCMD(cmd.CMD_UP_TWIST_RIGHT, actions, cube);
+                    executeCMD(AlgorithmCommands.CMD_LEFT_ROTATE, actions, cube);
+                    executeCMD(AlgorithmCommands.CMD_LEFT_ROTATE, actions, cube);
+                    executeCMD(AlgorithmCommands.CMD_UP_TWIST_RIGHT, actions, cube);
                     edgeFromTheRight(actions, cube);
                 }
         }
@@ -643,52 +643,52 @@ class LogicUtils {
     // front-right side.
     // has fixed actions that is added to the list of commands
     // Adds the appropriate commands to the list
-    private static void edgeFromTheRight(List<cmd> actions, Cube cube) {
-        executeCMD(cmd.CMD_UP_TWIST_RIGHT, actions, cube);
-        executeCMD(cmd.CMD_FRONT_TWIST_C_CLOCKWISE, actions, cube);
-        executeCMD(cmd.CMD_UP_TWIST_LEFT, actions, cube);
-        executeCMD(cmd.CMD_FRONT_TWIST_CLOCKWISE, actions, cube);
-        executeCMD(cmd.CMD_UP_TWIST_LEFT, actions, cube);
-        executeCMD(cmd.CMD_RIGHT_TWIST_FRONTUPWARD, actions, cube);
-        executeCMD(cmd.CMD_UP_TWIST_RIGHT, actions, cube);
-        executeCMD(cmd.CMD_RIGHT_TWIST_BACKUPWARD, actions, cube);
+    private static void edgeFromTheRight(List<AlgorithmCommands> actions, Cube cube) {
+        executeCMD(AlgorithmCommands.CMD_UP_TWIST_RIGHT, actions, cube);
+        executeCMD(AlgorithmCommands.CMD_FRONT_TWIST_C_CLOCKWISE, actions, cube);
+        executeCMD(AlgorithmCommands.CMD_UP_TWIST_LEFT, actions, cube);
+        executeCMD(AlgorithmCommands.CMD_FRONT_TWIST_CLOCKWISE, actions, cube);
+        executeCMD(AlgorithmCommands.CMD_UP_TWIST_LEFT, actions, cube);
+        executeCMD(AlgorithmCommands.CMD_RIGHT_TWIST_FRONTUPWARD, actions, cube);
+        executeCMD(AlgorithmCommands.CMD_UP_TWIST_RIGHT, actions, cube);
+        executeCMD(AlgorithmCommands.CMD_RIGHT_TWIST_BACKUPWARD, actions, cube);
     }
 
     // one of the core actions of stage three in the algorithm, bring an edge from up-front to the
     // right-front side.
     // has fixed actions that is added to the list of commands
     // Adds the appropriate commands to the list
-    private static void edgeOnTop(List<cmd> actions, Cube cube) {
-        executeCMD(cmd.CMD_UP_TWIST_LEFT, actions, cube);
-        executeCMD(cmd.CMD_RIGHT_TWIST_FRONTUPWARD, actions, cube);
-        executeCMD(cmd.CMD_UP_TWIST_RIGHT, actions, cube);
-        executeCMD(cmd.CMD_RIGHT_TWIST_BACKUPWARD, actions, cube);
-        executeCMD(cmd.CMD_UP_TWIST_RIGHT, actions, cube);
-        executeCMD(cmd.CMD_FRONT_TWIST_C_CLOCKWISE, actions, cube);
-        executeCMD(cmd.CMD_UP_TWIST_LEFT, actions, cube);
-        executeCMD(cmd.CMD_FRONT_TWIST_CLOCKWISE, actions, cube);
+    private static void edgeOnTop(List<AlgorithmCommands> actions, Cube cube) {
+        executeCMD(AlgorithmCommands.CMD_UP_TWIST_LEFT, actions, cube);
+        executeCMD(AlgorithmCommands.CMD_RIGHT_TWIST_FRONTUPWARD, actions, cube);
+        executeCMD(AlgorithmCommands.CMD_UP_TWIST_RIGHT, actions, cube);
+        executeCMD(AlgorithmCommands.CMD_RIGHT_TWIST_BACKUPWARD, actions, cube);
+        executeCMD(AlgorithmCommands.CMD_UP_TWIST_RIGHT, actions, cube);
+        executeCMD(AlgorithmCommands.CMD_FRONT_TWIST_C_CLOCKWISE, actions, cube);
+        executeCMD(AlgorithmCommands.CMD_UP_TWIST_LEFT, actions, cube);
+        executeCMD(AlgorithmCommands.CMD_FRONT_TWIST_CLOCKWISE, actions, cube);
     }
 
     // one of the core actions of stage three in the algorithm, switching sides of the front-right edge.
     // has fixed actions that is added to the list of commands
     // Adds the appropriate commands to the list
-    private static void switchEdgeColors(List<cmd> actions, Cube cube) {
-        executeCMD(cmd.CMD_UP_TWIST_LEFT, actions, cube);
-        executeCMD(cmd.CMD_RIGHT_TWIST_FRONTUPWARD, actions, cube);
-        executeCMD(cmd.CMD_UP_TWIST_RIGHT, actions, cube);
-        executeCMD(cmd.CMD_RIGHT_TWIST_BACKUPWARD, actions, cube);
-        executeCMD(cmd.CMD_UP_TWIST_RIGHT, actions, cube);
-        executeCMD(cmd.CMD_FRONT_TWIST_C_CLOCKWISE, actions, cube);
-        executeCMD(cmd.CMD_UP_TWIST_LEFT, actions, cube);
-        executeCMD(cmd.CMD_FRONT_TWIST_CLOCKWISE, actions, cube);
-        executeCMD(cmd.CMD_UP_TWIST_RIGHT, actions, cube);
-        executeCMD(cmd.CMD_RIGHT_TWIST_FRONTUPWARD, actions, cube);
-        executeCMD(cmd.CMD_UP_TWIST_RIGHT, actions, cube);
-        executeCMD(cmd.CMD_RIGHT_TWIST_BACKUPWARD, actions, cube);
-        executeCMD(cmd.CMD_UP_TWIST_RIGHT, actions, cube);
-        executeCMD(cmd.CMD_FRONT_TWIST_C_CLOCKWISE, actions, cube);
-        executeCMD(cmd.CMD_UP_TWIST_LEFT, actions, cube);
-        executeCMD(cmd.CMD_FRONT_TWIST_CLOCKWISE, actions, cube);
+    private static void switchEdgeColors(List<AlgorithmCommands> actions, Cube cube) {
+        executeCMD(AlgorithmCommands.CMD_UP_TWIST_LEFT, actions, cube);
+        executeCMD(AlgorithmCommands.CMD_RIGHT_TWIST_FRONTUPWARD, actions, cube);
+        executeCMD(AlgorithmCommands.CMD_UP_TWIST_RIGHT, actions, cube);
+        executeCMD(AlgorithmCommands.CMD_RIGHT_TWIST_BACKUPWARD, actions, cube);
+        executeCMD(AlgorithmCommands.CMD_UP_TWIST_RIGHT, actions, cube);
+        executeCMD(AlgorithmCommands.CMD_FRONT_TWIST_C_CLOCKWISE, actions, cube);
+        executeCMD(AlgorithmCommands.CMD_UP_TWIST_LEFT, actions, cube);
+        executeCMD(AlgorithmCommands.CMD_FRONT_TWIST_CLOCKWISE, actions, cube);
+        executeCMD(AlgorithmCommands.CMD_UP_TWIST_RIGHT, actions, cube);
+        executeCMD(AlgorithmCommands.CMD_RIGHT_TWIST_FRONTUPWARD, actions, cube);
+        executeCMD(AlgorithmCommands.CMD_UP_TWIST_RIGHT, actions, cube);
+        executeCMD(AlgorithmCommands.CMD_RIGHT_TWIST_BACKUPWARD, actions, cube);
+        executeCMD(AlgorithmCommands.CMD_UP_TWIST_RIGHT, actions, cube);
+        executeCMD(AlgorithmCommands.CMD_FRONT_TWIST_C_CLOCKWISE, actions, cube);
+        executeCMD(AlgorithmCommands.CMD_UP_TWIST_LEFT, actions, cube);
+        executeCMD(AlgorithmCommands.CMD_FRONT_TWIST_CLOCKWISE, actions, cube);
 
     }
 
@@ -699,7 +699,7 @@ class LogicUtils {
     // Help function for stage two. searches for the location given and brings it to the desired position on the cube
     // which is up-front-right corner.
     // Adds the appropriate commands to the list
-    static void getRedCorner(Cube cube, List<cmd> actions, Logic.Location redCorner) {
+    static void getRedCorner(Cube cube, List<AlgorithmCommands> actions, Logic.Location redCorner) {
         if (redCorner.name == null) {
             System.out.println("Error: 'stageTwo' has failed");
             return;
@@ -720,16 +720,16 @@ class LogicUtils {
                     }
                 } else if (redCorner.secondDircetion == Face_Enum.BACK) {
                     if (redCorner.thirdDirection == Face_Enum.UP) {
-                        executeCMD(cmd.CMD_BACK_TWIST_CLOCKWISE, actions, cube);
-                        executeCMD(cmd.CMD_DOWN_TWIST_LEFT, actions, cube);
-                        executeCMD(cmd.CMD_BACK_TWIST_C_CLOCKWISE, actions, cube);
+                        executeCMD(AlgorithmCommands.CMD_BACK_TWIST_CLOCKWISE, actions, cube);
+                        executeCMD(AlgorithmCommands.CMD_DOWN_TWIST_LEFT, actions, cube);
+                        executeCMD(AlgorithmCommands.CMD_BACK_TWIST_C_CLOCKWISE, actions, cube);
                         downRedCorner(actions, cube);
                     } else if (redCorner.thirdDirection == Face_Enum.DOWN) {
                         System.out.println("Not a logic location for this corner - RBD");
                     }
                 } else if (redCorner.secondDircetion == Face_Enum.DOWN) {
                     if (redCorner.thirdDirection == Face_Enum.BACK) {
-                        executeCMD(cmd.CMD_DOWN_TWIST_LEFT, actions, cube);
+                        executeCMD(AlgorithmCommands.CMD_DOWN_TWIST_LEFT, actions, cube);
                         frontLowerRedCorner(actions, cube);
                     } else if (redCorner.thirdDirection == Face_Enum.FRONT) {
                         System.out.println("Not a logic location for this corner - RDF");
@@ -739,16 +739,16 @@ class LogicUtils {
             case LEFT:
                 if (redCorner.secondDircetion == Face_Enum.DOWN) {
                     if (redCorner.thirdDirection == Face_Enum.FRONT) {
-                        executeCMD(cmd.CMD_DOWN_TWIST_RIGHT, actions, cube);
+                        executeCMD(AlgorithmCommands.CMD_DOWN_TWIST_RIGHT, actions, cube);
                         frontLowerRedCorner(actions, cube);
                     } else if (redCorner.thirdDirection == Face_Enum.BACK) {
                         System.out.println("Not a logic location for this corner - LDB");
                     }
                 } else if (redCorner.secondDircetion == Face_Enum.FRONT) {
                     if (redCorner.thirdDirection == Face_Enum.UP) {
-                        executeCMD(cmd.CMD_LEFT_TWIST_BACKUPWARD, actions, cube);
-                        executeCMD(cmd.CMD_DOWN_TWIST_RIGHT, actions, cube);
-                        executeCMD(cmd.CMD_LEFT_TWIST_FRONTUPWARD, actions, cube);
+                        executeCMD(AlgorithmCommands.CMD_LEFT_TWIST_BACKUPWARD, actions, cube);
+                        executeCMD(AlgorithmCommands.CMD_DOWN_TWIST_RIGHT, actions, cube);
+                        executeCMD(AlgorithmCommands.CMD_LEFT_TWIST_FRONTUPWARD, actions, cube);
                         frontLowerRedCorner(actions, cube);
                     } else if (redCorner.thirdDirection == Face_Enum.DOWN) {
                         System.out.println("Not a logic location for this corner - LFD");
@@ -756,10 +756,10 @@ class LogicUtils {
                     }
                 } else if (redCorner.secondDircetion == Face_Enum.UP) {
                     if (redCorner.thirdDirection == Face_Enum.BACK) {
-                        executeCMD(cmd.CMD_LEFT_TWIST_FRONTUPWARD, actions, cube);
-                        executeCMD(cmd.CMD_DOWN_TWIST_RIGHT, actions, cube);
-                        executeCMD(cmd.CMD_DOWN_TWIST_RIGHT, actions, cube);
-                        executeCMD(cmd.CMD_LEFT_TWIST_BACKUPWARD, actions, cube);
+                        executeCMD(AlgorithmCommands.CMD_LEFT_TWIST_FRONTUPWARD, actions, cube);
+                        executeCMD(AlgorithmCommands.CMD_DOWN_TWIST_RIGHT, actions, cube);
+                        executeCMD(AlgorithmCommands.CMD_DOWN_TWIST_RIGHT, actions, cube);
+                        executeCMD(AlgorithmCommands.CMD_LEFT_TWIST_BACKUPWARD, actions, cube);
                         rightLowerRedCorner(actions, cube);
                     } else if (redCorner.thirdDirection == Face_Enum.FRONT) {
                         System.out.println("Not a logic location for this corner - LUF");
@@ -767,8 +767,8 @@ class LogicUtils {
                     }
                 } else if (redCorner.secondDircetion == Face_Enum.BACK) {
                     if (redCorner.thirdDirection == Face_Enum.DOWN) {
-                        executeCMD(cmd.CMD_DOWN_TWIST_RIGHT, actions, cube);
-                        executeCMD(cmd.CMD_DOWN_TWIST_RIGHT, actions, cube);
+                        executeCMD(AlgorithmCommands.CMD_DOWN_TWIST_RIGHT, actions, cube);
+                        executeCMD(AlgorithmCommands.CMD_DOWN_TWIST_RIGHT, actions, cube);
                         rightLowerRedCorner(actions, cube);
                     } else if (redCorner.thirdDirection == Face_Enum.UP) {
                         System.out.println("Not a logic location for this corner - LBU");
@@ -778,26 +778,26 @@ class LogicUtils {
             case BACK:
                 if (redCorner.secondDircetion == Face_Enum.RIGHT) {
                     if (redCorner.thirdDirection == Face_Enum.DOWN) {
-                        executeCMD(cmd.CMD_DOWN_TWIST_LEFT, actions, cube);
+                        executeCMD(AlgorithmCommands.CMD_DOWN_TWIST_LEFT, actions, cube);
                         rightLowerRedCorner(actions, cube);
                     } else if (redCorner.thirdDirection == Face_Enum.UP) {
                         System.out.println("Not a logic location for this corner - BRU");
                     }
                 } else if (redCorner.secondDircetion == Face_Enum.UP) {
                     if (redCorner.thirdDirection == Face_Enum.RIGHT) {
-                        executeCMD(cmd.CMD_BACK_TWIST_CLOCKWISE, actions, cube);
-                        executeCMD(cmd.CMD_DOWN_TWIST_LEFT, actions, cube);
-                        executeCMD(cmd.CMD_BACK_TWIST_C_CLOCKWISE, actions, cube);
+                        executeCMD(AlgorithmCommands.CMD_BACK_TWIST_CLOCKWISE, actions, cube);
+                        executeCMD(AlgorithmCommands.CMD_DOWN_TWIST_LEFT, actions, cube);
+                        executeCMD(AlgorithmCommands.CMD_BACK_TWIST_C_CLOCKWISE, actions, cube);
                         rightLowerRedCorner(actions, cube);
                     } else if (redCorner.thirdDirection == Face_Enum.LEFT) {
                         System.out.println("Not a logic location for this corner - BUL");
                     }
                 } else if (redCorner.secondDircetion == Face_Enum.LEFT) {
                     if (redCorner.thirdDirection == Face_Enum.UP) {
-                        executeCMD(cmd.CMD_BACK_TWIST_C_CLOCKWISE, actions, cube);
-                        executeCMD(cmd.CMD_DOWN_TWIST_RIGHT, actions, cube);
-                        executeCMD(cmd.CMD_DOWN_TWIST_RIGHT, actions, cube);
-                        executeCMD(cmd.CMD_BACK_TWIST_CLOCKWISE, actions, cube);
+                        executeCMD(AlgorithmCommands.CMD_BACK_TWIST_C_CLOCKWISE, actions, cube);
+                        executeCMD(AlgorithmCommands.CMD_DOWN_TWIST_RIGHT, actions, cube);
+                        executeCMD(AlgorithmCommands.CMD_DOWN_TWIST_RIGHT, actions, cube);
+                        executeCMD(AlgorithmCommands.CMD_BACK_TWIST_CLOCKWISE, actions, cube);
                         frontLowerRedCorner(actions, cube);
                     } else if (redCorner.thirdDirection == Face_Enum.DOWN) {
 
@@ -805,8 +805,8 @@ class LogicUtils {
                     }
                 } else if (redCorner.secondDircetion == Face_Enum.DOWN) {
                     if (redCorner.thirdDirection == Face_Enum.LEFT) {
-                        executeCMD(cmd.CMD_DOWN_TWIST_RIGHT, actions, cube);
-                        executeCMD(cmd.CMD_DOWN_TWIST_RIGHT, actions, cube);
+                        executeCMD(AlgorithmCommands.CMD_DOWN_TWIST_RIGHT, actions, cube);
+                        executeCMD(AlgorithmCommands.CMD_DOWN_TWIST_RIGHT, actions, cube);
                         frontLowerRedCorner(actions, cube);
                     } else if (redCorner.thirdDirection == Face_Enum.RIGHT) {
                         System.out.println("Not a logic location for this corner - BDR");
@@ -828,16 +828,16 @@ class LogicUtils {
                     }
                 } else if (redCorner.secondDircetion == Face_Enum.UP) {
                     if (redCorner.thirdDirection == Face_Enum.LEFT) {
-                        executeCMD(cmd.CMD_LEFT_TWIST_BACKUPWARD, actions, cube);
-                        executeCMD(cmd.CMD_DOWN_TWIST_RIGHT, actions, cube);
-                        executeCMD(cmd.CMD_LEFT_TWIST_FRONTUPWARD, actions, cube);
+                        executeCMD(AlgorithmCommands.CMD_LEFT_TWIST_BACKUPWARD, actions, cube);
+                        executeCMD(AlgorithmCommands.CMD_DOWN_TWIST_RIGHT, actions, cube);
+                        executeCMD(AlgorithmCommands.CMD_LEFT_TWIST_FRONTUPWARD, actions, cube);
                         downRedCorner(actions, cube);
                     } else if (redCorner.thirdDirection == Face_Enum.RIGHT) {
                         System.out.println("Not a logic location for this corner - FUR");
                     }
                 } else if (redCorner.secondDircetion == Face_Enum.LEFT) {
                     if (redCorner.thirdDirection == Face_Enum.DOWN) {
-                        executeCMD(cmd.CMD_DOWN_TWIST_RIGHT, actions, cube);
+                        executeCMD(AlgorithmCommands.CMD_DOWN_TWIST_RIGHT, actions, cube);
                         rightLowerRedCorner(actions, cube);
                     } else if (redCorner.thirdDirection == Face_Enum.UP) {
                         System.out.println("Not a logic location for this corner - FLU");
@@ -853,22 +853,22 @@ class LogicUtils {
                     }
                 } else if (redCorner.secondDircetion == Face_Enum.FRONT) {
                     if (redCorner.thirdDirection == Face_Enum.LEFT) {
-                        executeCMD(cmd.CMD_DOWN_TWIST_RIGHT, actions, cube);
+                        executeCMD(AlgorithmCommands.CMD_DOWN_TWIST_RIGHT, actions, cube);
                         downRedCorner(actions, cube);
                     } else if (redCorner.thirdDirection == Face_Enum.RIGHT) {
                         System.out.println("Not a logic location for this corner - DFR");
                     }
                 } else if (redCorner.secondDircetion == Face_Enum.LEFT) {
                     if (redCorner.thirdDirection == Face_Enum.BACK) {
-                        executeCMD(cmd.CMD_DOWN_TWIST_LEFT, actions, cube);
-                        executeCMD(cmd.CMD_DOWN_TWIST_LEFT, actions, cube);
+                        executeCMD(AlgorithmCommands.CMD_DOWN_TWIST_LEFT, actions, cube);
+                        executeCMD(AlgorithmCommands.CMD_DOWN_TWIST_LEFT, actions, cube);
                         downRedCorner(actions, cube);
                     } else if (redCorner.thirdDirection == Face_Enum.FRONT) {
                         System.out.println("Not a logic location for this corner - DLF");
                     }
                 } else if (redCorner.secondDircetion == Face_Enum.BACK) {
                     if (redCorner.thirdDirection == Face_Enum.RIGHT) {
-                        executeCMD(cmd.CMD_DOWN_TWIST_LEFT, actions, cube);
+                        executeCMD(AlgorithmCommands.CMD_DOWN_TWIST_LEFT, actions, cube);
                         downRedCorner(actions, cube);
                     } else if (redCorner.thirdDirection == Face_Enum.LEFT) {
                         System.out.println("Not a logic location for this corner - DBL");
@@ -878,28 +878,28 @@ class LogicUtils {
             case UP:
                 if (redCorner.secondDircetion == Face_Enum.RIGHT) {
                     if (redCorner.thirdDirection == Face_Enum.BACK) {
-                        executeCMD(cmd.CMD_BACK_TWIST_CLOCKWISE, actions, cube);
-                        executeCMD(cmd.CMD_DOWN_TWIST_LEFT, actions, cube);
-                        executeCMD(cmd.CMD_BACK_TWIST_C_CLOCKWISE, actions, cube);
+                        executeCMD(AlgorithmCommands.CMD_BACK_TWIST_CLOCKWISE, actions, cube);
+                        executeCMD(AlgorithmCommands.CMD_DOWN_TWIST_LEFT, actions, cube);
+                        executeCMD(AlgorithmCommands.CMD_BACK_TWIST_C_CLOCKWISE, actions, cube);
                         frontLowerRedCorner(actions, cube);
                     } else if (redCorner.thirdDirection == Face_Enum.FRONT) {
                         System.out.println("Not a logic location for this corner - URF");
                     }
                 } else if (redCorner.secondDircetion == Face_Enum.BACK) {
                     if (redCorner.thirdDirection == Face_Enum.LEFT) {
-                        executeCMD(cmd.CMD_BACK_TWIST_C_CLOCKWISE, actions, cube);
-                        executeCMD(cmd.CMD_DOWN_TWIST_LEFT, actions, cube);
-                        executeCMD(cmd.CMD_DOWN_TWIST_LEFT, actions, cube);
-                        executeCMD(cmd.CMD_BACK_TWIST_CLOCKWISE, actions, cube);
+                        executeCMD(AlgorithmCommands.CMD_BACK_TWIST_C_CLOCKWISE, actions, cube);
+                        executeCMD(AlgorithmCommands.CMD_DOWN_TWIST_LEFT, actions, cube);
+                        executeCMD(AlgorithmCommands.CMD_DOWN_TWIST_LEFT, actions, cube);
+                        executeCMD(AlgorithmCommands.CMD_BACK_TWIST_CLOCKWISE, actions, cube);
                         rightLowerRedCorner(actions, cube);
                     } else if (redCorner.thirdDirection == Face_Enum.RIGHT) {
                         System.out.println("Not a logic location for this corner - UBR");
                     }
                 } else if (redCorner.secondDircetion == Face_Enum.LEFT) {
                     if (redCorner.thirdDirection == Face_Enum.FRONT) {
-                        executeCMD(cmd.CMD_LEFT_TWIST_BACKUPWARD, actions, cube);
-                        executeCMD(cmd.CMD_DOWN_TWIST_RIGHT, actions, cube);
-                        executeCMD(cmd.CMD_LEFT_TWIST_FRONTUPWARD, actions, cube);
+                        executeCMD(AlgorithmCommands.CMD_LEFT_TWIST_BACKUPWARD, actions, cube);
+                        executeCMD(AlgorithmCommands.CMD_DOWN_TWIST_RIGHT, actions, cube);
+                        executeCMD(AlgorithmCommands.CMD_LEFT_TWIST_FRONTUPWARD, actions, cube);
                         rightLowerRedCorner(actions, cube);
                     } else if (redCorner.thirdDirection == Face_Enum.BACK) {
                         System.out.println("Not a logic location for this corner - ULB");
@@ -917,73 +917,73 @@ class LogicUtils {
     // up-front-right side.
     // has fixed actions that is added to the list of commands
     // Adds the appropriate commands to the list
-    private static void rightLowerRedCorner(List<cmd> actions, Cube cube) {
-        executeCMD(cmd.CMD_DOWN_TWIST_RIGHT, actions, cube);
-        executeCMD(cmd.CMD_FRONT_TWIST_CLOCKWISE, actions, cube);
-        executeCMD(cmd.CMD_DOWN_TWIST_LEFT, actions, cube);
-        executeCMD(cmd.CMD_FRONT_TWIST_C_CLOCKWISE, actions, cube);
+    private static void rightLowerRedCorner(List<AlgorithmCommands> actions, Cube cube) {
+        executeCMD(AlgorithmCommands.CMD_DOWN_TWIST_RIGHT, actions, cube);
+        executeCMD(AlgorithmCommands.CMD_FRONT_TWIST_CLOCKWISE, actions, cube);
+        executeCMD(AlgorithmCommands.CMD_DOWN_TWIST_LEFT, actions, cube);
+        executeCMD(AlgorithmCommands.CMD_FRONT_TWIST_C_CLOCKWISE, actions, cube);
     }
 
     // one of the core actions of stage two in the algorithm, bring an corner from front-right-down to the
     // up-right-front side.
     // has fixed actions that is added to the list of commands
     // Adds the appropriate commands to the list
-    private static void frontLowerRedCorner(List<cmd> actions, Cube cube) {
-        executeCMD(cmd.CMD_DOWN_TWIST_LEFT, actions, cube);
-        executeCMD(cmd.CMD_RIGHT_TWIST_BACKUPWARD, actions, cube);
-        executeCMD(cmd.CMD_DOWN_TWIST_RIGHT, actions, cube);
-        executeCMD(cmd.CMD_RIGHT_TWIST_FRONTUPWARD, actions, cube);
+    private static void frontLowerRedCorner(List<AlgorithmCommands> actions, Cube cube) {
+        executeCMD(AlgorithmCommands.CMD_DOWN_TWIST_LEFT, actions, cube);
+        executeCMD(AlgorithmCommands.CMD_RIGHT_TWIST_BACKUPWARD, actions, cube);
+        executeCMD(AlgorithmCommands.CMD_DOWN_TWIST_RIGHT, actions, cube);
+        executeCMD(AlgorithmCommands.CMD_RIGHT_TWIST_FRONTUPWARD, actions, cube);
     }
 
     // one of the core actions of stage two in the algorithm, bring an corner from down-front-right to the
     // up-right-front side.
     // has fixed actions that is added to the list of commands
     // Adds the appropriate commands to the list
-    private static void downRedCorner(List<cmd> actions, Cube cube) {
-        executeCMD(cmd.CMD_RIGHT_TWIST_BACKUPWARD, actions, cube);
-        executeCMD(cmd.CMD_DOWN_TWIST_RIGHT, actions, cube);
-        executeCMD(cmd.CMD_RIGHT_TWIST_FRONTUPWARD, actions, cube);
-        executeCMD(cmd.CMD_FRONT_TWIST_CLOCKWISE, actions, cube);
-        executeCMD(cmd.CMD_DOWN_TWIST_RIGHT, actions, cube);
-        executeCMD(cmd.CMD_DOWN_TWIST_RIGHT, actions, cube);
-        executeCMD(cmd.CMD_FRONT_TWIST_C_CLOCKWISE, actions, cube);
+    private static void downRedCorner(List<AlgorithmCommands> actions, Cube cube) {
+        executeCMD(AlgorithmCommands.CMD_RIGHT_TWIST_BACKUPWARD, actions, cube);
+        executeCMD(AlgorithmCommands.CMD_DOWN_TWIST_RIGHT, actions, cube);
+        executeCMD(AlgorithmCommands.CMD_RIGHT_TWIST_FRONTUPWARD, actions, cube);
+        executeCMD(AlgorithmCommands.CMD_FRONT_TWIST_CLOCKWISE, actions, cube);
+        executeCMD(AlgorithmCommands.CMD_DOWN_TWIST_RIGHT, actions, cube);
+        executeCMD(AlgorithmCommands.CMD_DOWN_TWIST_RIGHT, actions, cube);
+        executeCMD(AlgorithmCommands.CMD_FRONT_TWIST_C_CLOCKWISE, actions, cube);
     }
 
     // one of the core actions of stage two in the algorithm, bring an corner from right-up-front to the up-front-right
     // side.
     // has fixed actions that is added to the list of commands
     // Adds the appropriate commands to the list
-    private static void rightUpperRedCorner(List<cmd> actions, Cube cube) {
-        executeCMD(cmd.CMD_RIGHT_TWIST_BACKUPWARD, actions, cube);
-        executeCMD(cmd.CMD_DOWN_TWIST_LEFT, actions, cube);
-        executeCMD(cmd.CMD_DOWN_TWIST_LEFT, actions, cube);
-        executeCMD(cmd.CMD_RIGHT_TWIST_FRONTUPWARD, actions, cube);
-        executeCMD(cmd.CMD_FRONT_TWIST_CLOCKWISE, actions, cube);
-        executeCMD(cmd.CMD_DOWN_TWIST_LEFT, actions, cube);
-        executeCMD(cmd.CMD_DOWN_TWIST_LEFT, actions, cube);
-        executeCMD(cmd.CMD_FRONT_TWIST_C_CLOCKWISE, actions, cube);
+    private static void rightUpperRedCorner(List<AlgorithmCommands> actions, Cube cube) {
+        executeCMD(AlgorithmCommands.CMD_RIGHT_TWIST_BACKUPWARD, actions, cube);
+        executeCMD(AlgorithmCommands.CMD_DOWN_TWIST_LEFT, actions, cube);
+        executeCMD(AlgorithmCommands.CMD_DOWN_TWIST_LEFT, actions, cube);
+        executeCMD(AlgorithmCommands.CMD_RIGHT_TWIST_FRONTUPWARD, actions, cube);
+        executeCMD(AlgorithmCommands.CMD_FRONT_TWIST_CLOCKWISE, actions, cube);
+        executeCMD(AlgorithmCommands.CMD_DOWN_TWIST_LEFT, actions, cube);
+        executeCMD(AlgorithmCommands.CMD_DOWN_TWIST_LEFT, actions, cube);
+        executeCMD(AlgorithmCommands.CMD_FRONT_TWIST_C_CLOCKWISE, actions, cube);
     }
 
     // one of the core actions of stage two in the algorithm, bring an corner from front-up-right to the up-right-front
     // side.
     // has fixed actions that is added to the list of commands
     // Adds the appropriate commands to the list
-    private static void frontUpperRedCorner(List<cmd> actions, Cube cube) {
-        executeCMD(cmd.CMD_FRONT_TWIST_CLOCKWISE, actions, cube);
-        executeCMD(cmd.CMD_DOWN_TWIST_RIGHT, actions, cube);
-        executeCMD(cmd.CMD_DOWN_TWIST_RIGHT, actions, cube);
-        executeCMD(cmd.CMD_FRONT_TWIST_C_CLOCKWISE, actions, cube);
-        executeCMD(cmd.CMD_RIGHT_TWIST_BACKUPWARD, actions, cube);
-        executeCMD(cmd.CMD_DOWN_TWIST_RIGHT, actions, cube);
-        executeCMD(cmd.CMD_DOWN_TWIST_RIGHT, actions, cube);
-        executeCMD(cmd.CMD_RIGHT_TWIST_FRONTUPWARD, actions, cube);
+    private static void frontUpperRedCorner(List<AlgorithmCommands> actions, Cube cube) {
+        executeCMD(AlgorithmCommands.CMD_FRONT_TWIST_CLOCKWISE, actions, cube);
+        executeCMD(AlgorithmCommands.CMD_DOWN_TWIST_RIGHT, actions, cube);
+        executeCMD(AlgorithmCommands.CMD_DOWN_TWIST_RIGHT, actions, cube);
+        executeCMD(AlgorithmCommands.CMD_FRONT_TWIST_C_CLOCKWISE, actions, cube);
+        executeCMD(AlgorithmCommands.CMD_RIGHT_TWIST_BACKUPWARD, actions, cube);
+        executeCMD(AlgorithmCommands.CMD_DOWN_TWIST_RIGHT, actions, cube);
+        executeCMD(AlgorithmCommands.CMD_DOWN_TWIST_RIGHT, actions, cube);
+        executeCMD(AlgorithmCommands.CMD_RIGHT_TWIST_FRONTUPWARD, actions, cube);
     }
 
 
     //////////////////////////////// stage one ////////////////////////////////
 
     // Help functions for stage one. Brings the given edge to the UP face in the FRONT side.
-    static void getRedCross(Cube cube, List<cmd> actions, Logic.Location redEdge) {
+    static void getRedCross(Cube cube, List<AlgorithmCommands> actions, Logic.Location redEdge) {
 
         if (redEdge.name == null) {
             System.out.println("Error: 'stageOne' has failed");
@@ -992,24 +992,24 @@ class LogicUtils {
         switch (redEdge.name) {
             case UP:
                 if (redEdge.x == 0 && redEdge.y == 1) {
-                    executeCMD(cmd.CMD_UP_TWIST_RIGHT, actions, cube);
-                    executeCMD(cmd.CMD_UP_TWIST_RIGHT, actions, cube);
-                    executeCMD(cmd.CMD_FRONT_TWIST_C_CLOCKWISE, actions, cube);
-                    executeCMD(cmd.CMD_UP_TWIST_RIGHT, actions, cube);
-                    executeCMD(cmd.CMD_UP_TWIST_RIGHT, actions, cube);
-                    executeCMD(cmd.CMD_FRONT_TWIST_CLOCKWISE, actions, cube);
+                    executeCMD(AlgorithmCommands.CMD_UP_TWIST_RIGHT, actions, cube);
+                    executeCMD(AlgorithmCommands.CMD_UP_TWIST_RIGHT, actions, cube);
+                    executeCMD(AlgorithmCommands.CMD_FRONT_TWIST_C_CLOCKWISE, actions, cube);
+                    executeCMD(AlgorithmCommands.CMD_UP_TWIST_RIGHT, actions, cube);
+                    executeCMD(AlgorithmCommands.CMD_UP_TWIST_RIGHT, actions, cube);
+                    executeCMD(AlgorithmCommands.CMD_FRONT_TWIST_CLOCKWISE, actions, cube);
                 } else if (redEdge.x == 1 && redEdge.y == 2) {
-                    executeCMD(cmd.CMD_RIGHT_TWIST_BACKUPWARD, actions, cube);
-                    executeCMD(cmd.CMD_RIGHT_TWIST_BACKUPWARD, actions, cube);
-                    executeCMD(cmd.CMD_DOWN_TWIST_LEFT, actions, cube);
-                    executeCMD(cmd.CMD_FRONT_TWIST_CLOCKWISE, actions, cube);
-                    executeCMD(cmd.CMD_FRONT_TWIST_CLOCKWISE, actions, cube);
+                    executeCMD(AlgorithmCommands.CMD_RIGHT_TWIST_BACKUPWARD, actions, cube);
+                    executeCMD(AlgorithmCommands.CMD_RIGHT_TWIST_BACKUPWARD, actions, cube);
+                    executeCMD(AlgorithmCommands.CMD_DOWN_TWIST_LEFT, actions, cube);
+                    executeCMD(AlgorithmCommands.CMD_FRONT_TWIST_CLOCKWISE, actions, cube);
+                    executeCMD(AlgorithmCommands.CMD_FRONT_TWIST_CLOCKWISE, actions, cube);
                 } else if (redEdge.x == 1 && redEdge.y == 0) {
-                    executeCMD(cmd.CMD_LEFT_TWIST_BACKUPWARD, actions, cube);
-                    executeCMD(cmd.CMD_LEFT_TWIST_BACKUPWARD, actions, cube);
-                    executeCMD(cmd.CMD_DOWN_TWIST_RIGHT, actions, cube);
-                    executeCMD(cmd.CMD_FRONT_TWIST_CLOCKWISE, actions, cube);
-                    executeCMD(cmd.CMD_FRONT_TWIST_CLOCKWISE, actions, cube);
+                    executeCMD(AlgorithmCommands.CMD_LEFT_TWIST_BACKUPWARD, actions, cube);
+                    executeCMD(AlgorithmCommands.CMD_LEFT_TWIST_BACKUPWARD, actions, cube);
+                    executeCMD(AlgorithmCommands.CMD_DOWN_TWIST_RIGHT, actions, cube);
+                    executeCMD(AlgorithmCommands.CMD_FRONT_TWIST_CLOCKWISE, actions, cube);
+                    executeCMD(AlgorithmCommands.CMD_FRONT_TWIST_CLOCKWISE, actions, cube);
                 }//redYellow.x==2&&redYellow.y==1 is the place
                 break;
             case FRONT:
@@ -1017,14 +1017,14 @@ class LogicUtils {
                     frontRedEdge(actions, cube);
 
                 } else if (redEdge.x == 1 && redEdge.y == 0) {
-                    executeCMD(cmd.CMD_FRONT_TWIST_CLOCKWISE, actions, cube);
+                    executeCMD(AlgorithmCommands.CMD_FRONT_TWIST_CLOCKWISE, actions, cube);
                     frontRedEdge(actions, cube);
                 } else if (redEdge.x == 1 && redEdge.y == 2) {
-                    executeCMD(cmd.CMD_FRONT_TWIST_C_CLOCKWISE, actions, cube);
+                    executeCMD(AlgorithmCommands.CMD_FRONT_TWIST_C_CLOCKWISE, actions, cube);
                     frontRedEdge(actions, cube);
                 } else if (redEdge.x == 2 && redEdge.y == 1) {
-                    executeCMD(cmd.CMD_FRONT_TWIST_CLOCKWISE, actions, cube);
-                    executeCMD(cmd.CMD_FRONT_TWIST_CLOCKWISE, actions, cube);
+                    executeCMD(AlgorithmCommands.CMD_FRONT_TWIST_CLOCKWISE, actions, cube);
+                    executeCMD(AlgorithmCommands.CMD_FRONT_TWIST_CLOCKWISE, actions, cube);
                     frontRedEdge(actions, cube);
                 }
                 break;
@@ -1032,60 +1032,60 @@ class LogicUtils {
                 if (redEdge.x == 0 && redEdge.y == 1) {
                     downRedEdge(actions, cube);
                 } else if (redEdge.x == 1 && redEdge.y == 0) {
-                    executeCMD(cmd.CMD_DOWN_TWIST_RIGHT, actions, cube);
+                    executeCMD(AlgorithmCommands.CMD_DOWN_TWIST_RIGHT, actions, cube);
                     downRedEdge(actions, cube);
                 } else if (redEdge.x == 1 && redEdge.y == 2) {
-                    executeCMD(cmd.CMD_DOWN_TWIST_LEFT, actions, cube);
+                    executeCMD(AlgorithmCommands.CMD_DOWN_TWIST_LEFT, actions, cube);
                     downRedEdge(actions, cube);
                 } else if (redEdge.x == 2 && redEdge.y == 1) {
-                    executeCMD(cmd.CMD_DOWN_TWIST_LEFT, actions, cube);
-                    executeCMD(cmd.CMD_DOWN_TWIST_LEFT, actions, cube);
+                    executeCMD(AlgorithmCommands.CMD_DOWN_TWIST_LEFT, actions, cube);
+                    executeCMD(AlgorithmCommands.CMD_DOWN_TWIST_LEFT, actions, cube);
                     downRedEdge(actions, cube);
                 }
                 break;
             case BACK:
                 if (redEdge.x == 0 && redEdge.y == 1) {
-                    executeCMD(cmd.CMD_BACK_TWIST_CLOCKWISE, actions, cube);
-                    executeCMD(cmd.CMD_BACK_TWIST_CLOCKWISE, actions, cube);
+                    executeCMD(AlgorithmCommands.CMD_BACK_TWIST_CLOCKWISE, actions, cube);
+                    executeCMD(AlgorithmCommands.CMD_BACK_TWIST_CLOCKWISE, actions, cube);
                     backRedEdge(actions, cube);
                 } else if (redEdge.x == 1 && redEdge.y == 0) {
-                    executeCMD(cmd.CMD_BACK_TWIST_CLOCKWISE, actions, cube);
+                    executeCMD(AlgorithmCommands.CMD_BACK_TWIST_CLOCKWISE, actions, cube);
                     backRedEdge(actions, cube);
-                    executeCMD(cmd.CMD_BACK_TWIST_C_CLOCKWISE, actions, cube);
+                    executeCMD(AlgorithmCommands.CMD_BACK_TWIST_C_CLOCKWISE, actions, cube);
                 } else if (redEdge.x == 2 && redEdge.y == 1) {
                     backRedEdge(actions, cube);
                 } else if (redEdge.x == 1 && redEdge.y == 2) {
-                    executeCMD(cmd.CMD_BACK_TWIST_C_CLOCKWISE, actions, cube);
+                    executeCMD(AlgorithmCommands.CMD_BACK_TWIST_C_CLOCKWISE, actions, cube);
                     backRedEdge(actions, cube);
-                    executeCMD(cmd.CMD_BACK_TWIST_CLOCKWISE, actions, cube);
+                    executeCMD(AlgorithmCommands.CMD_BACK_TWIST_CLOCKWISE, actions, cube);
                 }
                 break;
             case LEFT:
                 if (redEdge.x == 0 && redEdge.y == 1) {
-                    executeCMD(cmd.CMD_LEFT_TWIST_BACKUPWARD, actions, cube);
-                    executeCMD(cmd.CMD_FRONT_TWIST_CLOCKWISE, actions, cube);
+                    executeCMD(AlgorithmCommands.CMD_LEFT_TWIST_BACKUPWARD, actions, cube);
+                    executeCMD(AlgorithmCommands.CMD_FRONT_TWIST_CLOCKWISE, actions, cube);
                 } else if (redEdge.x == 1 && redEdge.y == 0) {
-                    executeCMD(cmd.CMD_LEFT_TWIST_FRONTUPWARD, actions, cube);
+                    executeCMD(AlgorithmCommands.CMD_LEFT_TWIST_FRONTUPWARD, actions, cube);
                     leftRedEdge(actions, cube);
-                    executeCMD(cmd.CMD_LEFT_TWIST_BACKUPWARD, actions, cube);
+                    executeCMD(AlgorithmCommands.CMD_LEFT_TWIST_BACKUPWARD, actions, cube);
                 } else if (redEdge.x == 2 && redEdge.y == 1) {
                     leftRedEdge(actions, cube);
                 } else if (redEdge.x == 1 && redEdge.y == 2) {
-                    executeCMD(cmd.CMD_FRONT_TWIST_CLOCKWISE, actions, cube);
+                    executeCMD(AlgorithmCommands.CMD_FRONT_TWIST_CLOCKWISE, actions, cube);
                 }
                 break;
             case RIGHT:
                 if (redEdge.x == 0 && redEdge.y == 1) {
-                    executeCMD(cmd.CMD_RIGHT_TWIST_BACKUPWARD, actions, cube);
-                    executeCMD(cmd.CMD_FRONT_TWIST_C_CLOCKWISE, actions, cube);
+                    executeCMD(AlgorithmCommands.CMD_RIGHT_TWIST_BACKUPWARD, actions, cube);
+                    executeCMD(AlgorithmCommands.CMD_FRONT_TWIST_C_CLOCKWISE, actions, cube);
                 } else if (redEdge.x == 1 && redEdge.y == 0) {
-                    executeCMD(cmd.CMD_FRONT_TWIST_C_CLOCKWISE, actions, cube);
+                    executeCMD(AlgorithmCommands.CMD_FRONT_TWIST_C_CLOCKWISE, actions, cube);
                 } else if (redEdge.x == 2 && redEdge.y == 1) {
                     rightRedEdge(actions, cube);
                 } else if (redEdge.x == 1 && redEdge.y == 2) {
-                    executeCMD(cmd.CMD_RIGHT_TWIST_FRONTUPWARD, actions, cube);
+                    executeCMD(AlgorithmCommands.CMD_RIGHT_TWIST_FRONTUPWARD, actions, cube);
                     rightRedEdge(actions, cube);
-                    executeCMD(cmd.CMD_RIGHT_TWIST_BACKUPWARD, actions, cube);
+                    executeCMD(AlgorithmCommands.CMD_RIGHT_TWIST_BACKUPWARD, actions, cube);
                 }
                 break;
         }
@@ -1094,49 +1094,49 @@ class LogicUtils {
     // one of the core actions of stage one in the algorithm, bring an edge  from front-up to the up-front side
     // has fixed actions that is added to the list of commands
     // Adds the appropriate commands to the list
-    private static void frontRedEdge(List<cmd> actions, Cube cube) {
-        executeCMD(cmd.CMD_FRONT_TWIST_CLOCKWISE, actions, cube);
-        executeCMD(cmd.CMD_RIGHT_TWIST_BACKUPWARD, actions, cube);
-        executeCMD(cmd.CMD_DOWN_TWIST_LEFT, actions, cube);
-        executeCMD(cmd.CMD_RIGHT_TWIST_FRONTUPWARD, actions, cube);
-        executeCMD(cmd.CMD_FRONT_TWIST_CLOCKWISE, actions, cube);
-        executeCMD(cmd.CMD_FRONT_TWIST_CLOCKWISE, actions, cube);
+    private static void frontRedEdge(List<AlgorithmCommands> actions, Cube cube) {
+        executeCMD(AlgorithmCommands.CMD_FRONT_TWIST_CLOCKWISE, actions, cube);
+        executeCMD(AlgorithmCommands.CMD_RIGHT_TWIST_BACKUPWARD, actions, cube);
+        executeCMD(AlgorithmCommands.CMD_DOWN_TWIST_LEFT, actions, cube);
+        executeCMD(AlgorithmCommands.CMD_RIGHT_TWIST_FRONTUPWARD, actions, cube);
+        executeCMD(AlgorithmCommands.CMD_FRONT_TWIST_CLOCKWISE, actions, cube);
+        executeCMD(AlgorithmCommands.CMD_FRONT_TWIST_CLOCKWISE, actions, cube);
     }
 
     // one of the core actions of stage one in the algorithm, bring an edge from back-down to the up-front side
     // has fixed actions that is added to the list of commands
     // Adds the appropriate commands to the list
-    private static void backRedEdge(List<cmd> actions, Cube cube) {
-        executeCMD(cmd.CMD_DOWN_TWIST_LEFT, actions, cube);
-        executeCMD(cmd.CMD_RIGHT_TWIST_FRONTUPWARD, actions, cube);
-        executeCMD(cmd.CMD_FRONT_TWIST_C_CLOCKWISE, actions, cube);
-        executeCMD(cmd.CMD_RIGHT_TWIST_BACKUPWARD, actions, cube);
+    private static void backRedEdge(List<AlgorithmCommands> actions, Cube cube) {
+        executeCMD(AlgorithmCommands.CMD_DOWN_TWIST_LEFT, actions, cube);
+        executeCMD(AlgorithmCommands.CMD_RIGHT_TWIST_FRONTUPWARD, actions, cube);
+        executeCMD(AlgorithmCommands.CMD_FRONT_TWIST_C_CLOCKWISE, actions, cube);
+        executeCMD(AlgorithmCommands.CMD_RIGHT_TWIST_BACKUPWARD, actions, cube);
     }
 
     // one of the core actions of stage one in the algorithm, bring an edge  from left-up to the up-front side
     // has fixed actions that is added to the list of commands
     // Adds the appropriate commands to the list
-    private static void leftRedEdge(List<cmd> actions, Cube cube) {
-        executeCMD(cmd.CMD_LEFT_TWIST_FRONTUPWARD, actions, cube);
-        executeCMD(cmd.CMD_FRONT_TWIST_CLOCKWISE, actions, cube);
-        executeCMD(cmd.CMD_LEFT_TWIST_BACKUPWARD, actions, cube);
+    private static void leftRedEdge(List<AlgorithmCommands> actions, Cube cube) {
+        executeCMD(AlgorithmCommands.CMD_LEFT_TWIST_FRONTUPWARD, actions, cube);
+        executeCMD(AlgorithmCommands.CMD_FRONT_TWIST_CLOCKWISE, actions, cube);
+        executeCMD(AlgorithmCommands.CMD_LEFT_TWIST_BACKUPWARD, actions, cube);
     }
 
     // one of the core actions of stage one in the algorithm, bring an edge  from right-up to the up-front side
     // has fixed actions that is added to the list of commands
     // Adds the appropriate commands to the list
-    private static void rightRedEdge(List<cmd> actions, Cube cube) {
-        executeCMD(cmd.CMD_RIGHT_TWIST_FRONTUPWARD, actions, cube);
-        executeCMD(cmd.CMD_FRONT_TWIST_C_CLOCKWISE, actions, cube);
-        executeCMD(cmd.CMD_RIGHT_TWIST_BACKUPWARD, actions, cube);
+    private static void rightRedEdge(List<AlgorithmCommands> actions, Cube cube) {
+        executeCMD(AlgorithmCommands.CMD_RIGHT_TWIST_FRONTUPWARD, actions, cube);
+        executeCMD(AlgorithmCommands.CMD_FRONT_TWIST_C_CLOCKWISE, actions, cube);
+        executeCMD(AlgorithmCommands.CMD_RIGHT_TWIST_BACKUPWARD, actions, cube);
     }
 
     // one of the core actions of stage one in the algorithm, bring an edge from down-front to the up-front side
     // has fixed actions that is added to the list of commands
     // Adds the appropriate commands to the list
-    private static void downRedEdge(List<cmd> actions, Cube cube) {
-        executeCMD(cmd.CMD_FRONT_TWIST_CLOCKWISE, actions, cube);
-        executeCMD(cmd.CMD_FRONT_TWIST_CLOCKWISE, actions, cube);
+    private static void downRedEdge(List<AlgorithmCommands> actions, Cube cube) {
+        executeCMD(AlgorithmCommands.CMD_FRONT_TWIST_CLOCKWISE, actions, cube);
+        executeCMD(AlgorithmCommands.CMD_FRONT_TWIST_CLOCKWISE, actions, cube);
     }
 
 

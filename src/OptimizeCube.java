@@ -43,7 +43,7 @@ class OptimizeCube {
     }
 
     private static int scoringFunction(Cube cube) {
-        List<cmd> result = Logic.algorithm(cube);
+        List<AlgorithmCommands> result = Logic.algorithm(cube);
         return OptimizeCube.getNumOfAtomic(result);
     }
 
@@ -115,26 +115,26 @@ class OptimizeCube {
      * To 1 command with the opposite direction
      * @param actions - The list of the commands
      */
-    static void optimizeList(List<cmd> actions){
-        Map<cmd, cmd> contrastCMDs = new HashMap<>();
-        contrastCMDs.put(cmd.CMD_LEFT_ROTATE, cmd.CMD_RIGHT_ROTATE);
-        contrastCMDs.put(cmd.CMD_RIGHT_ROTATE, cmd.CMD_LEFT_ROTATE);
-        contrastCMDs.put(cmd.CMD_UP_TWIST_LEFT, cmd.CMD_UP_TWIST_RIGHT);
-        contrastCMDs.put(cmd.CMD_UP_TWIST_RIGHT, cmd.CMD_UP_TWIST_LEFT);
-        contrastCMDs.put(cmd.CMD_LEFT_TWIST_FRONTUPWARD, cmd.CMD_LEFT_TWIST_BACKUPWARD);
-        contrastCMDs.put(cmd.CMD_LEFT_TWIST_BACKUPWARD, cmd.CMD_LEFT_TWIST_FRONTUPWARD);
-        contrastCMDs.put(cmd.CMD_DOWN_TWIST_RIGHT, cmd.CMD_DOWN_TWIST_LEFT);
-        contrastCMDs.put(cmd.CMD_DOWN_TWIST_LEFT, cmd.CMD_DOWN_TWIST_RIGHT);
-        contrastCMDs.put(cmd.CMD_RIGHT_TWIST_FRONTUPWARD, cmd.CMD_RIGHT_TWIST_BACKUPWARD);
-        contrastCMDs.put(cmd.CMD_RIGHT_TWIST_BACKUPWARD, cmd.CMD_RIGHT_TWIST_FRONTUPWARD);
-        contrastCMDs.put(cmd.CMD_FRONT_TWIST_CLOCKWISE, cmd.CMD_FRONT_TWIST_C_CLOCKWISE);
-        contrastCMDs.put(cmd.CMD_FRONT_TWIST_C_CLOCKWISE, cmd.CMD_FRONT_TWIST_CLOCKWISE);
-        contrastCMDs.put(cmd.CMD_BACK_TWIST_CLOCKWISE, cmd.CMD_BACK_TWIST_C_CLOCKWISE);
-        contrastCMDs.put(cmd.CMD_BACK_TWIST_C_CLOCKWISE, cmd.CMD_BACK_TWIST_CLOCKWISE);
+    static void optimizeList(List<AlgorithmCommands> actions){
+        Map<AlgorithmCommands, AlgorithmCommands> contrastCMDs = new HashMap<>();
+        contrastCMDs.put(AlgorithmCommands.CMD_LEFT_ROTATE, AlgorithmCommands.CMD_RIGHT_ROTATE);
+        contrastCMDs.put(AlgorithmCommands.CMD_RIGHT_ROTATE, AlgorithmCommands.CMD_LEFT_ROTATE);
+        contrastCMDs.put(AlgorithmCommands.CMD_UP_TWIST_LEFT, AlgorithmCommands.CMD_UP_TWIST_RIGHT);
+        contrastCMDs.put(AlgorithmCommands.CMD_UP_TWIST_RIGHT, AlgorithmCommands.CMD_UP_TWIST_LEFT);
+        contrastCMDs.put(AlgorithmCommands.CMD_LEFT_TWIST_FRONTUPWARD, AlgorithmCommands.CMD_LEFT_TWIST_BACKUPWARD);
+        contrastCMDs.put(AlgorithmCommands.CMD_LEFT_TWIST_BACKUPWARD, AlgorithmCommands.CMD_LEFT_TWIST_FRONTUPWARD);
+        contrastCMDs.put(AlgorithmCommands.CMD_DOWN_TWIST_RIGHT, AlgorithmCommands.CMD_DOWN_TWIST_LEFT);
+        contrastCMDs.put(AlgorithmCommands.CMD_DOWN_TWIST_LEFT, AlgorithmCommands.CMD_DOWN_TWIST_RIGHT);
+        contrastCMDs.put(AlgorithmCommands.CMD_RIGHT_TWIST_FRONTUPWARD, AlgorithmCommands.CMD_RIGHT_TWIST_BACKUPWARD);
+        contrastCMDs.put(AlgorithmCommands.CMD_RIGHT_TWIST_BACKUPWARD, AlgorithmCommands.CMD_RIGHT_TWIST_FRONTUPWARD);
+        contrastCMDs.put(AlgorithmCommands.CMD_FRONT_TWIST_CLOCKWISE, AlgorithmCommands.CMD_FRONT_TWIST_C_CLOCKWISE);
+        contrastCMDs.put(AlgorithmCommands.CMD_FRONT_TWIST_C_CLOCKWISE, AlgorithmCommands.CMD_FRONT_TWIST_CLOCKWISE);
+        contrastCMDs.put(AlgorithmCommands.CMD_BACK_TWIST_CLOCKWISE, AlgorithmCommands.CMD_BACK_TWIST_C_CLOCKWISE);
+        contrastCMDs.put(AlgorithmCommands.CMD_BACK_TWIST_C_CLOCKWISE, AlgorithmCommands.CMD_BACK_TWIST_CLOCKWISE);
 
         for (int i = actions.size() - 2; i >= 0; i--){
             try{
-                if(actions.get(i)==cmd.CMD_FLIP){continue;}
+                if(actions.get(i)== AlgorithmCommands.CMD_FLIP){continue;}
                 if (actions.get(i) == actions.get(i+1) && actions.get(i) == actions.get(i+2)){
                     actions.set(i, contrastCMDs.get(actions.get(i)));
                     actions.remove(i+2);
@@ -148,10 +148,10 @@ class OptimizeCube {
     }
 
 // This function counts the number of commands , without flips and rotates
-    static int getNumOfAtomic(List<cmd> actions){
+    private static int getNumOfAtomic(List<AlgorithmCommands> actions){
         int num = 0;
-        for (cmd action : actions){
-            if (action != cmd.CMD_RIGHT_ROTATE && action != cmd.CMD_LEFT_ROTATE && action != cmd.CMD_FLIP){
+        for (AlgorithmCommands action : actions){
+            if (action != AlgorithmCommands.CMD_RIGHT_ROTATE && action != AlgorithmCommands.CMD_LEFT_ROTATE && action != AlgorithmCommands.CMD_FLIP){
                 num++;
             }
         }

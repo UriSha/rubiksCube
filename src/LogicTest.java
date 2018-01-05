@@ -21,7 +21,7 @@ class LogicTest {
     void initialize() {
         for (int i = 0; i < 100; i++) {
             Cube cube = CubeUtils.getRandomCube();
-            List<cmd> actions = new ArrayList<>();
+            List<AlgorithmCommands> actions = new ArrayList<>();
             Logic.initialize(cube, actions);
             String msg = "Initialize test has failed. The center of the %s face is: %s instead of: %s";
             assertTrue(cube.getUp().getGrid()[1][1] == Cube.Color.RED, String.format
@@ -34,7 +34,7 @@ class LogicTest {
     void stageOne() {
         for (int i = 0; i < 100; i++) {
             Cube cube = CubeUtils.getRandomCube();
-            List<cmd> actions = new ArrayList<>();
+            List<AlgorithmCommands> actions = new ArrayList<>();
             Logic.initialize(cube, actions);
             Logic.stageOne(cube, actions);
             String msgCross = "Stage one test has failed. %s edge is located at : %s - %s  instead of : %s";
@@ -61,7 +61,7 @@ class LogicTest {
     void stageTwo() {
         for (int i = 0; i < 100; i++) {
             Cube cube = CubeUtils.getRandomCube();
-            List<cmd> actions = new ArrayList<>();
+            List<AlgorithmCommands> actions = new ArrayList<>();
             Logic.initialize(cube, actions);
             Logic.stageOne(cube, actions);
             Logic.stageTwo(cube, actions);
@@ -89,7 +89,7 @@ class LogicTest {
     void stageThree() {
         for (int i = 0; i < 100; i++) {
             Cube cube = CubeUtils.getRandomCube();
-            List<cmd> actions = new ArrayList<>();
+            List<AlgorithmCommands> actions = new ArrayList<>();
             Logic.initialize(cube, actions);
             Logic.stageOne(cube, actions);
             Logic.stageTwo(cube, actions);
@@ -119,7 +119,7 @@ class LogicTest {
     void stageFour() {
         for (int j = 0; j < 100; j++) {
             Cube cube = CubeUtils.getRandomCube();
-            List<cmd> actions = new ArrayList<>();
+            List<AlgorithmCommands> actions = new ArrayList<>();
             Logic.initialize(cube, actions);
             Logic.stageOne(cube, actions);
             Logic.stageTwo(cube, actions);
@@ -143,7 +143,7 @@ class LogicTest {
     void stageFive() {
         for (int i = 0; i < 100; i++) {
             Cube cube = CubeUtils.getRandomCube();
-            List<cmd> actions = new ArrayList<>();
+            List<AlgorithmCommands> actions = new ArrayList<>();
             Logic.initialize(cube, actions);
             Logic.stageOne(cube, actions);
             Logic.stageTwo(cube, actions);
@@ -166,7 +166,7 @@ class LogicTest {
     void stageSix() {
         for (int i = 0; i < 100; i++) {
             Cube cube = CubeUtils.getRandomCube();
-            List<cmd> actions = new ArrayList<>();
+            List<AlgorithmCommands> actions = new ArrayList<>();
             Logic.initialize(cube, actions);
             Logic.stageOne(cube, actions);
             Logic.stageTwo(cube, actions);
@@ -221,7 +221,7 @@ class LogicTest {
     void stageSeven() {
         for (int i = 0; i < 100; i++) {
             Cube cube = CubeUtils.getRandomCube();
-            List<cmd> actions = new ArrayList<>();
+            List<AlgorithmCommands> actions = new ArrayList<>();
             Logic.initialize(cube, actions);
             Logic.stageOne(cube, actions);
             Logic.stageTwo(cube, actions);

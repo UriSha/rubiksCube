@@ -21,7 +21,7 @@ class CubeTest {
         Cube.Color initialColor;
         Cube.Color[][] grid;
 
-        isValid = CubeValidation.isValidCube(cube);
+        isValid = cube.isValidCube();
         assertTrue(isValid,String.format(msg,isValid,!isValid,cube));
         Cube.Face[] faces = cube.getFaces();
 
@@ -33,7 +33,7 @@ class CubeTest {
                     for (Cube.Color color : Cube.Color.values()){
                         if (color != initialColor){
                             grid[i][j] = color;
-                            isValid = CubeValidation.isValidCube(cube);
+                            isValid = cube.isValidCube();
                             assertFalse(isValid,String.format(msg,isValid,!isValid,cube));
                             grid[i][j] = initialColor;
                         }
@@ -49,7 +49,7 @@ class CubeTest {
         Cube cube;
         for (int i =0;i<100;i++) {
             cube = CubeUtils.getRandomCube();
-            assertTrue(CubeValidation.isValidCube(cube),String.format(msg,cube));
+            assertTrue(cube.isValidCube(),String.format(msg,cube));
         }
 
 
