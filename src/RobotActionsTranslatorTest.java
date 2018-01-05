@@ -1,13 +1,78 @@
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class RobotActionsTranslatorTest {
     @org.junit.jupiter.api.Test
-    void translateCommandList() {
+    void translateCommandsWithoutAlgoMovingPointOfView() {
+        String wrongActionMsg = "translateCommandsWithoutAlgoMovingPointOfView() failed. the %dth (zero-based) action was expected to be %s, but was %s";
+        String differentSizesMsg = "translateCommandsWithoutAlgoMovingPointOfView() failed. the translator returned a list in size of %d, when it was supposed to be in size of %d";
+
+        List<cmd> algorithmCommands = new ArrayList<>();
+        algorithmCommands.add(cmd.CMD_DOWN_TWIST_RIGHT);
+        algorithmCommands.add(cmd.CMD_UP_TWIST_LEFT);
+        algorithmCommands.add(cmd.CMD_LEFT_TWIST_BACKUPWARD);
+        algorithmCommands.add(cmd.CMD_RIGHT_TWIST_FRONTUPWARD);
+
+        List<RobotActionsTranslator.RobotSolvingAction> robotCommandsFromAlgo;
+        robotCommandsFromAlgo = RobotActionsTranslator.translateCommandList(algorithmCommands);
+
+        RobotActionsTranslator.RobotSolvingAction[] expectedRobotActions = new RobotActionsTranslator.RobotSolvingAction[10];
+        expectedRobotActions[0] = RobotActionsTranslator.RobotSolvingAction.ROBOT_RIGHT_TWIST;
+        expectedRobotActions[1] = RobotActionsTranslator.RobotSolvingAction.ROBOT_FLIP;
+        expectedRobotActions[2] = RobotActionsTranslator.RobotSolvingAction.ROBOT_FLIP;
+        expectedRobotActions[3] = RobotActionsTranslator.RobotSolvingAction.ROBOT_RIGHT_TWIST;
+        expectedRobotActions[4] = RobotActionsTranslator.RobotSolvingAction.ROBOT_RIGHT_ROTATE;
+        expectedRobotActions[5] = RobotActionsTranslator.RobotSolvingAction.ROBOT_FLIP;
+        expectedRobotActions[6] = RobotActionsTranslator.RobotSolvingAction.ROBOT_RIGHT_TWIST;
+        expectedRobotActions[7] = RobotActionsTranslator.RobotSolvingAction.ROBOT_FLIP;
+        expectedRobotActions[8] = RobotActionsTranslator.RobotSolvingAction.ROBOT_FLIP;
+        expectedRobotActions[9] = RobotActionsTranslator.RobotSolvingAction.ROBOT_RIGHT_TWIST;
+
+        compareActions(expectedRobotActions,robotCommandsFromAlgo,differentSizesMsg,wrongActionMsg);
+
+    }
+    @org.junit.jupiter.api.Test
+    void translateCommandsWithAlgoMovingPointOfView() {
+        String wrongActionMsg = "translateCommandsWithAlgoMovingPointOfView() failed. the %dth (zero-based) action was expected to be %s, but was %s";
+        String differentSizesMsg = "translateCommandsWithAlgoMovingPointOfView() failed. the translator returned a list in size of %d, when it was supposed to be in size of %d";
+
+        List<cmd> algorithmCommands = new ArrayList<>();
+        algorithmCommands.add(cmd.CMD_FLIP);
+        algorithmCommands.add(cmd.CMD_FRONT_TWIST_CLOCKWISE);
+        algorithmCommands.add(cmd.CMD_LEFT_ROTATE);
+        algorithmCommands.add(cmd.CMD_BACK_TWIST_C_CLOCKWISE);
+
+
+        List<RobotActionsTranslator.RobotSolvingAction> robotCommandsFromAlgo = RobotActionsTranslator.translateCommandList(algorithmCommands);
+        System.out.println(robotCommandsFromAlgo);
+        RobotActionsTranslator.RobotSolvingAction[] expectedRobotActions = new RobotActionsTranslator.RobotSolvingAction[6];
+        expectedRobotActions[0] = RobotActionsTranslator.RobotSolvingAction.ROBOT_FLIP;
+        expectedRobotActions[1] = RobotActionsTranslator.RobotSolvingAction.ROBOT_FLIP;
+        expectedRobotActions[2] = RobotActionsTranslator.RobotSolvingAction.ROBOT_RIGHT_TWIST;
+        expectedRobotActions[3] = RobotActionsTranslator.RobotSolvingAction.ROBOT_RIGHT_ROTATE;
+        expectedRobotActions[4] = RobotActionsTranslator.RobotSolvingAction.ROBOT_FLIP;
+        expectedRobotActions[5] = RobotActionsTranslator.RobotSolvingAction.ROBOT_RIGHT_TWIST;
+
+        compareActions(expectedRobotActions,robotCommandsFromAlgo,differentSizesMsg,wrongActionMsg);
+    }
+
+
+    private void compareActions(RobotActionsTranslator.RobotSolvingAction[] expectedRobotActions,
+                                List<RobotActionsTranslator.RobotSolvingAction> robotCommandsFromAlgo,
+                                String differentSizesMsg,String wrongActionMsg){
+
+        assertTrue (robotCommandsFromAlgo.size() == expectedRobotActions.length ,
+                String.format(differentSizesMsg,robotCommandsFromAlgo.size(),expectedRobotActions.length));
+        for (int i=0; i<expectedRobotActions.length;i++){
+            assertTrue(expectedRobotActions[i]==robotCommandsFromAlgo.get(i),
+                    String.format(wrongActionMsg,i,expectedRobotActions[i],robotCommandsFromAlgo.get(i)));
+        }
     }
 
     @org.junit.jupiter.api.Test
