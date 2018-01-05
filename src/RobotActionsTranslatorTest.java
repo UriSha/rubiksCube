@@ -50,7 +50,7 @@ class RobotActionsTranslatorTest {
 
 
         List<RobotActionsTranslator.RobotSolvingAction> robotCommandsFromAlgo = RobotActionsTranslator.translateCommandList(algorithmCommands);
-        System.out.println(robotCommandsFromAlgo);
+
         RobotActionsTranslator.RobotSolvingAction[] expectedRobotActions = new RobotActionsTranslator.RobotSolvingAction[6];
         expectedRobotActions[0] = RobotActionsTranslator.RobotSolvingAction.ROBOT_FLIP;
         expectedRobotActions[1] = RobotActionsTranslator.RobotSolvingAction.ROBOT_FLIP;
