@@ -13,11 +13,11 @@ class RobotActionsTranslatorTest {
         String wrongActionMsg = "translateCommandsWithoutAlgoMovingPointOfView() failed. the %dth (zero-based) action was expected to be %s, but was %s";
         String differentSizesMsg = "translateCommandsWithoutAlgoMovingPointOfView() failed. the translator returned a list in size of %d, when it was supposed to be in size of %d";
 
-        List<cmd> algorithmCommands = new ArrayList<>();
-        algorithmCommands.add(cmd.CMD_DOWN_TWIST_RIGHT);
-        algorithmCommands.add(cmd.CMD_UP_TWIST_LEFT);
-        algorithmCommands.add(cmd.CMD_LEFT_TWIST_BACKUPWARD);
-        algorithmCommands.add(cmd.CMD_RIGHT_TWIST_FRONTUPWARD);
+        List<AlgorithmCommands> algorithmCommands = new ArrayList<>();
+        algorithmCommands.add(AlgorithmCommands.CMD_DOWN_TWIST_RIGHT);
+        algorithmCommands.add(AlgorithmCommands.CMD_UP_TWIST_LEFT);
+        algorithmCommands.add(AlgorithmCommands.CMD_LEFT_TWIST_BACKUPWARD);
+        algorithmCommands.add(AlgorithmCommands.CMD_RIGHT_TWIST_FRONTUPWARD);
 
         List<RobotActionsTranslator.RobotSolvingAction> robotCommandsFromAlgo;
         robotCommandsFromAlgo = RobotActionsTranslator.translateCommandList(algorithmCommands);
@@ -42,11 +42,11 @@ class RobotActionsTranslatorTest {
         String wrongActionMsg = "translateCommandsWithAlgoMovingPointOfView() failed. the %dth (zero-based) action was expected to be %s, but was %s";
         String differentSizesMsg = "translateCommandsWithAlgoMovingPointOfView() failed. the translator returned a list in size of %d, when it was supposed to be in size of %d";
 
-        List<cmd> algorithmCommands = new ArrayList<>();
-        algorithmCommands.add(cmd.CMD_FLIP);
-        algorithmCommands.add(cmd.CMD_FRONT_TWIST_CLOCKWISE);
-        algorithmCommands.add(cmd.CMD_LEFT_ROTATE);
-        algorithmCommands.add(cmd.CMD_BACK_TWIST_C_CLOCKWISE);
+        List<AlgorithmCommands> algorithmCommands = new ArrayList<>();
+        algorithmCommands.add(AlgorithmCommands.CMD_FLIP);
+        algorithmCommands.add(AlgorithmCommands.CMD_FRONT_TWIST_CLOCKWISE);
+        algorithmCommands.add(AlgorithmCommands.CMD_LEFT_ROTATE);
+        algorithmCommands.add(AlgorithmCommands.CMD_BACK_TWIST_C_CLOCKWISE);
 
 
         List<RobotActionsTranslator.RobotSolvingAction> robotCommandsFromAlgo = RobotActionsTranslator.translateCommandList(algorithmCommands);
