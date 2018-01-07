@@ -1,24 +1,21 @@
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.Assert.*;
 
-/**
- * Test class for the algorithm parts of the code. each test run 100 times and get a randomized cube each time
- */
-class LogicTest {
+public class LogicTest {
 
     @Test
     /**
      * Test for the full algorithm, after getting a randomized cube
      */
-    void algorithm() {
+    public void algorithm() {
         for (int i = 0; i < 100; i++) {
             Cube cube = CubeUtils.getRandomCube();
             Logic.algorithm(cube);
-            assertTrue(Logic.isArnonReady(cube), "Error: The main algorithm is not working");
+            assertTrue("Error: The main algorithm is not working", Logic.isArnonReady(cube));
         }
     }
 
@@ -28,20 +25,20 @@ class LogicTest {
 
 
     @Test
-    void initialize() {
+    public void initialize() {
         for (int i = 0; i < 100; i++) {
             Cube cube = CubeUtils.getRandomCube();
             List<AlgorithmCommands> actions = new ArrayList<>();
             Logic.initialize(cube, actions);
             String msg = "Initialize test has failed. The center of the %s face is: %s instead of: %s";
-            assertTrue(cube.getUp().getGrid()[1][1] == Cube.Color.RED, String.format
-                    (msg,"UP", cube.getUp().getGrid()[1][1],"RED"));
-            assertTrue(cube.getFront().getGrid()[1][1] == Cube.Color.YELLOW, String.format
-                    (msg,"FRONT", cube.getFront().getGrid()[1][1],"YELLOW"));
+            assertTrue(String.format(msg,"UP", cube.getUp().getGrid()[1][1],"RED"),
+                    cube.getUp().getGrid()[1][1] == Cube.Color.RED);
+            assertTrue( String.format(msg,"FRONT", cube.getFront().getGrid()[1][1],"YELLOW"),
+                    cube.getFront().getGrid()[1][1] == Cube.Color.YELLOW);
         }
     }
     @Test
-    void stageOne() {
+    public void stageOne() {
         for (int i = 0; i < 100; i++) {
             Cube cube = CubeUtils.getRandomCube();
             List<AlgorithmCommands> actions = new ArrayList<>();
@@ -56,19 +53,19 @@ class LogicTest {
             assertNotNull(redBlue);
             assertNotNull(redGreen);
             assertNotNull(redWhite);
-            assertTrue(redYellow.name == Face_Enum.UP && redYellow.secondDircetion == Face_Enum.FRONT,
-                    String.format(msgCross,"RED-YELLOW", redYellow.name, redYellow.secondDircetion,"UP - FRONT"));
-            assertTrue(redBlue.name == Face_Enum.UP && redBlue.secondDircetion == Face_Enum.RIGHT,
-                    String.format(msgCross,"RED-BLUE", redBlue.name, redBlue.secondDircetion,"UP - RIGHT"));
-            assertTrue(redGreen.name == Face_Enum.UP && redGreen.secondDircetion == Face_Enum.LEFT,
-                    String.format(msgCross,"RED-GREEN", redGreen.name, redGreen.secondDircetion,"UP - LEFT"));
-            assertTrue(redWhite.name == Face_Enum.UP && redWhite.secondDircetion == Face_Enum.BACK,
-                    String.format(msgCross,"RED-WHITE", redWhite.name, redWhite.secondDircetion,"UP - BACK"));
+            assertTrue(String.format(msgCross,"RED-YELLOW", redYellow.name, redYellow.secondDircetion,"UP - FRONT"),
+                    redYellow.name == Face_Enum.UP && redYellow.secondDircetion == Face_Enum.FRONT);
+            assertTrue(String.format(msgCross,"RED-BLUE", redBlue.name, redBlue.secondDircetion,"UP - RIGHT"),
+                    redBlue.name == Face_Enum.UP && redBlue.secondDircetion == Face_Enum.RIGHT);
+            assertTrue(String.format(msgCross,"RED-GREEN", redGreen.name, redGreen.secondDircetion,"UP - LEFT"),
+                    redGreen.name == Face_Enum.UP && redGreen.secondDircetion == Face_Enum.LEFT);
+            assertTrue(String.format(msgCross,"RED-WHITE", redWhite.name, redWhite.secondDircetion,"UP - BACK"),
+                    redWhite.name == Face_Enum.UP && redWhite.secondDircetion == Face_Enum.BACK);
         }
     }
 
     @Test
-    void stageTwo() {
+    public void stageTwo() {
         for (int i = 0; i < 100; i++) {
             Cube cube = CubeUtils.getRandomCube();
             List<AlgorithmCommands> actions = new ArrayList<>();
@@ -84,19 +81,19 @@ class LogicTest {
             assertNotNull(redGreenYellow);
             assertNotNull(redWhiteGreen);
             assertNotNull(redBlueWhite);
-            assertTrue(redYellowBlue.name == Face_Enum.UP && redYellowBlue.secondDircetion == Face_Enum.FRONT
-                    && redYellowBlue.thirdDirection == Face_Enum.RIGHT, String.format(msgCorner,"RED-YELLOW-BLUE"));
-            assertTrue(redGreenYellow.name == Face_Enum.UP && redGreenYellow.secondDircetion == Face_Enum.LEFT
-                    && redGreenYellow.thirdDirection == Face_Enum.FRONT, String.format(msgCorner,"RED-GREEN-YELLOW"));
-            assertTrue(redWhiteGreen.name == Face_Enum.UP && redWhiteGreen.secondDircetion == Face_Enum.BACK
-                    && redWhiteGreen.thirdDirection == Face_Enum.LEFT, String.format(msgCorner,"RED-WHITE-GREEN"));
-            assertTrue(redBlueWhite.name == Face_Enum.UP && redBlueWhite.secondDircetion == Face_Enum.RIGHT
-                    && redBlueWhite.thirdDirection == Face_Enum.BACK, String.format(msgCorner,"RED-BLUE-WHITE"));
+            assertTrue( String.format(msgCorner,"RED-YELLOW-BLUE"), redYellowBlue.name == Face_Enum.UP
+                    && redYellowBlue.secondDircetion == Face_Enum.FRONT && redYellowBlue.thirdDirection == Face_Enum.RIGHT);
+            assertTrue(String.format(msgCorner,"RED-GREEN-YELLOW"),redGreenYellow.name == Face_Enum.UP
+                    && redGreenYellow.secondDircetion == Face_Enum.LEFT && redGreenYellow.thirdDirection == Face_Enum.FRONT);
+            assertTrue( String.format(msgCorner,"RED-WHITE-GREEN"),redWhiteGreen.name == Face_Enum.UP
+                    && redWhiteGreen.secondDircetion == Face_Enum.BACK && redWhiteGreen.thirdDirection == Face_Enum.LEFT);
+            assertTrue(String.format(msgCorner,"RED-BLUE-WHITE"),redBlueWhite.name == Face_Enum.UP
+                    && redBlueWhite.secondDircetion == Face_Enum.RIGHT && redBlueWhite.thirdDirection == Face_Enum.BACK);
         }
     }
 
     @Test
-    void stageThree() {
+    public void stageThree() {
         for (int i = 0; i < 100; i++) {
             Cube cube = CubeUtils.getRandomCube();
             List<AlgorithmCommands> actions = new ArrayList<>();
@@ -114,19 +111,19 @@ class LogicTest {
             assertNotNull(greenWhite);
             assertNotNull(yellowGreen);
             assertNotNull(blueYellow);
-            assertTrue(whiteBlue.name == Face_Enum.FRONT && whiteBlue.secondDircetion == Face_Enum.RIGHT,
-                    String.format(msgEdge,"WHITE-BLUE", whiteBlue.name, whiteBlue.secondDircetion,"FRONT - RIGHT"));
-            assertTrue(greenWhite.name == Face_Enum.LEFT && greenWhite.secondDircetion == Face_Enum.FRONT,
-                    String.format(msgEdge,"GREEN-WHITE", greenWhite.name, greenWhite.secondDircetion,"LEFT - FRONT"));
-            assertTrue(yellowGreen.name == Face_Enum.BACK && yellowGreen.secondDircetion == Face_Enum.LEFT,
-                    String.format(msgEdge,"YELLOW-GREEN", yellowGreen.name, yellowGreen.secondDircetion,"BACK - LEFT"));
-            assertTrue(blueYellow.name == Face_Enum.RIGHT && blueYellow.secondDircetion == Face_Enum.BACK,
-                    String.format(msgEdge,"BLUE-YELLOW", blueYellow.name, blueYellow.secondDircetion,"RIGHT - BACK"));
+            assertTrue(String.format(msgEdge,"WHITE-BLUE", whiteBlue.name, whiteBlue.secondDircetion,"FRONT - RIGHT"),
+                    whiteBlue.name == Face_Enum.FRONT && whiteBlue.secondDircetion == Face_Enum.RIGHT);
+            assertTrue(String.format(msgEdge,"GREEN-WHITE", greenWhite.name, greenWhite.secondDircetion,"LEFT - FRONT"),
+                    greenWhite.name == Face_Enum.LEFT && greenWhite.secondDircetion == Face_Enum.FRONT);
+            assertTrue(String.format(msgEdge,"YELLOW-GREEN", yellowGreen.name, yellowGreen.secondDircetion,"BACK - LEFT"),
+                    yellowGreen.name == Face_Enum.BACK && yellowGreen.secondDircetion == Face_Enum.LEFT);
+            assertTrue(String.format(msgEdge,"BLUE-YELLOW", blueYellow.name, blueYellow.secondDircetion,"RIGHT - BACK"),
+                    blueYellow.name == Face_Enum.RIGHT && blueYellow.secondDircetion == Face_Enum.BACK);
         }
     }
 
     @Test
-    void stageFour() {
+    public void stageFour() {
         for (int j = 0; j < 100; j++) {
             Cube cube = CubeUtils.getRandomCube();
             List<AlgorithmCommands> actions = new ArrayList<>();
@@ -144,13 +141,13 @@ class LogicTest {
             String errMsg = "Stage four test has failed. this orange face should be UP, but instead it's %s";
             for (int i = 0; i < 4; i++) {
                 assertNotNull(oranges[i]);
-                assertTrue(oranges[i].name == Face_Enum.UP, String.format(errMsg, oranges[i].name));
+                assertTrue( String.format(errMsg, oranges[i].name),oranges[i].name == Face_Enum.UP);
             }
         }
     }
 
     @Test
-    void stageFive() {
+    public void stageFive() {
         for (int i = 0; i < 100; i++) {
             Cube cube = CubeUtils.getRandomCube();
             List<AlgorithmCommands> actions = new ArrayList<>();
@@ -165,15 +162,15 @@ class LogicTest {
             String errMsg = "Stage five test has failed. the color that caused the problem : %s";
             for (int j = 0;j < 4; j++) {
                 assertNotNull(oranges[j]);
-                assertTrue(cube.getFront().getGrid()[0][1] == oranges[j]
-                        , String.format(errMsg, cube.getFront().getGrid()[0][1]));
+                assertTrue(String.format(errMsg, cube.getFront().getGrid()[0][1]),
+                        cube.getFront().getGrid()[0][1] == oranges[j]);
                 cube.rotate(true);
             }
         }
     }
 
     @Test
-    void stageSix() {
+    public void stageSix() {
         for (int i = 0; i < 100; i++) {
             Cube cube = CubeUtils.getRandomCube();
             List<AlgorithmCommands> actions = new ArrayList<>();
@@ -190,45 +187,44 @@ class LogicTest {
             String errMsg = "Stage six test has failed. corner number %s is not in place";
             assertNotNull(corner1);
             assertNotNull(corner2);
-            assertTrue((corner1.name == Face_Enum.UP && corner1.secondDircetion == Face_Enum.FRONT && corner1.thirdDirection == Face_Enum.RIGHT) ||
-                    (corner1.name == Face_Enum.RIGHT && corner1.secondDircetion == Face_Enum.UP && corner1.thirdDirection == Face_Enum.FRONT) ||
-                    (corner1.name == Face_Enum.FRONT && corner1.secondDircetion == Face_Enum.RIGHT && corner1.thirdDirection == Face_Enum.UP) ||
-                    (corner1.name == Face_Enum.UP && corner1.secondDircetion == Face_Enum.RIGHT && corner1.thirdDirection == Face_Enum.FRONT) ||
-                    (corner1.name == Face_Enum.FRONT && corner1.secondDircetion == Face_Enum.UP && corner1.thirdDirection == Face_Enum.RIGHT) ||
-                    (corner1.name == Face_Enum.RIGHT && corner1.secondDircetion == Face_Enum.FRONT && corner1.thirdDirection == Face_Enum.UP),
-                    String.format(errMsg,"0"));
-            assertTrue((corner2.name == Face_Enum.UP && corner2.secondDircetion == Face_Enum.FRONT && corner2.thirdDirection == Face_Enum.LEFT) ||
-                    (corner2.name == Face_Enum.LEFT && corner2.secondDircetion == Face_Enum.UP && corner2.thirdDirection == Face_Enum.FRONT) ||
-                    (corner2.name == Face_Enum.FRONT && corner2.secondDircetion == Face_Enum.LEFT && corner2.thirdDirection == Face_Enum.UP) ||
-                    (corner2.name == Face_Enum.UP && corner2.secondDircetion == Face_Enum.LEFT && corner2.thirdDirection == Face_Enum.FRONT) ||
-                    (corner2.name == Face_Enum.FRONT && corner2.secondDircetion == Face_Enum.UP && corner2.thirdDirection == Face_Enum.LEFT) ||
-                    (corner2.name == Face_Enum.LEFT && corner2.secondDircetion == Face_Enum.FRONT && corner2.thirdDirection == Face_Enum.UP),
-                    String.format(errMsg,"3"));
+            assertTrue(String.format(errMsg,"0"),
+                    (corner1.name == Face_Enum.UP && corner1.secondDircetion == Face_Enum.FRONT && corner1.thirdDirection == Face_Enum.RIGHT) ||
+                            (corner1.name == Face_Enum.RIGHT && corner1.secondDircetion == Face_Enum.UP && corner1.thirdDirection == Face_Enum.FRONT) ||
+                            (corner1.name == Face_Enum.FRONT && corner1.secondDircetion == Face_Enum.RIGHT && corner1.thirdDirection == Face_Enum.UP) ||
+                            (corner1.name == Face_Enum.UP && corner1.secondDircetion == Face_Enum.RIGHT && corner1.thirdDirection == Face_Enum.FRONT) ||
+                            (corner1.name == Face_Enum.FRONT && corner1.secondDircetion == Face_Enum.UP && corner1.thirdDirection == Face_Enum.RIGHT) ||
+                            (corner1.name == Face_Enum.RIGHT && corner1.secondDircetion == Face_Enum.FRONT && corner1.thirdDirection == Face_Enum.UP));
+            assertTrue( String.format(errMsg,"3"),
+                    (corner2.name == Face_Enum.UP && corner2.secondDircetion == Face_Enum.FRONT && corner2.thirdDirection == Face_Enum.LEFT) ||
+                            (corner2.name == Face_Enum.LEFT && corner2.secondDircetion == Face_Enum.UP && corner2.thirdDirection == Face_Enum.FRONT) ||
+                            (corner2.name == Face_Enum.FRONT && corner2.secondDircetion == Face_Enum.LEFT && corner2.thirdDirection == Face_Enum.UP) ||
+                            (corner2.name == Face_Enum.UP && corner2.secondDircetion == Face_Enum.LEFT && corner2.thirdDirection == Face_Enum.FRONT) ||
+                            (corner2.name == Face_Enum.FRONT && corner2.secondDircetion == Face_Enum.UP && corner2.thirdDirection == Face_Enum.LEFT) ||
+                            (corner2.name == Face_Enum.LEFT && corner2.secondDircetion == Face_Enum.FRONT && corner2.thirdDirection == Face_Enum.UP));
             cube.rotate(true);
             cube.rotate(true);
             Logic.Location corner3 = LogicUtils.getLocationOfCorner(cube, Cube.Color.ORANGE, Cube.Color.YELLOW, Cube.Color.GREEN);
             Logic.Location corner4 = LogicUtils.getLocationOfCorner(cube, Cube.Color.ORANGE, Cube.Color.YELLOW, Cube.Color.BLUE);
             assertNotNull(corner3);
             assertNotNull(corner4);
-            assertTrue((corner3.name == Face_Enum.UP && corner3.secondDircetion == Face_Enum.FRONT && corner3.thirdDirection == Face_Enum.RIGHT) ||
-                    (corner3.name == Face_Enum.RIGHT && corner3.secondDircetion == Face_Enum.UP && corner3.thirdDirection == Face_Enum.FRONT) ||
-                    (corner3.name == Face_Enum.FRONT && corner3.secondDircetion == Face_Enum.RIGHT && corner3.thirdDirection == Face_Enum.UP) ||
-                    (corner3.name == Face_Enum.UP && corner3.secondDircetion == Face_Enum.RIGHT && corner3.thirdDirection == Face_Enum.FRONT) ||
-                    (corner3.name == Face_Enum.FRONT && corner3.secondDircetion == Face_Enum.UP && corner3.thirdDirection == Face_Enum.RIGHT) ||
-                    (corner3.name == Face_Enum.RIGHT && corner3.secondDircetion == Face_Enum.FRONT && corner3.thirdDirection == Face_Enum.UP),
-                    String.format(errMsg,"2"));
-            assertTrue((corner4.name == Face_Enum.UP && corner4.secondDircetion == Face_Enum.FRONT && corner4.thirdDirection == Face_Enum.LEFT) ||
-                    (corner4.name == Face_Enum.LEFT && corner4.secondDircetion == Face_Enum.UP && corner4.thirdDirection == Face_Enum.FRONT) ||
-                    (corner4.name == Face_Enum.FRONT && corner4.secondDircetion == Face_Enum.LEFT && corner4.thirdDirection == Face_Enum.UP) ||
-                    (corner4.name == Face_Enum.UP && corner4.secondDircetion == Face_Enum.LEFT && corner4.thirdDirection == Face_Enum.FRONT) ||
-                    (corner4.name == Face_Enum.FRONT && corner4.secondDircetion == Face_Enum.UP && corner4.thirdDirection == Face_Enum.LEFT) ||
-                    (corner4.name == Face_Enum.LEFT && corner4.secondDircetion == Face_Enum.FRONT && corner4.thirdDirection == Face_Enum.UP),
-                    String.format(errMsg,"1"));
+            assertTrue(String.format(errMsg,"2"),
+                    (corner3.name == Face_Enum.UP && corner3.secondDircetion == Face_Enum.FRONT && corner3.thirdDirection == Face_Enum.RIGHT) ||
+                            (corner3.name == Face_Enum.RIGHT && corner3.secondDircetion == Face_Enum.UP && corner3.thirdDirection == Face_Enum.FRONT) ||
+                            (corner3.name == Face_Enum.FRONT && corner3.secondDircetion == Face_Enum.RIGHT && corner3.thirdDirection == Face_Enum.UP) ||
+                            (corner3.name == Face_Enum.UP && corner3.secondDircetion == Face_Enum.RIGHT && corner3.thirdDirection == Face_Enum.FRONT) ||
+                            (corner3.name == Face_Enum.FRONT && corner3.secondDircetion == Face_Enum.UP && corner3.thirdDirection == Face_Enum.RIGHT) ||
+                            (corner3.name == Face_Enum.RIGHT && corner3.secondDircetion == Face_Enum.FRONT && corner3.thirdDirection == Face_Enum.UP) );
+            assertTrue(String.format(errMsg,"1"),(corner4.name == Face_Enum.UP && corner4.secondDircetion == Face_Enum.FRONT && corner4.thirdDirection == Face_Enum.LEFT) ||
+                            (corner4.name == Face_Enum.LEFT && corner4.secondDircetion == Face_Enum.UP && corner4.thirdDirection == Face_Enum.FRONT) ||
+                            (corner4.name == Face_Enum.FRONT && corner4.secondDircetion == Face_Enum.LEFT && corner4.thirdDirection == Face_Enum.UP) ||
+                            (corner4.name == Face_Enum.UP && corner4.secondDircetion == Face_Enum.LEFT && corner4.thirdDirection == Face_Enum.FRONT) ||
+                            (corner4.name == Face_Enum.FRONT && corner4.secondDircetion == Face_Enum.UP && corner4.thirdDirection == Face_Enum.LEFT) ||
+                            (corner4.name == Face_Enum.LEFT && corner4.secondDircetion == Face_Enum.FRONT && corner4.thirdDirection == Face_Enum.UP));
         }
     }
 
     @Test
-    void stageSeven() {
+    public void stageSeven() {
         for (int i = 0; i < 100; i++) {
             Cube cube = CubeUtils.getRandomCube();
             List<AlgorithmCommands> actions = new ArrayList<>();
@@ -242,7 +238,8 @@ class LogicTest {
             Logic.stageSix(cube, actions);
             Logic.stageSeven(cube, actions);
             String errMsg = "Stage seven test has failed";
-            assertTrue(Logic.isArnonReady(cube), errMsg);
+            assertTrue( errMsg,Logic.isArnonReady(cube));
         }
     }
+
 }
