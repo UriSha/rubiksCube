@@ -3,10 +3,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
- class RobotActionsTranslator {
+class RobotActionsTranslator {
 
     /**
-     *
+     * used in RobotUtils to determine which action the robot should do
      */
     public enum RobotSolvingAction {
         ROBOT_FLIP,
@@ -17,35 +17,35 @@ import java.util.Map;
     }
 
     /**
-     *
+     * @param algorithmCommands - a list of commands received as the output of the algorithm to translate to robot actions
+     * @return a list of action the robot should do in order to solve the cube
      */
-     static List<RobotSolvingAction> translateCommandList(List<AlgorithmCommands> algorithmCommands){
+    static List<RobotSolvingAction> translateCommandList(List<AlgorithmCommands> algorithmCommands) {
         List<RobotSolvingAction> result = new ArrayList<>();
 
         // initialPhysicalMap - key : face to twist (from algorithm), value : its current position
-        Map<Face_Enum,Face_Enum> initialPhysicalMap = new HashMap<>();
+        Map<Face_Enum, Face_Enum> initialPhysicalMap = new HashMap<>();
 
         // initialize map values
-        initialPhysicalMap.put(Face_Enum.UP,Face_Enum.UP);
-        initialPhysicalMap.put(Face_Enum.LEFT,Face_Enum.LEFT);
-        initialPhysicalMap.put(Face_Enum.FRONT,Face_Enum.FRONT);
-        initialPhysicalMap.put(Face_Enum.BACK,Face_Enum.BACK);
-        initialPhysicalMap.put(Face_Enum.RIGHT,Face_Enum.RIGHT);
-        initialPhysicalMap.put(Face_Enum.DOWN,Face_Enum.DOWN);
+        initialPhysicalMap.put(Face_Enum.UP, Face_Enum.UP);
+        initialPhysicalMap.put(Face_Enum.LEFT, Face_Enum.LEFT);
+        initialPhysicalMap.put(Face_Enum.FRONT, Face_Enum.FRONT);
+        initialPhysicalMap.put(Face_Enum.BACK, Face_Enum.BACK);
+        initialPhysicalMap.put(Face_Enum.RIGHT, Face_Enum.RIGHT);
+        initialPhysicalMap.put(Face_Enum.DOWN, Face_Enum.DOWN);
 
         // virtualInitialMap - key :
-        Map<Face_Enum,Face_Enum> virtualInitialMap = new HashMap<>();
+        Map<Face_Enum, Face_Enum> virtualInitialMap = new HashMap<>();
 
         // initialize map values
-        virtualInitialMap.put(Face_Enum.UP,Face_Enum.UP);
-        virtualInitialMap.put(Face_Enum.LEFT,Face_Enum.LEFT);
-        virtualInitialMap.put(Face_Enum.FRONT,Face_Enum.FRONT);
-        virtualInitialMap.put(Face_Enum.BACK,Face_Enum.BACK);
-        virtualInitialMap.put(Face_Enum.RIGHT,Face_Enum.RIGHT);
-        virtualInitialMap.put(Face_Enum.DOWN,Face_Enum.DOWN);
-        
-        
-        
+        virtualInitialMap.put(Face_Enum.UP, Face_Enum.UP);
+        virtualInitialMap.put(Face_Enum.LEFT, Face_Enum.LEFT);
+        virtualInitialMap.put(Face_Enum.FRONT, Face_Enum.FRONT);
+        virtualInitialMap.put(Face_Enum.BACK, Face_Enum.BACK);
+        virtualInitialMap.put(Face_Enum.RIGHT, Face_Enum.RIGHT);
+        virtualInitialMap.put(Face_Enum.DOWN, Face_Enum.DOWN);
+
+
         for (AlgorithmCommands command : algorithmCommands)
             fromAlgoCommandToRobotAction(command, result, initialPhysicalMap, virtualInitialMap);
 
@@ -53,7 +53,10 @@ import java.util.Map;
 
     }
 
-    private static void fromAlgoCommandToRobotAction(AlgorithmCommands command, List<RobotSolvingAction> result, Map<Face_Enum,Face_Enum> initialPhysicalMap, Map<Face_Enum,Face_Enum> virtualInitialMap){
+    /**
+     * translate an algorithm command to robot action using memory of the physical cube state (i.e initialPhysicalMap and virtualInitialMap)
+     */
+    private static void fromAlgoCommandToRobotAction(AlgorithmCommands command, List<RobotSolvingAction> result, Map<Face_Enum, Face_Enum> initialPhysicalMap, Map<Face_Enum, Face_Enum> virtualInitialMap) {
         Face_Enum upLocation;
         Face_Enum leftLocation;
         Face_Enum frontLocation;
@@ -63,7 +66,7 @@ import java.util.Map;
 
         boolean isRight;
 
-        switch (command){
+        switch (command) {
             case CMD_FLIP:
 //                result.addAll(translateFlipToActualCMD(initialPhysicalMap, virtualCubeState));
                 virtualUpdateMapDueToFlip(virtualInitialMap);
@@ -82,96 +85,96 @@ import java.util.Map;
                 if (frontLocation == Face_Enum.FRONT)
                     isRight = true;
                 else
-                    isRight = getBoolForDirection(Face_Enum.FRONT, frontLocation,true);
-                result.addAll(getRobotActionTwist(frontLocation,isRight,initialPhysicalMap));
+                    isRight = getBoolForDirection(Face_Enum.FRONT, frontLocation, true);
+                result.addAll(getRobotActionTwist(frontLocation, isRight, initialPhysicalMap));
                 break;
             case CMD_FRONT_TWIST_C_CLOCKWISE:
                 frontLocation = initialPhysicalMap.get(virtualInitialMap.get(Face_Enum.FRONT));
                 if (frontLocation == Face_Enum.FRONT)
                     isRight = false;
                 else
-                    isRight = getBoolForDirection(Face_Enum.FRONT, frontLocation,false);
-                result.addAll(getRobotActionTwist(frontLocation,isRight,initialPhysicalMap));
+                    isRight = getBoolForDirection(Face_Enum.FRONT, frontLocation, false);
+                result.addAll(getRobotActionTwist(frontLocation, isRight, initialPhysicalMap));
                 break;
             case CMD_RIGHT_TWIST_FRONTUPWARD:
                 rightLocation = initialPhysicalMap.get(virtualInitialMap.get(Face_Enum.RIGHT));
                 if (rightLocation == Face_Enum.RIGHT)
                     isRight = true;
                 else
-                    isRight = getBoolForDirection(Face_Enum.RIGHT, rightLocation,true);
-                result.addAll(getRobotActionTwist(rightLocation,isRight,initialPhysicalMap));
+                    isRight = getBoolForDirection(Face_Enum.RIGHT, rightLocation, true);
+                result.addAll(getRobotActionTwist(rightLocation, isRight, initialPhysicalMap));
                 break;
             case CMD_RIGHT_TWIST_BACKUPWARD:
                 rightLocation = initialPhysicalMap.get(virtualInitialMap.get(Face_Enum.RIGHT));
                 if (rightLocation == Face_Enum.RIGHT)
                     isRight = false;
                 else
-                    isRight = getBoolForDirection(Face_Enum.RIGHT, rightLocation,false);
-                result.addAll(getRobotActionTwist(rightLocation,isRight,initialPhysicalMap));
+                    isRight = getBoolForDirection(Face_Enum.RIGHT, rightLocation, false);
+                result.addAll(getRobotActionTwist(rightLocation, isRight, initialPhysicalMap));
                 break;
             case CMD_LEFT_TWIST_FRONTUPWARD:
                 leftLocation = initialPhysicalMap.get(virtualInitialMap.get(Face_Enum.LEFT));
                 if (leftLocation == Face_Enum.LEFT)
                     isRight = true;
                 else
-                    isRight = getBoolForDirection(Face_Enum.LEFT, leftLocation,true);
-                result.addAll(getRobotActionTwist(leftLocation,isRight,initialPhysicalMap));
+                    isRight = getBoolForDirection(Face_Enum.LEFT, leftLocation, true);
+                result.addAll(getRobotActionTwist(leftLocation, isRight, initialPhysicalMap));
                 break;
             case CMD_LEFT_TWIST_BACKUPWARD:
                 leftLocation = initialPhysicalMap.get(virtualInitialMap.get(Face_Enum.LEFT));
                 if (leftLocation == Face_Enum.LEFT)
                     isRight = false;
                 else
-                    isRight = getBoolForDirection(Face_Enum.LEFT, leftLocation,false);
-                result.addAll(getRobotActionTwist(leftLocation,isRight,initialPhysicalMap));
+                    isRight = getBoolForDirection(Face_Enum.LEFT, leftLocation, false);
+                result.addAll(getRobotActionTwist(leftLocation, isRight, initialPhysicalMap));
                 break;
             case CMD_UP_TWIST_RIGHT:
                 upLocation = initialPhysicalMap.get(virtualInitialMap.get(Face_Enum.UP));
                 if (upLocation == Face_Enum.UP)
                     isRight = true;
                 else
-                    isRight = getBoolForDirection(Face_Enum.UP, upLocation,true);
-                result.addAll(getRobotActionTwist(upLocation,isRight,initialPhysicalMap));
+                    isRight = getBoolForDirection(Face_Enum.UP, upLocation, true);
+                result.addAll(getRobotActionTwist(upLocation, isRight, initialPhysicalMap));
                 break;
             case CMD_UP_TWIST_LEFT:
                 upLocation = initialPhysicalMap.get(virtualInitialMap.get(Face_Enum.UP));
                 if (upLocation == Face_Enum.UP)
                     isRight = false;
                 else
-                    isRight = getBoolForDirection(Face_Enum.UP, upLocation,false);
-                result.addAll(getRobotActionTwist(upLocation,isRight,initialPhysicalMap));
+                    isRight = getBoolForDirection(Face_Enum.UP, upLocation, false);
+                result.addAll(getRobotActionTwist(upLocation, isRight, initialPhysicalMap));
                 break;
             case CMD_DOWN_TWIST_RIGHT:
                 downLocation = initialPhysicalMap.get(virtualInitialMap.get(Face_Enum.DOWN));
                 if (downLocation == Face_Enum.DOWN)
                     isRight = true;
                 else
-                    isRight = getBoolForDirection(Face_Enum.DOWN, downLocation,true);
-                result.addAll(getRobotActionTwist(downLocation,isRight,initialPhysicalMap));
+                    isRight = getBoolForDirection(Face_Enum.DOWN, downLocation, true);
+                result.addAll(getRobotActionTwist(downLocation, isRight, initialPhysicalMap));
                 break;
             case CMD_DOWN_TWIST_LEFT:
                 downLocation = initialPhysicalMap.get(virtualInitialMap.get(Face_Enum.DOWN));
                 if (downLocation == Face_Enum.DOWN)
                     isRight = false;
                 else
-                    isRight = getBoolForDirection(Face_Enum.DOWN, downLocation,false);
-                result.addAll(getRobotActionTwist(downLocation,isRight,initialPhysicalMap));
+                    isRight = getBoolForDirection(Face_Enum.DOWN, downLocation, false);
+                result.addAll(getRobotActionTwist(downLocation, isRight, initialPhysicalMap));
                 break;
             case CMD_BACK_TWIST_CLOCKWISE:
                 backLocation = initialPhysicalMap.get(virtualInitialMap.get(Face_Enum.BACK));
                 if (backLocation == Face_Enum.BACK)
                     isRight = true;
                 else
-                    isRight = getBoolForDirection(Face_Enum.BACK, backLocation,true);
-                result.addAll(getRobotActionTwist(backLocation,isRight,initialPhysicalMap));
+                    isRight = getBoolForDirection(Face_Enum.BACK, backLocation, true);
+                result.addAll(getRobotActionTwist(backLocation, isRight, initialPhysicalMap));
                 break;
             case CMD_BACK_TWIST_C_CLOCKWISE:
                 backLocation = initialPhysicalMap.get(virtualInitialMap.get(Face_Enum.BACK));
                 if (backLocation == Face_Enum.BACK)
                     isRight = false;
                 else
-                    isRight = getBoolForDirection(Face_Enum.BACK, backLocation,false);
-                result.addAll(getRobotActionTwist(backLocation,isRight,initialPhysicalMap));
+                    isRight = getBoolForDirection(Face_Enum.BACK, backLocation, false);
+                result.addAll(getRobotActionTwist(backLocation, isRight, initialPhysicalMap));
                 break;
 
 
@@ -182,17 +185,14 @@ import java.util.Map;
     }
 
 
-
     /**
-     * also updates the faces locations map
-     * @param face
-     * @param direction
-     * @param initialPhysicalMap
-     * @return
+     * helper for fromAlgoCommandToRobotAction()
+     * adds the robot actions when the next algorithm action is twist of a face
+     *
      */
-    private static List<RobotSolvingAction> getRobotActionTwist(Face_Enum face, boolean direction,Map<Face_Enum,Face_Enum> initialPhysicalMap){
+    private static List<RobotSolvingAction> getRobotActionTwist(Face_Enum face, boolean direction, Map<Face_Enum, Face_Enum> initialPhysicalMap) {
         List<RobotSolvingAction> result = new ArrayList<>();
-        switch (face){
+        switch (face) {
             case UP:
                 result.add(RobotSolvingAction.ROBOT_FLIP);
                 updateMapDueToFlip(initialPhysicalMap);
@@ -229,14 +229,19 @@ import java.util.Map;
             default:
                 break;
         }
-        if (getBoolOtherFaceIsDown(face,direction))
+        if (getBoolOtherFaceIsDown(face, direction))
             result.add(RobotSolvingAction.ROBOT_RIGHT_TWIST);
         else
             result.add(RobotSolvingAction.ROBOT_LEFT_TWIST);
         return result;
     }
 
-    static void virtualUpdateMapDueToFlip(Map<Face_Enum,Face_Enum> virtualInitialMap){
+    /**
+     * updates the mapping between the virtual face (i.e the current view point of the algorithm) to the initial faces due to virtual flip
+     * for example before any virtual (algirothm) actions the map is {up:up, back:back, down:down, front:front, left:left, right:right}
+     * and after the first flip {up:back, back:down, down:front, front:up, left:left, right:right}
+     */
+    static void virtualUpdateMapDueToFlip(Map<Face_Enum, Face_Enum> virtualInitialMap) {
         Face_Enum temp = virtualInitialMap.get(Face_Enum.UP);
 
         virtualInitialMap.put(Face_Enum.UP, virtualInitialMap.get(Face_Enum.BACK));
@@ -244,8 +249,10 @@ import java.util.Map;
         virtualInitialMap.put(Face_Enum.DOWN, virtualInitialMap.get(Face_Enum.FRONT));
         virtualInitialMap.put(Face_Enum.FRONT, temp);
     }
-
-    private static void virtualUpdateMapDueToLeftRotate(Map<Face_Enum,Face_Enum> virtualInitialMap){
+    /**
+     * updates the mapping between the virtual face (i.e the current view point of the algorithm) to the initial faces due to virtual left rotate
+     */
+    private static void virtualUpdateMapDueToLeftRotate(Map<Face_Enum, Face_Enum> virtualInitialMap) {
         Face_Enum temp = virtualInitialMap.get(Face_Enum.FRONT);
 
         virtualInitialMap.put(Face_Enum.FRONT, virtualInitialMap.get(Face_Enum.RIGHT));
@@ -253,8 +260,10 @@ import java.util.Map;
         virtualInitialMap.put(Face_Enum.BACK, virtualInitialMap.get(Face_Enum.LEFT));
         virtualInitialMap.put(Face_Enum.LEFT, temp);
     }
-
-    private static void virtualUpdateMapDueToRightRotate(Map<Face_Enum,Face_Enum> virtualInitialMap){
+    /**
+     * updates the mapping between the virtual face (i.e the current view point of the algorithm) to the initial faces due to virtual right rotate
+     */
+    private static void virtualUpdateMapDueToRightRotate(Map<Face_Enum, Face_Enum> virtualInitialMap) {
         Face_Enum temp = virtualInitialMap.get(Face_Enum.FRONT);
 
         virtualInitialMap.put(Face_Enum.FRONT, virtualInitialMap.get(Face_Enum.LEFT));
@@ -262,13 +271,17 @@ import java.util.Map;
         virtualInitialMap.put(Face_Enum.BACK, virtualInitialMap.get(Face_Enum.RIGHT));
         virtualInitialMap.put(Face_Enum.RIGHT, temp);
     }
+    /**
+     * updates the mapping between the initial face to the physical faces due to physical flip
+     * for example before any physical actions the map is {up:up, back:back, down:down, front:front, left:left, right:right}
+     * and after the first robot flip {up:down, back:up, down:back, front:down, left:left, right:right}
+     */
+    static void updateMapDueToFlip(Map<Face_Enum, Face_Enum> initialPhysicalMap) {
 
-    static void updateMapDueToFlip(Map<Face_Enum,Face_Enum> initialPhysicalMap){
-
-        Face_Enum faceCurrentlyInFront = getfaceInPosition(initialPhysicalMap,Face_Enum.FRONT);
-        Face_Enum faceCurrentlyInUp = getfaceInPosition(initialPhysicalMap,Face_Enum.UP);
-        Face_Enum faceCurrentlyInBack = getfaceInPosition(initialPhysicalMap,Face_Enum.BACK);
-        Face_Enum faceCurrentlyInDown = getfaceInPosition(initialPhysicalMap,Face_Enum.DOWN);
+        Face_Enum faceCurrentlyInFront = getfaceInPosition(initialPhysicalMap, Face_Enum.FRONT);
+        Face_Enum faceCurrentlyInUp = getfaceInPosition(initialPhysicalMap, Face_Enum.UP);
+        Face_Enum faceCurrentlyInBack = getfaceInPosition(initialPhysicalMap, Face_Enum.BACK);
+        Face_Enum faceCurrentlyInDown = getfaceInPosition(initialPhysicalMap, Face_Enum.DOWN);
 
 
         initialPhysicalMap.put(faceCurrentlyInFront, Face_Enum.DOWN);
@@ -277,28 +290,30 @@ import java.util.Map;
         initialPhysicalMap.put(faceCurrentlyInDown, Face_Enum.BACK);
     }
 
+    /**
+     * updates the mapping between the initial face to the physical faces due to physical right rotate
+     */
+    private static void updateMapDueToRightRotate(Map<Face_Enum, Face_Enum> initialPhysicalMap) {
 
-
-
-    private static void updateMapDueToRightRotate(Map<Face_Enum,Face_Enum> initialPhysicalMap){
-
-        Face_Enum faceCurrentlyInFront = getfaceInPosition(initialPhysicalMap,Face_Enum.FRONT);
-        Face_Enum faceCurrentlyInLeft = getfaceInPosition(initialPhysicalMap,Face_Enum.LEFT);
-        Face_Enum faceCurrentlyInBack = getfaceInPosition(initialPhysicalMap,Face_Enum.BACK);
-        Face_Enum faceCurrentlyInRight = getfaceInPosition(initialPhysicalMap,Face_Enum.RIGHT);
+        Face_Enum faceCurrentlyInFront = getfaceInPosition(initialPhysicalMap, Face_Enum.FRONT);
+        Face_Enum faceCurrentlyInLeft = getfaceInPosition(initialPhysicalMap, Face_Enum.LEFT);
+        Face_Enum faceCurrentlyInBack = getfaceInPosition(initialPhysicalMap, Face_Enum.BACK);
+        Face_Enum faceCurrentlyInRight = getfaceInPosition(initialPhysicalMap, Face_Enum.RIGHT);
 
         initialPhysicalMap.put(faceCurrentlyInFront, Face_Enum.RIGHT);
         initialPhysicalMap.put(faceCurrentlyInLeft, Face_Enum.FRONT);
         initialPhysicalMap.put(faceCurrentlyInBack, Face_Enum.LEFT);
         initialPhysicalMap.put(faceCurrentlyInRight, Face_Enum.BACK);
     }
+    /**
+     * updates the mapping between the initial face to the physical faces due to physical left rotate
+     */
+    private static void updateMapDueToLeftRotate(Map<Face_Enum, Face_Enum> initialPhysicalMap) {
 
-    private static void updateMapDueToLeftRotate(Map<Face_Enum,Face_Enum> initialPhysicalMap){
-
-        Face_Enum faceCurrentlyInFront = getfaceInPosition(initialPhysicalMap,Face_Enum.FRONT);
-        Face_Enum faceCurrentlyInRight = getfaceInPosition(initialPhysicalMap,Face_Enum.RIGHT);
-        Face_Enum faceCurrentlyInBack = getfaceInPosition(initialPhysicalMap,Face_Enum.BACK);
-        Face_Enum faceCurrentlyInLeft = getfaceInPosition(initialPhysicalMap,Face_Enum.LEFT);
+        Face_Enum faceCurrentlyInFront = getfaceInPosition(initialPhysicalMap, Face_Enum.FRONT);
+        Face_Enum faceCurrentlyInRight = getfaceInPosition(initialPhysicalMap, Face_Enum.RIGHT);
+        Face_Enum faceCurrentlyInBack = getfaceInPosition(initialPhysicalMap, Face_Enum.BACK);
+        Face_Enum faceCurrentlyInLeft = getfaceInPosition(initialPhysicalMap, Face_Enum.LEFT);
 
 
         initialPhysicalMap.put(faceCurrentlyInFront, Face_Enum.LEFT);
@@ -308,7 +323,10 @@ import java.util.Map;
 
     }
 
-    private static Face_Enum getfaceInPosition(Map<Face_Enum,Face_Enum> initialPhysicalMap, Face_Enum face){
+    /**
+     * returns the Face_Enum that is the key that has the value of face in initialPhysicalMap
+     */
+    private static Face_Enum getfaceInPosition(Map<Face_Enum, Face_Enum> initialPhysicalMap, Face_Enum face) {
         if (initialPhysicalMap.get(Face_Enum.FRONT) == face)
             return Face_Enum.FRONT;
         if (initialPhysicalMap.get(Face_Enum.UP) == face)
@@ -326,7 +344,13 @@ import java.util.Map;
 
     }
 
-     static boolean getBoolForDirection(Face_Enum initial, Face_Enum current, boolean algorithmBool){
+    /**
+     * @param initial - the initial physical position of the face that needs to be twisted
+     * @param current - the current physical position of the face that needs to be twisted
+     * @param algorithmBool - the original boolen of the twist (i.e true for right and false for left, true for up and false for down)
+     * @return boolean that implies the orientation of the physical twist that will be coherent with the algorithm
+     */
+    static boolean getBoolForDirection(Face_Enum initial, Face_Enum current, boolean algorithmBool) {
 
         // the original Face (i.e was right and right now is up)
 //        if (initial.getValue() == current.getValue())
@@ -339,13 +363,16 @@ import java.util.Map;
         boolean result = getBoolOtherFaceIsDown(current, algorithmBool);
         if (initial == current)
             return result;
-        return getBoolOtherFaceIsDown(initial,result);
-
+        return getBoolOtherFaceIsDown(initial, result);
 
 
     }
 
-    private static boolean getBoolOtherFaceIsDown(Face_Enum initial, boolean algorithmBool){
+    /**
+     * helper for getBoolForDirection()
+     * translates boolean from a location of a face to the down location
+     */
+    private static boolean getBoolOtherFaceIsDown(Face_Enum initial, boolean algorithmBool) {
         if (initial == Face_Enum.BACK || initial == Face_Enum.LEFT)
             return !algorithmBool;
         if (initial == Face_Enum.FRONT || initial == Face_Enum.RIGHT)
@@ -353,7 +380,7 @@ import java.util.Map;
 
         return initial == Face_Enum.DOWN ? algorithmBool : !algorithmBool;
     }
-    
+
 //    private static List<RobotSolvingAction> updateFlipToActualCMD(Map<Face_Enum,Face_Enum> initialPhysicalMap) {
 //
 //    	return null;
@@ -368,5 +395,5 @@ import java.util.Map;
 //    	
 //    	return null;
 //    }
-   
+
 }
