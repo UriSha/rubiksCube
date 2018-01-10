@@ -6,16 +6,16 @@ import java.util.List;
 import static org.junit.Assert.*;
 
 public class LogicTest {
-
-    @Test
     /**
-     * Test for the full algorithm, after getting a randomized cube
+     * Test for the full algorithm, after getting a randomized cube - in order to test the optimizing stage
      */
+    @Test
+
     public void algorithm() {
         for (int i = 0; i < 100; i++) {
             Cube cube = CubeUtils.getRandomCube();
             Logic.algorithm(cube);
-            assertTrue("Error: The main algorithm is not working", Logic.isArnonReady(cube));
+            assertTrue("Error: The optimizing stage is not working", Logic.isArnonReady(cube));
         }
     }
 
