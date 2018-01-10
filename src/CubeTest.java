@@ -1,5 +1,8 @@
 import org.junit.Test;
 
+import java.util.Map;
+import java.util.Random;
+
 import static org.junit.Assert.*;
 
 public class CubeTest {
@@ -10,9 +13,10 @@ public class CubeTest {
         Cube cube = CubeUtils.initialDoneCube();
         changeOneTileCheckValidity(cube);
 
-        for (int i = 0; i < 50; i++) {
+        for (int i = 0; i < 100; i++) {
             cube = CubeUtils.getRandomCube();
             changeOneTileCheckValidity(cube);
+            changeSeveralTilesCheckValidity(cube);
         }
     }
 
@@ -41,6 +45,46 @@ public class CubeTest {
                         }
                     }
                 }
+            }
+        }
+    }
+
+    private void changeSeveralTilesCheckValidity(Cube cube) {
+        String msg = "isValidCube() failed. returns %s instead of %s on the following cube: \n%s";
+        boolean isValid;
+        Cube.Face[] faces = cube.getFaces();
+
+        Random rand = new Random();
+
+        int faceIndex = rand.nextInt(6);
+        Cube.Color[][] grid = faces[faceIndex].getGrid();
+
+        int i = rand.nextInt(3);
+        int j = rand.nextInt(3);
+        Cube.Color initialColor = grid[i][j];
+
+        for (Cube.Color color : Cube.Color.values()) {
+            if (color != initialColor) {
+                grid[i][j] = color;
+
+                int prevI = i, prevJ = j, prevFace = faceIndex;
+                while(prevI==i && prevJ==j && prevFace == faceIndex){
+                    i = rand.nextInt(3);
+                    j = rand.nextInt(3);
+                    faceIndex = rand.nextInt(6);
+                }
+                grid = faces[faceIndex].getGrid();
+                Cube.Color secondColor = grid[i][j];
+
+                for (Cube.Color color2 : Cube.Color.values()) {
+                    if (color2 != secondColor && initialColor != color2 ) {
+                        grid[i][j] = color2;
+                        isValid = cube.isValidCube();
+                        assertFalse(String.format(msg, isValid, !isValid, cube), isValid);
+
+                    }
+                }
+
             }
         }
     }
