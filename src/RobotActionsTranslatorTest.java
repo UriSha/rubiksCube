@@ -13,9 +13,9 @@ public class RobotActionsTranslatorTest {
 
     @Test
     public void translateCommandsWithoutAlgoMovingPointOfView() {
-        String wrongActionMsg = "translateCommandsWithoutAlgoMovingPointOfView() failed. the %dth (zero-based) action was expected to be %s, but was %s";
-        String differentSizesMsg = "translateCommandsWithoutAlgoMovingPointOfView() failed. the translator returned a list in size of %d, when it was supposed to be in size of %d";
-
+        String[] wrongActionMsg = new String[]{"translateCommandsWithoutAlgoMovingPointOfView() failed. the ", "th (zero-based) action was expected to be ",
+                ", but was "};
+        String[] differentSizesMsg = new String[]{"translateCommandsWithoutAlgoMovingPointOfView() failed. the translator returned a list in size of ", ", when it was supposed to be in size of "};
         List<AlgorithmCommands> algorithmCommands = new ArrayList<>();
         algorithmCommands.add(AlgorithmCommands.CMD_DOWN_TWIST_RIGHT);
         algorithmCommands.add(AlgorithmCommands.CMD_UP_TWIST_LEFT);
@@ -43,8 +43,8 @@ public class RobotActionsTranslatorTest {
 
     @Test
     public void translateCommandsWithAlgoMovingPointOfView() {
-        String wrongActionMsg = "translateCommandsWithAlgoMovingPointOfView() failed. the %dth (zero-based) action was expected to be %s, but was %s";
-        String differentSizesMsg = "translateCommandsWithAlgoMovingPointOfView() failed. the translator returned a list in size of %d, when it was supposed to be in size of %d";
+        String[] wrongActionMsg = new String[]{"translateCommandsWithAlgoMovingPointOfView() failed. the ", "th (zero-based) action was expected to be ", ", but was "};
+        String[] differentSizesMsg = new String[]{"translateCommandsWithAlgoMovingPointOfView() failed. the translator returned a list in size of ", ", when it was supposed to be in size of "};
 
         List<AlgorithmCommands> algorithmCommands = new ArrayList<>();
         algorithmCommands.add(AlgorithmCommands.CMD_FLIP);
@@ -69,78 +69,77 @@ public class RobotActionsTranslatorTest {
 
     private void compareActions(RobotActionsTranslator.RobotSolvingAction[] expectedRobotActions,
                                 List<RobotActionsTranslator.RobotSolvingAction> robotCommandsFromAlgo,
-                                String differentSizesMsg, String wrongActionMsg) {
+                                String[] differentSizesMsg, String[] wrongActionMsg) {
 
-        assertTrue(String.format(differentSizesMsg, robotCommandsFromAlgo.size(), expectedRobotActions.length),
+        assertTrue(differentSizesMsg[0] + robotCommandsFromAlgo.size() + differentSizesMsg[1] + expectedRobotActions.length,
                 robotCommandsFromAlgo.size() == expectedRobotActions.length);
         for (int i = 0; i < expectedRobotActions.length; i++) {
-            assertTrue(String.format(wrongActionMsg, i, expectedRobotActions[i], robotCommandsFromAlgo.get(i)),
+            assertTrue(wrongActionMsg[0] + i + wrongActionMsg[1] + expectedRobotActions[i] + wrongActionMsg[2] + robotCommandsFromAlgo.get(i),
                     expectedRobotActions[i] == robotCommandsFromAlgo.get(i));
         }
     }
 
     @Test
     public void getBoolForDirection() {
-        String msg = "getBoolForDirection() failed when initial face is %s, current face is %s, and boolean is %s";
+        String[] msg = new String[]{"getBoolForDirection() failed when initial face is ", ", current face is ", ", and boolean is "};
         // test translator if the initial and current face are the same (i.e need to translate initial to DOWN)
-        assertTrue(String.format(msg, "UP", "UP", "false"), RobotActionsTranslator.getBoolForDirection(Face_Enum.UP, Face_Enum.UP, false));
-        assertFalse(String.format(msg, "UP", "UP", "true"), RobotActionsTranslator.getBoolForDirection(Face_Enum.UP, Face_Enum.UP, true));
+        assertTrue(msg[0] + "UP" + msg[1] + "UP" + msg[2] + "false", RobotActionsTranslator.getBoolForDirection(Face_Enum.UP, Face_Enum.UP, false));
+        assertFalse(msg[0] + "UP" + msg[1] + "UP" + msg[2] + "true", RobotActionsTranslator.getBoolForDirection(Face_Enum.UP, Face_Enum.UP, true));
 
-        assertTrue(String.format(msg, "DOWN", "DOWN", "true"), RobotActionsTranslator.getBoolForDirection(Face_Enum.DOWN, Face_Enum.DOWN, true));
-        assertFalse(String.format(msg, "DOWN", "DOWN", "false"), RobotActionsTranslator.getBoolForDirection(Face_Enum.DOWN, Face_Enum.DOWN, false));
+        assertTrue(msg[0] + "DOWN" + msg[1] + "DOWN" + msg[2] + "true", RobotActionsTranslator.getBoolForDirection(Face_Enum.DOWN, Face_Enum.DOWN, true));
+        assertFalse(msg[0] + "DOWN" + msg[1] + "DOWN" + msg[2] + "false", RobotActionsTranslator.getBoolForDirection(Face_Enum.DOWN, Face_Enum.DOWN, false));
 
-        assertTrue(String.format(msg, "LEFT", "LEFT", "false"), RobotActionsTranslator.getBoolForDirection(Face_Enum.LEFT, Face_Enum.LEFT, false));
-        assertFalse(String.format(msg, "LEFT", "LEFT", "true"), RobotActionsTranslator.getBoolForDirection(Face_Enum.LEFT, Face_Enum.LEFT, true));
+        assertTrue(msg[0] + "LEFT" + msg[1] + "LEFT" + msg[2] + "false", RobotActionsTranslator.getBoolForDirection(Face_Enum.LEFT, Face_Enum.LEFT, false));
+        assertFalse(msg[0] + "LEFT" + msg[1] + "LEFT" + msg[2] + "true", RobotActionsTranslator.getBoolForDirection(Face_Enum.LEFT, Face_Enum.LEFT, true));
 
-        assertTrue(String.format(msg, "RIGHT", "RIGHT", "true"), RobotActionsTranslator.getBoolForDirection(Face_Enum.RIGHT, Face_Enum.RIGHT, true));
-        assertFalse(String.format(msg, "RIGHT", "RIGHT", "false"), RobotActionsTranslator.getBoolForDirection(Face_Enum.RIGHT, Face_Enum.RIGHT, false));
-
-
-        assertTrue(String.format(msg, "BACK", "BACK", "false"), RobotActionsTranslator.getBoolForDirection(Face_Enum.BACK, Face_Enum.BACK, false));
-        assertFalse(String.format(msg, "BACK", "BACK", "true"), RobotActionsTranslator.getBoolForDirection(Face_Enum.BACK, Face_Enum.BACK, true));
+        assertTrue(msg[0] + "RIGHT" + msg[1] + "RIGHT" + msg[2] + "true", RobotActionsTranslator.getBoolForDirection(Face_Enum.RIGHT, Face_Enum.RIGHT, true));
+        assertFalse(msg[0] + "RIGHT" + msg[1] + "RIGHT" + msg[2] + "false", RobotActionsTranslator.getBoolForDirection(Face_Enum.RIGHT, Face_Enum.RIGHT, false));
 
 
-        assertTrue(String.format(msg, "FRONT", "FRONT", "true"), RobotActionsTranslator.getBoolForDirection(Face_Enum.FRONT, Face_Enum.FRONT, true));
-        assertFalse(String.format(msg, "FRONT", "FRONT", "false"), RobotActionsTranslator.getBoolForDirection(Face_Enum.FRONT, Face_Enum.FRONT, false));
+        assertTrue(msg[0] + "BACK" + msg[1] + "BACK" + msg[2] + "false", RobotActionsTranslator.getBoolForDirection(Face_Enum.BACK, Face_Enum.BACK, false));
+        assertFalse(msg[0] + "BACK" + msg[1] + "BACK" + msg[2] + "true", RobotActionsTranslator.getBoolForDirection(Face_Enum.BACK, Face_Enum.BACK, true));
+
+
+        assertTrue(msg[0] + "FRONT" + msg[1] + "FRONT" + msg[2] + "true", RobotActionsTranslator.getBoolForDirection(Face_Enum.FRONT, Face_Enum.FRONT, true));
+        assertFalse(msg[0] + "FRONT" + msg[1] + "FRONT" + msg[2] + "false", RobotActionsTranslator.getBoolForDirection(Face_Enum.FRONT, Face_Enum.FRONT, false));
 
 
         // test translator if the current face is DOWN the same
-        assertTrue(String.format(msg, "UP", "DOWN", "false"), RobotActionsTranslator.getBoolForDirection(Face_Enum.UP, Face_Enum.DOWN, false));
-        assertFalse(String.format(msg, "UP", "DOWN", "true"), RobotActionsTranslator.getBoolForDirection(Face_Enum.UP, Face_Enum.DOWN, true));
+        assertTrue(msg[0] + "UP" + msg[1] + "DOWN" + msg[2] + "false", RobotActionsTranslator.getBoolForDirection(Face_Enum.UP, Face_Enum.DOWN, false));
+        assertFalse(msg[0] + "UP" + msg[1] + "DOWN" + msg[2] + "true", RobotActionsTranslator.getBoolForDirection(Face_Enum.UP, Face_Enum.DOWN, true));
 
-        assertTrue(String.format(msg, "LEFT", "DOWN", "false"), RobotActionsTranslator.getBoolForDirection(Face_Enum.LEFT, Face_Enum.DOWN, false));
-        assertFalse(String.format(msg, "LEFT", "DOWN", "true"), RobotActionsTranslator.getBoolForDirection(Face_Enum.LEFT, Face_Enum.DOWN, true));
+        assertTrue(msg[0] + "LEFT" + msg[1] + "DOWN" + msg[2] + "false", RobotActionsTranslator.getBoolForDirection(Face_Enum.LEFT, Face_Enum.DOWN, false));
+        assertFalse(msg[0] + "LEFT" + msg[1] + "DOWN" + msg[2] + "true", RobotActionsTranslator.getBoolForDirection(Face_Enum.LEFT, Face_Enum.DOWN, true));
 
-        assertTrue(String.format(msg, "RIGHT", "DOWN", "true"), RobotActionsTranslator.getBoolForDirection(Face_Enum.RIGHT, Face_Enum.DOWN, true));
-        assertFalse(String.format(msg, "RIGHT", "DOWN", "false"), RobotActionsTranslator.getBoolForDirection(Face_Enum.RIGHT, Face_Enum.DOWN, false));
-
-
-        assertTrue(String.format(msg, "BACK", "DOWN", "false"), RobotActionsTranslator.getBoolForDirection(Face_Enum.BACK, Face_Enum.DOWN, false));
-        assertFalse(String.format(msg, "BACK", "DOWN", "true"), RobotActionsTranslator.getBoolForDirection(Face_Enum.BACK, Face_Enum.DOWN, true));
+        assertTrue(msg[0] + "RIGHT" + msg[1] + "DOWN" + msg[2] + "true", RobotActionsTranslator.getBoolForDirection(Face_Enum.RIGHT, Face_Enum.DOWN, true));
+        assertFalse(msg[0] + "RIGHT" + msg[1] + "DOWN" + msg[2] + "false", RobotActionsTranslator.getBoolForDirection(Face_Enum.RIGHT, Face_Enum.DOWN, false));
 
 
-        assertTrue(String.format(msg, "FRONT", "DOWN", "true"), RobotActionsTranslator.getBoolForDirection(Face_Enum.FRONT, Face_Enum.DOWN, true));
-        assertFalse(String.format(msg, "FRONT", "DOWN", "false"), RobotActionsTranslator.getBoolForDirection(Face_Enum.FRONT, Face_Enum.DOWN, false));
+        assertTrue(msg[0] + "BACK" + msg[1] + "DOWN" + msg[2] + "false", RobotActionsTranslator.getBoolForDirection(Face_Enum.BACK, Face_Enum.DOWN, false));
+        assertFalse(msg[0] + "BACK" + msg[1] + "DOWN" + msg[2] + "true", RobotActionsTranslator.getBoolForDirection(Face_Enum.BACK, Face_Enum.DOWN, true));
+
+
+        assertTrue(msg[0] + "FRONT" + msg[1] + "DOWN" + msg[2] + "true", RobotActionsTranslator.getBoolForDirection(Face_Enum.FRONT, Face_Enum.DOWN, true));
+        assertFalse(msg[0] + "FRONT" + msg[1] + "DOWN" + msg[2] + "false", RobotActionsTranslator.getBoolForDirection(Face_Enum.FRONT, Face_Enum.DOWN, false));
 
 
         // test translator if the initial and current are opposite
-        assertTrue(String.format(msg, "LEFT", "RIGHT", "false"), RobotActionsTranslator.getBoolForDirection(Face_Enum.LEFT, Face_Enum.RIGHT, false));
-        assertFalse(String.format(msg, "LEFT", "RIGHT", "true"), RobotActionsTranslator.getBoolForDirection(Face_Enum.LEFT, Face_Enum.RIGHT, true));
+        assertTrue(msg[0] + "LEFT" + msg[1] + "RIGHT" + msg[2] + "false", RobotActionsTranslator.getBoolForDirection(Face_Enum.LEFT, Face_Enum.RIGHT, false));
+        assertFalse(msg[0] + "LEFT" + msg[1] + "RIGHT" + msg[2] + "true", RobotActionsTranslator.getBoolForDirection(Face_Enum.LEFT, Face_Enum.RIGHT, true));
 
-        assertTrue(String.format(msg, "BACK", "FRONT", "false"), RobotActionsTranslator.getBoolForDirection(Face_Enum.BACK, Face_Enum.FRONT, false));
-        assertFalse(String.format(msg, "BACK", "FRONT", "true"), RobotActionsTranslator.getBoolForDirection(Face_Enum.BACK, Face_Enum.FRONT, true));
+        assertTrue(msg[0] + "BACK" + msg[1] + "FRONT" + msg[2] + "false", RobotActionsTranslator.getBoolForDirection(Face_Enum.BACK, Face_Enum.FRONT, false));
+        assertFalse(msg[0] + "BACK" + msg[1] + "FRONT" + msg[2] + "true", RobotActionsTranslator.getBoolForDirection(Face_Enum.BACK, Face_Enum.FRONT, true));
 
 
-        assertTrue(String.format(msg, "DOWN", "UP", "false"), RobotActionsTranslator.getBoolForDirection(Face_Enum.DOWN, Face_Enum.UP, false));
-        assertFalse(String.format(msg, "DOWN", "UP", "true"), RobotActionsTranslator.getBoolForDirection(Face_Enum.DOWN, Face_Enum.UP, true));
+        assertTrue(msg[0] + "DOWN" + msg[1] + "UP" + msg[2] + "false", RobotActionsTranslator.getBoolForDirection(Face_Enum.DOWN, Face_Enum.UP, false));
+        assertFalse(msg[0] + "DOWN" + msg[1] + "UP" + msg[2] + "true", RobotActionsTranslator.getBoolForDirection(Face_Enum.DOWN, Face_Enum.UP, true));
 
     }
 
     @Test
     public void virtualUpdateMapDueToFlip() {
-
-        String msg = "virtualUpdateMapDueToFlip() failed when before virtual flip the key: %s has value: %s, and after" +
-                " the flip the value is: %s instead of %s";
+        String[] msg = new String[]{"virtualUpdateMapDueToFlip() failed when before virtual flip the key: ", " has value: ", ", and after" +
+                " the flip the value is: ", " instead of "};
 
         // init first test map
         Map<Face_Enum, Face_Enum> testMap = new HashMap<>();
@@ -171,12 +170,12 @@ public class RobotActionsTranslatorTest {
         Face_Enum expectedValForLeft = Face_Enum.LEFT;
         Face_Enum expectedValForRight = Face_Enum.RIGHT;
 
-        assertTrue(String.format(msg, Face_Enum.UP, prevUP, testMap.get(Face_Enum.UP), expectedValForUP), testMap.get(Face_Enum.UP) == expectedValForUP);
-        assertTrue(String.format(msg, Face_Enum.BACK, prevBack, testMap.get(Face_Enum.BACK), expectedValForBack), testMap.get(Face_Enum.BACK) == expectedValForBack);
-        assertTrue(String.format(msg, Face_Enum.DOWN, prevDown, testMap.get(Face_Enum.DOWN), expectedValForDown), testMap.get(Face_Enum.DOWN) == expectedValForDown);
-        assertTrue(String.format(msg, Face_Enum.FRONT, prevFront, testMap.get(Face_Enum.FRONT), expectedValForFront), testMap.get(Face_Enum.FRONT) == expectedValForFront);
-        assertTrue(String.format(msg, Face_Enum.LEFT, prevLeft, testMap.get(Face_Enum.LEFT), expectedValForLeft), testMap.get(Face_Enum.LEFT) == expectedValForLeft);
-        assertTrue(String.format(msg, Face_Enum.RIGHT, prevRight, testMap.get(Face_Enum.RIGHT), expectedValForRight), testMap.get(Face_Enum.RIGHT) == expectedValForRight);
+        assertTrue(msg[0] + Face_Enum.UP + msg[1] + prevUP + msg[2] + testMap.get(Face_Enum.UP) + msg[3] + expectedValForUP, testMap.get(Face_Enum.UP) == expectedValForUP);
+        assertTrue(msg[0] + Face_Enum.BACK + msg[1] + prevBack + msg[2] + testMap.get(Face_Enum.BACK) + msg[3] + expectedValForBack, testMap.get(Face_Enum.BACK) == expectedValForBack);
+        assertTrue(msg[0] + Face_Enum.DOWN + msg[1] + prevDown + msg[2] + testMap.get(Face_Enum.DOWN) + msg[3] + expectedValForDown, testMap.get(Face_Enum.DOWN) == expectedValForDown);
+        assertTrue(msg[0] + Face_Enum.FRONT + msg[1] + prevFront + msg[2] + testMap.get(Face_Enum.FRONT) + msg[3] + expectedValForFront, testMap.get(Face_Enum.FRONT) == expectedValForFront);
+        assertTrue(msg[0] + Face_Enum.LEFT + msg[1] + prevLeft + msg[2] + testMap.get(Face_Enum.LEFT) + msg[3] + expectedValForLeft, testMap.get(Face_Enum.LEFT) == expectedValForLeft);
+        assertTrue(msg[0] + Face_Enum.RIGHT + msg[1] + prevRight + msg[2] + testMap.get(Face_Enum.RIGHT) + msg[3] + expectedValForRight, testMap.get(Face_Enum.RIGHT) == expectedValForRight);
         // first flip end
 
 
@@ -197,20 +196,21 @@ public class RobotActionsTranslatorTest {
         expectedValForLeft = Face_Enum.LEFT;
         expectedValForRight = Face_Enum.RIGHT;
 
-        assertTrue(String.format(msg, Face_Enum.UP, prevUP, testMap.get(Face_Enum.UP), expectedValForUP), testMap.get(Face_Enum.UP) == expectedValForUP);
-        assertTrue(String.format(msg, Face_Enum.BACK, prevBack, testMap.get(Face_Enum.BACK), expectedValForBack), testMap.get(Face_Enum.BACK) == expectedValForBack);
-        assertTrue(String.format(msg, Face_Enum.DOWN, prevDown, testMap.get(Face_Enum.DOWN), expectedValForDown), testMap.get(Face_Enum.DOWN) == expectedValForDown);
-        assertTrue(String.format(msg, Face_Enum.FRONT, prevFront, testMap.get(Face_Enum.FRONT), expectedValForFront), testMap.get(Face_Enum.FRONT) == expectedValForFront);
-        assertTrue(String.format(msg, Face_Enum.LEFT, prevLeft, testMap.get(Face_Enum.LEFT), expectedValForLeft), testMap.get(Face_Enum.LEFT) == expectedValForLeft);
-        assertTrue(String.format(msg, Face_Enum.RIGHT, prevRight, testMap.get(Face_Enum.RIGHT), expectedValForRight), testMap.get(Face_Enum.RIGHT) == expectedValForRight);
+        assertTrue(msg[0] + Face_Enum.UP + msg[1] + prevUP + msg[2] + testMap.get(Face_Enum.UP) + msg[3] + expectedValForUP, testMap.get(Face_Enum.UP) == expectedValForUP);
+        assertTrue(msg[0] + Face_Enum.BACK + msg[1] + prevBack + msg[2] + testMap.get(Face_Enum.BACK) + msg[3] + expectedValForBack, testMap.get(Face_Enum.BACK) == expectedValForBack);
+        assertTrue(msg[0] + Face_Enum.DOWN + msg[1] + prevDown + msg[2] + testMap.get(Face_Enum.DOWN) + msg[3] + expectedValForDown, testMap.get(Face_Enum.DOWN) == expectedValForDown);
+        assertTrue(msg[0] + Face_Enum.FRONT + msg[1] + prevFront + msg[2] + testMap.get(Face_Enum.FRONT) + msg[3] + expectedValForFront, testMap.get(Face_Enum.FRONT) == expectedValForFront);
+        assertTrue(msg[0] + Face_Enum.LEFT + msg[1] + prevLeft + msg[2] + testMap.get(Face_Enum.LEFT) + msg[3] + expectedValForLeft, testMap.get(Face_Enum.LEFT) == expectedValForLeft);
+        assertTrue(msg[0] + Face_Enum.RIGHT + msg[1] + prevRight + msg[2] + testMap.get(Face_Enum.RIGHT) + msg[3] + expectedValForRight, testMap.get(Face_Enum.RIGHT) == expectedValForRight);
         // second flip end
+
 
     }
 
     @Test
     public void updateMapDueToFlip() {
-        String msg = "updateMapDueToFlip() failed when before flip the key: %s has value: %s, and after" +
-                " the flip the value is: %s instead of %s";
+        String[] msg = new String[]{"virtualUpdateMapDueToFlip() failed when before virtual flip the key: ", " has value: ", ", and after" +
+                " the flip the value is: ", " instead of "};
 
         // init first test map
         Map<Face_Enum, Face_Enum> initialPhysicalMap = new HashMap<>();
@@ -241,13 +241,14 @@ public class RobotActionsTranslatorTest {
         Face_Enum expectedValForLeft = Face_Enum.LEFT;
         Face_Enum expectedValForRight = Face_Enum.RIGHT;
 
-        assertTrue(String.format(msg, Face_Enum.UP, prevUP, initialPhysicalMap.get(Face_Enum.UP), expectedValForUP), initialPhysicalMap.get(Face_Enum.UP) == expectedValForUP);
-        assertTrue(String.format(msg, Face_Enum.BACK, prevBack, initialPhysicalMap.get(Face_Enum.BACK), expectedValForBack), initialPhysicalMap.get(Face_Enum.BACK) == expectedValForBack);
-        assertTrue(String.format(msg, Face_Enum.DOWN, prevDown, initialPhysicalMap.get(Face_Enum.DOWN), expectedValForDown), initialPhysicalMap.get(Face_Enum.DOWN) == expectedValForDown);
-        assertTrue(String.format(msg, Face_Enum.FRONT, prevFront, initialPhysicalMap.get(Face_Enum.FRONT), expectedValForFront), initialPhysicalMap.get(Face_Enum.FRONT) == expectedValForFront);
-        assertTrue(String.format(msg, Face_Enum.LEFT, prevLeft, initialPhysicalMap.get(Face_Enum.LEFT), expectedValForLeft), initialPhysicalMap.get(Face_Enum.LEFT) == expectedValForLeft);
-        assertTrue(String.format(msg, Face_Enum.RIGHT, prevRight, initialPhysicalMap.get(Face_Enum.RIGHT), expectedValForRight), initialPhysicalMap.get(Face_Enum.RIGHT) == expectedValForRight);
-        // first flip end
+
+        assertTrue(msg[0] + Face_Enum.UP + msg[1] + prevUP + msg[2] + initialPhysicalMap.get(Face_Enum.UP) + msg[3] + expectedValForUP, initialPhysicalMap.get(Face_Enum.UP) == expectedValForUP);
+        assertTrue(msg[0] + Face_Enum.BACK + msg[1] + prevBack + msg[2] + initialPhysicalMap.get(Face_Enum.BACK) + msg[3] + expectedValForBack, initialPhysicalMap.get(Face_Enum.BACK) == expectedValForBack);
+        assertTrue(msg[0] + Face_Enum.DOWN + msg[1] + prevDown + msg[2] + initialPhysicalMap.get(Face_Enum.DOWN) + msg[3] + expectedValForDown, initialPhysicalMap.get(Face_Enum.DOWN) == expectedValForDown);
+        assertTrue(msg[0] + Face_Enum.FRONT + msg[1] + prevFront + msg[2] + initialPhysicalMap.get(Face_Enum.FRONT) + msg[3] + expectedValForFront, initialPhysicalMap.get(Face_Enum.FRONT) == expectedValForFront);
+        assertTrue(msg[0] + Face_Enum.LEFT + msg[1] + prevLeft + msg[2] + initialPhysicalMap.get(Face_Enum.LEFT) + msg[3] + expectedValForLeft, initialPhysicalMap.get(Face_Enum.LEFT) == expectedValForLeft);
+        assertTrue(msg[0] + Face_Enum.RIGHT + msg[1] + prevRight + msg[2] + initialPhysicalMap.get(Face_Enum.RIGHT) + msg[3] + expectedValForRight, initialPhysicalMap.get(Face_Enum.RIGHT) == expectedValForRight);
+
     }
 }
 

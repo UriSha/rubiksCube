@@ -13,7 +13,7 @@ public class CubeTest {
         Cube cube = CubeUtils.initialDoneCube();
         changeOneTileCheckValidity(cube);
 
-        for (int i = 0; i < 100; i++) {
+        for (int i = 0; i < 1000; i++) {
             cube = CubeUtils.getRandomCube();
             changeOneTileCheckValidity(cube);
             changeSeveralTilesCheckValidity(cube);
