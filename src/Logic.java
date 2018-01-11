@@ -13,6 +13,7 @@ class Logic {
         List<AlgorithmCommands> result=algorithm(cube);
         return result;
     }
+
 // Runs all the seven stages of the algorithm and returns an array list that the robot can use in order to
 // physically solve the cube
      static List<AlgorithmCommands> algorithm(Cube cube) {
