@@ -22,13 +22,13 @@ public class CubeTest {
 
 
     private void changeOneTileCheckValidity(Cube cube) {
-        String msg = "isValidCube() failed. returns %s instead of %s on the following cube: \n%s";
+        String[] msg =new String[]{"isValidCube() failed. returns " ," instead of ", " on the following cube: \n"};
         boolean isValid;
         Cube.Color initialColor;
         Cube.Color[][] grid;
 
         isValid = cube.isValidCube();
-        assertTrue(String.format(msg, isValid, !isValid, cube), isValid);
+        assertTrue(msg[0]+isValid+msg[1]+!isValid +msg[2]+cube, isValid);
         Cube.Face[] faces = cube.getFaces();
 
         for (int k = 0; k < 6; k++) {
@@ -40,7 +40,7 @@ public class CubeTest {
                         if (color != initialColor) {
                             grid[i][j] = color;
                             isValid = cube.isValidCube();
-                            assertFalse(String.format(msg, isValid, !isValid, cube), isValid);
+                            assertFalse(msg[0]+isValid+msg[1]+!isValid +msg[2]+cube, isValid);
                             grid[i][j] = initialColor;
                         }
                     }
@@ -50,7 +50,7 @@ public class CubeTest {
     }
 
     private void changeSeveralTilesCheckValidity(Cube cube) {
-        String msg = "isValidCube() failed. returns %s instead of %s on the following cube: \n%s";
+        String[] msg =new String[]{"isValidCube() failed. returns "," instead of "," on the following cube: \n"};
         boolean isValid;
         Cube.Face[] faces = cube.getFaces();
 
@@ -80,7 +80,7 @@ public class CubeTest {
                     if (color2 != secondColor && initialColor != color2 ) {
                         grid[i][j] = color2;
                         isValid = cube.isValidCube();
-                        assertFalse(String.format(msg, isValid, !isValid, cube), isValid);
+                        assertFalse(msg[0]+isValid+msg[1]+!isValid+msg[2]+cube, isValid);
 
                     }
                 }
@@ -91,11 +91,11 @@ public class CubeTest {
 
     @Test
     public void cubeActions() {
-        String msg = "cubeActions() failed. made cube actions on an initial cube and the result turd out to be illegal \n%s";
+        String msg ="cubeActions() failed. made cube actions on an initial cube and the result turned out to be illegal \n";
         Cube cube;
         for (int i = 0; i < 100; i++) {
             cube = CubeUtils.getRandomCube();
-            assertTrue(String.format(msg, cube), cube.isValidCube());
+            assertTrue(msg+cube, cube.isValidCube());
         }
 
 
