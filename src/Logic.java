@@ -10,9 +10,9 @@ class Logic {
 // our built algorithm
     static List<AlgorithmCommands> mainAlgorithm(Cube cube){
         cube = OptimizeCube.getConvertedOptimizedCube(cube);
-        List<AlgorithmCommands> result=algorithm(cube);
-        return result;
+        return algorithm(cube);
     }
+
 // Runs all the seven stages of the algorithm and returns an array list that the robot can use in order to
 // physically solve the cube
      static List<AlgorithmCommands> algorithm(Cube cube) {
